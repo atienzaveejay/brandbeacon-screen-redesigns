@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=1440">
+<title>Breakout creators · Brand Beacon redesign</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:Figtree,'Segoe UI',system-ui,sans-serif;color:#0B0B0B;background:#F5F4F0}
+a{color:#7A5600;text-decoration:none}a:hover{color:#4F3800}
+*{box-sizing:border-box}
+.side{width:252px;flex-shrink:0;background:#fff;border-right:1px solid #ECE9E1;display:flex;flex-direction:column;padding:20px 16px;gap:4px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;padding:4px 6px 22px;color:#0B0B0B}
+.logo-mark{width:32px;height:32px;border-radius:9px;background:#FFC72C;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px}
+.nav{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:12px;font-size:15px;font-weight:600;color:#1F1D1A}
+.nav:hover{background:#FAF8F2;color:#0B0B0B}
+.nav.on{background:#FFF6D6;color:#6B4B00}
+.navlabel{font-size:11px;font-weight:800;letter-spacing:.08em;color:#8C877D;padding:18px 12px 6px}
+.new{margin-left:auto;font-size:10px;font-weight:800;letter-spacing:.06em;color:#6B4B00;background:#FFE58A;padding:3px 7px;border-radius:6px}
+.me{margin-top:auto;display:flex;align-items:center;gap:10px;border:1px solid #ECE9E1;border-radius:14px;padding:10px 12px}
+.av{width:30px;height:30px;border-radius:50%;background:#FFF6D6;color:#6B4B00;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex-shrink:0}
+.main{flex-grow:1;padding:28px 32px 40px;display:flex;flex-direction:column;gap:24px;min-width:0}
+.card{background:#fff;border:1px solid #ECE9E1;border-radius:22px}
+.h1{font-size:30px;font-weight:800;margin:0;letter-spacing:-.01em}
+.h2{font-size:20px;font-weight:800;margin:0;display:flex;align-items:center;gap:10px}
+.h2:before{content:"";width:4px;height:18px;border-radius:2px;background:#FFC72C}
+.h3{font-size:15px;font-weight:800;margin:0}
+.sub{font-size:14px;color:#5E5A52;margin:0;line-height:1.45}
+.muted{color:#6B675F}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 18px;border-radius:12px;font-weight:700;font-size:14px;border:1px solid #E3DFD4;background:#fff;color:#0B0B0B;font-family:inherit;cursor:pointer}
+.btn.y{background:#FFC72C;border-color:#FFC72C;color:#1A1300}
+.btn.k{background:#0B0B0B;border-color:#0B0B0B;color:#fff}
+.btn.sm{height:36px;padding:0 12px;font-size:13px;border-radius:10px}
+.ib{width:44px;height:44px;border-radius:12px;border:1px solid #E3DFD4;background:#fff;display:inline-flex;align-items:center;justify-content:center;color:#0B0B0B;cursor:pointer;flex-shrink:0}
+.chip{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 13px;border-radius:999px;border:1px solid #E3DFD4;background:#fff;font-size:13px;font-weight:600;color:#1F1D1A}
+.chip.on{background:#0B0B0B;border-color:#0B0B0B;color:#fff}
+.dot{width:6px;height:6px;border-radius:50%;background:#FFC72C;display:inline-block}
+.tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;letter-spacing:.06em;padding:4px 8px;border-radius:7px;background:#FFF6D6;color:#6B4B00}
+.tag.g{background:#E7F4EC;color:#16603A}
+.tag.gr{background:#F1EFE9;color:#4A463F}
+.tag.b{background:#EAF0FB;color:#234C8C}
+.score{position:absolute;left:10px;bottom:10px;background:#fff;border-radius:999px;padding:5px 11px 5px 10px;display:flex;align-items:center;gap:6px}
+.score b{font-size:17px;font-weight:900;color:#6B4B00}
+.score span{font-size:10px;font-weight:700;line-height:1.05}
+.dur{position:absolute;right:10px;top:10px;background:rgba(0,0,0,.65);color:#fff;font-size:11px;font-weight:700;padding:3px 7px;border-radius:7px}
+.rank{position:absolute;left:10px;top:10px;background:rgba(0,0,0,.65);color:#fff;font-size:11px;font-weight:800;padding:3px 8px;border-radius:7px}
+.thumb{position:relative;overflow:hidden;background:#222}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.stat4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;border-top:1px solid #F0EDE6;border-bottom:1px solid #F0EDE6;padding:10px 0}
+.stat4 b{display:block;font-size:14px;font-weight:800}
+.stat4 span{font-size:11px;color:#6B675F}
+.cap{font-size:13px;line-height:1.4;color:#2A2723;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin:0}
+.kpi{padding:18px 20px;display:flex;flex-direction:column;gap:4px}
+.kpi .k{font-size:12px;font-weight:700;color:#6B675F}
+.kpi .n{font-size:28px;font-weight:900;letter-spacing:-.01em}
+.kpi .s{font-size:12px;color:#6B675F}
+.row{display:flex;align-items:center;gap:12px}
+.rail-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid #F0EDE6;font-size:14px}
+.bar{height:6px;border-radius:3px;background:#FFC72C}
+.bartrack{height:6px;border-radius:3px;background:#F3F0E8;flex-grow:1;display:flex}
+table{border-collapse:collapse;width:100%}
+th{font-size:11px;letter-spacing:.07em;font-weight:800;color:#6B675F;text-align:left;padding:12px 14px;border-bottom:1px solid #ECE9E1;text-transform:uppercase}
+td{padding:12px 14px;border-bottom:1px solid #F0EDE6;font-size:14px;vertical-align:middle}
+.cb{width:20px;height:20px;border-radius:6px;border:1.5px solid #CFCABF;display:inline-flex;align-items:center;justify-content:center;background:#fff}
+.cb.on{background:#0B0B0B;border-color:#0B0B0B;color:#fff}
+.field{border:1px solid #E3DFD4;border-radius:14px;padding:10px 12px;background:#fff}
+.lbl{font-size:12px;font-weight:800;color:#3A3731;margin-bottom:6px;display:block}
+.toggle{width:40px;height:24px;border-radius:12px;background:#0B0B0B;position:relative;flex-shrink:0}
+.toggle:after{content:"";position:absolute;right:3px;top:3px;width:18px;height:18px;border-radius:50%;background:#FFC72C}
+.toggle.off{background:#DAD6CC}
+.toggle.off:after{left:3px;right:auto;background:#fff}
+</style>
+
+</head>
+<body>
+
+<div style="width: 1440px; height: 1200px; display: flex; background: #F5F4F0; overflow: hidden;">
+<nav class="side" aria-label="Main">
+<a class="logo" href="my-feed.html" target="_top"><span class="logo-mark">BB</span><span>Brand Beacon</span></a>
+<a class="nav" href="my-feed.html" target="_top"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"></path></svg><span>My Feed</span></a><a class="nav" href="my-feed.html" target="_top"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4v16M8 4v16M12 5l4 15M17 4l3 16"></path></svg><span>Library</span></a><a class="nav" href="dashboard.html" target="_top"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h16v11H4z"></path><path d="M3 5h18l-1 4H4z"></path><path d="M10 20v-5h4v5"></path></svg><span>Brand searches</span></a><a class="nav" href="my-feed.html" target="_top"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="3"></circle></svg><span>Product searches</span></a>
+<div class="navlabel">YOUR BRAND</div>
+<a class="nav" href="my-brand-intelligence.html" target="_top"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 4v5c0 5-3.5 8-8 9c-4.5-1-8-4-8-9V7z"></path></svg><span>My Brand</span><span class="new">NEW</span></a><a class="nav on" href="breakout-creators.html" target="_top"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20c.5-3.5 3.2-5.5 6.5-5.5s6 2 6.5 5.5"></path><circle cx="17" cy="9" r="2.5"></circle><path d="M17.5 14.5c2.2.3 3.7 2 4 4.5"></path></svg><span>Breakout creators</span><span class="new">NEW</span></a>
+<div class="me"><span class="av">V</span><div style="display: flex; flex-direction: column; min-width: 0; flex-grow: 1;"><span style="font-size: 14px; font-weight: 700;">Veejay Atienza</span><span style="font-size: 12px; color: #6B675F;">Growth · 0 of 100 searches</span></div><button class="ib" style="width: 36px; height: 36px; border: none;" aria-label="Sign out"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4h4v16h-4"></path><path d="M10 8l-4 4l4 4M6 12h10"></path></svg></button></div>
+</nav>
+<main class="main">
+<section class="row" style="justify-content: space-between; align-items: flex-end;">
+<div style="display: flex; flex-direction: column; gap: 8px;"><h1 class="h1">Breakout creators</h1><p class="sub">Every creator who made a breakout for a keyword, your brand or a competitor. Ranked by their best Breakout Score.</p></div>
+<div class="row" style="gap: 10px;"><button class="btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5l5-5"></path><path d="M4 20h16"></path></svg>Export CSV</button><a class="btn y" href="share-this-video.html" target="_top"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 3L10 14"></path><path d="M21 3l-7 18l-4-7l-7-4z"></path></svg>Share a video with 3 selected</a></div>
+</section><section class="card" style="padding: 18px 22px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px;">
+<div class="kpi" style="padding: 0;"><span class="k">Creators found</span><span class="n">8</span><span class="s">from the top 8 breakouts</span></div>
+<div class="kpi" style="padding: 0;"><span class="k">Under 4K followers</span><span class="n">8 of 8</span><span class="s">small accounts, big reach</span></div>
+<div class="kpi" style="padding: 0;"><span class="k">Biggest video</span><span class="n">20M</span><span class="s">views, @_ellapalmer_</span></div>
+<div class="kpi" style="padding: 0;"><span class="k">On your list</span><span class="n">3</span><span class="s">1 link sent, 2 shortlisted</span></div>
+</section><div class="row" style="gap: 8px; flex-wrap: wrap;">
+<span style="font-size: 13px; font-weight: 700;">Built from</span><button class="chip on"><span class="dot"></span>Brand: rhode skin</button><button class="chip"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Keyword</button><button class="chip"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Your brand</button><button class="chip"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Competitor</button>
+<span style="width: 1px; height: 24px; background: #E3DFD4; margin: 0 4px;"></span>
+<button class="chip">Followers: any<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6l6-6"></path></svg></button><button class="chip">Has public email<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6l6-6"></path></svg></button><button class="chip">Status: all<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6l6-6"></path></svg></button>
+<span style="flex-grow: 1;"></span>
+<label class="row field" style="gap: 8px; padding: 0 12px; height: 38px; width: 260px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg><input aria-label="Find a creator" placeholder="Find a creator" style="border: none; outline: none; font: inherit; font-size: 14px; flex-grow: 1;"></label>
+</div><section class="card" style="overflow: hidden;"><table>
+<thead><tr><th></th><th>Creator</th><th>Best breakout</th><th style="text-align: right;">Views</th><th style="text-align: right;">Breakout Score</th><th>Contact</th><th>Status</th><th></th></tr></thead>
+<tbody><tr style="background: #FFFBEE;">
+<td style="width: 44px;"><span class="cb on" role="checkbox" aria-checked="true" aria-label="Select @cyr1n32"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg></span></td>
+<td><div class="row" style="gap: 10px;"><span class="av">C</span><div style="display: flex; flex-direction: column; gap: 3px;"><b>@cyr1n32</b><span class="row" style="gap: 6px; font-size: 12px; color: #6B675F;">1.6K followers<span class="tag gr" style="padding: 2px 6px; font-size: 10px;">NANO</span></span></div></div></td>
+<td><div class="row" style="gap: 10px;"><div class="thumb" style="width: 40px; height: 56px; border-radius: 8px; flex-shrink: 0;"><img src="../img/v1.jpg" alt=""></div><div style="display: flex; flex-direction: column; gap: 2px; max-width: 330px;"><span style="font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Name me a better marketing brand #rhode #best #aesthetic #haileybieber</span><span style="font-size: 12px; color: #6B675F;">Posted Apr 25 · 0:20</span></div></div></td>
+<td style="text-align: right; font-weight: 700;">8.9M</td>
+<td style="text-align: right;"><span style="font-size: 17px; font-weight: 900; color: #6B4B00;">8.6K×</span></td>
+<td><div style="display: flex; flex-direction: column; gap: 4px; font-size: 12px;"><a href="javascript:void(0)" style="font-weight: 700;">TikTok profile</a><button class="btn sm" style="height: 28px; padding: 0 10px; font-size: 12px; align-self: flex-start;">Find public email</button></div></td>
+<td><span class="tag b">LINK SENT</span></td>
+<td style="text-align: right;"><a class="ib" href="share-this-video.html" target="_top" style="width: 36px; height: 36px; border-radius: 10px;" aria-label="Share a video with @cyr1n32"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 3L10 14"></path><path d="M21 3l-7 18l-4-7l-7-4z"></path></svg></a></td>
+</tr><tr style="">
+<td style="width: 44px;"><span class="cb " role="checkbox" aria-checked="false" aria-label="Select @_ellapalmer_"></span></td>
+<td><div class="row" style="gap: 10px;"><span class="av">_</span><div style="display: flex; flex-direction: column; gap: 3px;"><b>@_ellapalmer_</b><span class="row" style="gap: 6px; font-size: 12px; color: #6B675F;">3.8K followers<span class="tag gr" style="padding: 2px 6px; font-size: 10px;">NANO</span></span></div></div></td>
+<td><div class="row" style="gap: 10px;"><div class="thumb" style="width: 40px; height: 56px; border-radius: 8px; flex-shrink: 0;"><img src="../img/v2.jpg" alt=""></div><div style="display: flex; flex-direction: column; gap: 2px; max-width: 330px;"><span style="font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Impaled by rhode @rhode skin #halloween2024 #rhode #rhodelipcase #diycostume</span><span style="font-size: 12px; color: #6B675F;">Posted Nov 1 · 0:11</span></div></div></td>
+<td style="text-align: right; font-weight: 700;">20M</td>
+<td style="text-align: right;"><span style="font-size: 17px; font-weight: 900; color: #6B4B00;">7.1K×</span></td>
+<td><div style="display: flex; flex-direction: column; gap: 4px; font-size: 12px;"><a href="javascript:void(0)" style="font-weight: 700;">TikTok profile</a><button class="btn sm" style="height: 28px; padding: 0 10px; font-size: 12px; align-self: flex-start;">Find public email</button></div></td>
+<td><span class="tag gr">NEW</span></td>
+<td style="text-align: right;"><a class="ib" href="share-this-video.html" target="_top" style="width: 36px; height: 36px; border-radius: 10px;" aria-label="Share a video with @_ellapalmer_"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 3L10 14"></path><path d="M21 3l-7 18l-4-7l-7-4z"></path></svg></a></td>
+</tr><tr style="background: #FFFBEE;">
+<td style="width: 44px;"><span class="cb on" role="checkbox" aria-checked="true" aria-label="Select @em_ireland"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg></span></td>
+<td><div class="row" style="gap: 10px;"><span class="av">E</span><div style="display: flex; flex-direction: column; gap: 3px;"><b>@em_ireland</b><span class="row" style="gap: 6px; font-size: 12px; color: #6B675F;">905 followers<span class="tag gr" style="padding: 2px 6px; font-size: 10px;">NANO</span></span></div></div></td>
+<td><div class="row" style="gap: 10px;"><div class="thumb" style="width: 40px; height: 56px; border-radius: 8px; flex-shrink: 0;"><img src="../img/v3.jpg" alt=""></div><div style="display: flex; flex-direction: column; gap: 2px; max-width: 330px;"><span style="font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">It’s SO CUTE!! #rhodehoodie #vancouverhoodie #rhodepopup #limitededition</span><span style="font-size: 12px; color: #6B675F;">Posted Jul 10 · 0:10</span></div></div></td>
+<td style="text-align: right; font-weight: 700;">4.8M</td>
+<td style="text-align: right;"><span style="font-size: 17px; font-weight: 900; color: #6B4B00;">6.2K×</span></td>
+<td><div style="display: flex; flex-direction: column; gap: 4px; font-size: 12px;"><a href="javascript:void(0)" style="font-weight: 700;">TikTok profile</a><button class="btn sm" style="height: 28px; padding: 0 10px; font-size: 12px; align-self: flex-start;">Find public email</button></div></td>
+<td><span class="tag">SHORTLISTED</span></td>
+<td style="text-align: right;"><a class="ib" href="share-this-video.html" target="_top" style="width: 36px; height: 36px; border-radius: 10px;" aria-label="Share a video with @em_ireland"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 3L10 14"></path><path d="M21 3l-7 18l-4-7l-7-4z"></path></svg></a></td>
+</tr><tr style="background: #FFFBEE;">
+<td style="width: 44px;"><span class="cb on" role="checkbox" aria-checked="true" aria-label="Select @justemma529"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg></span></td>
+<td><div class="row" style="gap: 10px;"><span class="av">J</span><div style="display: flex; flex-direction: column; gap: 3px;"><b>@justemma529</b><span class="row" style="gap: 6px; font-size: 12px; color: #6B675F;">891 followers<span class="tag gr" style="padding: 2px 6px; font-size: 10px;">NANO</span></span></div></div></td>
+<td><div class="row" style="gap: 10px;"><div class="thumb" style="width: 40px; height: 56px; border-radius: 8px; flex-shrink: 0;"><img src="../img/v4.jpg" alt=""></div><div style="display: flex; flex-direction: column; gap: 2px; max-width: 330px;"><span style="font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">the queen saved my skin thank u @rhode skin #rhode #rhodeskincare #skincare</span><span style="font-size: 12px; color: #6B675F;">Posted Jun 11 · 0:07</span></div></div></td>
+<td style="text-align: right; font-weight: 700;">4.0M</td>
+<td style="text-align: right;"><span style="font-size: 17px; font-weight: 900; color: #6B4B00;">5.9K×</span></td>
+<td><div style="display: flex; flex-direction: column; gap: 4px; font-size: 12px;"><a href="javascript:void(0)" style="font-weight: 700;">TikTok profile</a><button class="btn sm" style="height: 28px; padding: 0 10px; font-size: 12px; align-self: flex-start;">Find public email</button></div></td>
+<td><span class="tag">SHORTLISTED</span></td>
+<td style="text-align: right;"><a class="ib" href="share-this-video.html" target="_top" style="width: 36px; height: 36px; border-radius: 10px;" aria-label="Share a video with @justemma529"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 3L10 14"></path><path d="M21 3l-7 18l-4-7l-7-4z"></path></svg></a></td>
+</tr><tr style="">
+<td style="width: 44px;"><span class="cb " role="checkbox" aria-checked="false" aria-label="Select @jordannsagee"></span></td>
+<td><div class="row" style="gap: 10px;"><span class="av">J</span><div style="display: flex; flex-direction: column; gap: 3px;"><b>@jordannsagee</b><span class="row" style="gap: 6px; font-size: 12px; color: #6B675F;">772 followers<span class="tag gr" style="padding: 2px 6px; font-size: 10px;">NANO</span></span></div></div></td>
+<td><div class="row" style="gap: 10px;"><div class="thumb" style="width: 40px; height: 56px; border-radius: 8px; flex-shrink: 0;"><img src="../img/v5.jpg" alt=""></div><div style="display: flex; flex-direction: column; gap: 2px; max-width: 330px;"><span style="font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">hailey bieber at george street mecca sydney!! @rhode skin</span><span style="font-size: 12px; color: #6B675F;">Posted Feb 12 · 0:09</span></div></div></td>
+<td style="text-align: right; font-weight: 700;">3.1M</td>
+<td style="text-align: right;"><span style="font-size: 17px; font-weight: 900; color: #6B4B00;">4.2K×</span></td>
+<td><div style="display: flex; flex-direction: column; gap: 4px; font-size: 12px;"><a href="javascript:void(0)" style="font-weight: 700;">TikTok profile</a><button class="btn sm" style="height: 28px; padding: 0 10px; font-size: 12px; align-self: flex-start;">Find public email</button></div></td>
+<td><span class="tag gr">NEW</span></td>
+<td style="text-align: right;"><a class="ib" href="share-this-video.html" target="_top" style="width: 36px; height: 36px; border-radius: 10px;" aria-label="Share a video with @jordannsagee"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 3L10 14"></path><path d="M21 3l-7 18l-4-7l-7-4z"></path></svg></a></td>
+</tr><tr style="">
+<td style="width: 44px;"><span class="cb " role="checkbox" aria-checked="false" aria-label="Select @laurenestephanny_"></span></td>
+<td><div class="row" style="gap: 10px;"><span class="av">L</span><div style="display: flex; flex-direction: column; gap: 3px;"><b>@laurenestephanny_</b><span class="row" style="gap: 6px; font-size: 12px; color: #6B675F;">893 followers<span class="tag gr" style="padding: 2px 6px; font-size: 10px;">NANO</span></span></div></div></td>
+<td><div class="row" style="gap: 10px;"><div class="thumb" style="width: 40px; height: 56px; border-radius: 8px; flex-shrink: 0;"><img src="../img/v6.jpg" alt=""></div><div style="display: flex; flex-direction: column; gap: 2px; max-width: 330px;"><span style="font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">jk #fyp #viralvideo #rhode #funny @rhode skin</span><span style="font-size: 12px; color: #6B675F;">Posted Feb 26 · 0:05</span></div></div></td>
+<td style="text-align: right; font-weight: 700;">2.5M</td>
+<td style="text-align: right;"><span style="font-size: 17px; font-weight: 900; color: #6B4B00;">3.6K×</span></td>
+<td><div style="display: flex; flex-direction: column; gap: 4px; font-size: 12px;"><a href="javascript:void(0)" style="font-weight: 700;">TikTok profile</a><button class="btn sm" style="height: 28px; padding: 0 10px; font-size: 12px; align-self: flex-start;">Find public email</button></div></td>
+<td><span class="tag gr">NEW</span></td>
+<td style="text-align: right;"><a class="ib" href="share-this-video.html" target="_top" style="width: 36px; height: 36px; border-radius: 10px;" aria-label="Share a video with @laurenestephanny_"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 3L10 14"></path><path d="M21 3l-7 18l-4-7l-7-4z"></path></svg></a></td>
+</tr><tr style="">
+<td style="width: 44px;"><span class="cb " role="checkbox" aria-checked="false" aria-label="Select @bricourtneyy"></span></td>
+<td><div class="row" style="gap: 10px;"><span class="av">B</span><div style="display: flex; flex-direction: column; gap: 3px;"><b>@bricourtneyy</b><span class="row" style="gap: 6px; font-size: 12px; color: #6B675F;">1.2K followers<span class="tag gr" style="padding: 2px 6px; font-size: 10px;">NANO</span></span></div></div></td>
+<td><div class="row" style="gap: 10px;"><div class="thumb" style="width: 40px; height: 56px; border-radius: 8px; flex-shrink: 0;"><img src="../img/v7.jpg" alt=""></div><div style="display: flex; flex-direction: column; gap: 2px; max-width: 330px;"><span style="font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">If he fumbles this im disowning him #rhodesummercollection #rhodeskin</span><span style="font-size: 12px; color: #6B675F;">Posted Jun 9 · 0:08</span></div></div></td>
+<td style="text-align: right; font-weight: 700;">1.7M</td>
+<td style="text-align: right;"><span style="font-size: 17px; font-weight: 900; color: #6B4B00;">1.9K×</span></td>
+<td><div style="display: flex; flex-direction: column; gap: 4px; font-size: 12px;"><a href="javascript:void(0)" style="font-weight: 700;">TikTok profile</a><button class="btn sm" style="height: 28px; padding: 0 10px; font-size: 12px; align-self: flex-start;">Find public email</button></div></td>
+<td><span class="tag gr">NEW</span></td>
+<td style="text-align: right;"><a class="ib" href="share-this-video.html" target="_top" style="width: 36px; height: 36px; border-radius: 10px;" aria-label="Share a video with @bricourtneyy"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 3L10 14"></path><path d="M21 3l-7 18l-4-7l-7-4z"></path></svg></a></td>
+</tr><tr style="">
+<td style="width: 44px;"><span class="cb " role="checkbox" aria-checked="false" aria-label="Select @elizaveta_beauty_"></span></td>
+<td><div class="row" style="gap: 10px;"><span class="av">E</span><div style="display: flex; flex-direction: column; gap: 3px;"><b>@elizaveta_beauty_</b><span class="row" style="gap: 6px; font-size: 12px; color: #6B675F;">3.1K followers<span class="tag gr" style="padding: 2px 6px; font-size: 10px;">NANO</span></span></div></div></td>
+<td><div class="row" style="gap: 10px;"><div class="thumb" style="width: 40px; height: 56px; border-radius: 8px; flex-shrink: 0;"><img src="../img/v8.jpg" alt=""></div><div style="display: flex; flex-direction: column; gap: 2px; max-width: 330px;"><span style="font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Just being honest @rhode skin #rhode #skincare #beauty #sephora</span><span style="font-size: 12px; color: #6B675F;">Posted Aug 19 · 0:05</span></div></div></td>
+<td style="text-align: right; font-weight: 700;">3.5M</td>
+<td style="text-align: right;"><span style="font-size: 17px; font-weight: 900; color: #6B4B00;">1.8K×</span></td>
+<td><div style="display: flex; flex-direction: column; gap: 4px; font-size: 12px;"><a href="javascript:void(0)" style="font-weight: 700;">TikTok profile</a><button class="btn sm" style="height: 28px; padding: 0 10px; font-size: 12px; align-self: flex-start;">Find public email</button></div></td>
+<td><span class="tag gr">NEW</span></td>
+<td style="text-align: right;"><a class="ib" href="share-this-video.html" target="_top" style="width: 36px; height: 36px; border-radius: 10px;" aria-label="Share a video with @elizaveta_beauty_"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 3L10 14"></path><path d="M21 3l-7 18l-4-7l-7-4z"></path></svg></a></td>
+</tr></tbody></table>
+<div class="row" style="justify-content: space-between; padding: 14px 18px; font-size: 13px; color: #4A463F;"><span>Public data only. An email shows only when the creator lists one in their bio. Brand Beacon never messages creators for you.</span><span>1 to 8 of 8</span></div>
+</section>
+</main>
+</div>
+
+</body>
+</html>

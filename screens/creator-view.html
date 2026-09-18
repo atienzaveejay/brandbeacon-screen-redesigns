@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=390">
+<title>What the creator sees · Brand Beacon redesign</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:Figtree,'Segoe UI',system-ui,sans-serif;color:#0B0B0B;background:#F5F4F0}
+a{color:#7A5600;text-decoration:none}a:hover{color:#4F3800}
+*{box-sizing:border-box}
+.side{width:252px;flex-shrink:0;background:#fff;border-right:1px solid #ECE9E1;display:flex;flex-direction:column;padding:20px 16px;gap:4px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;padding:4px 6px 22px;color:#0B0B0B}
+.logo-mark{width:32px;height:32px;border-radius:9px;background:#FFC72C;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px}
+.nav{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:12px;font-size:15px;font-weight:600;color:#1F1D1A}
+.nav:hover{background:#FAF8F2;color:#0B0B0B}
+.nav.on{background:#FFF6D6;color:#6B4B00}
+.navlabel{font-size:11px;font-weight:800;letter-spacing:.08em;color:#8C877D;padding:18px 12px 6px}
+.new{margin-left:auto;font-size:10px;font-weight:800;letter-spacing:.06em;color:#6B4B00;background:#FFE58A;padding:3px 7px;border-radius:6px}
+.me{margin-top:auto;display:flex;align-items:center;gap:10px;border:1px solid #ECE9E1;border-radius:14px;padding:10px 12px}
+.av{width:30px;height:30px;border-radius:50%;background:#FFF6D6;color:#6B4B00;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex-shrink:0}
+.main{flex-grow:1;padding:28px 32px 40px;display:flex;flex-direction:column;gap:24px;min-width:0}
+.card{background:#fff;border:1px solid #ECE9E1;border-radius:22px}
+.h1{font-size:30px;font-weight:800;margin:0;letter-spacing:-.01em}
+.h2{font-size:20px;font-weight:800;margin:0;display:flex;align-items:center;gap:10px}
+.h2:before{content:"";width:4px;height:18px;border-radius:2px;background:#FFC72C}
+.h3{font-size:15px;font-weight:800;margin:0}
+.sub{font-size:14px;color:#5E5A52;margin:0;line-height:1.45}
+.muted{color:#6B675F}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 18px;border-radius:12px;font-weight:700;font-size:14px;border:1px solid #E3DFD4;background:#fff;color:#0B0B0B;font-family:inherit;cursor:pointer}
+.btn.y{background:#FFC72C;border-color:#FFC72C;color:#1A1300}
+.btn.k{background:#0B0B0B;border-color:#0B0B0B;color:#fff}
+.btn.sm{height:36px;padding:0 12px;font-size:13px;border-radius:10px}
+.ib{width:44px;height:44px;border-radius:12px;border:1px solid #E3DFD4;background:#fff;display:inline-flex;align-items:center;justify-content:center;color:#0B0B0B;cursor:pointer;flex-shrink:0}
+.chip{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 13px;border-radius:999px;border:1px solid #E3DFD4;background:#fff;font-size:13px;font-weight:600;color:#1F1D1A}
+.chip.on{background:#0B0B0B;border-color:#0B0B0B;color:#fff}
+.dot{width:6px;height:6px;border-radius:50%;background:#FFC72C;display:inline-block}
+.tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;letter-spacing:.06em;padding:4px 8px;border-radius:7px;background:#FFF6D6;color:#6B4B00}
+.tag.g{background:#E7F4EC;color:#16603A}
+.tag.gr{background:#F1EFE9;color:#4A463F}
+.tag.b{background:#EAF0FB;color:#234C8C}
+.score{position:absolute;left:10px;bottom:10px;background:#fff;border-radius:999px;padding:5px 11px 5px 10px;display:flex;align-items:center;gap:6px}
+.score b{font-size:17px;font-weight:900;color:#6B4B00}
+.score span{font-size:10px;font-weight:700;line-height:1.05}
+.dur{position:absolute;right:10px;top:10px;background:rgba(0,0,0,.65);color:#fff;font-size:11px;font-weight:700;padding:3px 7px;border-radius:7px}
+.rank{position:absolute;left:10px;top:10px;background:rgba(0,0,0,.65);color:#fff;font-size:11px;font-weight:800;padding:3px 8px;border-radius:7px}
+.thumb{position:relative;overflow:hidden;background:#222}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.stat4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;border-top:1px solid #F0EDE6;border-bottom:1px solid #F0EDE6;padding:10px 0}
+.stat4 b{display:block;font-size:14px;font-weight:800}
+.stat4 span{font-size:11px;color:#6B675F}
+.cap{font-size:13px;line-height:1.4;color:#2A2723;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin:0}
+.kpi{padding:18px 20px;display:flex;flex-direction:column;gap:4px}
+.kpi .k{font-size:12px;font-weight:700;color:#6B675F}
+.kpi .n{font-size:28px;font-weight:900;letter-spacing:-.01em}
+.kpi .s{font-size:12px;color:#6B675F}
+.row{display:flex;align-items:center;gap:12px}
+.rail-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid #F0EDE6;font-size:14px}
+.bar{height:6px;border-radius:3px;background:#FFC72C}
+.bartrack{height:6px;border-radius:3px;background:#F3F0E8;flex-grow:1;display:flex}
+table{border-collapse:collapse;width:100%}
+th{font-size:11px;letter-spacing:.07em;font-weight:800;color:#6B675F;text-align:left;padding:12px 14px;border-bottom:1px solid #ECE9E1;text-transform:uppercase}
+td{padding:12px 14px;border-bottom:1px solid #F0EDE6;font-size:14px;vertical-align:middle}
+.cb{width:20px;height:20px;border-radius:6px;border:1.5px solid #CFCABF;display:inline-flex;align-items:center;justify-content:center;background:#fff}
+.cb.on{background:#0B0B0B;border-color:#0B0B0B;color:#fff}
+.field{border:1px solid #E3DFD4;border-radius:14px;padding:10px 12px;background:#fff}
+.lbl{font-size:12px;font-weight:800;color:#3A3731;margin-bottom:6px;display:block}
+.toggle{width:40px;height:24px;border-radius:12px;background:#0B0B0B;position:relative;flex-shrink:0}
+.toggle:after{content:"";position:absolute;right:3px;top:3px;width:18px;height:18px;border-radius:50%;background:#FFC72C}
+.toggle.off{background:#DAD6CC}
+.toggle.off:after{left:3px;right:auto;background:#fff}
+</style>
+
+</head>
+<body>
+
+<div style="width: 390px; height: 1900px; background: #F5F4F0; display: flex; flex-direction: column; overflow: hidden;">
+<header class="row" style="justify-content: space-between; padding: 14px 16px; background: #fff; border-bottom: 1px solid #ECE9E1;"><span class="row" style="gap: 10px;"><span class="av" style="border-radius: 9px; width: 34px; height: 34px;">L</span><span style="display: flex; flex-direction: column;"><b style="font-size: 15px;">[Your brand]</b><span style="font-size: 12px; color: #6B675F;">[yourbrand.com]</span></span></span><span style="font-size: 12px; color: #6B675F;">Private link</span></header>
+<div style="padding: 18px 16px; display: flex; flex-direction: column; gap: 16px;">
+<div style="display: flex; flex-direction: column; gap: 6px;"><span class="tag" style="align-self: flex-start;">A VIDEO IDEA FOR YOU</span><h1 style="margin: 0; font-size: 25px; font-weight: 900; line-height: 1.15;">[Your brand] wants a video like this one</h1></div>
+<div class="card" style="padding: 14px 16px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px;"><div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 11px; font-weight: 800; letter-spacing: .06em; color: #6B675F;">PAY</span><b style="font-size: 15px;">[$ per video]</b></div><div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 11px; font-weight: 800; letter-spacing: .06em; color: #6B675F;">DUE BY</span><b style="font-size: 15px;">[Date]</b></div><div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 11px; font-weight: 800; letter-spacing: .06em; color: #6B675F;">SAMPLE</span><b style="font-size: 15px;">[Yes or no]</b></div><div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 11px; font-weight: 800; letter-spacing: .06em; color: #6B675F;">SPARK CODE</span><b style="font-size: 15px;">[30 days]</b></div></div>
+<div class="thumb" style="height: 440px; border-radius: 20px;"><img src="../img/v1.jpg" alt="Video by @cyr1n32"><span class="dur">0:20</span><span class="score"><b>8.6K×</b><span>Breakout<br>Score</span></span><span style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; border-radius: 50%; background: rgba(255,255,255,.92); display: flex; align-items: center; justify-content: center;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg></span></div>
+<div class="stat4" style="border: none; padding: 0;"><div><b>8.9M</b><span>views</span></div><div><b>1.7M</b><span>likes</span></div><div><b>2.5K</b><span>comments</span></div><div><b>25K</b><span>shares</span></div></div>
+<section class="card" style="padding: 14px 16px;"><h2 class="h3">Make your version</h2><ul style="list-style: none; padding: 0; margin: 8px 0 0;"><li class="row" style="gap: 10px; padding: 9px 0; border-top: 1px solid #F0EDE6;"><span style="width: 24px; height: 24px; border-radius: 50%; background: #FFC72C; font-weight: 900; font-size: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">1</span><b style="font-size: 14px; flex-grow: 1;">Open with a direct challenge</b><span class="tag" style="font-size: 10px;">MUST KEEP</span></li><li class="row" style="gap: 10px; padding: 9px 0; border-top: 1px solid #F0EDE6;"><span style="width: 24px; height: 24px; border-radius: 50%; background: #FFC72C; font-weight: 900; font-size: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">2</span><b style="font-size: 14px; flex-grow: 1;">Keep it short and confident</b><span class="tag" style="font-size: 10px;">MUST KEEP</span></li><li class="row" style="gap: 10px; padding: 9px 0; border-top: 1px solid #F0EDE6;"><span style="width: 24px; height: 24px; border-radius: 50%; background: #FFC72C; font-weight: 900; font-size: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">3</span><b style="font-size: 14px; flex-grow: 1;">Leave a question open</b><span class="tag gr" style="font-size: 10px;">YOUR CALL</span></li></ul></section>
+<section class="card" style="padding: 14px 16px;"><h2 class="h3">Why it worked</h2><ul style="list-style: none; padding: 0; margin: 8px 0 0;"><li style="display: flex; gap: 10px; padding: 10px 0; border-top: 1px solid #F0EDE6;"><span style="font-size: 12px; font-weight: 900; color: #6B4B00; width: 20px; flex-shrink: 0;">01</span><div style="display: flex; flex-direction: column; gap: 2px;"><b style="font-size: 14px;">Engagement challenge</b><span style="font-size: 13px; color: #4A463F; line-height: 1.4;">Opens by daring viewers to name a better brand, which pulls comments and shares.</span></div></li><li style="display: flex; gap: 10px; padding: 10px 0; border-top: 1px solid #F0EDE6;"><span style="font-size: 12px; font-weight: 900; color: #6B4B00; width: 20px; flex-shrink: 0;">02</span><div style="display: flex; flex-direction: column; gap: 2px;"><b style="font-size: 14px;">Relevant hashtags</b><span style="font-size: 13px; color: #4A463F; line-height: 1.4;">#rhode and #haileybieber put it in front of people already looking.</span></div></li><li style="display: flex; gap: 10px; padding: 10px 0; border-top: 1px solid #F0EDE6;"><span style="font-size: 12px; font-weight: 900; color: #6B4B00; width: 20px; flex-shrink: 0;">03</span><div style="display: flex; flex-direction: column; gap: 2px;"><b style="font-size: 14px;">Celebrity association</b><span style="font-size: 13px; color: #4A463F; line-height: 1.4;">Tagging the founder borrows her fanbase and trust.</span></div></li><li style="display: flex; gap: 10px; padding: 10px 0; border-top: 1px solid #F0EDE6;"><span style="font-size: 12px; font-weight: 900; color: #6B4B00; width: 20px; flex-shrink: 0;">04</span><div style="display: flex; flex-direction: column; gap: 2px;"><b style="font-size: 14px;">Short and confident</b><span style="font-size: 13px; color: #4A463F; line-height: 1.4;">One punchy line, then it ends.</span></div></li></ul></section>
+<div style="display: flex; flex-direction: column; gap: 8px;"><span style="font-size: 13px; font-weight: 800;">Your answer goes to [Your brand]</span>
+<button class="btn y" style="height: 52px; font-size: 16px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>I’m interested</button>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px;"><button class="btn" style="height: 46px;">Ask a question</button><button class="btn" style="height: 46px;">Not for me</button></div></div>
+<section style="background: #0B0B0B; color: #fff; border-radius: 20px; padding: 18px; display: flex; flex-direction: column; gap: 10px;"><b style="font-size: 17px; line-height: 1.3;">This is one of 55 breakouts found for this search.</b><span style="font-size: 13px; color: #D9D5CC; line-height: 1.45;">Create a free account to see the rest, ranked by Breakout Score.</span><button class="btn y">Create a free account</button></section>
+<p style="text-align: center; font-size: 12px; color: #6B675F; margin: 0;">Sent with Brand Beacon</p>
+</div>
+</div>
+
+</body>
+</html>

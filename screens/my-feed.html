@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=1440">
+<title>My Feed · Brand Beacon redesign</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:Figtree,'Segoe UI',system-ui,sans-serif;color:#0B0B0B;background:#F5F4F0}
+a{color:#7A5600;text-decoration:none}a:hover{color:#4F3800}
+*{box-sizing:border-box}
+.side{width:252px;flex-shrink:0;background:#fff;border-right:1px solid #ECE9E1;display:flex;flex-direction:column;padding:20px 16px;gap:4px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;padding:4px 6px 22px;color:#0B0B0B}
+.logo-mark{width:32px;height:32px;border-radius:9px;background:#FFC72C;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px}
+.nav{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:12px;font-size:15px;font-weight:600;color:#1F1D1A}
+.nav:hover{background:#FAF8F2;color:#0B0B0B}
+.nav.on{background:#FFF6D6;color:#6B4B00}
+.navlabel{font-size:11px;font-weight:800;letter-spacing:.08em;color:#8C877D;padding:18px 12px 6px}
+.new{margin-left:auto;font-size:10px;font-weight:800;letter-spacing:.06em;color:#6B4B00;background:#FFE58A;padding:3px 7px;border-radius:6px}
+.me{margin-top:auto;display:flex;align-items:center;gap:10px;border:1px solid #ECE9E1;border-radius:14px;padding:10px 12px}
+.av{width:30px;height:30px;border-radius:50%;background:#FFF6D6;color:#6B4B00;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex-shrink:0}
+.main{flex-grow:1;padding:28px 32px 40px;display:flex;flex-direction:column;gap:24px;min-width:0}
+.card{background:#fff;border:1px solid #ECE9E1;border-radius:22px}
+.h1{font-size:30px;font-weight:800;margin:0;letter-spacing:-.01em}
+.h2{font-size:20px;font-weight:800;margin:0;display:flex;align-items:center;gap:10px}
+.h2:before{content:"";width:4px;height:18px;border-radius:2px;background:#FFC72C}
+.h3{font-size:15px;font-weight:800;margin:0}
+.sub{font-size:14px;color:#5E5A52;margin:0;line-height:1.45}
+.muted{color:#6B675F}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 18px;border-radius:12px;font-weight:700;font-size:14px;border:1px solid #E3DFD4;background:#fff;color:#0B0B0B;font-family:inherit;cursor:pointer}
+.btn.y{background:#FFC72C;border-color:#FFC72C;color:#1A1300}
+.btn.k{background:#0B0B0B;border-color:#0B0B0B;color:#fff}
+.btn.sm{height:36px;padding:0 12px;font-size:13px;border-radius:10px}
+.ib{width:44px;height:44px;border-radius:12px;border:1px solid #E3DFD4;background:#fff;display:inline-flex;align-items:center;justify-content:center;color:#0B0B0B;cursor:pointer;flex-shrink:0}
+.chip{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 13px;border-radius:999px;border:1px solid #E3DFD4;background:#fff;font-size:13px;font-weight:600;color:#1F1D1A}
+.chip.on{background:#0B0B0B;border-color:#0B0B0B;color:#fff}
+.dot{width:6px;height:6px;border-radius:50%;background:#FFC72C;display:inline-block}
+.tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;letter-spacing:.06em;padding:4px 8px;border-radius:7px;background:#FFF6D6;color:#6B4B00}
+.tag.g{background:#E7F4EC;color:#16603A}
+.tag.gr{background:#F1EFE9;color:#4A463F}
+.tag.b{background:#EAF0FB;color:#234C8C}
+.score{position:absolute;left:10px;bottom:10px;background:#fff;border-radius:999px;padding:5px 11px 5px 10px;display:flex;align-items:center;gap:6px}
+.score b{font-size:17px;font-weight:900;color:#6B4B00}
+.score span{font-size:10px;font-weight:700;line-height:1.05}
+.dur{position:absolute;right:10px;top:10px;background:rgba(0,0,0,.65);color:#fff;font-size:11px;font-weight:700;padding:3px 7px;border-radius:7px}
+.rank{position:absolute;left:10px;top:10px;background:rgba(0,0,0,.65);color:#fff;font-size:11px;font-weight:800;padding:3px 8px;border-radius:7px}
+.thumb{position:relative;overflow:hidden;background:#222}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.stat4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;border-top:1px solid #F0EDE6;border-bottom:1px solid #F0EDE6;padding:10px 0}
+.stat4 b{display:block;font-size:14px;font-weight:800}
+.stat4 span{font-size:11px;color:#6B675F}
+.cap{font-size:13px;line-height:1.4;color:#2A2723;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin:0}
+.kpi{padding:18px 20px;display:flex;flex-direction:column;gap:4px}
+.kpi .k{font-size:12px;font-weight:700;color:#6B675F}
+.kpi .n{font-size:28px;font-weight:900;letter-spacing:-.01em}
+.kpi .s{font-size:12px;color:#6B675F}
+.row{display:flex;align-items:center;gap:12px}
+.rail-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid #F0EDE6;font-size:14px}
+.bar{height:6px;border-radius:3px;background:#FFC72C}
+.bartrack{height:6px;border-radius:3px;background:#F3F0E8;flex-grow:1;display:flex}
+table{border-collapse:collapse;width:100%}
+th{font-size:11px;letter-spacing:.07em;font-weight:800;color:#6B675F;text-align:left;padding:12px 14px;border-bottom:1px solid #ECE9E1;text-transform:uppercase}
+td{padding:12px 14px;border-bottom:1px solid #F0EDE6;font-size:14px;vertical-align:middle}
+.cb{width:20px;height:20px;border-radius:6px;border:1.5px solid #CFCABF;display:inline-flex;align-items:center;justify-content:center;background:#fff}
+.cb.on{background:#0B0B0B;border-color:#0B0B0B;color:#fff}
+.field{border:1px solid #E3DFD4;border-radius:14px;padding:10px 12px;background:#fff}
+.lbl{font-size:12px;font-weight:800;color:#3A3731;margin-bottom:6px;display:block}
+.toggle{width:40px;height:24px;border-radius:12px;background:#0B0B0B;position:relative;flex-shrink:0}
+.toggle:after{content:"";position:absolute;right:3px;top:3px;width:18px;height:18px;border-radius:50%;background:#FFC72C}
+.toggle.off{background:#DAD6CC}
+.toggle.off:after{left:3px;right:auto;background:#fff}
+</style>
+
+</head>
+<body>
+
+<div style="width: 1440px; height: 1800px; display: flex; background: #F5F4F0; overflow: hidden;">
+<nav class="side" aria-label="Main">
+<a class="logo" href="my-feed.html" target="_top"><span class="logo-mark">BB</span><span>Brand Beacon</span></a>
+<a class="nav on" href="my-feed.html" target="_top"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"></path></svg><span>My Feed</span></a><a class="nav" href="my-feed.html" target="_top"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4v16M8 4v16M12 5l4 15M17 4l3 16"></path></svg><span>Library</span></a><a class="nav" href="dashboard.html" target="_top"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h16v11H4z"></path><path d="M3 5h18l-1 4H4z"></path><path d="M10 20v-5h4v5"></path></svg><span>Brand searches</span></a><a class="nav" href="my-feed.html" target="_top"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="3"></circle></svg><span>Product searches</span></a>
+<div class="navlabel">YOUR BRAND</div>
+<a class="nav" href="my-brand-intelligence.html" target="_top"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 4v5c0 5-3.5 8-8 9c-4.5-1-8-4-8-9V7z"></path></svg><span>My Brand</span><span class="new">NEW</span></a><a class="nav" href="breakout-creators.html" target="_top"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20c.5-3.5 3.2-5.5 6.5-5.5s6 2 6.5 5.5"></path><circle cx="17" cy="9" r="2.5"></circle><path d="M17.5 14.5c2.2.3 3.7 2 4 4.5"></path></svg><span>Breakout creators</span><span class="new">NEW</span></a>
+<div class="me"><span class="av">V</span><div style="display: flex; flex-direction: column; min-width: 0; flex-grow: 1;"><span style="font-size: 14px; font-weight: 700;">Veejay Atienza</span><span style="font-size: 12px; color: #6B675F;">Growth · 0 of 100 searches</span></div><button class="ib" style="width: 36px; height: 36px; border: none;" aria-label="Sign out"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4h4v16h-4"></path><path d="M10 8l-4 4l4 4M6 12h10"></path></svg></button></div>
+</nav>
+<main class="main">
+<section class="card" style="padding: 18px; display: flex; flex-direction: column; gap: 14px;">
+<div class="row" style="border: 1px solid #ECE9E1; border-radius: 16px; padding: 8px; gap: 10px;">
+<div class="row" style="background: #F5F4F0; border-radius: 12px; padding: 4px; gap: 4px;"><button class="btn sm y" style="height: 34px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h16v11H4z"></path><path d="M3 5h18l-1 4H4z"></path><path d="M10 20v-5h4v5"></path></svg>Brand</button><button class="btn sm" style="height: 34px; border: none; background: transparent;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="3"></circle></svg>Product</button></div>
+<label style="flex-grow: 1; display: flex; align-items: center; gap: 8px; color: #6B675F; font-size: 15px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg><input aria-label="Search a brand" placeholder="Search a brand on TikTok" style="border: none; outline: none; font: inherit; flex-grow: 1; background: transparent;"></label>
+<button class="btn y"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>Find breakouts</button>
+</div>
+<div class="row" style="gap: 8px; flex-wrap: wrap;"><span style="font-size: 13px; font-weight: 700; margin-right: 4px;">Suggested brands to track</span><button class="chip"><span class="dot"></span>tula skincare</button><button class="chip"><span class="dot"></span>rhode beauty</button><button class="chip"><span class="dot"></span>olipop</button><button class="chip"><span class="dot"></span>drunk elephant</button><button class="chip"><span class="dot"></span>nike</button></div>
+</section>
+<section style="display: flex; flex-direction: column; gap: 12px;">
+<div class="row" style="justify-content: space-between;"><h2 class="h2">Since your last run</h2><a href="dashboard.html" target="_top" style="font-weight: 700; font-size: 14px; display: inline-flex; align-items: center; gap: 6px;">Open the rhode skin readout<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6l-6 6"></path></svg></a></div>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px;"><div class="card kpi"><span class="k">New breakouts</span><span class="n">55</span><span class="s">rhode skin, run on Sep 18</span></div><div class="card kpi"><span class="k">Top Breakout Score</span><span class="n">8.6K×</span><span class="s">@cyr1n32, 8.9M views</span></div><div class="card kpi"><span class="k">Videos scanned</span><span class="n">200</span><span class="s">across 1 tracked search</span></div><div class="card kpi"><span class="k">Next refresh</span><span class="n">Sep 25</span><span class="s">weekly, runs by itself</span></div></div>
+</section>
+<div style="display: flex; gap: 24px; align-items: flex-start;"><div style="display: flex; flex-direction: column; gap: 14px; flex-grow: 1; min-width: 0;">
+<div style="display: flex; flex-direction: column; gap: 6px;"><h2 class="h2">Your top breakout videos</h2><p class="sub">Ranked by Breakout Score across the searches you track. From your Sep 18 run.</p></div>
+<div class="row" style="gap: 12px; background: #fff; border: 1px solid #ECE9E1; border-radius: 14px; padding: 10px 14px;"><span style="width: 28px; height: 28px; border-radius: 50%; background: #FFF6D6; color: #6B4B00; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-weight: 900;">?</span><span style="font-size: 13px; line-height: 1.45; flex-grow: 1;"><b>How to read Breakout Score:</b> how much a video beat what that account usually gets. A video at 10× got ten times its account’s usual views.</span><a href="javascript:void(0)" style="font-size: 13px; font-weight: 700; white-space: nowrap;">How we score</a></div>
+<div class="row" style="gap: 8px; flex-wrap: wrap;"><div class="row" style="background: #fff; border: 1px solid #E3DFD4; border-radius: 12px; padding: 3px; gap: 2px;"><button class="btn sm k" style="height: 32px;">New since last run</button><button class="btn sm" style="height: 32px; border: none;">Biggest breakouts</button></div><button class="chip">Last 30 days<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6l6-6"></path></svg></button><span style="flex-grow: 1;"></span><button class="chip on">All searches</button><button class="chip"><span class="dot"></span>rhode skin · 55</button></div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px;"><article class="card" style="overflow: hidden; display: flex; flex-direction: column;">
+<div class="thumb" style="height: 290px;"><img src="../img/v1.jpg" alt="Video by @cyr1n32"><span class="dur">0:20</span><span class="score"><b>8.6K×</b><span>Breakout<br>Score</span></span></div>
+<div style="padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 10px;">
+<div class="row" style="gap: 8px;"><span class="av" style="width: 26px; height: 26px; font-size: 11px;">C</span><div style="display: flex; flex-direction: column; flex-grow: 1; min-width: 0;"><span style="font-weight: 800; font-size: 14px;">@cyr1n32</span><span style="font-size: 12px; color: #6B675F;">1.6K followers · posted Apr 25</span></div></div>
+<p class="cap">Name me a better marketing brand #rhode #best #aesthetic #haileybieber</p>
+<div class="stat4"><div><b>8.9M</b><span>views</span></div><div><b>1.7M</b><span>likes</span></div><div><b>2.5K</b><span>comments</span></div><div><b>25K</b><span>shares</span></div></div>
+<div class="row" style="gap: 8px;"><a class="btn sm" href="share-this-video.html" target="_top" style="flex-grow: 1; border-color: #0B0B0B;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>Open analysis</a><a class="ib" style="width: 36px; height: 36px; border-radius: 10px;" href="share-this-video.html" target="_top" aria-label="Send to creators"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 3L10 14"></path><path d="M21 3l-7 18l-4-7l-7-4z"></path></svg></a><button class="ib" style="width: 36px; height: 36px; border-radius: 10px;" aria-label="Save video"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"></path></svg></button></div>
+</div>
+</article><article class="card" style="overflow: hidden; display: flex; flex-direction: column;">
+<div class="thumb" style="height: 290px;"><img src="../img/v2.jpg" alt="Video by @_ellapalmer_"><span class="dur">0:11</span><span class="score"><b>7.1K×</b><span>Breakout<br>Score</span></span></div>
+<div style="padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 10px;">
+<div class="row" style="gap: 8px;"><span class="av" style="width: 26px; height: 26px; font-size: 11px;">_</span><div style="display: flex; flex-direction: column; flex-grow: 1; min-width: 0;"><span style="font-weight: 800; font-size: 14px;">@_ellapalmer_</span><span style="font-size: 12px; color: #6B675F;">3.8K followers · posted Nov 1</span></div></div>
+<p class="cap">Impaled by rhode @rhode skin #halloween2024 #rhode #rhodelipcase #diycostume</p>
+<div class="stat4"><div><b>20M</b><span>views</span></div><div><b>2.5M</b><span>likes</span></div><div><b>3.7K</b><span>comments</span></div><div><b>192K</b><span>shares</span></div></div>
+<div class="row" style="gap: 8px;"><button class="btn y sm" style="flex-grow: 1;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"></path></svg>Analyze video</button><a class="ib" style="width: 36px; height: 36px; border-radius: 10px;" href="share-this-video.html" target="_top" aria-label="Send to creators"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 3L10 14"></path><path d="M21 3l-7 18l-4-7l-7-4z"></path></svg></a><button class="ib" style="width: 36px; height: 36px; border-radius: 10px;" aria-label="Save video"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"></path></svg></button></div>
+</div>
+</article><article class="card" style="overflow: hidden; display: flex; flex-direction: column;">
+<div class="thumb" style="height: 290px;"><img src="../img/v3.jpg" alt="Video by @em_ireland"><span class="dur">0:10</span><span class="score"><b>6.2K×</b><span>Breakout<br>Score</span></span></div>
+<div style="padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 10px;">
+<div class="row" style="gap: 8px;"><span class="av" style="width: 26px; height: 26px; font-size: 11px;">E</span><div style="display: flex; flex-direction: column; flex-grow: 1; min-width: 0;"><span style="font-weight: 800; font-size: 14px;">@em_ireland</span><span style="font-size: 12px; color: #6B675F;">905 followers · posted Jul 10</span></div></div>
+<p class="cap">It’s SO CUTE!! #rhodehoodie #vancouverhoodie #rhodepopup #limitededition</p>
+<div class="stat4"><div><b>4.8M</b><span>views</span></div><div><b>457K</b><span>likes</span></div><div><b>361</b><span>comments</span></div><div><b>3.9K</b><span>shares</span></div></div>
+<div class="row" style="gap: 8px;"><button class="btn y sm" style="flex-grow: 1;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"></path></svg>Analyze video</button><a class="ib" style="width: 36px; height: 36px; border-radius: 10px;" href="share-this-video.html" target="_top" aria-label="Send to creators"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 3L10 14"></path><path d="M21 3l-7 18l-4-7l-7-4z"></path></svg></a><button class="ib" style="width: 36px; height: 36px; border-radius: 10px;" aria-label="Save video"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"></path></svg></button></div>
+</div>
+</article><article class="card" style="overflow: hidden; display: flex; flex-direction: column;">
+<div class="thumb" style="height: 290px;"><img src="../img/v4.jpg" alt="Video by @justemma529"><span class="dur">0:07</span><span class="score"><b>5.9K×</b><span>Breakout<br>Score</span></span></div>
+<div style="padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 10px;">
+<div class="row" style="gap: 8px;"><span class="av" style="width: 26px; height: 26px; font-size: 11px;">J</span><div style="display: flex; flex-direction: column; flex-grow: 1; min-width: 0;"><span style="font-weight: 800; font-size: 14px;">@justemma529</span><span style="font-size: 12px; color: #6B675F;">891 followers · posted Jun 11</span></div></div>
+<p class="cap">the queen saved my skin thank u @rhode skin #rhode #rhodeskincare #skincare</p>
+<div class="stat4"><div><b>4.0M</b><span>views</span></div><div><b>627K</b><span>likes</span></div><div><b>657</b><span>comments</span></div><div><b>5.2K</b><span>shares</span></div></div>
+<div class="row" style="gap: 8px;"><button class="btn y sm" style="flex-grow: 1;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"></path></svg>Analyze video</button><a class="ib" style="width: 36px; height: 36px; border-radius: 10px;" href="share-this-video.html" target="_top" aria-label="Send to creators"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 3L10 14"></path><path d="M21 3l-7 18l-4-7l-7-4z"></path></svg></a><button class="ib" style="width: 36px; height: 36px; border-radius: 10px;" aria-label="Save video"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"></path></svg></button></div>
+</div>
+</article><article class="card" style="overflow: hidden; display: flex; flex-direction: column;">
+<div class="thumb" style="height: 290px;"><img src="../img/v5.jpg" alt="Video by @jordannsagee"><span class="dur">0:09</span><span class="score"><b>4.2K×</b><span>Breakout<br>Score</span></span></div>
+<div style="padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 10px;">
+<div class="row" style="gap: 8px;"><span class="av" style="width: 26px; height: 26px; font-size: 11px;">J</span><div style="display: flex; flex-direction: column; flex-grow: 1; min-width: 0;"><span style="font-weight: 800; font-size: 14px;">@jordannsagee</span><span style="font-size: 12px; color: #6B675F;">772 followers · posted Feb 12</span></div></div>
+<p class="cap">hailey bieber at george street mecca sydney!! @rhode skin</p>
+<div class="stat4"><div><b>3.1M</b><span>views</span></div><div><b>377K</b><span>likes</span></div><div><b>2.1K</b><span>comments</span></div><div><b>11K</b><span>shares</span></div></div>
+<div class="row" style="gap: 8px;"><button class="btn y sm" style="flex-grow: 1;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"></path></svg>Analyze video</button><a class="ib" style="width: 36px; height: 36px; border-radius: 10px;" href="share-this-video.html" target="_top" aria-label="Send to creators"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 3L10 14"></path><path d="M21 3l-7 18l-4-7l-7-4z"></path></svg></a><button class="ib" style="width: 36px; height: 36px; border-radius: 10px;" aria-label="Save video"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"></path></svg></button></div>
+</div>
+</article><article class="card" style="overflow: hidden; display: flex; flex-direction: column;">
+<div class="thumb" style="height: 290px;"><img src="../img/v6.jpg" alt="Video by @laurenestephanny_"><span class="dur">0:05</span><span class="score"><b>3.6K×</b><span>Breakout<br>Score</span></span></div>
+<div style="padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 10px;">
+<div class="row" style="gap: 8px;"><span class="av" style="width: 26px; height: 26px; font-size: 11px;">L</span><div style="display: flex; flex-direction: column; flex-grow: 1; min-width: 0;"><span style="font-weight: 800; font-size: 14px;">@laurenestephanny_</span><span style="font-size: 12px; color: #6B675F;">893 followers · posted Feb 26</span></div></div>
+<p class="cap">jk #fyp #viralvideo #rhode #funny @rhode skin</p>
+<div class="stat4"><div><b>2.5M</b><span>views</span></div><div><b>374K</b><span>likes</span></div><div><b>2.2K</b><span>comments</span></div><div><b>39K</b><span>shares</span></div></div>
+<div class="row" style="gap: 8px;"><button class="btn y sm" style="flex-grow: 1;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"></path></svg>Analyze video</button><a class="ib" style="width: 36px; height: 36px; border-radius: 10px;" href="share-this-video.html" target="_top" aria-label="Send to creators"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 3L10 14"></path><path d="M21 3l-7 18l-4-7l-7-4z"></path></svg></a><button class="ib" style="width: 36px; height: 36px; border-radius: 10px;" aria-label="Save video"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"></path></svg></button></div>
+</div>
+</article></div>
+<div style="display: flex; justify-content: center;"><button class="btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Show 49 more</button></div>
+</div><aside style="width: 320px; flex-shrink: 0; display: flex; flex-direction: column; gap: 14px;" aria-label="Your searches and trends">
+<section class="card" style="padding: 16px 18px;"><div class="row" style="justify-content: space-between; margin-bottom: 8px;"><h3 class="h3">Your searches</h3><a href="my-feed.html" target="_top" style="font-size: 13px; font-weight: 700;">Manage</a></div>
+<a class="rail-item" href="dashboard.html" target="_top" style="color: #0B0B0B;"><span class="av" style="border-radius: 9px;">RS</span><span style="flex-grow: 1; display: flex; flex-direction: column;"><b>rhode skin</b><span style="font-size: 12px; color: #6B675F;">55 breakouts · weekly</span></span><span class="tag g">READY</span></a></section>
+<section class="card" style="padding: 16px 18px;"><div class="row" style="justify-content: space-between; margin-bottom: 4px;"><h3 class="h3">Creators behind your breakouts</h3></div><p class="sub" style="font-size: 12px; margin-bottom: 4px;">All 8 of your top 8 came from accounts under 4K followers.</p><a class="rail-item" href="breakout-creators.html" target="_top" style="color: #0B0B0B;"><span class="av" style="width: 28px; height: 28px; font-size: 11px;">C</span><span style="flex-grow: 1; display: flex; flex-direction: column;"><b style="font-size: 14px;">@cyr1n32</b><span style="font-size: 12px; color: #6B675F;">1.6K followers</span></span><span style="font-weight: 800; color: #6B4B00;">8.6K×</span></a><a class="rail-item" href="breakout-creators.html" target="_top" style="color: #0B0B0B;"><span class="av" style="width: 28px; height: 28px; font-size: 11px;">_</span><span style="flex-grow: 1; display: flex; flex-direction: column;"><b style="font-size: 14px;">@_ellapalmer_</b><span style="font-size: 12px; color: #6B675F;">3.8K followers</span></span><span style="font-weight: 800; color: #6B4B00;">7.1K×</span></a><a class="rail-item" href="breakout-creators.html" target="_top" style="color: #0B0B0B;"><span class="av" style="width: 28px; height: 28px; font-size: 11px;">E</span><span style="flex-grow: 1; display: flex; flex-direction: column;"><b style="font-size: 14px;">@em_ireland</b><span style="font-size: 12px; color: #6B675F;">905 followers</span></span><span style="font-weight: 800; color: #6B4B00;">6.2K×</span></a><a class="rail-item" href="breakout-creators.html" target="_top" style="color: #0B0B0B;"><span class="av" style="width: 28px; height: 28px; font-size: 11px;">J</span><span style="flex-grow: 1; display: flex; flex-direction: column;"><b style="font-size: 14px;">@justemma529</b><span style="font-size: 12px; color: #6B675F;">891 followers</span></span><span style="font-weight: 800; color: #6B4B00;">5.9K×</span></a><a href="breakout-creators.html" target="_top" class="btn sm" style="width: 100%; margin-top: 10px;">See all breakout creators<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6l-6 6"></path></svg></a></section>
+<section class="card" style="padding: 16px 18px;"><div class="row" style="justify-content: space-between; margin-bottom: 4px;"><h3 class="h3">Hashtags in your breakouts</h3><span class="tag">YOURS</span></div><div class="rail-item"><span style="width: 118px; font-weight: 700;">#rhode</span><span class="bartrack"><span class="bar" style="width: 100%;"></span></span><span style="width: 26px; text-align: right; font-size: 13px; color: #4A463F;">63</span></div><div class="rail-item"><span style="width: 118px; font-weight: 700;">#rhodeskin</span><span class="bartrack"><span class="bar" style="width: 63%;"></span></span><span style="width: 26px; text-align: right; font-size: 13px; color: #4A463F;">40</span></div><div class="rail-item"><span style="width: 118px; font-weight: 700;">#haileybieber</span><span class="bartrack"><span class="bar" style="width: 41%;"></span></span><span style="width: 26px; text-align: right; font-size: 13px; color: #4A463F;">26</span></div><div class="rail-item"><span style="width: 118px; font-weight: 700;">#fyp</span><span class="bartrack"><span class="bar" style="width: 20%;"></span></span><span style="width: 26px; text-align: right; font-size: 13px; color: #4A463F;">13</span></div><div class="rail-item"><span style="width: 118px; font-weight: 700;">#skincare</span><span class="bartrack"><span class="bar" style="width: 12%;"></span></span><span style="width: 26px; text-align: right; font-size: 13px; color: #4A463F;">8</span></div><div class="rail-item"><span style="width: 118px; font-weight: 700;">#makeup</span><span class="bartrack"><span class="bar" style="width: 11%;"></span></span><span style="width: 26px; text-align: right; font-size: 13px; color: #4A463F;">7</span></div></section>
+<section class="card" style="padding: 16px 18px;"><div class="row" style="justify-content: space-between; margin-bottom: 4px;"><h3 class="h3">Climbing on TikTok</h3><span class="tag gr">ALL CATEGORIES</span></div><div class="rail-item"><span style="flex-grow: 1; font-weight: 700;">#slime</span><span style="color: #16603A; font-weight: 800; font-size: 13px;">+8600%</span></div><div class="rail-item"><span style="flex-grow: 1; font-weight: 700;">#fortnite</span><span style="color: #16603A; font-weight: 800; font-size: 13px;">+3933%</span></div><div class="rail-item"><span style="flex-grow: 1; font-weight: 700;">#eyebrows</span><span style="color: #16603A; font-weight: 800; font-size: 13px;">+2000%</span></div><p class="sub" style="font-size: 12px; margin-top: 8px;">Week over week across every indexed video, not only your searches.</p></section>
+</aside></div>
+</main>
+</div>
+
+</body>
+</html>

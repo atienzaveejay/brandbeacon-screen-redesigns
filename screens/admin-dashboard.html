@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=1440">
+<title>Admin overview · Brand Beacon redesign</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:Figtree,'Segoe UI',system-ui,sans-serif;color:#0B0B0B;background:#F5F4F0}
+a{color:#7A5600;text-decoration:none}a:hover{color:#4F3800}
+*{box-sizing:border-box}
+.side{width:252px;flex-shrink:0;background:#fff;border-right:1px solid #ECE9E1;display:flex;flex-direction:column;padding:20px 16px;gap:4px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;padding:4px 6px 22px;color:#0B0B0B}
+.logo-mark{width:32px;height:32px;border-radius:9px;background:#FFC72C;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px}
+.nav{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:12px;font-size:15px;font-weight:600;color:#1F1D1A}
+.nav:hover{background:#FAF8F2;color:#0B0B0B}
+.nav.on{background:#FFF6D6;color:#6B4B00}
+.navlabel{font-size:11px;font-weight:800;letter-spacing:.08em;color:#8C877D;padding:18px 12px 6px}
+.new{margin-left:auto;font-size:10px;font-weight:800;letter-spacing:.06em;color:#6B4B00;background:#FFE58A;padding:3px 7px;border-radius:6px}
+.me{margin-top:auto;display:flex;align-items:center;gap:10px;border:1px solid #ECE9E1;border-radius:14px;padding:10px 12px}
+.av{width:30px;height:30px;border-radius:50%;background:#FFF6D6;color:#6B4B00;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex-shrink:0}
+.main{flex-grow:1;padding:28px 32px 40px;display:flex;flex-direction:column;gap:24px;min-width:0}
+.card{background:#fff;border:1px solid #ECE9E1;border-radius:22px}
+.h1{font-size:30px;font-weight:800;margin:0;letter-spacing:-.01em}
+.h2{font-size:20px;font-weight:800;margin:0;display:flex;align-items:center;gap:10px}
+.h2:before{content:"";width:4px;height:18px;border-radius:2px;background:#FFC72C}
+.h3{font-size:15px;font-weight:800;margin:0}
+.sub{font-size:14px;color:#5E5A52;margin:0;line-height:1.45}
+.muted{color:#6B675F}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 18px;border-radius:12px;font-weight:700;font-size:14px;border:1px solid #E3DFD4;background:#fff;color:#0B0B0B;font-family:inherit;cursor:pointer}
+.btn.y{background:#FFC72C;border-color:#FFC72C;color:#1A1300}
+.btn.k{background:#0B0B0B;border-color:#0B0B0B;color:#fff}
+.btn.sm{height:36px;padding:0 12px;font-size:13px;border-radius:10px}
+.ib{width:44px;height:44px;border-radius:12px;border:1px solid #E3DFD4;background:#fff;display:inline-flex;align-items:center;justify-content:center;color:#0B0B0B;cursor:pointer;flex-shrink:0}
+.chip{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 13px;border-radius:999px;border:1px solid #E3DFD4;background:#fff;font-size:13px;font-weight:600;color:#1F1D1A}
+.chip.on{background:#0B0B0B;border-color:#0B0B0B;color:#fff}
+.dot{width:6px;height:6px;border-radius:50%;background:#FFC72C;display:inline-block}
+.tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;letter-spacing:.06em;padding:4px 8px;border-radius:7px;background:#FFF6D6;color:#6B4B00}
+.tag.g{background:#E7F4EC;color:#16603A}
+.tag.gr{background:#F1EFE9;color:#4A463F}
+.tag.b{background:#EAF0FB;color:#234C8C}
+.score{position:absolute;left:10px;bottom:10px;background:#fff;border-radius:999px;padding:5px 11px 5px 10px;display:flex;align-items:center;gap:6px}
+.score b{font-size:17px;font-weight:900;color:#6B4B00}
+.score span{font-size:10px;font-weight:700;line-height:1.05}
+.dur{position:absolute;right:10px;top:10px;background:rgba(0,0,0,.65);color:#fff;font-size:11px;font-weight:700;padding:3px 7px;border-radius:7px}
+.rank{position:absolute;left:10px;top:10px;background:rgba(0,0,0,.65);color:#fff;font-size:11px;font-weight:800;padding:3px 8px;border-radius:7px}
+.thumb{position:relative;overflow:hidden;background:#222}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.stat4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;border-top:1px solid #F0EDE6;border-bottom:1px solid #F0EDE6;padding:10px 0}
+.stat4 b{display:block;font-size:14px;font-weight:800}
+.stat4 span{font-size:11px;color:#6B675F}
+.cap{font-size:13px;line-height:1.4;color:#2A2723;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin:0}
+.kpi{padding:18px 20px;display:flex;flex-direction:column;gap:4px}
+.kpi .k{font-size:12px;font-weight:700;color:#6B675F}
+.kpi .n{font-size:28px;font-weight:900;letter-spacing:-.01em}
+.kpi .s{font-size:12px;color:#6B675F}
+.row{display:flex;align-items:center;gap:12px}
+.rail-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid #F0EDE6;font-size:14px}
+.bar{height:6px;border-radius:3px;background:#FFC72C}
+.bartrack{height:6px;border-radius:3px;background:#F3F0E8;flex-grow:1;display:flex}
+table{border-collapse:collapse;width:100%}
+th{font-size:11px;letter-spacing:.07em;font-weight:800;color:#6B675F;text-align:left;padding:12px 14px;border-bottom:1px solid #ECE9E1;text-transform:uppercase}
+td{padding:12px 14px;border-bottom:1px solid #F0EDE6;font-size:14px;vertical-align:middle}
+.cb{width:20px;height:20px;border-radius:6px;border:1.5px solid #CFCABF;display:inline-flex;align-items:center;justify-content:center;background:#fff}
+.cb.on{background:#0B0B0B;border-color:#0B0B0B;color:#fff}
+.field{border:1px solid #E3DFD4;border-radius:14px;padding:10px 12px;background:#fff}
+.lbl{font-size:12px;font-weight:800;color:#3A3731;margin-bottom:6px;display:block}
+.toggle{width:40px;height:24px;border-radius:12px;background:#0B0B0B;position:relative;flex-shrink:0}
+.toggle:after{content:"";position:absolute;right:3px;top:3px;width:18px;height:18px;border-radius:50%;background:#FFC72C}
+.toggle.off{background:#DAD6CC}
+.toggle.off:after{left:3px;right:auto;background:#fff}
+</style>
+
+</head>
+<body>
+
+<div style="width: 1440px; height: 2200px; display: flex; background: #F5F4F0; overflow: hidden;">
+<nav class="side" aria-label="Admin">
+<a class="logo" href="javascript:void(0)"><span class="logo-mark">BB</span><span style="display: flex; flex-direction: column; line-height: 1.1;">Brand Beacon<span style="font-size: 12px; font-weight: 600; color: #6B675F;">Admin</span></span></a>
+<a class="nav on" href="javascript:void(0)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"></path></svg><span>Overview</span></a><a class="nav" href="javascript:void(0)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20c.5-3.5 3.2-5.5 6.5-5.5s6 2 6.5 5.5"></path><circle cx="17" cy="9" r="2.5"></circle><path d="M17.5 14.5c2.2.3 3.7 2 4 4.5"></path></svg><span>Customers</span></a><a class="nav" href="javascript:void(0)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg><span>Searches</span></a><a class="nav" href="javascript:void(0)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="3"></circle></svg><span>Acquisition</span></a><a class="nav" href="javascript:void(0)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"></path></svg><span>Plans and coupons</span></a><a class="nav" href="javascript:void(0)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.5V12l3 2"></path></svg><span>Activity</span></a><a class="nav" href="javascript:void(0)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v6M12 15v6M3 12h6M15 12h6"></path></svg><span>System health</span><span class='new' style='background: #FDE7E4; color: #9B2C1F;'>3</span></a><a class="nav" href="javascript:void(0)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4v16M8 4v16M12 5l4 15M17 4l3 16"></path></svg><span>Content</span></a>
+</nav>
+<main class="main">
+<section class="row" style="justify-content: space-between; align-items: flex-end;">
+<div style="display: flex; flex-direction: column; gap: 6px;"><h1 class="h1">Overview</h1><p class="sub">Aug 20 to Sep 18, 2026 · compared with the 30 days before</p></div>
+<div class="row" style="gap: 10px;">
+<label class="row card" style="gap: 10px; padding: 8px 14px; border-radius: 14px; font-size: 14px; font-weight: 700;"><span class="toggle" role="switch" aria-checked="true" aria-label="Hide team and Ignite accounts"></span>Hide team and Ignite accounts</label>
+<button class="chip">Last 30 days<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6l6-6"></path></svg></button><button class="btn sm">Refresh</button>
+</div>
+</section>
+<section class="card" style="padding: 14px 18px; display: flex; align-items: center; gap: 12px; background: #FFF6D6; border-color: #FFE08A;"><span style="font-size: 18px; font-weight: 900;">!</span><span style="font-size: 14px; flex-grow: 1;"><b>Numbers below still include team accounts.</b> At least 8 of the 25 newest accounts are team or Ignite. Tag them once (by company email domain plus a named list) and every number on this page drops them.</span><a href="javascript:void(0)" style="font-weight: 700; font-size: 14px;">Tag team accounts</a></section>
+<div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 14px;"><div class="card kpi"><span class="k">Sign ups</span><span class="n">33</span><span class="s" style="color: #6B675F;">in range, team included</span></div><div class="card kpi"><span class="k">Ran a first search</span><span class="n">24</span><span class="s" style="color: #6B675F;">73% of sign ups</span></div><div class="card kpi"><span class="k">Paid conversions</span><span class="n">4</span><span class="s" style="color: #6B675F;">3 via coupon, 1 by card</span></div><div class="card kpi"><span class="k">Active paid now</span><span class="n">12</span><span class="s" style="color: #6B675F;">live count</span></div><div class="card kpi"><span class="k">MRR</span><span class="n">[$ from Stripe]</span><span class="s" style="color: #9B2C1F;">not tracked yet</span></div><div class="card kpi"><span class="k">Trialing</span><span class="n">2</span><span class="s" style="color: #6B675F;">live count</span></div></div>
+<div style="display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 16px; align-items: start;">
+<section class="card" style="padding: 22px 24px; display: flex; flex-direction: column; gap: 14px;"><div class="row" style="justify-content: space-between;"><h2 class="h2">One funnel, one set of numbers</h2><span style="font-size: 12px; color: #6B675F;">Same people, same range</span></div>
+<div style="display: flex; gap: 14px; align-items: flex-end; min-height: 250px;"><div style="flex: 1; display: flex; flex-direction: column; gap: 8px;"><div style="height: 160px; border-radius: 10px; background: #FFC72C; align-self: stretch;"></div><b style="font-size: 22px;">33</b><span style="font-size: 13px; font-weight: 700;">Signed up</span><span style="font-size: 12px; color: #6B675F;">100%</span></div><div style="flex: 1; display: flex; flex-direction: column; gap: 8px;"><div style="height: 116px; border-radius: 10px; background: #FFC72C; align-self: stretch;"></div><b style="font-size: 22px;">24</b><span style="font-size: 13px; font-weight: 700;">Ran first search</span><span style="font-size: 12px; color: #6B675F;">73%</span></div><div style="flex: 1; display: flex; flex-direction: column; gap: 8px;"><div style="height: 60px; border-radius: 10px; background: repeating-linear-gradient(45deg,#F3F0E8,#F3F0E8 8px,#E8E4DA 8px,#E8E4DA 16px); align-self: stretch;"></div><b style="font-size: 22px;">[N]</b><span style="font-size: 13px; font-weight: 700;">Hit the free limit</span><span style="font-size: 12px; color: #6B675F;">needs event</span></div><div style="flex: 1; display: flex; flex-direction: column; gap: 8px;"><div style="height: 18px; border-radius: 10px; background: #FFC72C; align-self: stretch;"></div><b style="font-size: 22px;">2</b><span style="font-size: 13px; font-weight: 700;">Started trial</span><span style="font-size: 12px; color: #6B675F;">6%</span></div><div style="flex: 1; display: flex; flex-direction: column; gap: 8px;"><div style="height: 19px; border-radius: 10px; background: #FFC72C; align-self: stretch;"></div><b style="font-size: 22px;">4</b><span style="font-size: 13px; font-weight: 700;">Paid</span><span style="font-size: 12px; color: #6B675F;">12%</span></div></div>
+<p class="sub" style="font-size: 13px;">Replaces the three places that disagree today (Sign ups 8 vs 33, Paid 0 vs 4 vs 12). 'Hit the free limit' needs a new event: it is the moment to show the upgrade.</p></section>
+<section class="card" style="padding: 22px 24px; display: flex; flex-direction: column; gap: 10px;"><h2 class="h2">Needs a follow up</h2>
+<div class="rail-item" style="border-top: none;"><span style="width: 36px; font-size: 22px; font-weight: 900;">[N]</span><span style="flex-grow: 1;"><b>Used their free search, did not upgrade</b><br><span style="font-size: 12px; color: #6B675F;">Most free accounts in the Users list show 0 left, 1 used</span></span><button class="btn sm">See list</button></div>
+<div class="rail-item"><span style="width: 36px; font-size: 22px; font-weight: 900;">[N]</span><span style="flex-grow: 1;"><b>Signed up, never searched</b><br><span style="font-size: 12px; color: #6B675F;">33 sign ups, 24 first searches</span></span><button class="btn sm">See list</button></div>
+<div class="rail-item"><span style="width: 36px; font-size: 22px; font-weight: 900;">2</span><span style="flex-grow: 1;"><b>Trials ending in 7 days</b><br><span style="font-size: 12px; color: #6B675F;">Live trialing count</span></span><button class="btn sm">See list</button></div>
+<div class="rail-item"><span style="width: 36px; font-size: 22px; font-weight: 900;">[N]</span><span style="flex-grow: 1;"><b>No credits left, no search used</b><br><span style="font-size: 12px; color: #6B675F;">Some free accounts show 0 left, 0 used. Likely a bug.</span></span><button class="btn sm">See list</button></div>
+</section>
+</div>
+<div style="display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 16px; align-items: start;">
+<section class="card" style="padding: 22px 24px;"><div class="row" style="justify-content: space-between;"><h2 class="h2">Where sign ups come from</h2><button class="btn sm"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"></path><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"></path></svg>Make a referral link</button></div>
+<p class="sub" style="font-size: 13px; margin: 8px 0 10px;">One link per person and channel, so LinkedIn, X and cold email can be told apart. The same links can power the UGC Breakouts affiliate program.</p>
+<table><thead><tr><th>Source</th><th style="text-align: right;">Sign ups</th><th style="text-align: right;">First search</th><th style="text-align: right;">Paid</th></tr></thead><tbody><tr><td><b>LinkedIn · Maia</b><div style='font-size: 12px; color: #6B675F;'>brandbeacon.io/?ref=maia</div></td><td style="text-align: right;">[N]</td><td style="text-align: right;">[N]</td><td style="text-align: right;">[N]</td></tr><tr><td><b>X · Marielle</b><div style='font-size: 12px; color: #6B675F;'>brandbeacon.io/?ref=marielle</div></td><td style="text-align: right;">[N]</td><td style="text-align: right;">[N]</td><td style="text-align: right;">[N]</td></tr><tr><td><b>Cold email · Veejay</b><div style='font-size: 12px; color: #6B675F;'>brandbeacon.io/?ref=veejay</div></td><td style="text-align: right;">[N]</td><td style="text-align: right;">[N]</td><td style="text-align: right;">[N]</td></tr><tr><td><b>Ivan's network</b><div style='font-size: 12px; color: #6B675F;'>brandbeacon.io/?ref=ivan</div></td><td style="text-align: right;">[N]</td><td style="text-align: right;">[N]</td><td style="text-align: right;">[N]</td></tr><tr><td><b>Not recorded</b><div style='font-size: 12px; color: #9B2C1F;'>all 33 current sign ups sit here</div></td><td style="text-align: right;">33</td><td style="text-align: right;">24</td><td style="text-align: right;">4</td></tr></tbody></table></section>
+<section class="card" style="padding: 22px 24px;"><h2 class="h2">Coupons</h2><p class="sub" style="font-size: 13px; margin: 8px 0 10px;">3 of the 4 paid conversions this range came from a coupon.</p>
+<table><thead><tr><th>Code</th><th>Plan</th><th style="text-align: right;">Used</th><th></th></tr></thead><tbody><tr><td><b>IVANVIP</b></td><td>Growth</td><td style="text-align: right;">2 / 30</td><td><span class="bartrack" style="display: flex; width: 120px;"><span class="bar" style="width: 6%;"></span></span></td></tr><tr><td><b>IGNITEBB</b></td><td>Growth</td><td style="text-align: right;">1 / 10</td><td><span class="bartrack" style="display: flex; width: 120px;"><span class="bar" style="width: 10%;"></span></span></td></tr><tr><td><b>BBCN100OFF</b></td><td>Growth</td><td style="text-align: right;">0 / 3</td><td><span class="bartrack" style="display: flex; width: 120px;"><span class="bar" style="width: 0%;"></span></span></td></tr></tbody></table></section>
+</div>
+<section class="card" style="padding: 22px 24px;"><div class="row" style="justify-content: space-between;"><h2 class="h2">System health</h2><span class="tag" style="background: #FDE7E4; color: #9B2C1F;">392 UNRESOLVED</span></div>
+<p class="sub" style="font-size: 13px; margin: 8px 0 10px;">Grouped by error type instead of 392 separate rows. Known, harmless errors can be muted so a new kind of failure stands out.</p>
+<table><thead><tr><th>Error type</th><th style="text-align: right;">Count</th><th>What it means</th><th></th></tr></thead><tbody><tr><td><b style="font-family: ui-monospace, Menlo, monospace; font-size: 12px;">media.repair.tiktok_cdn.record_failed</b><div style="font-size: 12px; color: #6B675F;">Apify returned no usable video payload</div></td><td style="text-align: right; font-weight: 800;">[n]</td><td style="font-size: 13px;">Known: TikTok removed or blocked the video</td><td style="text-align: right;"><button class="btn sm">Resolve all</button></td></tr><tr><td><b style="font-family: ui-monospace, Menlo, monospace; font-size: 12px;">search_enrichment.exception</b><div style="font-size: 12px; color: #6B675F;">Search enrichment failed</div></td><td style="text-align: right; font-weight: 800;">[n]</td><td style="font-size: 13px;">Check: can break a customer search</td><td style="text-align: right;"><button class="btn sm">Resolve all</button></td></tr><tr><td><b style="font-family: ui-monospace, Menlo, monospace; font-size: 12px;">video_transcript.payload_missing</b><div style="font-size: 12px; color: #6B675F;">No transcript returned</div></td><td style="text-align: right; font-weight: 800;">[n]</td><td style="font-size: 13px;">Check: analysis runs without a transcript</td><td style="text-align: right;"><button class="btn sm">Resolve all</button></td></tr></tbody></table></section>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px;">
+<div class="card kpi"><span class="k">Searches run</span><span class="n">286</span><span class="s">up 11 on the range before</span></div>
+<div class="card kpi"><span class="k">Videos indexed</span><span class="n">29,541</span><span class="s">up 1,288</span></div>
+<div class="card kpi"><span class="k">Analyses per active brand</span><span class="n">15.6</span><span class="s">'active creators' renamed 'active brands'</span></div>
+</div>
+</main>
+</div>
+
+</body>
+</html>
