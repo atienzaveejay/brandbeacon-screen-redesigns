@@ -55,10 +55,10 @@ footer{max-width:1600px;margin:0 auto;padding:24px;color:var(--muted);font-size:
 </style>
 </head>
 <body>
-<header class="top"><div class="bar"><span class="logo"><span class="mark">BB</span>Brand Beacon redesigns</span><nav class="toc" aria-label="Screens"><a href="#my-feed">My Feed</a><a href="#dashboard">Dashboard (brand readout)</a><a href="#breakout-creators">Breakout creators list</a><a href="#share">Share this video</a><a href="#admin">BB admin dashboard</a><a href="#my-brand">My Brand Intelligence (sample data, priority last)</a></nav></div></header>
+<header class="top"><div class="bar"><span class="logo"><span class="mark">BB</span>Brand Beacon redesigns</span><nav class="toc" aria-label="Screens"><a href="#my-feed">My Feed</a><a href="#dashboard">Brand readout</a><a href="#breakout-creators">Breakout creators</a><a href="#share">Share this video</a><a href="#my-brand">My Brand Intelligence</a><a href="#admin">BB admin</a></nav></div></header>
 <main>
 <section class="hero">
-<h1>Six screens, before and after</h1>
+<h1>Before and after, simplified</h1>
 <p>Left: the live app, captured on 19 Sep 2026 (the admin panel is shown as an outline, since it holds customer data). Right: the redesign. Each redesign is a working mockup, so you can scroll it and click between screens.</p>
 <p class="meta">Built from Ivan’s 18 Sep call and research on about 20 competing tools. Real numbers come from the live rhode skin search. My Brand Intelligence uses sample data.</p>
 </section>
@@ -79,8 +79,7 @@ footer{max-width:1600px;margin:0 auto;padding:24px;color:var(--muted);font-size:
 </ul>
 <ul>
 <li>Competitor pricing: Reacher $199, Modash $199, Kalodata about $46 to $99, 1of10 $29 to $69, Virlo $49 to $199. BB at $99 sits in the middle.</li>
-</ul>
-<p></p></div>
+</ul></div>
 <div class="box bugs"><h4>FOUND LIVE ON 19 SEP (for Lester)</h4>
 <ul>
 <li>My Feed says rhode skin has 0 breakouts. Brand searches says 55.</li>
@@ -97,100 +96,78 @@ footer{max-width:1600px;margin:0 auto;padding:24px;color:var(--muted);font-size:
 </div>
 <section class="row" id="my-feed">
 <h2><span class="num">1</span>My Feed</h2>
-<div class="pair"><div class="col"><figure class="shot"><figcaption><span class="pill">BEFORE</span>My Feed, live on 19 Sep<a href="img/before-feed.jpg" target="_blank" rel="noopener">Open full size</a></figcaption><p class="cap">Unlabeled stats, 3 giant cards per row, rhode skin shows 0 breakouts</p><div class="imgwrap"><img src="img/before-feed.jpg" alt="Live screenshot: My Feed, live on 19 Sep" loading="lazy"></div></figure></div><div class="col"><figure class="shot"><figcaption><span class="pill after">AFTER</span>My Feed<a href="screens/my-feed.html" target="_blank" rel="noopener">Open full size</a></figcaption><div class="scaler" data-w="1440" data-h="1800"><iframe src="screens/my-feed.html" title="My Feed" loading="lazy" width="1440" height="1800"></iframe></div></figure></div></div>
-<details class="notes" open><summary>What changed and why</summary><h4>MY FEED: what changed</h4>
-<p>Ivan, 18 Sep call: &quot;not the happiest with it&quot;, no spec. So this is an audit plus options.</p>
+<div class="pair"><div class="col"><figure class="shot"><figcaption><span class="pill">BEFORE</span>My Feed, live on 19 Sep<a href="img/before-feed.jpg" target="_blank" rel="noopener">Open full size</a></figcaption><p class="cap">Unlabeled stats, 3 giant cards per row, rhode skin shows 0 breakouts</p><div class="imgwrap"><img src="img/before-feed.jpg" alt="Live screenshot: My Feed, live on 19 Sep" loading="lazy"></div></figure></div><div class="col"><figure class="shot"><figcaption><span class="pill after">AFTER</span>My Feed<a href="screens/my-feed.html" target="_blank" rel="noopener">Open full size</a></figcaption><div class="scaler" data-w="1440" data-h="1200"><iframe src="screens/my-feed.html" title="My Feed" loading="lazy" width="1440" height="1200"></iframe></div></figure></div></div>
+<details class="notes" open><summary>What changed and why</summary><h4>MY FEED, simplified</h4>
+<p>On the screen: one line of news, two tabs, 8 videos, one link to the creators.</p>
 <ul>
-<li>&#x27;Since your last run&#x27; strip up top: 4 numbers from the live rhode skin run.</li>
-<li>NEW (research): two modes, &#x27;New since last run&#x27; and &#x27;Biggest breakouts&#x27; with a date range. Virlo splits its feed the same way.</li>
-<li>NEW (research): a one line &#x27;How to read Breakout Score&#x27; under the header. 1of10 and vidIQ explain their score with a worked example. Wording is ours from 17 Sep.</li>
-<li>Stats get labels. Live shows bare icons and an unlabeled %.</li>
-<li>One button per state: Open analysis, or Analyze video.</li>
-<li>Share icon on every card (video level, per Ivan).</li>
-<li>Right rail: fixed &#x27;0 breakouts&#x27;, added Creators behind your breakouts, labeled Climbing as &#x27;All categories&#x27;.</li>
-<li>LOCK: a live sales prospect removed from suggested brands.</li>
-<li>Left out on purpose: email or Slack digests. Ivan said no to notifications on 18 Sep.</li>
-</ul></details>
+<li>Each card: video, score, handle, views, one button, share.</li>
+<li>Moved out: the 4 stat tiles, score explainer box, right rail (hashtags, climbing, searches), suggested brands, captions and the 4 number stat rows.</li>
+</ul>
+<p>Why the tabs: Virlo splits its feed into fresh vs most viral. Ivan, 18 Sep: &#x27;not the happiest with it&#x27;.</p></details>
 </section>
 <section class="row" id="dashboard">
-<h2><span class="num">2</span>Dashboard (brand readout)</h2>
-<div class="pair"><div class="col"><figure class="shot"><figcaption><span class="pill">BEFORE</span>Brand readout, live on 19 Sep<a href="img/before-dash.jpg" target="_blank" rel="noopener">Open full size</a></figcaption><p class="cap">Key numbers buried at the bottom, times in UTC, hashtag bars all the same length</p><div class="imgwrap"><img src="img/before-dash.jpg" alt="Live screenshot: Brand readout, live on 19 Sep" loading="lazy"></div></figure></div><div class="col"><figure class="shot"><figcaption><span class="pill after">AFTER</span>Dashboard (brand readout)<a href="screens/dashboard.html" target="_blank" rel="noopener">Open full size</a></figcaption><div class="scaler" data-w="1440" data-h="2650"><iframe src="screens/dashboard.html" title="Dashboard (brand readout)" loading="lazy" width="1440" height="2650"></iframe></div></figure></div></div>
-<details class="notes" open><summary>What changed and why</summary><h4>DASHBOARD: what changed</h4>
-<p class="ask">ASK: your BB list says &#x27;improvements to our BB dashboard&#x27; and links the admin panel. Did you mean that internal dashboard (signups, referral source per Maia&#x27;s ask) instead of this brand readout?</p>
+<h2><span class="num">2</span>Brand readout</h2>
+<div class="pair"><div class="col"><figure class="shot"><figcaption><span class="pill">BEFORE</span>Brand readout, live on 19 Sep<a href="img/before-dash.jpg" target="_blank" rel="noopener">Open full size</a></figcaption><p class="cap">Key numbers buried at the bottom, times in UTC</p><div class="imgwrap"><img src="img/before-dash.jpg" alt="Live screenshot: Brand readout, live on 19 Sep" loading="lazy"></div></figure></div><div class="col"><figure class="shot"><figcaption><span class="pill after">AFTER</span>Brand readout<a href="screens/dashboard.html" target="_blank" rel="noopener">Open full size</a></figcaption><div class="scaler" data-w="1440" data-h="1980"><iframe src="screens/dashboard.html" title="Brand readout" loading="lazy" width="1440" height="1980"></iframe></div></figure></div></div>
+<details class="notes" open><summary>What changed and why</summary><h4>BRAND READOUT, simplified</h4>
+<p>On the screen: 3 numbers, 3 insights, 8 videos, one chart with tabs.</p>
 <ul>
-<li>KPI row at the top, with &#x27;vs last run&#x27; slots that fill in from the Sep 25 refresh. Motion&#x27;s weekly leaderboard shows movement the same way.</li>
-<li>NEW: &#x27;Who made the top 8&#x27; by creator size (real: 4 under 1K, 4 at 1K to 4K). Motion style comparison cut.</li>
-<li>NEW: posting heatmap names its method (&#x27;when breakouts were posted&#x27;) and has an ET / PT toggle. Most tools hide the time zone.</li>
-<li>Share moved off the header. Ivan wants sharing at video level only, not the whole report.</li>
-<li>8 videos in a 4 column grid, chart x axis, hashtag counts, score shades in order.</li>
+<li>Moved into the chart tabs: posting times (in ET), hashtags, score spread.</li>
+<li>Moved out: &#x27;vs last run&#x27; slots, breakouts per week, creator size card.</li>
+<li>Share stays on each video, per Ivan (video level only).</li>
 </ul></details>
 </section>
 <section class="row" id="breakout-creators">
-<h2><span class="num">3</span>Breakout creators list</h2>
-<div class="pair"><div class="col"><figure class="shot"><figcaption><span class="pill">BEFORE</span>Creators today<a href="img/before-creators.jpg" target="_blank" rel="noopener">Open full size</a></figcaption><p class="cap">Only a handle inside each video card. No list, no shortlist, no export</p><div class="imgwrap"><img src="img/before-creators.jpg" alt="Live screenshot: Creators today" loading="lazy"></div></figure></div><div class="col"><figure class="shot"><figcaption><span class="pill after">AFTER</span>Breakout creators<a href="screens/breakout-creators.html" target="_blank" rel="noopener">Open full size</a></figcaption><div class="scaler" data-w="1440" data-h="1200"><iframe src="screens/breakout-creators.html" title="Breakout creators" loading="lazy" width="1440" height="1200"></iframe></div></figure></div></div>
-<details class="notes" open><summary>What changed and why</summary><h4>BREAKOUT CREATORS: what changed</h4>
-<p>Ivan, 18 Sep: &quot;a list of all the creators that made breakouts for the keyword&quot;. Level 1 handles, level 2 emails we can get. In-app DMs &quot;too advanced&quot;.</p>
+<h2><span class="num">3</span>Breakout creators</h2>
+<div class="pair"><div class="col"><figure class="shot"><figcaption><span class="pill">BEFORE</span>Creators today<a href="img/before-creators.jpg" target="_blank" rel="noopener">Open full size</a></figcaption><p class="cap">Only a handle inside each video card</p><div class="imgwrap"><img src="img/before-creators.jpg" alt="Live screenshot: Creators today" loading="lazy"></div></figure></div><div class="col"><figure class="shot"><figcaption><span class="pill after">AFTER</span>Breakout creators<a href="screens/breakout-creators.html" target="_blank" rel="noopener">Open full size</a></figcaption><div class="scaler" data-w="1440" data-h="1120"><iframe src="screens/breakout-creators.html" title="Breakout creators" loading="lazy" width="1440" height="1120"></iframe></div></figure></div></div>
+<details class="notes" open><summary>What changed and why</summary><h4>BREAKOUT CREATORS, simplified</h4>
+<p>On the screen: one sentence, two filters, one table with 4 columns.</p>
 <ul>
-<li>NEW: &#x27;Built from&#x27; a keyword, your brand or a competitor.</li>
-<li>NEW: Contact column: TikTok profile plus &#x27;Find public email&#x27; (bio only). Kalodata has a &#x27;has contact&#x27; filter too.</li>
-<li>NEW: NANO size chip, since all 8 are under 4K. Kalodata and TikTok One rank on performance, not followers.</li>
-<li>Status is now New / Shortlisted / Link sent (TikTok One tracks invites the same way).</li>
-<li>Footer: Brand Beacon never messages creators for you. TikTok bans scraping, and sending email from the app brings CAN-SPAM rules.</li>
+<li>Contact: a &#x27;Find email&#x27; action per row. Handles and public emails only (Ivan&#x27;s levels 1 and 2). No in-app messaging.</li>
+<li>Select rows and a black bar appears: share a video with them, or export.</li>
+<li>Moved out: the 4 stat tiles, source chips, size chips, separate views column.</li>
 </ul>
-<p class="ask">ASK: Ivan has worked on this with Grok. Get what he has.</p>
-<p class="ask">ASK: roll repeat breakouts into one row (needs all 55)?</p></details>
+<p class="ask">ASK: Ivan has worked on this with Grok. Get what he has.</p></details>
 </section>
 <section class="row" id="share">
 <h2><span class="num">4</span>Share this video</h2>
-<div class="pair"><div class="col"><figure class="shot"><figcaption><span class="pill">BEFORE</span>Video analysis today<a href="img/before-share.jpg" target="_blank" rel="noopener">Open full size</a></figcaption><p class="cap">The only actions are Save and open on TikTok. No way to send it to a creator</p><div class="imgwrap"><img src="img/before-share.jpg" alt="Live screenshot: Video analysis today" loading="lazy"></div></figure></div><div class="col"><figure class="shot"><figcaption><span class="pill after">AFTER</span>Share this video<a href="screens/share-this-video.html" target="_blank" rel="noopener">Open full size</a></figcaption><div class="scaler" data-w="1440" data-h="1180"><iframe src="screens/share-this-video.html" title="Share this video" loading="lazy" width="1440" height="1180"></iframe></div></figure><figure class="shot"><figcaption><span class="pill after">AFTER</span>What the creator opens (phone)<a href="screens/creator-view.html" target="_blank" rel="noopener">Open full size</a></figcaption><div class="scaler" data-w="390" data-h="1900"><iframe src="screens/creator-view.html" title="What the creator opens (phone)" loading="lazy" width="390" height="1900"></iframe></div></figure></div></div>
-<details class="notes" open><summary>What changed and why</summary><h4>SHARE THIS VIDEO: what changed</h4>
-<p>Ivan, 18 Sep: share at video level only, to your team or creators. Push viewers to a free account.</p>
+<div class="pair"><div class="col"><figure class="shot"><figcaption><span class="pill">BEFORE</span>Video analysis today<a href="img/before-share.jpg" target="_blank" rel="noopener">Open full size</a></figcaption><p class="cap">The only actions are Save and open on TikTok</p><div class="imgwrap"><img src="img/before-share.jpg" alt="Live screenshot: Video analysis today" loading="lazy"></div></figure></div><div class="col"><figure class="shot"><figcaption><span class="pill after">AFTER</span>Share this video<a href="screens/share-this-video.html" target="_blank" rel="noopener">Open full size</a></figcaption><div class="scaler" data-w="1440" data-h="1000"><iframe src="screens/share-this-video.html" title="Share this video" loading="lazy" width="1440" height="1000"></iframe></div></figure><figure class="shot"><figcaption><span class="pill after">AFTER</span>What the creator opens (phone)<a href="screens/creator-view.html" target="_blank" rel="noopener">Open full size</a></figcaption><div class="scaler" data-w="390" data-h="1360"><iframe src="screens/creator-view.html" title="What the creator opens (phone)" loading="lazy" width="390" height="1360"></iframe></div></figure></div></div>
+<details class="notes" open><summary>What changed and why</summary><h4>SHARE THIS VIDEO, simplified</h4>
+<p>Modal: who it goes to, what to copy, a note, one button (Copy links).</p>
 <ul>
-<li>NEW: &#x27;Who is it for&#x27;: My team or Creators.</li>
-<li>NEW: Copy link, not send email. One link per creator so you see who opened it. The brand pastes it into its own DM, email or TikTok Shop invite. That avoids TikTok scraping rules and CAN-SPAM.</li>
-<li>NEW: structured deal fields (pay, due by, product link, sample, Shop commission, Spark code). Insense and TikTok Shop Target Collaboration ask for these; creators want pay and usage upfront.</li>
-<li>NEW: each step tagged MUST KEEP or YOUR CALL. Creator surveys say they want to know where they have freedom.</li>
+<li>Deal details (pay, due date, sample, Spark code) sit behind one link.</li>
+<li>Copy link, not send email: the brand pastes it into its own DM or email. Avoids TikTok scraping rules and CAN-SPAM.</li>
 </ul>
-<p>WHAT THE CREATOR OPENS: what changed</p>
-<ul>
-<li>Brand name and site in the header. A no-login page has to show who is asking.</li>
-<li>Deal box first: pay, due by, sample, Spark code.</li>
-<li>Three answers: I&#x27;m interested / Ask a question / Not for me, so the brand sees who replied (TikTok One pattern).</li>
-<li>NEW (Ivan): &#x27;one of 55 breakouts&#x27; card pushing a free account.</li>
-</ul>
-<p class="ask">BLOCKER: the site still serves the title &#x27;Outlier Vault&#x27; with no og tags, so every shared link shows a blank card. Fix before this ships.</p></details>
+<p>Creator page (phone): brand, one headline, the video, 3 steps, the note, two buttons. &#x27;Why it worked&#x27; is one tap away. Free account link at the bottom, per Ivan.</p>
+<p class="ask">BLOCKER: the site title still says &#x27;Outlier Vault&#x27; with no og tags, so shared links show a blank card.</p></details>
 </section>
 <section class="row" id="my-brand">
-<h2><span class="num">5</span>My Brand Intelligence (sample data, priority last)</h2>
-<div class="pair"><div class="col"><figure class="shot"><figcaption><span class="pill">BEFORE</span>My Brand Intelligence</figcaption><p class="cap">Does not exist yet</p><div class="missing"><img src="img/before-sidebar.jpg" alt="Live sidebar with four items: My Feed, Library, Brand searches, Product searches"><div><b>Not in the app today</b><span>The sidebar has four items and none of them is about your own brand. You can search any brand on TikTok, but you cannot see how your own account is doing against its usual numbers.</span></div></div></figure></div><div class="col"><figure class="shot"><figcaption><span class="pill after">AFTER</span>My Brand Intelligence<a href="screens/my-brand-intelligence.html" target="_blank" rel="noopener">Open full size</a></figcaption><div class="scaler" data-w="1440" data-h="1400"><iframe src="screens/my-brand-intelligence.html" title="My Brand Intelligence" loading="lazy" width="1440" height="1400"></iframe></div></figure></div></div>
-<details class="notes" open><summary>What changed and why</summary><h4>MY BRAND INTELLIGENCE</h4>
-<p>Ivan, 18 Sep: priority &quot;Last&quot;. Name locked as My Brand Intelligence.</p>
+<h2><span class="num">5</span>My Brand Intelligence</h2>
+<div class="pair"><div class="col"><figure class="shot"><figcaption><span class="pill">BEFORE</span>My Brand Intelligence</figcaption><p class="cap">Does not exist yet</p><div class="missing"><img src="img/before-sidebar.jpg" alt="Live sidebar with four items"><div><b>Not in the app today</b><span>The sidebar has four items and none of them is about your own brand.</span></div></div></figure></div><div class="col"><figure class="shot"><figcaption><span class="pill after">AFTER</span>My Brand Intelligence (sample data)<a href="screens/my-brand-intelligence.html" target="_blank" rel="noopener">Open full size</a></figcaption><div class="scaler" data-w="1440" data-h="1240"><iframe src="screens/my-brand-intelligence.html" title="My Brand Intelligence (sample data)" loading="lazy" width="1440" height="1240"></iframe></div></figure></div></div>
+<details class="notes" open><summary>What changed and why</summary><h4>MY BRAND INTELLIGENCE, simplified</h4>
+<p>SAMPLE DATA. Ivan: priority last.</p>
+<p>On the screen: 3 numbers, your latest posts scored against your usual, 2 things to do next.</p>
 <ul>
-<li>SAMPLE DATA: invented brand (solmere) and numbers.</li>
-<li>NEW: &#x27;Last 10 posts: 3 beat your usual, 7 fell short&#x27; (Viewstats compares to recent posts).</li>
-<li>NEW: posts under 48 hours show as early and are not scored (Dash Social waits 48h).</li>
-<li>What worked grouped by type (face to camera vs product shots), as Motion does, not one video at a time.</li>
-<li>Compare with the brands you track (Rival IQ).</li>
+<li>Compare brands and &#x27;who talks about you&#x27; move to tabs.</li>
 </ul>
-<p class="ask">ASK: public handle only, or TikTok login for private stats?</p></details>
+<p class="ask">ASK: public handle only, or TikTok login?</p></details>
 </section>
-
 <section class="row" id="admin">
-<h2><span class="num">6</span>BB admin dashboard</h2>
-<div class="pair"><div class="col"><figure class="shot"><figcaption><span class="pill ">BEFORE</span>Admin dashboard today (outline)<a href="screens/admin-before.html" target="_blank" rel="noopener">Open full size</a></figcaption><div class="scaler" data-w="1440" data-h="1250"><iframe src="screens/admin-before.html" title="Admin dashboard today (outline)" loading="lazy" width="1440" height="1250"></iframe></div></figure></div><div class="col"><figure class="shot"><figcaption><span class="pill after">AFTER</span>Admin overview<a href="screens/admin-dashboard.html" target="_blank" rel="noopener">Open full size</a></figcaption><div class="scaler" data-w="1440" data-h="2200"><iframe src="screens/admin-dashboard.html" title="Admin overview" loading="lazy" width="1440" height="2200"></iframe></div></figure></div></div>
-<details class="notes" open><summary>What changed and why</summary><h4>BB ADMIN DASHBOARD: what changed</h4>
-<p>From the admin pages saved on 19 Sep. Totals only, no customer names or emails. Numbers are the real totals from those pages. [N] means the page does not show it yet.</p>
+<h2><span class="num">6</span>BB admin: 22 pages become 7</h2>
+<div class="pair"><div class="col"><figure class="shot"><figcaption><span class="pill ">BEFORE</span>Admin today, 22 pages<a href="screens/admin-before.html" target="_blank" rel="noopener">Open full size</a></figcaption><div class="scaler" data-w="1440" data-h="1060"><iframe src="screens/admin-before.html" title="Admin today, 22 pages" loading="lazy" width="1440" height="1060"></iframe></div></figure></div><div class="col"><figure class="shot"><figcaption><span class="pill after">AFTER</span>Admin overview<a href="screens/admin-dashboard.html" target="_blank" rel="noopener">Open full size</a></figcaption><div class="scaler" data-w="1440" data-h="1300"><iframe src="screens/admin-dashboard.html" title="Admin overview" loading="lazy" width="1440" height="1300"></iframe></div></figure></div></div>
+<details class="notes" open><summary>What changed and why</summary><h4>BB ADMIN: 22 pages become 7</h4>
+<p>Overview, Customers, Searches, Videos, Billing, Blog, System. One page each, tabs inside. All 7 are drawn below.</p>
 <ul>
-<li>One funnel. Today the same range shows 8 and 33 sign ups, and 0, 4 and 12 paid in different cards.</li>
-<li>&#x27;Hide team and Ignite accounts&#x27; switch. At least 8 of the 25 newest accounts are ours, and they inflate every number.</li>
-<li>MRR and &#x27;paid by card vs coupon&#x27;. 3 of the 4 paid conversions used a coupon, and revenue is shown nowhere.</li>
-<li>&#x27;Needs a follow up&#x27; list: used the free search and stopped, signed up and never searched, trials ending. These are the people to email.</li>
-<li>Referral links per person and channel. All 33 sign ups are &#x27;Source not recorded&#x27; today. This is Maia&#x27;s ask, and the same links can run the UGC Breakouts affiliate program.</li>
-<li>Errors grouped by type with mute, instead of 392 rows of one repeating Apify error.</li>
-<li>Wording: &#x27;Breakout Vault&#x27; becomes Brand Beacon, &#x27;active creators&#x27; becomes active brands.</li>
+<li>Overview: 4 numbers, one funnel, who to follow up, where sign ups come from, one system line.</li>
+<li>Customers: Users and Subscription merged, with a detail panel (timeline, give a search, log in as).</li>
+<li>Billing: plans, coupons and coupon users as tabs. Whitelist becomes a coupon setting.</li>
+<li>Blog: 5 pages become 1. Featured becomes a switch.</li>
+<li>System: errors grouped by type, activity log and admins as tabs.</li>
+<li>&#x27;Hide team accounts&#x27; on every page.</li>
 </ul>
-<p class="ask">FOR LESTER: some free accounts show 0 credits left with 0 used. Looks like a credit bug.</p></details>
+<p>Numbers are real totals from your saved pages. Rows with names are SAMPLE, not customers. [N] means the data is not tracked yet.</p>
+<p class="ask">FOR LESTER: some free accounts show 0 credits left with 0 used.</p></details>
 </section>
+<section class="row" id="admin-sections"><h2><span class="num">7</span>The other admin sections</h2><div class="pair"><div class="col"><figure class="shot"><figcaption><span class="pill after">AFTER</span>Customers (sample rows)<a href="screens/admin-customers.html" target="_blank" rel="noopener">Open full size</a></figcaption><div class="scaler" data-w="1440" data-h="1120"><iframe src="screens/admin-customers.html" title="Customers (sample rows)" loading="lazy" width="1440" height="1120"></iframe></div></figure></div><div class="col"><figure class="shot"><figcaption><span class="pill after">AFTER</span>Searches<a href="screens/admin-searches.html" target="_blank" rel="noopener">Open full size</a></figcaption><div class="scaler" data-w="1100" data-h="900"><iframe src="screens/admin-searches.html" title="Searches" loading="lazy" width="1100" height="900"></iframe></div></figure></div><div class="col"><figure class="shot"><figcaption><span class="pill after">AFTER</span>Videos<a href="screens/admin-videos.html" target="_blank" rel="noopener">Open full size</a></figcaption><div class="scaler" data-w="1100" data-h="1000"><iframe src="screens/admin-videos.html" title="Videos" loading="lazy" width="1100" height="1000"></iframe></div></figure></div><div class="col"><figure class="shot"><figcaption><span class="pill after">AFTER</span>Billing<a href="screens/admin-billing.html" target="_blank" rel="noopener">Open full size</a></figcaption><div class="scaler" data-w="1100" data-h="1000"><iframe src="screens/admin-billing.html" title="Billing" loading="lazy" width="1100" height="1000"></iframe></div></figure></div><div class="col"><figure class="shot"><figcaption><span class="pill after">AFTER</span>Blog<a href="screens/admin-blog.html" target="_blank" rel="noopener">Open full size</a></figcaption><div class="scaler" data-w="1100" data-h="800"><iframe src="screens/admin-blog.html" title="Blog" loading="lazy" width="1100" height="800"></iframe></div></figure></div><div class="col"><figure class="shot"><figcaption><span class="pill after">AFTER</span>System<a href="screens/admin-system.html" target="_blank" rel="noopener">Open full size</a></figcaption><div class="scaler" data-w="1100" data-h="1000"><iframe src="screens/admin-system.html" title="System" loading="lazy" width="1100" height="1000"></iframe></div></figure></div></div></section>
 </main>
 <footer>Design mockups for internal review. Not a product page.</footer>
 <script>
