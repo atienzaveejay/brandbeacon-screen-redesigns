@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Brand Beacon user flow v2</title>
+<meta name="description" content="A new-user flow for Brand Beacon that reaches the aha early, with the research and competitor walkthroughs behind it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F6F4EE;--ink:#17150F;--muted:#5C584F;--line:#E6E2D8;--y:#FFC629;--ys:#FFF6D9;--yt:#7A5600}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Figtree,'Segoe UI',system-ui,sans-serif;line-height:1.55}
+a{color:var(--yt)}
+header.top{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+.bar{max-width:1320px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;text-decoration:none;color:var(--ink)}
+.mark{width:30px;height:30px;border-radius:9px;background:var(--y);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px}
+nav.toc{display:flex;gap:8px;flex-wrap:wrap;margin-left:auto}
+nav.toc a{text-decoration:none;color:var(--ink);font-size:14px;font-weight:700;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:#fff}
+main{max-width:1320px;margin:0 auto;padding:40px 24px 80px}
+h1{font-size:clamp(30px,4vw,48px);line-height:1.1;margin:0 0 12px;letter-spacing:-0.02em}
+h2{font-size:30px;margin:0 0 8px;letter-spacing:-0.02em}
+h3{font-size:20px;margin:0}
+.lede{font-size:18px;color:var(--muted);max-width:760px;margin:0 0 32px}
+.summary{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:24px}
+.card{background:#fff;border-radius:16px;padding:24px 28px;box-shadow:0 1px 3px rgba(23,21,15,.08)}
+.card h4{margin:0 0 8px;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.card ol,.card ul{margin:8px 0 0;padding-left:20px} .card li{margin:8px 0}
+.card.tint{background:var(--ys);box-shadow:none;border:1px solid #F5DD92}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+td.bb{background:#FFF1EE}
+section.block{margin-top:80px}
+.sub{color:var(--muted);margin:0 0 24px;max-width:820px}
+.step{margin:40px 0 0;padding-top:8px}
+.stephead{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.num{min-width:36px;height:36px;border-radius:999px;background:var(--y);display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:14px}
+.stepgrid{display:grid;grid-template-columns:minmax(0,1fr) 220px 300px;gap:20px;align-items:start}
+.stepnote ul{margin:0;padding-left:18px} .stepnote li{margin:0 0 10px;font-size:15px}
+.insp{margin:12px 0 0;padding:12px 14px;background:var(--ys);border-radius:12px;font-size:14px}
+.shot{margin:0;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 1px 3px rgba(23,21,15,.08)}
+.shot img{width:100%;display:block}
+.shot figcaption{padding:10px 14px;font-size:14px;font-weight:700;border-top:1px solid var(--line)}
+.shot .cap{margin:0;padding:0 14px 12px;font-size:14px;color:var(--muted)}
+.shot.tall .imgwrap{max-height:560px;overflow:auto}
+.app{margin-top:48px}
+.apphead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.tag{font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;background:#E6F4EC;color:#1F6B45}
+.tag.read{background:#EFECE4;color:var(--muted)}
+.appgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:start}
+.appgrid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.takes{margin:12px 0 0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.takes .card{padding:18px 22px} .takes ul{margin:0}
+.mini{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.mini .card h3{font-size:18px;margin-bottom:6px} .mini .card p{margin:6px 0;font-size:15px}
+.flowline{font-size:14px;color:var(--muted);background:#F6F4EE;border-radius:10px;padding:8px 10px;margin:8px 0}
+.sources li{margin:6px 0;font-size:15px}
+footer{max-width:1320px;margin:0 auto;padding:24px;color:var(--muted);font-size:14px}
+@media (max-width:1100px){.stepgrid{grid-template-columns:minmax(0,1fr) 200px} .stepnote{grid-column:1 / -1} .summary,.takes{grid-template-columns:minmax(0,1fr)} .appgrid,.mini{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+@media (max-width:700px){.stepgrid,.appgrid,.appgrid.two,.mini{grid-template-columns:minmax(0,1fr)} .mob{max-width:260px} main{padding:24px 16px 64px} .bar{padding:12px 16px} table{font-size:14px} .tablewrap{overflow-x:auto}}
+</style>
+</head>
+<body>
+<header class="top"><div class="bar"><a class="logo" href="../"><span class="mark">BB</span>Brand Beacon user flow v2</a>
+<nav class="toc" aria-label="Sections"><a href="#summary">Summary</a><a href="#flow">The flow</a><a href="#seen">What we saw</a><a href="#others">Other apps</a><a href="#sources">Sources</a></nav></div></header>
+<main>
+<section id="summary">
+<h1>Get every new user to the breakdown in their first two minutes</h1>
+<p class="lede">A proposed new-user flow for Brand Beacon, built from a walkthrough of the live app and hands-on sign-ups at four competitors on 22 Sept 2026.</p>
+<div class="summary">
+<div class="card">
+<h4>What we found</h4>
+<ul>
+<li><b>Free users never see the product&rsquo;s best part.</b> Free gets 0 video breakdowns. The first &ldquo;Analyze video&rdquo; click opens a paywall that says &ldquo;Your free top-video breakdown stays included&rdquo;, but no free breakdown exists.</li>
+<li><b>The wait is mostly fixed.</b> A report took about 1 to 2 minutes on 22 Sept, down from about 6 on 18 Sept.</li>
+<li><b>We ask for more than our competitors.</b> Kalodata, FastMoss and Exolyt all run trials with no card. Brand Beacon is the only one asking for a card, and the only one giving free users none of its AI.</li>
+<li><b>A competitor already gives away our paid feature.</b> A day-one Kalodata trial user got a full &ldquo;why this video went viral&rdquo; report for 2.75 of 15 free credits.</li>
+<li><b>Our edge is real.</b> None of the three measures a video against its creator&rsquo;s own baseline. That is the Breakout Score, and it should be the first thing people see.</li>
+</ul>
+</div>
+<div class="card tint">
+<h4>What we propose</h4>
+<ol>
+<li>Show real breakout videos before sign-up, with scores and the breakdown hidden.</li>
+<li>Make sign-up the reveal, and auto-run one free breakdown of the top video.</li>
+<li>Play a 90 second welcome from Ivan while the report builds.</li>
+<li>Growth free for 8 days with no card, then a free plan that tracks one brand weekly.</li>
+<li>Add Share on single videos, with a public page that credits Brand Beacon.</li>
+</ol>
+<h4 style="margin-top:20px">Decisions for Ivan</h4>
+<ul>
+<li>Drop the card from the trial (or ask for it only on day 8)?</li>
+<li>Is weekly tracking on Free intended? A Free search showed a weekly refresh, but pricing lists it as Growth only.</li>
+<li>Budget for one free AI breakdown per new account.</li>
+</ul>
+</div>
+</div>
+<div class="card" style="margin-top:24px">
+<h4>Seen first-hand on 22 Sept</h4>
+<div class="tablewrap"><table>
+<tr><th></th><th>Card for trial</th><th>Questions before the app</th><th>Time to a real result</th><th>Free AI or insight</th><th>After the trial</th></tr>
+<tr><td class="bb"><b>Brand Beacon</b></td><td class="bb">Yes</td><td class="bb">None</td><td class="bb">About 1 to 2 min</td><td class="bb">0 breakdowns</td><td class="bb">Free: 1 search</td></tr>
+<tr><td><b>Kalodata</b></td><td>No</td><td>4</td><td>Instant</td><td>Full &ldquo;why it went viral&rdquo; report on day one</td><td>Account locks</td></tr>
+<tr><td><b>SparkToro</b></td><td>No</td><td>3</td><td>About 5 sec</td><td>Real report, premium sections locked</td><td>3 free reports a month</td></tr>
+<tr><td><b>Exolyt</b></td><td>No</td><td>About 9</td><td>About 8 sec</td><td>Top plan free for 7 days</td><td>Drops to a free plan</td></tr>
+<tr><td><b>FastMoss</b></td><td>No (3-day trial)</td><td colspan="4">Its login would not hold in our test browser, so only the logged-out view was checked (below).</td></tr>
+</table></div>
+</div>
+<p class="sub" style="margin-top:16px">Still to check with a paid account: whether an analysis now appears on screen without a page reload. On 18 Sept it did not.</p>
+</section>
+
+<section class="block" id="flow">
+<h2>The flow, step by step</h2>
+<p class="sub">Eight steps, desktop and mobile. Each note lists the apps that inspired the step. Click any image to open it full size.</p>
+<section class="step" id="s01"><div class="stephead"><span class="num">01</span><h3>Homepage: type a brand, no account</h3></div><div class="stepgrid"><div class="desk"><figure class="shot"><div class="imgwrap"><a href="img/flow-01.jpg" target="_blank" rel="noopener"><img src="img/flow-01.jpg" alt="Desktop" loading="lazy"></a></div><figcaption>Desktop</figcaption></figure></div><div class="mob"><figure class="shot"><div class="imgwrap"><a href="img/flow-m1.jpg" target="_blank" rel="noopener"><img src="img/flow-m1.jpg" alt="Mobile" loading="lazy"></a></div><figcaption>Mobile</figcaption></figure></div><div class="stepnote"><ul><li>Search is the first thing on the page, with an example breakdown beside it so visitors see what they will get.</li><li>Trust line under the search: preview before you sign up, no card, 11,000+ brands tracked weekly.</li></ul><p class="insp"><b>Inspired by</b> Plausible (live demo on the homepage), Ahrefs (the tool is the landing page), ChatGPT (the input box is the homepage).</p></div></div></section><section class="step" id="s02"><div class="stephead"><span class="num">02</span><h3>Preview: real videos, scores hidden</h3></div><div class="stepgrid"><div class="desk"><figure class="shot"><div class="imgwrap"><a href="img/flow-02.jpg" target="_blank" rel="noopener"><img src="img/flow-02.jpg" alt="Desktop" loading="lazy"></a></div><figcaption>Desktop</figcaption></figure></div><div class="mob"><figure class="shot"><div class="imgwrap"><a href="img/flow-m2.jpg" target="_blank" rel="noopener"><img src="img/flow-m2.jpg" alt="Mobile" loading="lazy"></a></div><figcaption>Mobile</figcaption></figure></div><div class="stepnote"><ul><li>A typed brand shows its real breakout videos straight away, with Breakout Scores and the AI breakdown locked.</li><li>The four "why it broke out" driver titles are visible; the detail unlocks with a free account.</li></ul><p class="insp"><b>Inspired by</b> Kalodata (whole app visible logged out, numbers masked), FastMoss (first row real, the rest blurred), Exploding Topics (chart free, deep analysis blurred).</p></div></div></section><section class="step" id="s03"><div class="stephead"><span class="num">03</span><h3>Not indexed yet: sign up and we build it</h3></div><div class="stepgrid"><div class="desk"><figure class="shot"><div class="imgwrap"><a href="img/flow-03.jpg" target="_blank" rel="noopener"><img src="img/flow-03.jpg" alt="Desktop" loading="lazy"></a></div><figcaption>Desktop</figcaption></figure></div><div class="mob"><figure class="shot"><div class="imgwrap"><a href="img/flow-m3.jpg" target="_blank" rel="noopener"><img src="img/flow-m3.jpg" alt="Mobile" loading="lazy"></a></div><figcaption>Mobile</figcaption></figure></div><div class="stepnote"><ul><li>If a brand is not in the index, sign-up starts the build (about 2 minutes) and the search is saved.</li><li>Real breakouts from the category fill the page meanwhile, so it is never empty.</li></ul><p class="insp"><b>Inspired by</b> SparkToro (you type first, sign up second, and the query carries through).</p></div></div></section><section class="step" id="s04"><div class="stephead"><span class="num">04</span><h3>Sign up to reveal, no card</h3></div><div class="stepgrid"><div class="desk"><figure class="shot"><div class="imgwrap"><a href="img/flow-04.jpg" target="_blank" rel="noopener"><img src="img/flow-04.jpg" alt="Desktop" loading="lazy"></a></div><figcaption>Desktop</figcaption></figure></div><div class="mob"><figure class="shot"><div class="imgwrap"><a href="img/flow-m4.jpg" target="_blank" rel="noopener"><img src="img/flow-m4.jpg" alt="Mobile" loading="lazy"></a></div><figcaption>Mobile</figcaption></figure></div><div class="stepnote"><ul><li>Sign-up is framed as the reveal: scores for all 200 videos, one free AI breakdown, weekly tracking, 8 days of Growth.</li><li>Google and email side by side. Email sign-up already works at /register; it just is not on the main buttons today.</li></ul><p class="insp"><b>Inspired by</b> Kalodata, FastMoss and Exolyt all run no-card trials. Tally asks for an account only at the moment of Publish.</p></div></div></section><section class="step" id="s05"><div class="stephead"><span class="num">05</span><h3>Welcome video from Ivan while it builds</h3></div><div class="stepgrid"><div class="desk"><figure class="shot"><div class="imgwrap"><a href="img/flow-05.jpg" target="_blank" rel="noopener"><img src="img/flow-05.jpg" alt="Desktop" loading="lazy"></a></div><figcaption>Desktop</figcaption></figure></div><div class="mob"><figure class="shot"><div class="imgwrap"><a href="img/flow-m5.jpg" target="_blank" rel="noopener"><img src="img/flow-m5.jpg" alt="Mobile" loading="lazy"></a></div><figcaption>Mobile</figcaption></figure></div><div class="stepnote"><ul><li>A 90 second welcome from Ivan plays during the 1 to 2 minute build: how to read a Breakout Score and what to do with the first breakout.</li><li>Beside it: build progress, and the trial terms in one card.</li></ul><p class="insp"><b>Inspired by</b> SparkToro (co-founder welcome video shown while the first report loads). None of the other tools did this.</p></div></div></section><section class="step" id="s06"><div class="stephead"><span class="num">06</span><h3>The aha: a free breakdown, then Share</h3></div><div class="stepgrid"><div class="desk"><figure class="shot"><div class="imgwrap"><a href="img/flow-06.jpg" target="_blank" rel="noopener"><img src="img/flow-06.jpg" alt="Desktop" loading="lazy"></a></div><figcaption>Desktop</figcaption></figure></div><div class="mob"><figure class="shot"><div class="imgwrap"><a href="img/flow-m6.jpg" target="_blank" rel="noopener"><img src="img/flow-m6.jpg" alt="Mobile" loading="lazy"></a></div><figcaption>Mobile</figcaption></figure></div><div class="stepnote"><ul><li>The report opens on its top breakout, already analyzed and labeled "Your free breakdown".</li><li>Share is the main button. A second analysis offers Growth but never blocks the answer.</li></ul><p class="insp"><b>Inspired by</b> Kalodata (a day-one trial user got a full "why it went viral" report; the upgrade prompt appears mid-answer with "continue with current benefits"), Loom (upgrade offer comes after the first success).</p></div></div></section><section class="step" id="s07"><div class="stephead"><span class="num">07</span><h3>Public shared page</h3></div><div class="stepgrid"><div class="desk"><figure class="shot"><div class="imgwrap"><a href="img/flow-07.jpg" target="_blank" rel="noopener"><img src="img/flow-07.jpg" alt="Desktop" loading="lazy"></a></div><figcaption>Desktop</figcaption></figure></div><div class="mob"><figure class="shot"><div class="imgwrap"><a href="img/flow-m7.jpg" target="_blank" rel="noopener"><img src="img/flow-m7.jpg" alt="Mobile" loading="lazy"></a></div><figcaption>Mobile</figcaption></figure></div><div class="stepnote"><ul><li>A shared breakdown opens with no account: TikTok embed, Brand Beacon's analysis, credit to the creator, and a button into the @rhode preview.</li><li>This is the second front door, and most people will open it on a phone.</li></ul><p class="insp"><b>Inspired by</b> Loom (viewers watch free, sign-up comes on an action), Calendly, Gamma and Tally (every shared output carries the product's name).</p></div></div></section><section class="step" id="s08"><div class="stephead"><span class="num">08</span><h3>My Feed: 1 brand tracked free, weekly</h3></div><div class="stepgrid"><div class="desk"><figure class="shot"><div class="imgwrap"><a href="img/flow-08.jpg" target="_blank" rel="noopener"><img src="img/flow-08.jpg" alt="Desktop" loading="lazy"></a></div><figcaption>Desktop</figcaption></figure></div><div class="mob"><figure class="shot"><div class="imgwrap"><a href="img/flow-m8.jpg" target="_blank" rel="noopener"><img src="img/flow-m8.jpg" alt="Mobile" loading="lazy"></a></div><figcaption>Mobile</figcaption></figure></div><div class="stepnote"><ul><li>After the trial the account drops to Free and keeps tracking one brand every Monday, so there is a reason to come back.</li><li>Upgrade prompts are about tracking more brands, not about seeing anything at all.</li></ul><p class="insp"><b>Inspired by</b> Exolyt (reverse trial: "we'll automatically switch you to our free plan"), Ahrefs (free tools lead to "track your own site").</p></div></div></section>
+</section>
+
+<section class="block" id="seen">
+<h2>What we saw first-hand</h2>
+<p class="sub">Walked through in a browser on 22 Sept 2026, logged out and then with a trial account. Screenshots are cropped to remove account details.</p>
+
+<div class="app"><div class="apphead"><h3>Brand Beacon today</h3><span class="tag">Walked, free account</span></div>
+<div class="appgrid"><figure class="shot"><div class="imgwrap"><a href="img/bb-keywords.jpg" target="_blank" rel="noopener"><img src="img/bb-keywords.jpg" alt="Keywords step, then Google sign-in" loading="lazy"></a></div><figcaption>Keywords step, then Google sign-in</figcaption></figure><figure class="shot"><div class="imgwrap"><a href="img/bb-building.jpg" target="_blank" rel="noopener"><img src="img/bb-building.jpg" alt="Report building (about 1 to 2 min)" loading="lazy"></a></div><figcaption>Report building (about 1 to 2 min)</figcaption></figure><figure class="shot"><div class="imgwrap"><a href="img/bb-paywall.jpg" target="_blank" rel="noopener"><img src="img/bb-paywall.jpg" alt="First Analyze click: paywall" loading="lazy"></a></div><figcaption>First Analyze click: paywall</figcaption></figure></div>
+<div class="takes"><div class="card"><ul>
+<li>You type a brand and pick keywords, then &ldquo;Run my free search&rdquo; goes straight to Google sign-in. Email sign-up exists at /register but is not on the main buttons.</li>
+<li>The popup promises &ldquo;Your free top-video breakdown stays included&rdquo;, but Free has 0 analyses.</li>
+</ul></div><div class="card"><ul>
+<li>No Share button on a report or a video yet.</li>
+<li>The 8-day trial collects a card up front.</li>
+</ul></div></div></div>
+
+<div class="app"><div class="apphead"><h3>Kalodata</h3><span class="tag">Walked, trial account</span><a href="https://www.kalodata.com/" target="_blank" rel="noopener">kalodata.com</a></div>
+<div class="appgrid"><figure class="shot"><div class="imgwrap"><a href="img/kalodata-masked.jpg" target="_blank" rel="noopener"><img src="img/kalodata-masked.jpg" alt="Logged out: the real list, numbers masked" loading="lazy"></a></div><figcaption>Logged out: the real list, numbers masked</figcaption></figure><figure class="shot"><div class="imgwrap"><a href="img/kalodata-unmasked.jpg" target="_blank" rel="noopener"><img src="img/kalodata-unmasked.jpg" alt="After sign-up: numbers revealed" loading="lazy"></a></div><figcaption>After sign-up: numbers revealed</figcaption></figure><figure class="shot"><div class="imgwrap"><a href="img/kalodata-ai.jpg" target="_blank" rel="noopener"><img src="img/kalodata-ai.jpg" alt="AI report: upgrade offer mid-answer" loading="lazy"></a></div><figcaption>AI report: upgrade offer mid-answer</figcaption></figure></div>
+<div class="takes"><div class="card"><ul>
+<li>Visitors browse the actual app with every number shown as &ldquo;$****&rdquo;.</li>
+<li>7-day trial, no card, 15 AI credits. A &ldquo;3 reasons this video went viral&rdquo; report took about 3 minutes and 2.75 credits.</li>
+</ul></div><div class="card tint"><b>What we take:</b> show the real list and hide the valuable part; let the upgrade prompt appear mid-answer without blocking it.</div></div></div>
+
+<div class="app"><div class="apphead"><h3>FastMoss</h3><span class="tag">Walked, logged out</span><a href="https://www.fastmoss.com/" target="_blank" rel="noopener">fastmoss.com</a></div>
+<div class="appgrid"><figure class="shot"><div class="imgwrap"><a href="img/fastmoss-search.jpg" target="_blank" rel="noopener"><img src="img/fastmoss-search.jpg" alt="Instant search with real sales numbers" loading="lazy"></a></div><figcaption>Instant search with real sales numbers</figcaption></figure><figure class="shot tall"><div class="imgwrap"><a href="img/fastmoss-shop.jpg" target="_blank" rel="noopener"><img src="img/fastmoss-shop.jpg" alt="Shop page: first row real, rest blurred" loading="lazy"></a></div><figcaption>Shop page: first row real, rest blurred</figcaption></figure><figure class="shot"><div class="imgwrap"><a href="img/fastmoss-signup.jpg" target="_blank" rel="noopener"><img src="img/fastmoss-signup.jpg" alt="3-day trial, no card" loading="lazy"></a></div><figcaption>3-day trial, no card</figcaption></figure></div>
+<div class="takes"><div class="card"><ul>
+<li>Logged-out search returns real data in the dropdown, and the dashboard is public.</li>
+<li>Shop pages show the headline stats and one row, then &ldquo;Unlock all 137 products, sign up free&rdquo;.</li>
+</ul></div><div class="card tint"><b>What we take:</b> a taste of real data before any account, with a clear count of what is behind the wall.</div></div></div>
+
+<div class="app"><div class="apphead"><h3>SparkToro</h3><span class="tag">Walked, free account</span><a href="https://sparktoro.com/" target="_blank" rel="noopener">sparktoro.com</a></div>
+<div class="appgrid"><figure class="shot"><div class="imgwrap"><a href="img/sparktoro-welcome.jpg" target="_blank" rel="noopener"><img src="img/sparktoro-welcome.jpg" alt="Co-founder welcome video during the first load" loading="lazy"></a></div><figcaption>Co-founder welcome video during the first load</figcaption></figure><figure class="shot tall"><div class="imgwrap"><a href="img/sparktoro-report.jpg" target="_blank" rel="noopener"><img src="img/sparktoro-report.jpg" alt="Free report with real sections" loading="lazy"></a></div><figcaption>Free report with real sections</figcaption></figure><figure class="shot tall"><div class="imgwrap"><a href="img/sparktoro-locked.jpg" target="_blank" rel="noopener"><img src="img/sparktoro-locked.jpg" alt="Premium sections as locked cards" loading="lazy"></a></div><figcaption>Premium sections as locked cards</figcaption></figure></div>
+<div class="takes"><div class="card"><ul>
+<li>You describe your audience first; sign-up comes second and the query carries through.</li>
+<li>Report ready in about 5 seconds. 3 free reports a month, no card.</li>
+</ul></div><div class="card tint"><b>What we take:</b> the founder welcome video (no one else did this), and locked premium sections shown after real results.</div></div></div>
+
+<div class="app"><div class="apphead"><h3>Exolyt</h3><span class="tag">Walked, trial account</span><a href="https://exolyt.com/" target="_blank" rel="noopener">exolyt.com</a></div>
+<div class="appgrid two"><figure class="shot"><div class="imgwrap"><a href="img/exolyt-home.jpg" target="_blank" rel="noopener"><img src="img/exolyt-home.jpg" alt="First screen after sign-up" loading="lazy"></a></div><figcaption>First screen after sign-up</figcaption></figure><figure class="shot tall"><div class="imgwrap"><a href="img/exolyt-rhode.jpg" target="_blank" rel="noopener"><img src="img/exolyt-rhode.jpg" alt="@rhode dashboard, about 8 seconds" loading="lazy"></a></div><figcaption>@rhode dashboard, about 8 seconds</figcaption></figure></div>
+<div class="takes"><div class="card"><ul>
+<li>Two forms, about 9 questions, before anything shows.</li>
+<li>Then the full top plan for 7 days, no card: &ldquo;After 7 days, we&rsquo;ll automatically switch you to our free plan.&rdquo;</li>
+<li>Its &ldquo;Brand Mentions&rdquo; tab lists accounts the brand itself tags. It does not find creators posting about the brand or score them against their baseline.</li>
+</ul></div><div class="card tint"><b>What we take:</b> the reverse trial works in this category. Our no-survey start is an advantage worth keeping.</div></div></div>
+</section>
+
+<section class="block" id="others">
+<h2>Other apps that shaped it</h2>
+<p class="sub">Walked logged out on 22 Sept, except where marked &ldquo;from published sources&rdquo;.</p>
+<div class="appgrid"><figure class="shot"><div class="imgwrap"><a href="img/plausible-demo.jpg" target="_blank" rel="noopener"><img src="img/plausible-demo.jpg" alt="Plausible: a live demo, no login" loading="lazy"></a></div><figcaption>Plausible: a live demo, no login</figcaption></figure><figure class="shot"><div class="imgwrap"><a href="img/ahrefs.jpg" target="_blank" rel="noopener"><img src="img/ahrefs.jpg" alt="Ahrefs: 20 of 16,723 keywords, no login" loading="lazy"></a></div><figcaption>Ahrefs: 20 of 16,723 keywords, no login</figcaption></figure><figure class="shot tall"><div class="imgwrap"><a href="img/exploding-topic.jpg" target="_blank" rel="noopener"><img src="img/exploding-topic.jpg" alt="Exploding Topics: chart free, detail blurred" loading="lazy"></a></div><figcaption>Exploding Topics: chart free, detail blurred</figcaption></figure></div>
+<div class="appgrid" style="margin-top:16px"><figure class="shot"><div class="imgwrap"><a href="img/tally-editor.jpg" target="_blank" rel="noopener"><img src="img/tally-editor.jpg" alt="Tally: build a form with no account" loading="lazy"></a></div><figcaption>Tally: build a form with no account</figcaption></figure><figure class="shot"><div class="imgwrap"><a href="img/tally-publish.jpg" target="_blank" rel="noopener"><img src="img/tally-publish.jpg" alt="Tally: account asked for at Publish" loading="lazy"></a></div><figcaption>Tally: account asked for at Publish</figcaption></figure><figure class="shot"><div class="imgwrap"><a href="img/chatgpt.jpg" target="_blank" rel="noopener"><img src="img/chatgpt.jpg" alt="ChatGPT: answers and Share, no account" loading="lazy"></a></div><figcaption>ChatGPT: answers and Share, no account</figcaption></figure></div>
+<div class="mini" style="margin-top:24px">
+<div class="card"><h3>Loom</h3><span class="tag read">From published sources</span><p class="flowline">Sign up &rarr; record &rarr; share &rarr; someone views it (the aha) &rarr; trial offer</p><p>Its data showed the aha was the first view of a shared video, not the recording. Viewers watch with no account; the upgrade offer comes after the first success.</p></div>
+<div class="card"><h3>Calendly</h3><span class="tag read">From published sources</span><p class="flowline">Sign up &rarr; ready-made event and link &rarr; invitee books &rarr; invitee sees &ldquo;Powered by Calendly&rdquo;</p><p>A working default instead of an empty screen, and a badge on every shared link.</p></div>
+<div class="card"><h3>Gamma</h3><span class="tag read">From published sources</span><p class="flowline">Sign up &rarr; prompt &rarr; AI deck in about a minute &rarr; share with a &ldquo;Made with Gamma&rdquo; badge</p><p>A growth teardown reports most users dropped off on a blank canvas before seeing AI output; getting the output to them fast fixed it.</p></div>
+<div class="card"><h3>remove.bg</h3><span class="tag read">From published sources</span><p class="flowline">Upload with no account &rarr; result in seconds &rarr; sign up only for HD</p><p>The full result is free to see; only the high-value export is paid.</p></div>
+<div class="card"><h3>Similarweb</h3><span class="tag read">From published sources</span><p class="flowline">Type a domain &rarr; basic report, no account &rarr; depth and history paid</p><p>The closest shape to Brand Beacon&rsquo;s search. Its site blocks automated browsers, so we did not walk it.</p></div>
+<div class="card"><h3>Senja</h3><span class="tag read">From published sources</span><p class="flowline">Sign up &rarr; import testimonials you already have &rarr; your own wall in minutes</p><p>The aha comes from the user&rsquo;s own data. For us: your brand&rsquo;s top breakout and why it worked.</p></div>
+</div>
+</section>
+
+<section class="block" id="sources">
+<h2>Sources</h2>
+<p class="sub">Figures from third-party sites are labeled as such in the notes above and have not been confirmed with the companies.</p>
+<div class="card"><ul class="sources">
+<li>Walked on 22 Sept 2026: brandbeacon.io, <a href="https://www.kalodata.com/" target="_blank" rel="noopener">Kalodata</a>, <a href="https://www.fastmoss.com/" target="_blank" rel="noopener">FastMoss</a>, <a href="https://sparktoro.com/start" target="_blank" rel="noopener">SparkToro</a>, <a href="https://exolyt.com/" target="_blank" rel="noopener">Exolyt</a>, <a href="https://plausible.io/plausible.io" target="_blank" rel="noopener">Plausible live demo</a>, <a href="https://ahrefs.com/keyword-generator" target="_blank" rel="noopener">Ahrefs keyword generator</a>, <a href="https://explodingtopics.com/" target="_blank" rel="noopener">Exploding Topics</a>, <a href="https://tally.so/" target="_blank" rel="noopener">Tally</a>, <a href="https://chatgpt.com/" target="_blank" rel="noopener">ChatGPT</a>, <a href="https://gamma.app/" target="_blank" rel="noopener">Gamma</a>, <a href="https://senja.io/" target="_blank" rel="noopener">Senja</a></li>
+<li>Loom: <a href="https://supademo.com/user-flow-examples/loom" target="_blank" rel="noopener">Supademo teardown</a>, <a href="https://www.growthmates.news/p/onboarding-at-loom-the-impact-of" target="_blank" rel="noopener">Growthmates</a>, <a href="https://goodux.appcues.com/blog/looms-targeted-onboarding" target="_blank" rel="noopener">Appcues</a></li>
+<li>Calendly and viral loops: <a href="https://userpilot.com/blog/onboarding-ux-examples/" target="_blank" rel="noopener">Userpilot</a>, <a href="https://www.flowjam.com/blog/viral-loop-examples-saas-the-definitive-playbook-for-engineering-self-sustaining-growth" target="_blank" rel="noopener">Flowjam</a></li>
+<li>Gamma: <a href="https://sacra.com/c/gamma/" target="_blank" rel="noopener">Sacra</a>, <a href="https://www.productgrowth.blog/p/gamma-growth-teardown-100m-arr" target="_blank" rel="noopener">Product Growth teardown</a></li>
+<li>remove.bg: <a href="https://techcrunch.com/2021/02/24/canva-acquires-background-removal-specialists-kaleido/" target="_blank" rel="noopener">TechCrunch on the Canva deal</a></li>
+<li>Similarweb: <a href="https://www.similarweb.com/blog/marketing/marketing-strategy/similarweb-free/" target="_blank" rel="noopener">What you can do for free</a></li>
+<li>Ahrefs: <a href="https://ahrefs.com/blog/ahrefs-free-tools/" target="_blank" rel="noopener">Free tools overview</a></li>
+<li>Plausible: <a href="https://plausible.io/blog/open-source-saas" target="_blank" rel="noopener">Reaching $1M ARR</a></li>
+<li>Tally: <a href="https://blog.tally.so/the-road-from-4m-to-5m-arr/" target="_blank" rel="noopener">From $4M to $5M ARR</a></li>
+<li>Senja: <a href="https://ideaindex.so/case-studies/senja" target="_blank" rel="noopener">IdeaIndex case study</a></li>
+<li>Exolyt: <a href="https://en.ain.ua/2023/03/07/finnish-startup-exolyt-raises-450k/" target="_blank" rel="noopener">Pre-seed round (AIN)</a>, <a href="https://exolyt.com/pricing" target="_blank" rel="noopener">Pricing</a></li>
+<li>Exploding Topics: <a href="https://news.designrush.com/semrush-buys-exploding-topics-to-strengthen-market-research-capabilities" target="_blank" rel="noopener">Semrush acquisition</a></li>
+<li>ChatGPT logged-out use: <a href="https://www.ghacks.net/2024/04/02/chatgpt-no-longer-requires-an-account-to-use-but-there-are-some-limitations/" target="_blank" rel="noopener">gHacks</a></li>
+<li>Canva (considered, left out because sign-up comes first): <a href="https://meaganglenn.beehiiv.com/p/the-teardown-canva" target="_blank" rel="noopener">Canva teardown</a></li>
+</ul></div>
+</section>
+</main>
+<footer>Prepared 22 Sept 2026. Video tiles in the flow screens are illustrations, not real TikTok stills. Competitor screenshots are cropped to remove account details.</footer>
+</body>
+</html>
