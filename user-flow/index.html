@@ -46,6 +46,11 @@ section.block{margin-top:80px}
 .shot figcaption{padding:10px 14px;font-size:14px;font-weight:700;border-top:1px solid var(--line)}
 .shot .cap{margin:0;padding:0 14px 12px;font-size:14px;color:var(--muted)}
 .shot.tall .imgwrap{max-height:560px;overflow:auto}
+.notes-off .stepnote{display:none}
+.notes-off .stepgrid{grid-template-columns:minmax(0,1fr) 300px}
+@media (max-width:1100px){.notes-off .stepgrid{grid-template-columns:minmax(0,1fr) 240px}}
+@media (max-width:700px){.notes-off .stepgrid{grid-template-columns:minmax(0,1fr)}}
+button.toc-toggle{font-family:inherit;font-size:14px;font-weight:700;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--y);color:var(--ink);cursor:pointer}
 .shot.scroll .imgwrap{max-height:640px;overflow:auto}
 .extra{margin-top:20px;display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:16px;align-items:start}
 .extra.one{grid-template-columns:minmax(0,660px)}
@@ -69,7 +74,7 @@ footer{max-width:1320px;margin:0 auto;padding:24px;color:var(--muted);font-size:
 </head>
 <body>
 <header class="top"><div class="bar"><a class="logo" href="../"><span class="mark">BB</span>Brand Beacon user flow v4</a>
-<nav class="toc" aria-label="Sections"><a href="#summary">Summary</a><a href="#decisions">What changed</a><a href="#flow">The flow</a><a href="#seen">What we saw</a><a href="#others">Other apps</a><a href="#sources">Sources</a></nav></div></header>
+<nav class="toc" aria-label="Sections"><a href="#summary">Summary</a><a href="#decisions">What changed</a><a href="#flow">The flow</a><a href="#seen">What we saw</a><a href="#others">Other apps</a><a href="#sources">Sources</a><button type="button" class="toc-toggle" id="notesToggle" aria-pressed="true">Show notes</button></nav></div></header>
 <main>
 <section id="summary">
 <h1>Sign in, three searches, three breakdowns</h1>
@@ -211,5 +216,24 @@ footer{max-width:1320px;margin:0 auto;padding:24px;color:var(--muted);font-size:
 </section>
 </main>
 <footer>Prepared 22 Sept 2026, rebuilt 24 Sept 2026 to Ivan&rsquo;s sign-in-first flow. The previous preview-first version is in the repo history. Video tiles in the flow screens are illustrations, not real TikTok stills. Competitor screenshots are cropped to remove account details.</footer>
+<script>
+(function () {
+  var b = document.getElementById('notesToggle');
+  var KEY = 'bb-flow-notes';
+  function apply(on) {
+    document.body.classList.toggle('notes-off', !on);
+    b.textContent = on ? 'Hide notes' : 'Show notes';
+    b.setAttribute('aria-pressed', String(!on));
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch (e) {}
+  apply(saved === 'on');
+  b.addEventListener('click', function () {
+    var on = document.body.classList.contains('notes-off');
+    apply(on);
+    try { localStorage.setItem(KEY, on ? 'on' : 'off'); } catch (e) {}
+  });
+})();
+</script>
 </body>
 </html>

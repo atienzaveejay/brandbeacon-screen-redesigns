@@ -112,7 +112,8 @@ DECISIONS = '''<section class="block" id="decisions">
 </section>'''
 
 # --- swap in the new sections, keep the research below untouched ---
-i = t.index('<section class="block" id="changed">')
+anchor = '<section class="block" id="decisions">' if 'id="decisions"' in t else '<section class="block" id="changed">'
+i = t.index(anchor)
 j = t.index('<section class="block" id="seen">')
 t = t[:i] + DECISIONS + '\n\n' + FLOW + '\n\n' + t[j:]
 
@@ -131,5 +132,40 @@ t = t.replace('content="The Brand Beacon new-user flow rebuilt against Ivan’s 
               'content="The Brand Beacon new-user flow built to Ivan’s 24 Sept list: Google sign-in first, three free searches and three free breakdowns, paywall on the fourth of each."')
 t = t.replace('<footer>Prepared 22 Sept 2026, revised 23 Sept 2026 against Ivan&rsquo;s feedback.',
               '<footer>Prepared 22 Sept 2026, rebuilt 24 Sept 2026 to Ivan&rsquo;s sign-in-first flow. The previous preview-first version is in the repo history.')
+# --- notes toggle (hidden by default, remembered per viewer) ---
+CSS = (".notes-off .stepnote{display:none}\n"
+       ".notes-off .stepgrid{grid-template-columns:minmax(0,1fr) 300px}\n"
+       "@media (max-width:1100px){.notes-off .stepgrid{grid-template-columns:minmax(0,1fr) 240px}}\n"
+       "@media (max-width:700px){.notes-off .stepgrid{grid-template-columns:minmax(0,1fr)}}\n"
+       "button.toc-toggle{font-family:inherit;font-size:14px;font-weight:700;padding:6px 12px;border:1px solid var(--line);"
+       "border-radius:999px;background:var(--y);color:var(--ink);cursor:pointer}\n")
+if '.notes-off' not in t:
+    t = t.replace('.shot.scroll .imgwrap{', CSS + '.shot.scroll .imgwrap{')
+BTN = '<button type="button" class="toc-toggle" id="notesToggle" aria-pressed="true">Show notes</button>'
+if 'notesToggle' not in t:
+    t = t.replace('<a href="#sources">Sources</a></nav>', '<a href="#sources">Sources</a>' + BTN + '</nav>')
+JS = """<script>
+(function () {
+  var b = document.getElementById('notesToggle');
+  var KEY = 'bb-flow-notes';
+  function apply(on) {
+    document.body.classList.toggle('notes-off', !on);
+    b.textContent = on ? 'Hide notes' : 'Show notes';
+    b.setAttribute('aria-pressed', String(!on));
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch (e) {}
+  apply(saved === 'on');
+  b.addEventListener('click', function () {
+    var on = document.body.classList.contains('notes-off');
+    apply(on);
+    try { localStorage.setItem(KEY, on ? 'on' : 'off'); } catch (e) {}
+  });
+})();
+</script>
+</body>"""
+if 'bb-flow-notes' not in t:
+    t = t.replace('</body>', JS)
+
 io.open(SRC, 'w', encoding='utf-8').write(t)
 print('index.html rebuilt,', len(t), 'bytes')
