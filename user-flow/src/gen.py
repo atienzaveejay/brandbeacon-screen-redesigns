@@ -409,7 +409,7 @@ def offer_row(mobile=False):
     row = f'{dot}'.join([item('3', 'brand searches'), item('3', 'AI breakdowns'), item('', 'no card, ever')])
     return (f'<div style="display:flex; flex-direction:column; align-items:center; gap:{8 if mobile else 10}px;">'
             f'<span style="font-size:{12 if mobile else 13}px; font-weight:700; letter-spacing:0.07em; '
-            f'text-transform:uppercase; color:{T3};">Every free account gets</span>'
+            f'text-transform:uppercase; color:{T3};">Sign up to get</span>'
             f'<div style="display:flex; align-items:center; gap:{10 if mobile else 18}px; flex-wrap:wrap; justify-content:center;">{row}</div></div>')
 
 def hero_row(mobile=False):

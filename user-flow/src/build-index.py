@@ -22,7 +22,7 @@ STEPS = [
  step('01', 's01', 'Landing page, built around sign-in',
       ('flow-01.jpg', 'Desktop, the whole page'), ('flow-m1.jpg', 'Mobile, the whole page'),
       ['Google is the primary button and the only solid element on the page. Email sits under it as the other way in.',
-       'The offer is stated as an entitlement, not a statistic: <b>every free account gets 3 brand searches, 3 AI breakdowns, no card</b>. '
+       'The offer is stated as an entitlement, not a statistic: <b>sign up to get 3 brand searches, 3 AI breakdowns, no card</b>. '
        'It sits directly above the button so it is read on the way to the click.',
        'Under the fold: how the three searches work, the numbers, a full sample breakdown, Free vs Growth, three questions, '
        'and the sign-in again at the bottom. Scroll inside the frame to see it; the dashed line marks where the fold falls.'],
