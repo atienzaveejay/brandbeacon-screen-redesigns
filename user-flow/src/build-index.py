@@ -6,7 +6,7 @@ def shot(src, cap, cls='shot'):
     return (f'<figure class="{cls}"><div class="imgwrap"><a href="img/{src}" target="_blank" rel="noopener">'
             f'<img src="img/{src}" alt="{cap}" loading="lazy"></a></div><figcaption>{cap}</figcaption></figure>')
 
-def step(n, sid, title, desk, mob, notes, insp, extra=None):
+def step(n, sid, title, desk, mob, notes, ivan, extra=None):
     ex = ''
     if extra:
         cls = 'extra' if len(extra) > 1 else 'extra one'
@@ -15,101 +15,121 @@ def step(n, sid, title, desk, mob, notes, insp, extra=None):
     return (f'<section class="step" id="{sid}"><div class="stephead"><span class="num">{n}</span><h3>{title}</h3></div>'
             f'<div class="stepgrid"><div class="desk">{shot(desk[0], desk[1])}</div>'
             f'<div class="mob">{shot(mob[0], mob[1])}</div>'
-            f'<div class="stepnote"><ul>{li}</ul><p class="insp"><b>Why</b> {insp}</p></div></div>{ex}</section>')
+            f'<div class="stepnote"><ul>{li}</ul><p class="insp"><b>Ivan&rsquo;s line</b> {ivan}</p></div></div>{ex}</section>')
 
 STEPS = [
- step('01', 's01', 'Homepage: the search is the page',
+ step('01', 's01', 'Landing page, built around sign-in',
       ('flow-01.jpg', 'Desktop'), ('flow-m1.jpg', 'Mobile'),
-      ['One box, one placeholder: <b>&ldquo;Search a brand or product&rdquo;</b>. The Brand / Product toggle is gone, because a product resolves to the brand behind it and the toggle made people choose before they knew the difference.',
-       'The search bar is now the biggest object on the screen and sits dead centre. The example video moved below it as a cropped strip, so it pulls the eye down the page instead of competing for it.',
-       'Below the fold: how it works, the numbers, a full sample breakdown, pricing, and three questions. The second image is that page, scrolled.'],
-      'Ivan, 23 Sept: &ldquo;should say brand and products?&rdquo;, &ldquo;anything below the fold? more sales page?&rdquo; and &ldquo;for desktop I don&rsquo;t think it focuses on the search enough, it&rsquo;s kinda hidden&rdquo;.',
-      extra=[('flow-01b.jpg', 'Desktop, below the fold: the sales page'), ('flow-m1b.jpg', 'Mobile, below the fold')]),
- step('02', 's02', 'Preview: indexed results, and one press to unlock',
+      ['Google is the primary button, email sits under it as the other way in. Nothing else on the screen competes with the card.',
+       'What you get is stated before the button, not after: <b>3 brand searches, 3 AI breakdowns, share any breakout, no card</b>.',
+       'One real breakout sits beside the card (8,637&times;, a 1.6K-follower account) so the offer is not only a promise. It is the single piece of proof on an otherwise gated page.',
+       'Below the fold: how the three searches work, the numbers, a full sample breakdown, Free vs Growth, three questions, and the sign-in again at the bottom.'],
+      '&ldquo;Landing page with focus on google sign in (also other sign in), 3 searches, 3 analysis free, also add information on what they&rsquo;ll get.&rdquo;',
+      extra=[('flow-01b.jpg', 'Desktop, below the fold'), ('flow-m1b.jpg', 'Mobile, below the fold')]),
+ step('02', 's02', 'Enter a brand, with keywords to expand',
       ('flow-02.jpg', 'Desktop'), ('flow-m2.jpg', 'Mobile'),
-      ['Nothing is crawled while a logged-out visitor waits. The header carries an <b>Indexed Mon 22 Sep</b> stamp and the wall says &ldquo;already indexed, nothing is being crawled right now&rdquo;, so a preview costs us one database read and cannot be used to run up a bill.',
-       'A one minute explainer sits above the locked panel, where someone who has never seen a Breakout Score actually is.',
-       '<b>Continue with Google</b> is now on the panel itself. One press goes straight to Google and lands on the welcome screen; the old modal is gone for everyone but the email path.'],
-      'Ivan, 23 Sept: &ldquo;if we&rsquo;re pulling real videos it might take some time&rdquo;, &ldquo;we don&rsquo;t want to run an actual pull unless they&rsquo;re signed in&rdquo;, &ldquo;maybe an explainer video here?&rdquo; and &ldquo;going from page 2 to 4 it seems there&rsquo;s 2 button presses for log in with Google&rdquo;.',
-      extra=[('flow-02b.jpg', 'Variant, not a step: the sheet only opens for &ldquo;use email instead&rdquo;')]),
- step('03', 's03', 'Welcome video while it builds',
+      ['The first screen after sign-in asks for one thing. Nothing else is on it.',
+       '<b>Brand-led, as you asked.</b> The question is &ldquo;which brand&rdquo;, and the helper line says a product term will resolve to the brand behind it. One box, so nobody has to choose a mode before they know the difference.',
+       'The expand row is the keyword narrowing: optional chips that filter the pull to a product line. Left empty it returns every breakout for the brand.',
+       'The cost is on the screen before the press: &ldquo;this uses 1 of your 3 free searches&rdquo;.'],
+      '&ldquo;Enter keyword (expand), brand or product (focus on brand?)&rdquo;'),
+ step('03', 'a03', 'Processing, with the welcome video over it',
       ('flow-03.jpg', 'Desktop'), ('flow-m3.jpg', 'Mobile'),
-      ['Unchanged. A 90 second welcome plays over the one to two minute build, with progress and the trial terms beside it.',
-       'This is also the screen an unindexed brand lands on. There is no separate &ldquo;we haven&rsquo;t indexed this yet&rdquo; page any more: the build just happens here, behind the video.'],
-      'Ivan, 23 Sept: &ldquo;love the video idea&rdquo;, and &ldquo;I don&rsquo;t think we&rsquo;ll have page #3 &hellip; if we don&rsquo;t have the results, we don&rsquo;t need to tell them before it processes&rdquo;.'),
- step('04', 's04', 'The breakdown, and what to do with it',
+      ['The video covers the wait rather than interrupting it. Same 90 second slot whether it is you on camera or an AI voiceover for now.',
+       'Beside it: what the pull is actually doing, and a reminder that this is search 1 of 3 and the other two do not expire.',
+       'The screenshot shows a generic presenter, so it works for either version of the recording.'],
+      '&ldquo;Processing + video from Ivan or AI VO for now.&rdquo;'),
+ step('04', 's04', 'Search results',
       ('flow-04.jpg', 'Desktop'), ('flow-m4.jpg', 'Mobile'),
-      ['New <b>Do this next</b> block under the analysis: the brief to hand a creator, and the posting window this brand&rsquo;s breakouts keep landing in.',
-       'New creator line: who made it, whether we are already partnered with them, and how many breakouts they have had in this category. That is the part a brand can act on the same day.',
-       '&ldquo;Why it worked&rdquo; on its own describes someone else&rsquo;s video. Everything added here is about the reader&rsquo;s next post.'],
-      'Ivan, 23 Sept: &ldquo;is the content on here what we want to share? what the brands need?&rdquo; This is our answer, and the open question below sets out what we still need from him.'),
- step('05', 's05', 'Public shared page',
+      ['Signed in, so nothing is masked, blurred or locked. Every Breakout Score is readable and the list is sorted by it.',
+       'Each card carries its own Analyze button, so the next step is reachable from any video rather than only the top one.',
+       'Export is on the header. Since the whole list is visible now, the thing worth paying for is the written breakdown, not the numbers.'],
+      '&ldquo;Search results page.&rdquo;'),
+ step('05', 's05', 'Prompt to analyze a video',
       ('flow-05.jpg', 'Desktop'), ('flow-m5.jpg', 'Mobile'),
-      ['Unchanged. A shared breakdown opens with no account: TikTok embed, our analysis, credit to the creator, and a button into the preview.',
-       'This is the second front door, and most people open it on a phone.'],
-      'Not raised in this round. Kept as approved on 22 Sept.'),
- step('06', 's06', 'My Feed: one brand tracked free, weekly',
+      ['Picking a video opens a short confirm rather than running straight away, because this is the step that spends one of the three.',
+       'It says what it will do (video, caption and comments), what it costs (1 of 3), and how long it takes (about 40 seconds).',
+       'On mobile it is a bottom sheet, so the thumb reaches the button.'],
+      '&ldquo;Prompt to analyze video.&rdquo;'),
+ step('06', 's06', 'Breakdown, with share',
       ('flow-06.jpg', 'Desktop'), ('flow-m6.jpg', 'Mobile'),
-      ['Unchanged. After the trial the account drops to Free and keeps tracking one brand every Monday.',
-       'Upgrade prompts are about tracking more brands, never about seeing anything at all.'],
-      'Not raised in this round. Kept as approved on 22 Sept.'),
+      ['The four drivers, then the <b>Do this next</b> block and the creator line agreed on 23 Sept: the brief to hand a creator, the posting window, and whether you are already partnered with whoever made it.',
+       'Share is the primary button and is free on every plan. The counter reads &ldquo;breakdown 1 of 3 used, 2 left, they do not expire&rdquo;.',
+       'The shared page is the one screen in this flow with no account behind it, which makes it the only way a stranger meets the product. It is the extra image below.'],
+      '&ldquo;Video analysis detail page with share.&rdquo;',
+      extra=[('flow-06b.jpg', 'Variant, not a step: what the share link opens for someone with no account')]),
+ step('07', 's07', 'Prompt to search another brand',
+      ('flow-07.jpg', 'Desktop'), ('flow-m7.jpg', 'Mobile'),
+      ['The prompt does the work of getting someone to search 2 and 3. Without it most accounts stop at one and the paywall never fires.',
+       'It suggests competitors of the brand just searched, which is the reason a brand team runs a second search at all.',
+       'The counter is shown as two searches left rather than one used, so the offer still reads as generous at this point.'],
+      '&ldquo;Prompt to search another term.&rdquo;'),
+ step('08', 's08', 'Paywall on the fourth search',
+      ('flow-08.jpg', 'Desktop'), ('flow-m8.jpg', 'Mobile'),
+      ['The wall names what is still free beside what is blocked: the three brands already searched, the breakdowns already run, and every share link already sent.',
+       'Nothing is deleted and nothing expires. The block is on <b>new</b> searches only, which is the difference between a paywall and a trial ending.',
+       'One plan, one price, one button. No second tier to weigh up at the moment of friction.'],
+      '&ldquo;4th search, paywall.&rdquo;'),
+ step('09', 's09', 'Paywall on the fourth breakdown',
+      ('flow-09.jpg', 'Desktop'), ('flow-m9.jpg', 'Mobile'),
+      ['Same wall, different trigger, and it keeps the video in view so it is clear exactly what was being asked for.',
+       'The score and the video stay free here. Only the written breakdown is behind the wall, so the results page never becomes useless.',
+       'Growth is quoted as 100 breakdowns a month against the 3 just spent.'],
+      '&ldquo;4th analysis, paywall.&rdquo;'),
 ]
 
 FLOW = ('<section class="block" id="flow">\n<h2>The flow, step by step</h2>\n'
-        '<p class="sub">Six steps now, down from eight. Desktop and mobile for each, plus the two screens that are variants rather than steps. '
-        'Click any image to open it full size.</p>\n' + '\n'.join(STEPS) + '\n</section>')
+        '<p class="sub">Nine steps, in the order you listed them, desktop and mobile for each. '
+        'The shared page is included as a variant because it is where a share link lands. Click any image to open it full size.</p>\n'
+        + '\n'.join(STEPS) + '\n</section>')
 
-CHANGED = '''<section class="block" id="changed">
-<h2>Ivan&rsquo;s notes, and what happened to each</h2>
-<p class="sub">Every line from the 23 Sept message. Two are questions back to him rather than changes, and they are marked.</p>
+DECISIONS = '''<section class="block" id="decisions">
+<h2>What this version changes, and four things to confirm</h2>
+<p class="sub">Built to your 24 Sept list. The flow now opens with sign-in, so the preview screens from the previous version are gone and the free tier carries the weight instead.</p>
 <div class="tablewrap"><table>
-<tr><th>His note</th><th>Screen</th><th>What we did</th></tr>
-<tr><td>&ldquo;Should say brand and products?&rdquo;</td><td>01</td><td>One box for both. The Brand / Product toggle is gone and the placeholder reads &ldquo;Search a brand or product&rdquo;; a product resolves to the brand behind it.</td></tr>
-<tr><td>&ldquo;Anything below the fold? More sales page?&rdquo;</td><td>01</td><td>Added: how it works, a numbers band, a full sample breakdown, Free vs Growth, three questions, and the search again at the bottom.</td></tr>
-<tr><td>&ldquo;For desktop I don&rsquo;t think it focuses on the search enough, it&rsquo;s kinda hidden.&rdquo;</td><td>01</td><td>Hero rebuilt. The search is centred, 780px wide, and the largest object on the page. The example video became a cropped strip below it.</td></tr>
-<tr><td>&ldquo;If we&rsquo;re pulling real videos it might take some time to get the videos.&rdquo;</td><td>02</td><td>The preview only ever reads the weekly index, so there is nothing to wait for. The header carries the index date.</td></tr>
-<tr><td>&ldquo;We don&rsquo;t want to run an actual pull unless they&rsquo;re signed in (could be abused).&rdquo;</td><td>02</td><td>Agreed and now stated on the screen. A logged-out search cannot trigger a crawl; the first crawl a person can cause happens after sign-in, on screen 03.</td></tr>
-<tr><td>&ldquo;Maybe an explainer video here?&rdquo;</td><td>02</td><td>A one minute explainer card sits above the locked panel. Short, and captioned, because this plays before anyone has a reason to turn sound on.</td></tr>
-<tr><td>&ldquo;I don&rsquo;t think we&rsquo;ll have page #3.&rdquo;</td><td>&mdash;</td><td>Deleted. An unindexed brand now goes straight to sign-in and builds behind the welcome video, with no screen telling them to wait first.</td></tr>
-<tr><td>&ldquo;Going from page 2 to 4, there&rsquo;s 2 button presses for log in with Google.&rdquo;</td><td>02</td><td>Fixed. The Google button is on the preview panel itself, so it is one press. The old modal survives only as the &ldquo;use email instead&rdquo; path.</td></tr>
-<tr><td>&ldquo;Love the video idea.&rdquo;</td><td>03</td><td>Kept as is.</td></tr>
-<tr><td>&ldquo;Is the content on here what we want to share? What the brands need?&rdquo;</td><td>04</td><td>Partly answered: a <b>Do this next</b> block and a creator line now sit under the analysis. The rest is a question back to him, below.</td></tr>
+<tr><th>Was</th><th>Now</th></tr>
+<tr><td>Homepage was a search box; results were previewed with scores masked, no account.</td><td>Homepage is a sign-in card. Nothing runs before an account exists.</td></tr>
+<tr><td>Free was 1 search and 0 breakdowns, with an 8-day Growth trial on top.</td><td>Free is 3 searches and 3 breakdowns, and the trial is gone.</td></tr>
+<tr><td>Six steps, with the wall at the point of reveal.</td><td>Nine steps, with two walls: the fourth search and the fourth breakdown.</td></tr>
+<tr><td>Brand / Product toggle, then one box for both.</td><td>One box, brand-led wording, products resolve to the brand behind them.</td></tr>
 </table></div>
 
 <div class="takes" style="margin-top:24px">
-<div class="card tint"><h4>Open question 1: what the brand actually needs</h4>
-<p style="margin:0 0 8px">We have taken &ldquo;what the brands need&rdquo; to mean <b>the next post</b>: a brief, a posting window, and the creator behind the breakout. Screen 04 now carries all three.</p>
-<p style="margin:0">What we cannot decide for him: whether the shared public page should carry that too, or stay a clean &ldquo;why this went viral&rdquo; read. Carrying it makes the page more useful to the one brand and less shareable to everyone else. <b>Ivan&rsquo;s call.</b></p></div>
-<div class="card tint"><h4>Open question 2: what the index really holds</h4>
-<p style="margin:0 0 8px">One box for brand or product assumes a product search can resolve to a brand. If the index is brand-keyed only, the box still works but the promise is thinner, and we should say &ldquo;brand&rdquo; and offer products as a filter inside the results instead.</p>
-<p style="margin:0"><b>Needed from Ivan:</b> can a product term resolve to a brand today, or is that a build?</p></div>
+<div class="card tint"><h4>1. The 8-day trial is gone. Deliberate?</h4>
+<p style="margin:0">Your list describes a standing free quota, not a clock. These screens drop the trial entirely: no card, no countdown, and the three never expire. That is a cleaner story than a trial, but it is a real change to the plan structure and it is not in your message, so it needs a yes.</p></div>
+<div class="card tint"><h4>2. Two counters or one?</h4>
+<p style="margin:0">3 searches and 3 breakdowns are tracked separately here, exactly as written, which is why the flow needs two paywalls. A single pooled count of 3 actions would need one wall and one sentence to explain, at the cost of someone burning all three on breakdowns of one brand.</p></div>
+<div class="card tint"><h4>3. &ldquo;Focus on brand?&rdquo;</h4>
+<p style="margin:0">Taken as: one input, brand-led wording, and a product term resolves to the brand behind it. That last part is the bit we cannot verify from outside. <b>Can a product term resolve to a brand today, or is that a build?</b> If it is a build, the helper line comes out and the box just says brand.</p></div>
+<div class="card tint"><h4>4. Nothing in the list covers the second visit</h4>
+<p style="margin:0">The nine steps run from sign-up to paywall. There is no screen for someone who signs in on day two with one search left, and no weekly reason to return. Worth deciding whether that is a later screen or whether the weekly email carries it.</p></div>
+</div>
+
+<div class="card" style="margin-top:20px">
+<h4>One build note</h4>
+<p style="margin:0">Sign-in stops a script, but a Google account is free to make, so the wall on its own will not stop someone determined to run the analyses. The controls that do the work are the per-account quota (already in these screens) and a rate limit on the pull. Worth having both in the ticket, not just the auth gate.</p>
 </div>
 </section>'''
 
-# --- swap the sections ---
-i = t.index('<section class="block" id="flow">'); j = t.index('<section class="block" id="seen">')
-t = t[:i] + CHANGED + '\n\n' + FLOW + '\n\n' + t[j:]
+# --- swap in the new sections, keep the research below untouched ---
+i = t.index('<section class="block" id="changed">')
+j = t.index('<section class="block" id="seen">')
+t = t[:i] + DECISIONS + '\n\n' + FLOW + '\n\n' + t[j:]
 
-t = t.replace('<title>Brand Beacon user flow v2</title>', '<title>Brand Beacon user flow v3</title>')
-t = t.replace('Brand Beacon user flow v2</a>', 'Brand Beacon user flow v3</a>')
-t = t.replace('content="A new-user flow for Brand Beacon that reaches the aha early, with the research and competitor walkthroughs behind it."',
-              'content="The Brand Beacon new-user flow rebuilt against Ivan’s 23 Sept feedback: six steps, a search-led homepage with a sales page under it, and one press to sign in."')
-t = t.replace('<nav class="toc" aria-label="Sections"><a href="#summary">Summary</a><a href="#flow">The flow</a>',
-              '<nav class="toc" aria-label="Sections"><a href="#summary">Summary</a><a href="#changed">Ivan&rsquo;s notes</a><a href="#flow">The flow</a>')
+t = t.replace('<title>Brand Beacon user flow v3</title>', '<title>Brand Beacon user flow v4</title>')
+t = t.replace('Brand Beacon user flow v3</a>', 'Brand Beacon user flow v4</a>')
+t = t.replace('<nav class="toc" aria-label="Sections"><a href="#summary">Summary</a><a href="#changed">Ivan&rsquo;s notes</a><a href="#flow">The flow</a>',
+              '<nav class="toc" aria-label="Sections"><a href="#summary">Summary</a><a href="#decisions">What changed</a><a href="#flow">The flow</a>')
 t = t.replace('<h1>Get every new user to the breakdown in their first two minutes</h1>',
-              '<h1>Get every new user to the breakdown in their first two minutes</h1>')
-t = t.replace('<p class="lede">A proposed new-user flow for Brand Beacon, built from a walkthrough of the live app and hands-on sign-ups at four competitors on 22 Sept 2026.</p>',
-              '<p class="lede">Version 3. The flow is down to six steps, the homepage is built around the search with a sales page under it, '
-              'and signing in is one press. Every change traces to a line of Ivan&rsquo;s 23 Sept feedback, listed below. '
-              'The competitor research it was built from is unchanged and sits further down.</p>')
-t = t.replace('<footer>Prepared 22 Sept 2026.',
-              '<footer>Prepared 22 Sept 2026, revised 23 Sept 2026 against Ivan&rsquo;s feedback.')
-# extra CSS for the tall below-the-fold shots
-t = t.replace('.shot.tall .imgwrap{max-height:560px;overflow:auto}',
-              '.shot.tall .imgwrap{max-height:560px;overflow:auto}\n'
-              '.shot.scroll .imgwrap{max-height:640px;overflow:auto}\n'
-              '.extra{margin-top:20px;display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:16px;align-items:start}\n'
-              '.extra.one{grid-template-columns:minmax(0,660px)}\n'
-              '@media (max-width:900px){.extra,.extra.one{grid-template-columns:minmax(0,1fr)}}')
+              '<h1>Sign in, three searches, three breakdowns</h1>')
+t = re.sub(r'<p class="lede">.*?</p>',
+           '<p class="lede">Version 4, built to Ivan&rsquo;s 24 Sept flow. Sign-in comes first, the free tier is three searches and '
+           'three AI breakdowns, and the wall falls on the fourth of each. Nine steps, desktop and mobile. '
+           'The competitor research underneath is unchanged from 22 Sept and is what the earlier preview-first version was built on; '
+           'it is kept here as evidence, not as a recommendation.</p>', t, count=1, flags=re.S)
+t = t.replace('content="The Brand Beacon new-user flow rebuilt against Ivan’s 23 Sept feedback: six steps, a search-led homepage with a sales page under it, and one press to sign in."',
+              'content="The Brand Beacon new-user flow built to Ivan’s 24 Sept list: Google sign-in first, three free searches and three free breakdowns, paywall on the fourth of each."')
+t = t.replace('<footer>Prepared 22 Sept 2026, revised 23 Sept 2026 against Ivan&rsquo;s feedback.',
+              '<footer>Prepared 22 Sept 2026, rebuilt 24 Sept 2026 to Ivan&rsquo;s sign-in-first flow. The previous preview-first version is in the repo history.')
 io.open(SRC, 'w', encoding='utf-8').write(t)
 print('index.html rebuilt,', len(t), 'bytes')
