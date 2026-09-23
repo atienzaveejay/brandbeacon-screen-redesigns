@@ -115,14 +115,17 @@ DECISIONS = '''<section class="block" id="decisions">
 anchor = '<section class="block" id="decisions">' if 'id="decisions"' in t else '<section class="block" id="changed">'
 i = t.index(anchor)
 j = t.index('<section class="block" id="seen">')
-t = t[:i] + DECISIONS + '\n\n' + FLOW + '\n\n' + t[j:]
+# Veejay, 24 Sept: the framing sections come off the page. DECISIONS is kept
+# above so it can be put back by restoring this line.
+t = t[:i] + FLOW + '\n\n' + t[j:]
 
 t = t.replace('<title>Brand Beacon user flow v3</title>', '<title>Brand Beacon user flow v4</title>')
 t = t.replace('Brand Beacon user flow v3</a>', 'Brand Beacon user flow v4</a>')
-t = t.replace('<nav class="toc" aria-label="Sections"><a href="#summary">Summary</a><a href="#changed">Ivan&rsquo;s notes</a><a href="#flow">The flow</a>',
-              '<nav class="toc" aria-label="Sections"><a href="#summary">Summary</a><a href="#decisions">What changed</a><a href="#flow">The flow</a>')
+t = re.sub(r'<nav class="toc" aria-label="Sections">.*?<a href="#flow">The flow</a>',
+           '<nav class="toc" aria-label="Sections"><a href="#flow">The flow</a>', t, count=1, flags=re.S)
 t = t.replace('<h1>Get every new user to the breakdown in their first two minutes</h1>',
               '<h1>Sign in, three searches, three breakdowns</h1>')
+t = re.sub(r'(<h1>[^<]*</h1>).*?(?=</section>)', lambda m: m.group(1) + '\n', t, count=1, flags=re.S)
 t = re.sub(r'<p class="lede">.*?</p>',
            '<p class="lede">Version 4, built to Ivan&rsquo;s 24 Sept flow. Sign-in comes first, the free tier is three searches and '
            'three AI breakdowns, and the wall falls on the fourth of each. Nine steps, desktop and mobile. '

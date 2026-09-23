@@ -74,51 +74,10 @@ footer{max-width:1320px;margin:0 auto;padding:24px;color:var(--muted);font-size:
 </head>
 <body>
 <header class="top"><div class="bar"><a class="logo" href="../"><span class="mark">BB</span>Brand Beacon user flow v4</a>
-<nav class="toc" aria-label="Sections"><a href="#summary">Summary</a><a href="#decisions">What changed</a><a href="#flow">The flow</a><a href="#seen">What we saw</a><a href="#others">Other apps</a><a href="#sources">Sources</a><button type="button" class="toc-toggle" id="notesToggle" aria-pressed="true">Show notes</button></nav></div></header>
+<nav class="toc" aria-label="Sections"><a href="#flow">The flow</a><a href="#seen">What we saw</a><a href="#others">Other apps</a><a href="#sources">Sources</a><button type="button" class="toc-toggle" id="notesToggle" aria-pressed="true">Show notes</button></nav></div></header>
 <main>
 <section id="summary">
 <h1>Sign in, three searches, three breakdowns</h1>
-<p class="lede">Version 4, built to Ivan&rsquo;s 24 Sept flow. Sign-in comes first, the free tier is three searches and three AI breakdowns, and the wall falls on the fourth of each. Nine steps, desktop and mobile. The competitor research underneath is unchanged from 22 Sept and is what the earlier preview-first version was built on; it is kept here as evidence, not as a recommendation.</p>
-<div class="card">
-<h4>Competitor research</h4>
-<div class="tablewrap"><table>
-<tr><th></th><th>Card for trial</th><th>Questions before the app</th><th>Time to a real result</th><th>Free AI or insight</th><th>After the trial</th></tr>
-<tr><td class="bb"><b>Brand Beacon</b></td><td class="bb">Yes</td><td class="bb">None</td><td class="bb">About 1 to 2 min</td><td class="bb">0 breakdowns</td><td class="bb">Free: 1 search</td></tr>
-<tr><td><b>Kalodata</b></td><td>No</td><td>4</td><td>Instant</td><td>Full &ldquo;why it went viral&rdquo; report on day one</td><td>Account locks</td></tr>
-<tr><td><b>SparkToro</b></td><td>No</td><td>3</td><td>About 5 sec</td><td>Real report, premium sections locked</td><td>3 free reports a month</td></tr>
-<tr><td><b>Exolyt</b></td><td>No</td><td>About 9</td><td>About 8 sec</td><td>Top plan free for 7 days</td><td>Drops to a free plan</td></tr>
-<tr><td><b>FastMoss</b></td><td>No (3-day trial)</td><td colspan="4">Its login would not hold in our test browser, so only the logged-out view was checked (below).</td></tr>
-</table></div>
-</div>
-<p class="sub" style="margin-top:16px">Still to check with a paid account: whether an analysis now appears on screen without a page reload. On 18 Sept it did not.</p>
-</section>
-
-<section class="block" id="decisions">
-<h2>What this version changes, and four things to confirm</h2>
-<p class="sub">Built to your 24 Sept list. The flow now opens with sign-in, so the preview screens from the previous version are gone and the free tier carries the weight instead.</p>
-<div class="tablewrap"><table>
-<tr><th>Was</th><th>Now</th></tr>
-<tr><td>Homepage was a search box; results were previewed with scores masked, no account.</td><td>Homepage is a sign-in card. Nothing runs before an account exists.</td></tr>
-<tr><td>Free was 1 search and 0 breakdowns, with an 8-day Growth trial on top.</td><td>Free is 3 searches and 3 breakdowns, and the trial is gone.</td></tr>
-<tr><td>Six steps, with the wall at the point of reveal.</td><td>Nine steps, with two walls: the fourth search and the fourth breakdown.</td></tr>
-<tr><td>Brand / Product toggle, then one box for both.</td><td>One box, brand-led wording, products resolve to the brand behind them.</td></tr>
-</table></div>
-
-<div class="takes" style="margin-top:24px">
-<div class="card tint"><h4>1. The 8-day trial is gone. Deliberate?</h4>
-<p style="margin:0">Your list describes a standing free quota, not a clock. These screens drop the trial entirely: no card, no countdown, and the three never expire. That is a cleaner story than a trial, but it is a real change to the plan structure and it is not in your message, so it needs a yes.</p></div>
-<div class="card tint"><h4>2. Two counters or one?</h4>
-<p style="margin:0">3 searches and 3 breakdowns are tracked separately here, exactly as written, which is why the flow needs two paywalls. A single pooled count of 3 actions would need one wall and one sentence to explain, at the cost of someone burning all three on breakdowns of one brand.</p></div>
-<div class="card tint"><h4>3. &ldquo;Focus on brand?&rdquo;</h4>
-<p style="margin:0">Taken as: one input, brand-led wording, and a product term resolves to the brand behind it. That last part is the bit we cannot verify from outside. <b>Can a product term resolve to a brand today, or is that a build?</b> If it is a build, the helper line comes out and the box just says brand.</p></div>
-<div class="card tint"><h4>4. Nothing in the list covers the second visit</h4>
-<p style="margin:0">The nine steps run from sign-up to paywall. There is no screen for someone who signs in on day two with one search left, and no weekly reason to return. Worth deciding whether that is a later screen or whether the weekly email carries it.</p></div>
-</div>
-
-<div class="card" style="margin-top:20px">
-<h4>One build note</h4>
-<p style="margin:0">Sign-in stops a script, but a Google account is free to make, so the wall on its own will not stop someone determined to run the analyses. The controls that do the work are the per-account quota (already in these screens) and a rate limit on the pull. Worth having both in the ticket, not just the auth gate.</p>
-</div>
 </section>
 
 <section class="block" id="flow">
