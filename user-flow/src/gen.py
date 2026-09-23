@@ -345,7 +345,7 @@ def signin_card(w=400, mobile=False):
     gets = ['3 brand searches', '3 AI breakdowns', 'No card, ever']
     li = ''.join(f'<li style="display:flex; align-items:center; gap:10px; font-size:{15 if mobile else 16}px;">{check_dot(18)}{g}</li>' for g in gets)
     return (f'<div style="width:{"100%" if mobile else str(w) + "px"}; box-sizing:border-box; background:{SURF}; border-radius:24px; '
-            f'padding:{22 if mobile else 30}px; box-shadow:{SH3}; display:flex; flex-direction:column; gap:{18 if mobile else 22}px;">'
+            f'padding:{22 if mobile else 30}px; box-shadow:{SH3}; display:flex; flex-direction:column; gap:{18 if mobile else 22}px; text-align:left;">'
             f'<span style="font-size:{21 if mobile else 23}px; font-weight:800; letter-spacing:-0.02em;">Start free</span>'
             f'<ul style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:12px;">{li}</ul>'
             f'<div style="display:flex; flex-direction:column; gap:14px;">{google_btn(True, 54, 16, solid=True)}'
@@ -395,22 +395,28 @@ def plan_wall(title, body, mobile=False):
             f'<span style="font-size:{12 if mobile else 13}px; color:{T3}; text-align:center;">Cancel any time. Your searches and breakdowns stay.</span></div>')
 
 # =================== DESKTOP ===================
+def proof_strip(mobile=False):
+    """One quiet line of evidence under the card, not a second column."""
+    pal = TILES[0][0]
+    return (f'<div style="display:flex; align-items:center; gap:{12 if mobile else 14}px; width:{"100%" if mobile else "400px"}; '
+            f'box-sizing:border-box; background:{SURF}; border:1px solid {LINE}; '
+            f'border-radius:{14 if mobile else 16}px; padding:{10 if mobile else 12}px {14 if mobile else 16}px {10 if mobile else 12}px {10 if mobile else 12}px;">'
+            f'{tile(48 if mobile else 54, pal, "", "", "0:20", None, small=True, h=82 if mobile else 92, radius=10)}'
+            f'<span style="display:flex; flex-direction:column; gap:1px; text-align:left;">'
+            f'<span style="font-size:{22 if mobile else 26}px; font-weight:800; color:{Y_TXT}; letter-spacing:-0.03em; line-height:1.1;">8,637&times;</span>'
+            f'<span style="font-size:{13 if mobile else 13}px; color:{T2}; line-height:1.45;">its creator&rsquo;s usual views. '
+            f'A 1.6K-follower account, found for @rhode last Monday.</span></span></div>')
+
 def d01():
-    """S01. Was eighteen competing elements; now two zones."""
-    pal, cap, hd, sc, fol = TILES[0]
-    proof = (f'<div style="display:flex; align-items:flex-end; gap:20px;">'
-             f'{tile(168, pal, "", "", "0:20", None, rank=1, h=299)}'
-             f'<div style="display:flex; flex-direction:column; gap:4px; padding-bottom:6px;">'
-             f'<span style="font-size:44px; font-weight:800; color:{Y_TXT}; letter-spacing:-0.035em; line-height:1;">8,637&times;</span>'
-             f'<span style="font-size:16px; color:{T2}; line-height:1.45; max-width:19em;">its creator&rsquo;s usual views. '
-             f'A 1.6K-follower account, found for @rhode last Monday.</span></div></div>')
-    left = (f'<div style="width:600px; display:flex; flex-direction:column; gap:26px;">'
-            f'<h1 style="margin:0; font-size:48px; font-weight:800; letter-spacing:-0.035em; line-height:1.06;">Find the TikToks that broke out for any brand</h1>'
-            f'<p style="margin:0; font-size:19px; color:{T2}; line-height:1.5; max-width:26em;">Facebook has an ad library. Organic TikTok doesn&rsquo;t, '
-            f'so we index 11,000+ brands every Monday.</p>{proof}</div>')
+    """S01. One centred column: claim, action, evidence. No second column to align to."""
+    head = (f'<div style="display:flex; flex-direction:column; align-items:center; gap:16px; text-align:center; max-width:720px;">'
+            f'<h1 style="margin:0; font-size:44px; font-weight:800; letter-spacing:-0.035em; line-height:1.08;">Find the TikToks that broke out for any brand</h1>'
+            f'<p style="margin:0; font-size:18px; color:{T2}; line-height:1.5; max-width:30em;">Facebook has an ad library. Organic TikTok doesn&rsquo;t, '
+            f'so we index 11,000+ brands every Monday.</p></div>')
     inner = (topnav(right=f'<a href="#" style="font-size:14px; font-weight:600; color:{T2}; text-decoration:none;">Pricing</a>'
                           f'<a href="#" style="font-size:14px; font-weight:600; color:{INK}; text-decoration:none;">Sign in</a>')
-             + f'<div style="flex-grow:1; display:flex; align-items:center; justify-content:center; gap:80px; padding:0 72px;">{left}{signin_card()}</div>')
+             + f'<div style="flex-grow:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:30px; padding:0 48px;">'
+             f'{head}{signin_card()}{proof_strip()}</div>')
     return root(inner, 'S02: signed in, the first thing asked for is a brand.')
 
 def d01b():
@@ -605,18 +611,11 @@ def d09():
 
 # =================== MOBILE ===================
 def m01():
-    pal, cap, hd, sc, fol = TILES[0]
-    proof = (f'<div style="display:flex; gap:16px; align-items:center;">'
-             f'{tile(92, pal, "", "", "0:20", None, small=True, h=156, radius=12)}'
-             f'<span style="display:flex; flex-direction:column; gap:2px; min-width:0;">'
-             f'<span style="font-size:32px; font-weight:800; color:{Y_TXT}; letter-spacing:-0.03em; line-height:1;">8,637&times;</span>'
-             f'<span style="font-size:14px; color:{T2}; line-height:1.45;">its creator&rsquo;s usual views. A 1.6K-follower account, found for @rhode.</span></span></div>')
     inner = (topnav(True, f'<a href="#" style="font-size:14px; font-weight:700; color:{INK}; text-decoration:none;">Sign in</a>')
-             + f'<div style="flex-grow:1; padding:24px 16px; display:flex; flex-direction:column; gap:22px; overflow:hidden;">'
-             f'<div style="display:flex; flex-direction:column; gap:12px;">'
+             + f'<div style="flex-grow:1; padding:26px 16px; display:flex; flex-direction:column; align-items:center; gap:20px; overflow:hidden; text-align:center;">'
              f'<h1 style="margin:0; font-size:30px; font-weight:800; letter-spacing:-0.03em; line-height:1.1;">Find the TikToks that broke out for any brand</h1>'
-             f'<p style="margin:0; font-size:16px; color:{T2}; line-height:1.5;">Facebook has an ad library. Organic TikTok doesn&rsquo;t, so we index 11,000+ brands every Monday.</p></div>'
-             f'{proof}{signin_card(mobile=True)}</div>')
+             f'<p style="margin:0; font-size:16px; color:{T2}; line-height:1.5;">Facebook has an ad library. Organic TikTok doesn&rsquo;t, so we index 11,000+ brands every Monday.</p>'
+             f'{signin_card(mobile=True)}{proof_strip(True)}</div>')
     return root(inner, 'M2: signed in, the first thing asked for is a brand.', True)
 
 def m01b():
