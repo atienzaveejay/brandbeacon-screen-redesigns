@@ -395,28 +395,43 @@ def plan_wall(title, body, mobile=False):
             f'<span style="font-size:{12 if mobile else 13}px; color:{T3}; text-align:center;">Cancel any time. Your searches and breakdowns stay.</span></div>')
 
 # =================== DESKTOP ===================
-def proof_strip(mobile=False):
-    """One quiet line of evidence under the card, not a second column."""
-    pal = TILES[0][0]
-    return (f'<div style="display:flex; align-items:center; gap:{12 if mobile else 14}px; width:{"100%" if mobile else "400px"}; '
-            f'box-sizing:border-box; background:{SURF}; border:1px solid {LINE}; '
-            f'border-radius:{14 if mobile else 16}px; padding:{10 if mobile else 12}px {14 if mobile else 16}px {10 if mobile else 12}px {10 if mobile else 12}px;">'
-            f'{tile(48 if mobile else 54, pal, "", "", "0:20", None, small=True, h=82 if mobile else 92, radius=10)}'
-            f'<span style="display:flex; flex-direction:column; gap:1px; text-align:left;">'
-            f'<span style="font-size:{22 if mobile else 26}px; font-weight:800; color:{Y_TXT}; letter-spacing:-0.03em; line-height:1.1;">8,637&times;</span>'
-            f'<span style="font-size:{13 if mobile else 13}px; color:{T2}; line-height:1.45;">its creator&rsquo;s usual views. '
-            f'A 1.6K-follower account, found for @rhode last Monday.</span></span></div>')
+def hero_row(mobile=False):
+    """The product, quietly: ranked breakouts and their scores, bleeding past both edges.
+    No captions, and softened, so it supports the call to action instead of shouting over it."""
+    w = 124 if mobile else 168
+    h = 296 if mobile else 252
+    n = 4 if mobile else 8
+    tiles = ''.join(tile(w, TILES[i % 6][0], '', '', ['0:20','0:11','0:10','0:14','0:12','0:16'][i % 6],
+                         TILES[i % 6][3], rank=i + 1, small=True, h=h, radius=14) for i in range(n))
+    gap = 12 if mobile else 16
+    return (f'<div style="position:relative; width:100%; height:{h}px; overflow:hidden;">'
+            f'<div style="display:flex; gap:{gap}px; width:{n * (w + gap)}px; position:absolute; left:50%; transform:translateX(-50%);">{tiles}</div>'
+            f'<div style="position:absolute; inset:0; background:linear-gradient(180deg,{PAGE} 0%,rgba(246,244,238,.28) 16%,rgba(246,244,238,0) 46%);"></div>'
+            f'<div style="position:absolute; top:0; bottom:0; left:0; width:{70 if mobile else 180}px; '
+            f'background:linear-gradient(90deg,{PAGE} 10%,rgba(246,244,238,0));"></div>'
+            f'<div style="position:absolute; top:0; bottom:0; right:0; width:{70 if mobile else 180}px; '
+            f'background:linear-gradient(270deg,{PAGE} 10%,rgba(246,244,238,0));"></div></div>')
 
 def d01():
-    """S01. One centred column: claim, action, evidence. No second column to align to."""
-    head = (f'<div style="display:flex; flex-direction:column; align-items:center; gap:16px; text-align:center; max-width:720px;">'
-            f'<h1 style="margin:0; font-size:44px; font-weight:800; letter-spacing:-0.035em; line-height:1.08;">Find the TikToks that broke out for any brand</h1>'
-            f'<p style="margin:0; font-size:18px; color:{T2}; line-height:1.5; max-width:30em;">Facebook has an ad library. Organic TikTok doesn&rsquo;t, '
-            f'so we index 11,000+ brands every Monday.</p></div>')
+    """S01. A landing page: claim, what you get, the one action, then the product.
+    Single column, and the product bleeds past the fold instead of leaving beige."""
+    glow = (f'<div style="position:absolute; top:-180px; left:50%; transform:translateX(-50%); width:1100px; height:520px; '
+            f'border-radius:50%; background:radial-gradient(closest-side, rgba(255,198,41,.22), rgba(255,198,41,0)); pointer-events:none;"></div>')
+    copy = (f'<div style="display:flex; flex-direction:column; align-items:center; gap:18px; text-align:center;">'
+            f'<h1 style="margin:0; font-size:52px; font-weight:800; letter-spacing:-0.035em; line-height:1.06; max-width:15em;">'
+            f'Find the TikToks that broke out for any brand</h1>'
+            f'<p style="margin:0; font-size:19px; color:{T2}; line-height:1.5; max-width:32em;">Facebook has an ad library. '
+            f'Organic TikTok doesn&rsquo;t, so we index 11,000+ brands every Monday.</p>'
+            f'{trust(["3 brand searches", "3 AI breakdowns", "No card"], 15)}</div>')
+    action = (f'<div style="display:flex; flex-direction:column; align-items:center; gap:12px;">'
+              f'<div style="width:320px;">{google_btn(True, 58, 17, solid=True)}</div>'
+              f'<span style="font-size:14px; color:{T3};"><a href="#" style="color:{Y_TXT}; font-weight:700;">Use email instead</a>'
+              f' &middot; <a href="#" style="color:{T2};">Sign in</a></span></div>')
     inner = (topnav(right=f'<a href="#" style="font-size:14px; font-weight:600; color:{T2}; text-decoration:none;">Pricing</a>'
                           f'<a href="#" style="font-size:14px; font-weight:600; color:{INK}; text-decoration:none;">Sign in</a>')
-             + f'<div style="flex-grow:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:30px; padding:0 48px;">'
-             f'{head}{signin_card()}{proof_strip()}</div>')
+             + f'<div style="flex-grow:1; position:relative; display:flex; flex-direction:column; align-items:center; overflow:hidden;">{glow}'
+             f'<div style="position:relative; display:flex; flex-direction:column; align-items:center; gap:28px; padding:36px 48px 0;">{copy}{action}</div>'
+             f'<div style="width:100%; margin-top:auto;">{hero_row()}</div></div>')
     return root(inner, 'S02: signed in, the first thing asked for is a brand.')
 
 def d01b():
@@ -611,11 +626,20 @@ def d09():
 
 # =================== MOBILE ===================
 def m01():
+    copy = (f'<div style="display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;">'
+            f'<h1 style="margin:0; font-size:32px; font-weight:800; letter-spacing:-0.03em; line-height:1.1;">Find the TikToks that broke out for any brand</h1>'
+            f'<p style="margin:0; font-size:16px; color:{T2}; line-height:1.5;">Facebook has an ad library. Organic TikTok doesn&rsquo;t, so we index 11,000+ brands every Monday.</p>'
+            f'<div style="display:flex; flex-direction:column; gap:8px; align-items:flex-start;">'
+            + ''.join(f'<span style="display:inline-flex; align-items:center; gap:8px; font-size:15px; color:{T2};">{check_dot(18)}{x}</span>'
+                      for x in ['3 brand searches', '3 AI breakdowns', 'No card'])
+            + '</div></div>')
+    action = (f'<div style="display:flex; flex-direction:column; align-items:center; gap:10px;">{google_btn(True, 54, 16, solid=True)}'
+              f'<span style="font-size:13px; color:{T3};"><a href="#" style="color:{Y_TXT}; font-weight:700;">Use email instead</a>'
+              f' &middot; <a href="#" style="color:{T2};">Sign in</a></span></div>')
     inner = (topnav(True, f'<a href="#" style="font-size:14px; font-weight:700; color:{INK}; text-decoration:none;">Sign in</a>')
-             + f'<div style="flex-grow:1; padding:26px 16px; display:flex; flex-direction:column; align-items:center; gap:20px; overflow:hidden; text-align:center;">'
-             f'<h1 style="margin:0; font-size:30px; font-weight:800; letter-spacing:-0.03em; line-height:1.1;">Find the TikToks that broke out for any brand</h1>'
-             f'<p style="margin:0; font-size:16px; color:{T2}; line-height:1.5;">Facebook has an ad library. Organic TikTok doesn&rsquo;t, so we index 11,000+ brands every Monday.</p>'
-             f'{signin_card(mobile=True)}{proof_strip(True)}</div>')
+             + f'<div style="flex-grow:1; position:relative; display:flex; flex-direction:column; overflow:hidden;">'
+             f'<div style="padding:26px 16px 0; display:flex; flex-direction:column; gap:22px;">{copy}{action}</div>'
+             f'<div style="width:100%; margin-top:auto;">{hero_row(True)}</div></div>')
     return root(inner, 'M2: signed in, the first thing asked for is a brand.', True)
 
 def m01b():
