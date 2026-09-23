@@ -395,11 +395,22 @@ def plan_wall(title, body, mobile=False):
             f'<span style="font-size:{12 if mobile else 13}px; color:{T3}; text-align:center;">Cancel any time. Your searches and breakdowns stay.</span></div>')
 
 # =================== DESKTOP ===================
+def offer_row(mobile=False):
+    """The offer, at the size an offer deserves. Numbers carry it; no boxes."""
+    items = [('3', 'brand searches'), ('3', 'AI breakdowns'), ('$0', 'no card, ever')]
+    cells = ''
+    for i, (n, l) in enumerate(items):
+        rule = (f'<span style="width:1px; height:{32 if mobile else 42}px; background:{LINE2}; flex-shrink:0;"></span>') if i else ''
+        cells += (rule + f'<span style="display:flex; flex-direction:column; align-items:center; gap:3px;">'
+                  f'<span style="font-size:{30 if mobile else 36}px; font-weight:800; letter-spacing:-0.03em; line-height:1;">{n}</span>'
+                  f'<span style="font-size:{12 if mobile else 14}px; color:{T2}; white-space:nowrap;">{l}</span></span>')
+    return f'<div style="display:flex; align-items:center; gap:{16 if mobile else 34}px;">{cells}</div>'
+
 def hero_row(mobile=False):
-    """The product, quietly: ranked breakouts and their scores, bleeding past both edges.
-    No captions, and softened, so it supports the call to action instead of shouting over it."""
+    """The product, quietly: ranked breakouts and their scores, bleeding past both edges
+    and fading at the top so it supports the call to action instead of shouting over it."""
     w = 124 if mobile else 168
-    h = 296 if mobile else 252
+    h = 250 if mobile else 214
     n = 4 if mobile else 8
     tiles = ''.join(tile(w, TILES[i % 6][0], '', '', ['0:20','0:11','0:10','0:14','0:12','0:16'][i % 6],
                          TILES[i % 6][3], rank=i + 1, small=True, h=h, radius=14) for i in range(n))
@@ -418,11 +429,10 @@ def d01():
     glow = (f'<div style="position:absolute; top:-180px; left:50%; transform:translateX(-50%); width:1100px; height:520px; '
             f'border-radius:50%; background:radial-gradient(closest-side, rgba(255,198,41,.22), rgba(255,198,41,0)); pointer-events:none;"></div>')
     copy = (f'<div style="display:flex; flex-direction:column; align-items:center; gap:18px; text-align:center;">'
-            f'<h1 style="margin:0; font-size:52px; font-weight:800; letter-spacing:-0.035em; line-height:1.06; max-width:15em;">'
+            f'<h1 style="margin:0; font-size:48px; font-weight:800; letter-spacing:-0.035em; line-height:1.06; max-width:15em;">'
             f'Find the TikToks that broke out for any brand</h1>'
-            f'<p style="margin:0; font-size:19px; color:{T2}; line-height:1.5; max-width:32em;">Facebook has an ad library. '
-            f'Organic TikTok doesn&rsquo;t, so we index 11,000+ brands every Monday.</p>'
-            f'{trust(["3 brand searches", "3 AI breakdowns", "No card"], 15)}</div>')
+            f'<p style="margin:0; font-size:18px; color:{T2}; line-height:1.5; max-width:32em;">Facebook has an ad library. '
+            f'Organic TikTok doesn&rsquo;t, so we index 11,000+ brands every Monday.</p></div>')
     action = (f'<div style="display:flex; flex-direction:column; align-items:center; gap:12px;">'
               f'<div style="width:320px;">{google_btn(True, 58, 17, solid=True)}</div>'
               f'<span style="font-size:14px; color:{T3};"><a href="#" style="color:{Y_TXT}; font-weight:700;">Use email instead</a>'
@@ -430,7 +440,7 @@ def d01():
     inner = (topnav(right=f'<a href="#" style="font-size:14px; font-weight:600; color:{T2}; text-decoration:none;">Pricing</a>'
                           f'<a href="#" style="font-size:14px; font-weight:600; color:{INK}; text-decoration:none;">Sign in</a>')
              + f'<div style="flex-grow:1; position:relative; display:flex; flex-direction:column; align-items:center; overflow:hidden;">{glow}'
-             f'<div style="position:relative; display:flex; flex-direction:column; align-items:center; gap:28px; padding:36px 48px 0;">{copy}{action}</div>'
+             f'<div style="position:relative; display:flex; flex-direction:column; align-items:center; gap:26px; padding:34px 48px 0;">{copy}{offer_row()}{action}</div>'
              f'<div style="width:100%; margin-top:auto;">{hero_row()}</div></div>')
     return root(inner, 'S02: signed in, the first thing asked for is a brand.')
 
@@ -629,10 +639,7 @@ def m01():
     copy = (f'<div style="display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;">'
             f'<h1 style="margin:0; font-size:32px; font-weight:800; letter-spacing:-0.03em; line-height:1.1;">Find the TikToks that broke out for any brand</h1>'
             f'<p style="margin:0; font-size:16px; color:{T2}; line-height:1.5;">Facebook has an ad library. Organic TikTok doesn&rsquo;t, so we index 11,000+ brands every Monday.</p>'
-            f'<div style="display:flex; flex-direction:column; gap:8px; align-items:flex-start;">'
-            + ''.join(f'<span style="display:inline-flex; align-items:center; gap:8px; font-size:15px; color:{T2};">{check_dot(18)}{x}</span>'
-                      for x in ['3 brand searches', '3 AI breakdowns', 'No card'])
-            + '</div></div>')
+            f'{offer_row(True)}</div>')
     action = (f'<div style="display:flex; flex-direction:column; align-items:center; gap:10px;">{google_btn(True, 54, 16, solid=True)}'
               f'<span style="font-size:13px; color:{T3};"><a href="#" style="color:{Y_TXT}; font-weight:700;">Use email instead</a>'
               f' &middot; <a href="#" style="color:{T2};">Sign in</a></span></div>')
