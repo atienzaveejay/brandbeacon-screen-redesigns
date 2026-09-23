@@ -396,15 +396,21 @@ def plan_wall(title, body, mobile=False):
 
 # =================== DESKTOP ===================
 def offer_row(mobile=False):
-    """The offer, at the size an offer deserves. Numbers carry it; no boxes."""
-    items = [('3', 'brand searches'), ('3', 'AI breakdowns'), ('$0', 'no card, ever')]
-    cells = ''
-    for i, (n, l) in enumerate(items):
-        rule = (f'<span style="width:1px; height:{32 if mobile else 42}px; background:{LINE2}; flex-shrink:0;"></span>') if i else ''
-        cells += (rule + f'<span style="display:flex; flex-direction:column; align-items:center; gap:3px;">'
-                  f'<span style="font-size:{30 if mobile else 36}px; font-weight:800; letter-spacing:-0.03em; line-height:1;">{n}</span>'
-                  f'<span style="font-size:{12 if mobile else 14}px; color:{T2}; white-space:nowrap;">{l}</span></span>')
-    return f'<div style="display:flex; align-items:center; gap:{16 if mobile else 34}px;">{cells}</div>'
+    """'3' stacked over 'brand searches' reads as a statistic about the product.
+    '3 brand searches' on one line reads as a quantity you are being given, which is
+    what this is. The label above says who gets it."""
+    def item(n, word):
+        num = (f'<span style="font-size:{26 if mobile else 32}px; font-weight:800; letter-spacing:-0.03em; '
+               f'line-height:1; color:{INK};">{n}</span>') if n else ''
+        return (f'<span style="display:inline-flex; align-items:baseline; gap:{6 if mobile else 8}px; white-space:nowrap;">'
+                f'{num}<span style="font-size:{15 if mobile else 18}px; font-weight:{700 if n else 500}; '
+                f'color:{INK if n else T2};">{word}</span></span>')
+    dot = f'<span style="color:{LINE2}; font-size:{14 if mobile else 16}px;">&bull;</span>'
+    row = f'{dot}'.join([item('3', 'brand searches'), item('3', 'AI breakdowns'), item('', 'no card, ever')])
+    return (f'<div style="display:flex; flex-direction:column; align-items:center; gap:{8 if mobile else 10}px;">'
+            f'<span style="font-size:{12 if mobile else 13}px; font-weight:700; letter-spacing:0.07em; '
+            f'text-transform:uppercase; color:{T3};">Every free account gets</span>'
+            f'<div style="display:flex; align-items:center; gap:{10 if mobile else 18}px; flex-wrap:wrap; justify-content:center;">{row}</div></div>')
 
 def hero_row(mobile=False):
     """The product, quietly: ranked breakouts and their scores, bleeding past both edges
@@ -439,10 +445,10 @@ def d01():
               f' &middot; <a href="#" style="color:{T2};">Sign in</a></span></div>')
     inner = (topnav(right=f'<a href="#" style="font-size:14px; font-weight:600; color:{T2}; text-decoration:none;">Pricing</a>'
                           f'<a href="#" style="font-size:14px; font-weight:600; color:{INK}; text-decoration:none;">Sign in</a>')
-             + f'<div style="flex-grow:1; position:relative; display:flex; flex-direction:column; align-items:center; overflow:hidden;">{glow}'
-             f'<div style="position:relative; display:flex; flex-direction:column; align-items:center; gap:26px; padding:34px 48px 0;">{copy}{offer_row()}{action}</div>'
-             f'<div style="width:100%; margin-top:auto;">{hero_row()}</div></div>')
-    return root(inner, 'S02: signed in, the first thing asked for is a brand.')
+             + f'<div style="position:relative; display:flex; flex-direction:column; align-items:center; overflow:hidden; padding-bottom:56px;">{glow}'
+             f'<div style="position:relative; display:flex; flex-direction:column; align-items:center; gap:26px; padding:34px 48px 44px;">{copy}{offer_row()}{action}</div>'
+             f'<div style="width:100%;">{hero_row()}</div></div>')
+    return inner
 
 def d01b():
     """Below the fold. Kept from v3, with the offer rewritten to 3 searches and 3 breakdowns."""
@@ -493,7 +499,19 @@ def d01b():
            f'<p style="margin:0; font-size:17px; color:{Y_TXT};">No card. Takes about twenty seconds to start.</p>'
            f'<div style="width:360px;">{google_btn(True, 54, 17)}</div></div>')
     body = f'<div style="padding:56px 80px 64px; display:flex; flex-direction:column; gap:64px;">{how}{stats}{sample}{pricing}{faqs}{cta}</div>'
-    return root(body, 'The rest of S01, scrolled. Kept from v3 with the offer rewritten.', w=1280, h=2680)
+    return body
+
+def fold(at, mobile=False):
+    return (f'<div style="position:absolute; left:0; right:0; top:{at}px; pointer-events:none; z-index:3;">'
+            f'<div style="border-top:1px dashed {LINE2};"></div>'
+            f'<span style="position:absolute; right:{14 if mobile else 24}px; top:-9px; background:{PAGE}; padding:0 8px; '
+            f'font-size:{11 if mobile else 12}px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; '
+            f'color:{T3};">Fold &middot; {"844" if mobile else "800"}px</span></div>')
+
+def d01_page():
+    """One continuous page. The hero was a separate artboard, which made it read as a
+    detached screen rather than the top of this page."""
+    return root(d01() + d01b() + fold(800), 'S02: signed in, the first thing asked for is a brand.', w=1280, h=3440)
 
 def d02():
     """S02 Enter keyword. Ivan: 'enter keyword (expand) - brand or product (focus on brand?)'."""
@@ -644,10 +662,10 @@ def m01():
               f'<span style="font-size:13px; color:{T3};"><a href="#" style="color:{Y_TXT}; font-weight:700;">Use email instead</a>'
               f' &middot; <a href="#" style="color:{T2};">Sign in</a></span></div>')
     inner = (topnav(True, f'<a href="#" style="font-size:14px; font-weight:700; color:{INK}; text-decoration:none;">Sign in</a>')
-             + f'<div style="flex-grow:1; position:relative; display:flex; flex-direction:column; overflow:hidden;">'
-             f'<div style="padding:26px 16px 0; display:flex; flex-direction:column; gap:22px;">{copy}{action}</div>'
-             f'<div style="width:100%; margin-top:auto;">{hero_row(True)}</div></div>')
-    return root(inner, 'M2: signed in, the first thing asked for is a brand.', True)
+             + f'<div style="position:relative; display:flex; flex-direction:column; overflow:hidden; padding-bottom:40px;">'
+             f'<div style="padding:26px 16px 34px; display:flex; flex-direction:column; gap:22px;">{copy}{action}</div>'
+             f'<div style="width:100%;">{hero_row(True)}</div></div>')
+    return inner
 
 def m01b():
     def sec(n, title, body):
@@ -683,7 +701,10 @@ def m01b():
             f'<div style="display:flex; flex-direction:column; gap:14px;"><h2 style="margin:0; font-size:25px; font-weight:800; letter-spacing:-0.03em; line-height:1.15;">This is the whole output</h2>{sample}</div>'
             f'<div style="display:flex; flex-direction:column; gap:14px;"><h2 style="margin:0; font-size:25px; font-weight:800; letter-spacing:-0.03em; line-height:1.15;">Free is a real plan</h2>{price}</div>'
             f'{cta}</div>')
-    return root(body, 'The same page on a phone. Most shared links open here.', True, w=390, h=2070)
+    return body
+
+def m01_page():
+    return root(m01() + m01b() + fold(844, True), 'M2: signed in, the first thing asked for is a brand.', True, w=390, h=2900)
 
 def m02():
     expand = (f'<div style="background:{SURF}; border-radius:14px; padding:14px; box-shadow:{SH1}; display:flex; flex-direction:column; gap:10px;">'
@@ -792,11 +813,11 @@ def m09():
     return root(inner, 'The loop from here is Growth, or the shared pages bringing someone else in.', True)
 
 FILES = {
- '01-Landing.dc.html': d01, '01b-Below.dc.html': d01b, '02-Keyword.dc.html': d02,
+ '01-Landing.dc.html': d01_page, '02-Keyword.dc.html': d02,
  '03-Processing.dc.html': d03, '04-Results.dc.html': d04, '05-AnalyzePrompt.dc.html': d05,
  '06-Analysis.dc.html': d06, '06b-Public.dc.html': d06b, '07-SearchAgain.dc.html': d07,
  '08-SearchPaywall.dc.html': d08, '09-AnalysisPaywall.dc.html': d09,
- 'M1-Landing.dc.html': m01, 'M1b-Below.dc.html': m01b, 'M2-Keyword.dc.html': m02,
+ 'M1-Landing.dc.html': m01_page, 'M2-Keyword.dc.html': m02,
  'M3-Processing.dc.html': m03, 'M4-Results.dc.html': m04, 'M5-AnalyzePrompt.dc.html': m05,
  'M6-Analysis.dc.html': m06, 'M7-SearchAgain.dc.html': m07, 'M8-SearchPaywall.dc.html': m08,
  'M9-AnalysisPaywall.dc.html': m09}

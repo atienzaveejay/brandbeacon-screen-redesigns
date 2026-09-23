@@ -4,11 +4,11 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 HI = os.path.join(HERE, 'hi')
 OUT = os.path.expanduser('~/brandbeacon-screen-redesigns/user-flow/img')
 MAP = {
- '01-Landing': 'flow-01', '01b-Below': 'flow-01b', '02-Keyword': 'flow-02',
+ '01-Landing': 'flow-01', '02-Keyword': 'flow-02',
  '03-Processing': 'flow-03', '04-Results': 'flow-04', '05-AnalyzePrompt': 'flow-05',
  '06-Analysis': 'flow-06', '06b-Public': 'flow-06b', '07-SearchAgain': 'flow-07',
  '08-SearchPaywall': 'flow-08', '09-AnalysisPaywall': 'flow-09',
- 'M1-Landing': 'flow-m1', 'M1b-Below': 'flow-m1b', 'M2-Keyword': 'flow-m2',
+ 'M1-Landing': 'flow-m1', 'M2-Keyword': 'flow-m2',
  'M3-Processing': 'flow-m3', 'M4-Results': 'flow-m4', 'M5-AnalyzePrompt': 'flow-m5',
  'M6-Analysis': 'flow-m6', 'M7-SearchAgain': 'flow-m7', 'M8-SearchPaywall': 'flow-m8',
  'M9-AnalysisPaywall': 'flow-m9',

@@ -6,26 +6,28 @@ def shot(src, cap, cls='shot'):
     return (f'<figure class="{cls}"><div class="imgwrap"><a href="img/{src}" target="_blank" rel="noopener">'
             f'<img src="img/{src}" alt="{cap}" loading="lazy"></a></div><figcaption>{cap}</figcaption></figure>')
 
-def step(n, sid, title, desk, mob, notes, ivan, extra=None):
+def step(n, sid, title, desk, mob, notes, ivan, extra=None, tall=False):
     ex = ''
     if extra:
         cls = 'extra' if len(extra) > 1 else 'extra one'
         ex = f'<div class="{cls}">' + ''.join(shot(s, c, 'shot scroll') for s, c in extra) + '</div>'
     li = ''.join(f'<li>{x}</li>' for x in notes)
+    cls = 'shot scroll' if tall else 'shot'
     return (f'<section class="step" id="{sid}"><div class="stephead"><span class="num">{n}</span><h3>{title}</h3></div>'
-            f'<div class="stepgrid"><div class="desk">{shot(desk[0], desk[1])}</div>'
-            f'<div class="mob">{shot(mob[0], mob[1])}</div>'
+            f'<div class="stepgrid"><div class="desk">{shot(desk[0], desk[1], cls)}</div>'
+            f'<div class="mob">{shot(mob[0], mob[1], cls)}</div>'
             f'<div class="stepnote"><ul>{li}</ul><p class="insp"><b>Ivan&rsquo;s line</b> {ivan}</p></div></div>{ex}</section>')
 
 STEPS = [
  step('01', 's01', 'Landing page, built around sign-in',
-      ('flow-01.jpg', 'Desktop'), ('flow-m1.jpg', 'Mobile'),
-      ['Google is the primary button, email sits under it as the other way in. Nothing else on the screen competes with the card.',
-       'What you get is stated before the button, not after: <b>3 brand searches, 3 AI breakdowns, share any breakout, no card</b>.',
-       'One real breakout sits beside the card (8,637&times;, a 1.6K-follower account) so the offer is not only a promise. It is the single piece of proof on an otherwise gated page.',
-       'Below the fold: how the three searches work, the numbers, a full sample breakdown, Free vs Growth, three questions, and the sign-in again at the bottom.'],
+      ('flow-01.jpg', 'Desktop, the whole page'), ('flow-m1.jpg', 'Mobile, the whole page'),
+      ['Google is the primary button and the only solid element on the page. Email sits under it as the other way in.',
+       'The offer is stated as an entitlement, not a statistic: <b>every free account gets 3 brand searches, 3 AI breakdowns, no card</b>. '
+       'It sits directly above the button so it is read on the way to the click.',
+       'Under the fold: how the three searches work, the numbers, a full sample breakdown, Free vs Growth, three questions, '
+       'and the sign-in again at the bottom. Scroll inside the frame to see it; the dashed line marks where the fold falls.'],
       '&ldquo;Landing page with focus on google sign in (also other sign in), 3 searches, 3 analysis free, also add information on what they&rsquo;ll get.&rdquo;',
-      extra=[('flow-01b.jpg', 'Desktop, below the fold'), ('flow-m1b.jpg', 'Mobile, below the fold')]),
+      tall=True),
  step('02', 's02', 'Enter a brand, with keywords to expand',
       ('flow-02.jpg', 'Desktop'), ('flow-m2.jpg', 'Mobile'),
       ['The first screen after sign-in asks for one thing. Nothing else is on it.',
@@ -112,7 +114,11 @@ DECISIONS = '''<section class="block" id="decisions">
 </section>'''
 
 # --- swap in the new sections, keep the research below untouched ---
-anchor = '<section class="block" id="decisions">' if 'id="decisions"' in t else '<section class="block" id="changed">'
+# splice point: whichever framing section still precedes the flow, else the flow itself
+for anchor in ('<section class="block" id="decisions">', '<section class="block" id="changed">',
+               '<section class="block" id="flow">'):
+    if anchor in t:
+        break
 i = t.index(anchor)
 j = t.index('<section class="block" id="seen">')
 # Veejay, 24 Sept: the framing sections come off the page. DECISIONS is kept
