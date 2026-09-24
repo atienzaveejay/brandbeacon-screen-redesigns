@@ -258,7 +258,7 @@ def fake_field(text, w='100%', icon=None):
 def price_card(name, price, sub, feats, highlight=False):
     li = ''.join(f'<li style="display:flex; align-items:flex-start; gap:10px; font-size:15px; color:{T2}; line-height:1.5;">{check_dot(18)}<span>{f}</span></li>' for f in feats)
     bd = f'border:2px solid {Y};' if highlight else f'border:1px solid {LINE};'
-    tag = f'<span style="position:absolute; top:-12px; left:24px;">{pill("Free for 8 days, no card")}</span>' if highlight else ''
+    tag = f'<span style="position:absolute; top:-12px; left:24px;">{pill("When the three run out")}</span>' if highlight else ''
     return (f'<div style="position:relative; flex:1; background:{SURF}; border-radius:20px; padding:28px; box-sizing:border-box; {bd} box-shadow:{SH1}; '
             f'display:flex; flex-direction:column; gap:16px;">{tag}'
             f'<div><span style="font-size:15px; font-weight:800; letter-spacing:0.04em; text-transform:uppercase; color:{T3};">{name}</span>'
@@ -468,9 +468,9 @@ def d01b():
           f'<span style="height:9px; width:70%; border-radius:5px; background:{LINE};"></span>'
           f'<span style="height:9px; width:78%; border-radius:5px; background:{LINE};"></span></div>')
     how = (f'<div style="display:flex; flex-direction:column; gap:28px;">'
-           f'{h2("What the three free searches get you", "Sign in, type a brand, and the first breakdown is on screen inside two minutes.")}'
+           f'{h2("What the three free searches get you", "Sign in, type a brand or a product, and the first breakdown is on screen inside two minutes.")}'
            f'<div style="display:flex; gap:20px; align-items:stretch;">'
-           f'{step_card(1, "Type a brand", "A brand name works best. A product term resolves to the brand behind it, so you never have to guess which to use.", a1)}'
+           f'{step_card(1, "Type a brand or a product", "A brand returns everything posted about it. A product returns the videos about that line, and the brand behind it.", a1)}'
            f'{step_card(2, "See its real breakouts", "Every video that beat its creator&rsquo;s own baseline, ranked and scored. Indexed already, so it loads at once.", a2)}'
            f'{step_card(3, "Read why it broke out", "The four things that made it travel, written out. Share it, or brief a creator with it.", a3)}'
            f'</div></div>')
@@ -740,7 +740,7 @@ def m01b():
     body = (f'<div style="padding:28px 16px 32px; display:flex; flex-direction:column; gap:28px;">'
             f'<div style="display:flex; flex-direction:column; gap:14px;">'
             f'<h2 style="margin:0; font-size:25px; font-weight:800; letter-spacing:-0.03em; line-height:1.15;">What the three free searches get you</h2>'
-            f'{sec(1, "Type a brand", "A brand name works best. A product term resolves to the brand behind it.")}'
+            f'{sec(1, "Type a brand or a product", "A brand returns everything posted about it. A product returns that line, and the brand behind it.")}'
             f'{sec(2, "See its real breakouts", "Every video that beat its creator&rsquo;s own baseline, ranked and scored.")}'
             f'{sec(3, "Read why it broke out", "The four things that made it travel. Share it, or brief a creator with it.")}</div>'
             f'<div style="display:flex; flex-direction:column; gap:14px;"><h2 style="margin:0; font-size:25px; font-weight:800; letter-spacing:-0.03em; line-height:1.15;">This is the whole output</h2>{sample}</div>'
