@@ -226,7 +226,7 @@ def hero_search(w=780):
     return (f'<div style="width:{w}px; background:{SURF}; border-radius:999px; padding:10px 10px 10px 26px; box-sizing:border-box; '
             f'box-shadow:{SH3}; display:flex; align-items:center; gap:14px;">{ic(P_SEARCH, 24, T3, 2)}'
             f'<label for="hq" style="position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0);">Brand or product</label>'
-            f'<input id="hq" type="text" placeholder="Search a brand or product, like rhode" style="flex-grow:1; min-width:0; height:56px; '
+            f'<input id="hq" type="text" placeholder="Search a brand or a product, like rhode" style="flex-grow:1; min-width:0; height:56px; '
             f'padding:0; border:none; background:transparent; font-family:inherit; font-size:20px; color:{INK};">'
             f'{btn("Find breakouts","primary",56,17)}</div>')
 
@@ -281,11 +281,14 @@ def video_player(w, h, mobile=False):
             f'<div style="position:absolute; left:{16 if mobile else 20}px; bottom:{16 if mobile else 20}px; display:flex; align-items:center; gap:12px;">{"" if mobile else avatar("IV", 40, "sand")}<span style="display:flex; flex-direction:column; gap:2px;"><span style="font-size:{14 if mobile else 16}px; font-weight:700; color:#fff;">A 90 second welcome from Ivan</span><span style="font-size:12px; color:#efe9dc;">How to read a Breakout Score</span></span></div></div>')
 
 def progress(mobile=False):
-    steps = [('Searching TikTok for @rhode', 'done'), ('Scoring 200 breakouts', 'done'), ('Writing your free breakdown', 'now')]
+    steps = [('Searching TikTok for @rhode', 'done'), ('Scoring every breakout we find', 'done'), ('Writing your free breakdown', 'now')]
     spin = f'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex-shrink:0;"><circle cx="12" cy="12" r="9" stroke="{LINE}" stroke-width="3"/><path d="M12 3a9 9 0 019 9" stroke="{Y}" stroke-width="3" stroke-linecap="round"/></svg>'
     li = ''.join(f'<li style="display:flex; align-items:center; gap:12px; font-size:{14}px; font-weight:{700 if s=="now" else 500}; color:{INK if s=="now" else T2};">{check_dot(20) if s=="done" else spin}{t}</li>' for t, s in steps)
     return (f'<div style="background:{SURF}; border-radius:16px; padding:{16 if mobile else 24}px; box-shadow:{SH2}; display:flex; flex-direction:column; gap:16px;">'
-            f'<div style="display:flex; justify-content:space-between; align-items:baseline;"><span style="font-size:16px; font-weight:800;">Building your report</span><span style="font-size:14px; font-weight:700; color:{Y_TXT};">About 1 min left</span></div>'
+            f'<div style="display:flex; justify-content:space-between; align-items:baseline;"><span style="font-size:16px; font-weight:800;">Building your report</span>'
+            f'<span style="display:inline-flex; align-items:center; gap:7px; height:28px; padding:0 12px; border-radius:999px; background:{Y_TINT}; '
+            f'border:1px solid {Y_LINE};">{ic(P_CLOCK, 14, Y_TXT, 2)}<span style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace; '
+            f'font-size:14px; font-weight:700; color:{Y_TXT};">0:58</span></span></div>'
             f'<div style="height:8px; border-radius:999px; background:{PAGE}; overflow:hidden;"><div style="width:66%; height:100%; border-radius:999px; background:{Y};"></div></div>'
             f'<ul style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:12px;">{li}</ul>'
             f'<span style="font-size:{12 if mobile else 14}px; color:{T2}; line-height:1.5;">It opens on its own when ready. We&rsquo;ll also email you.</span></div>')
@@ -342,7 +345,7 @@ def quota(searches, analyses, mobile=False, tint=False):
 
 def signin_card(w=400, mobile=False):
     """One heading, three lines, one primary. Everything else was restating it."""
-    gets = ['3 brand searches', '3 AI breakdowns', 'No card, ever']
+    gets = ['3 brand or product searches', '3 AI breakdowns', 'No card, ever']
     li = ''.join(f'<li style="display:flex; align-items:center; gap:10px; font-size:{15 if mobile else 16}px;">{check_dot(18)}{g}</li>' for g in gets)
     return (f'<div style="width:{"100%" if mobile else str(w) + "px"}; box-sizing:border-box; background:{SURF}; border-radius:24px; '
             f'padding:{22 if mobile else 30}px; box-shadow:{SH3}; display:flex; flex-direction:column; gap:{18 if mobile else 22}px; text-align:left;">'
@@ -365,6 +368,10 @@ def app_bar(searches=0, analyses=0, mobile=False, right=None):
 
 P_SPARK = 'M12 4l1.8 4.7L18.5 10l-4.7 1.8L12 16.5l-1.8-4.7L5.5 10l4.7-1.3z'
 P_CHEV = 'M6 9l6 6 6-6'
+P_CLOCK = 'M12 3a9 9 0 100 18 9 9 0 000-18zM12 7v5l3.5 2'
+P_LINK = 'M10 13a5 5 0 007.5.5l2-2a5 5 0 00-7-7l-1 1M14 11a5 5 0 00-7.5-.5l-2 2a5 5 0 007 7l1-1'
+P_HASH = 'M5 9h14M5 15h14M10 4L8 20M16 4l-2 16'
+P_DOWN = 'M12 4v11M8 11l4 4 4-4M5 19h14'
 
 def analyze_btn(h=40, fs=14, full=False, label='Analyze this breakout', kind='primary'):
     return btn(label, kind, h, fs, full, ic(P_SPARK, 16, INK if kind == 'primary' else T2, 2))
@@ -378,7 +385,7 @@ def result_card(i, w=200, scored=True, cta=False, highlight=False):
     return f'<div style="{ring}">{inner}</div>'
 
 def plan_wall(title, body, mobile=False):
-    feats = ['Unlimited searches', '100 AI breakdowns a month', 'Creator lists and exports', 'Weekly email on every brand']
+    feats = ['Unlimited brand and product searches', '100 AI breakdowns a month', 'Creator lists and exports', 'A refresh email on every brand']
     li = ''.join(f'<li style="display:flex; align-items:center; gap:10px; font-size:{13 if mobile else 15}px;">{check_dot(18)}{f}</li>' for f in feats)
     return (f'<div style="width:{"100%" if mobile else "560px"}; box-sizing:border-box; background:{SURF}; border-radius:24px; '
             f'padding:{22 if mobile else 32}px; box-shadow:{SH3}; display:flex; flex-direction:column; gap:{14 if mobile else 20}px;">'
@@ -406,7 +413,7 @@ def offer_row(mobile=False):
                 f'{num}<span style="font-size:{15 if mobile else 18}px; font-weight:{700 if n else 500}; '
                 f'color:{INK if n else T2};">{word}</span></span>')
     dot = f'<span style="color:{LINE2}; font-size:{14 if mobile else 16}px;">&bull;</span>'
-    row = f'{dot}'.join([item('3', 'brand searches'), item('3', 'AI breakdowns'), item('', 'no card, ever')])
+    row = f'{dot}'.join([item('3', 'brand or product searches'), item('3', 'AI breakdowns'), item('', 'no card, ever')])
     return (f'<div style="display:flex; flex-direction:column; align-items:center; gap:{8 if mobile else 10}px;">'
             f'<span style="font-size:{12 if mobile else 13}px; font-weight:700; letter-spacing:0.07em; '
             f'text-transform:uppercase; color:{T3};">Sign up to get</span>'
@@ -438,7 +445,7 @@ def d01():
             f'<h1 style="margin:0; font-size:48px; font-weight:800; letter-spacing:-0.035em; line-height:1.06; max-width:15em;">'
             f'Find the TikToks that broke out for any brand</h1>'
             f'<p style="margin:0; font-size:18px; color:{T2}; line-height:1.5; max-width:32em;">Facebook has an ad library. '
-            f'Organic TikTok doesn&rsquo;t, so we index 11,000+ brands every Monday.</p></div>')
+            f'Organic TikTok doesn&rsquo;t, so we built it. 11,000+ brands indexed and counting.</p></div>')
     action = (f'<div style="display:flex; flex-direction:column; align-items:center; gap:12px;">'
               f'<div style="width:320px;">{google_btn(True, 58, 17, solid=True)}</div>'
               f'<span style="font-size:14px; color:{T3};"><a href="#" style="color:{Y_TXT}; font-weight:700;">Use email instead</a>'
@@ -446,7 +453,8 @@ def d01():
     inner = (topnav(right=f'<a href="#" style="font-size:14px; font-weight:600; color:{T2}; text-decoration:none;">Pricing</a>'
                           f'<a href="#" style="font-size:14px; font-weight:600; color:{INK}; text-decoration:none;">Sign in</a>')
              + f'<div style="position:relative; display:flex; flex-direction:column; align-items:center; overflow:hidden; padding-bottom:56px;">{glow}'
-             f'<div style="position:relative; display:flex; flex-direction:column; align-items:center; gap:26px; padding:34px 48px 44px;">{copy}{offer_row()}{action}</div>'
+             f'<div style="position:relative; display:flex; flex-direction:column; align-items:center; padding:34px 48px 44px;">{copy}'
+             f'<div style="margin-top:44px;">{offer_row()}</div><div style="margin-top:26px;">{action}</div></div>'
              f'<div style="width:100%;">{hero_row()}</div></div>')
     return inner
 
@@ -466,12 +474,6 @@ def d01b():
            f'{step_card(2, "See its real breakouts", "Every video that beat its creator&rsquo;s own baseline, ranked and scored. Indexed already, so it loads at once.", a2)}'
            f'{step_card(3, "Read why it broke out", "The four things that made it travel, written out. Share it, or brief a creator with it.", a3)}'
            f'</div></div>')
-    stats = (f'<div style="background:{INK}; border-radius:24px; padding:36px 48px; display:flex; align-items:center; justify-content:space-around;">'
-             + ''.join(f'<div style="display:flex; flex-direction:column; gap:4px; align-items:center;">'
-                       f'<span style="font-size:36px; font-weight:800; letter-spacing:-0.03em; color:{Y};">{n}</span>'
-                       f'<span style="font-size:14px; color:#cdc7b9;">{l}</span></div>'
-                       for n, l in [('11,000+', 'brands indexed'), ('200', 'breakouts per brand'), ('Every Monday', 'refreshed'), ('8,637&times;', 'top score this week')])
-             + '</div>')
     sample = (f'<div style="display:flex; flex-direction:column; gap:28px;">'
               f'{h2("This is the whole output", "Not a teaser of it. Three of these are free on every account.")}'
               f'<div style="background:{SURF}; border-radius:24px; padding:32px; box-shadow:{SH2}; display:flex; gap:32px; align-items:flex-start;">'
@@ -484,12 +486,12 @@ def d01b():
     pricing = (f'<div style="display:flex; flex-direction:column; gap:28px;">'
                f'{h2("Free is a real plan, not a demo", "No card to start, and no trial clock running down in the corner.")}'
                f'<div style="display:flex; gap:20px; align-items:stretch;">'
-               f'{price_card("Free", "$0", "forever", ["3 brand searches", "3 AI breakdowns", "Share any breakout, no limit", "No card, ever"])}'
-               f'{price_card("Growth", "$49", "a month", ["Unlimited searches", "100 breakdowns a month", "Creator lists and exports", "Weekly email on every brand"], True)}'
+               f'{price_card("Free", "$0", "forever", ["3 brand or product searches", "3 AI breakdowns", "Share any breakout, no limit", "No card, ever"])}'
+               f'{price_card("Growth", "$49", "a month", ["Unlimited brand and product searches", "100 breakdowns a month", "Creator lists and exports", "A refresh email on every brand"], True)}'
                f'</div></div>')
     faqs = (f'<div style="display:flex; flex-direction:column; gap:20px;">{h2("Before you ask", size=30)}'
             f'<div style="display:flex; flex-direction:column; gap:12px;">'
-            f'{faq("Why do I have to sign in first?", "Every search runs a real pull against TikTok and every breakdown runs a real model. An account keeps that honest for everyone and means your searches are waiting for you next time.")}'
+            f'{faq("Why do I have to sign in first?", "Every search runs a real pull against TikTok and every breakdown runs a real model. An account keeps that honest for everyone and means your searches are waiting for you next time.")}{faq("How fresh is it?", "Each brand refreshes on its own seven-day cycle, counted from the day it was first indexed, so a brand you add today refreshes a week from today.")}'
             f'{faq("What is a Breakout Score?", "How far a video ran past its own creator&rsquo;s usual views. 8,637&times; means it reached 8,637 times that creator&rsquo;s baseline, so a 1.6K-follower account can outrank a household name.")}'
             f'{faq("What happens after my three?", "Nothing disappears. Everything you already ran stays readable and shareable; a fourth search or breakdown is what needs Growth.")}'
             f'</div></div>')
@@ -498,7 +500,7 @@ def d01b():
            f'<h2 style="margin:0; font-size:36px; font-weight:800; letter-spacing:-0.03em; line-height:1.15;">Three searches, on us</h2>'
            f'<p style="margin:0; font-size:17px; color:{Y_TXT};">No card. Takes about twenty seconds to start.</p>'
            f'<div style="width:360px;">{google_btn(True, 54, 17)}</div></div>')
-    body = f'<div style="padding:56px 80px 64px; display:flex; flex-direction:column; gap:64px;">{how}{stats}{sample}{pricing}{faqs}{cta}</div>'
+    body = f'<div style="padding:56px 80px 64px; display:flex; flex-direction:column; gap:64px;">{how}{sample}{pricing}{faqs}{cta}</div>'
     return body
 
 def fold(at, mobile=False):
@@ -511,25 +513,25 @@ def fold(at, mobile=False):
 def d01_page():
     """One continuous page. The hero was a separate artboard, which made it read as a
     detached screen rather than the top of this page."""
-    return root(d01() + d01b() + fold(800), 'S02: signed in, the first thing asked for is a brand.', w=1280, h=3440)
+    return root(d01() + d01b() + fold(800), 'S02: signed in, the first thing asked for is a brand or a product.', w=1280, h=3440)
 
 def d02():
-    """S02 Enter keyword. Ivan: 'enter keyword (expand) - brand or product (focus on brand?)'."""
-    expand = (f'<div style="width:720px; background:{SURF}; border-radius:16px; padding:18px 20px; box-shadow:{SH1}; display:flex; flex-direction:column; gap:12px;">'
-              f'<div style="display:flex; align-items:center; justify-content:space-between;">'
-              f'<span style="display:inline-flex; align-items:center; gap:8px; font-size:14px; font-weight:700;">{ic(P_TARGET, 16, T3)}Narrow it down <span style="font-weight:500; color:{T3};">(optional)</span></span>'
-              f'{ic(P_CHEV, 18, T3, 2)}</div>'
-              f'<div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">'
-              + ''.join(f'<button type="button" style="height:32px; padding:0 12px; border-radius:999px; border:1px solid {Y_LINE}; background:{Y_TINT}; '
-                        f'font-family:inherit; font-size:13px; font-weight:600; color:{Y_TXT}; cursor:pointer;">{k} &times;</button>' for k in ['peptide lip tint'])
-              + ''.join(f'<button type="button" style="height:32px; padding:0 12px; border-radius:999px; border:1px solid {LINE2}; background:{SURF}; '
-                        f'font-family:inherit; font-size:13px; font-weight:600; color:{T2}; cursor:pointer;">+ {k}</button>' for k in ['glazing milk', 'pocket blush', 'barrier restore cream'])
-              + f'</div><span style="font-size:13px; color:{T3};">Leave it empty to see every breakout for the brand.</span></div>')
-    inner = (app_bar(0, 0) + f'<div style="flex-grow:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:22px; padding:0 64px;">'
+    """S02. Ivan, 24 Sept: 'i dont understand narrow it down' and 'should have products also'.
+    The expander is gone; the box takes a brand or a product and says so."""
+    kinds = (f'<div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:center;">'
+             f'<span style="font-size:14px; color:{T3};">Try</span>'
+             + ''.join(f'<button type="button" style="height:34px; padding:0 14px; border-radius:999px; border:1px solid {LINE2}; '
+                       f'background:{SURF}; font-family:inherit; font-size:14px; font-weight:600; color:{INK}; cursor:pointer; '
+                       f'display:inline-flex; align-items:center; gap:7px;">{ic(P_BRAND if k == "brand" else P_TARGET, 14, T3)}{n}</button>'
+                       for n, k in [('rhode', 'brand'), ('olipop', 'brand'), ('peptide lip tint', 'product'),
+                                    ('drunk elephant', 'brand'), ('glazing milk', 'product')])
+             + '</div>')
+    inner = (app_bar(0, 0) + f'<div style="flex-grow:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:24px; padding:0 64px;">'
              f'<div style="display:flex; flex-direction:column; align-items:center; gap:10px; text-align:center;">'
-             f'<h1 style="margin:0; font-size:38px; font-weight:800; letter-spacing:-0.03em; line-height:1.1;">Which brand do you want to see?</h1>'
-             f'<p style="margin:0; font-size:17px; color:{T2};">A brand name works best. Type a product and we&rsquo;ll find the brand behind it.</p></div>'
-             f'{hero_search(720)}{chips(["rhode", "olipop", "drunk elephant", "prime", "nike"])}{expand}'
+             f'<h1 style="margin:0; font-size:38px; font-weight:800; letter-spacing:-0.03em; line-height:1.1;">Search a brand or a product</h1>'
+             f'<p style="margin:0; font-size:17px; color:{T2}; max-width:34em;">A brand returns everything posted about it. '
+             f'A product returns the videos about that line, and the brand behind it.</p></div>'
+             f'{hero_search(720)}{kinds}'
              f'<span style="font-size:13px; color:{T3}; margin-top:4px;">This uses 1 of your 3 free searches.</span></div>')
     return root(inner, 'S03: the search runs while a short welcome plays.')
 
@@ -549,36 +551,17 @@ def d04():
     head = (f'<div style="display:flex; align-items:flex-end; justify-content:space-between;">'
             f'<div style="display:flex; align-items:center; gap:16px;">{avatar("RH", 48, "berry")}'
             f'<div style="display:flex; flex-direction:column; gap:4px;"><span style="font-size:30px; font-weight:800; letter-spacing:-0.025em; line-height:1.1;">@rhode</span>'
-            f'<span style="font-size:14px; color:{T2};">Skincare &middot; 200 breakouts &middot; ranked by Breakout Score</span></div></div>'
+            f'<span style="font-size:14px; color:{T2};">Skincare &middot; every breakout we found, ranked by Breakout Score</span></div></div>'
             f'{btn("Export", "secondary", 40, 14)}</div>')
     body = (f'<div style="flex-grow:1; padding:28px 48px 0; display:flex; flex-direction:column; gap:22px; overflow:hidden;">{head}'
             f'<div style="display:flex; gap:20px;">{row}</div>'
             f'<div style="position:relative; height:126px; overflow:hidden;"><div style="display:flex; gap:20px;">{row2}</div>'
             f'<div style="position:absolute; inset:0; background:linear-gradient(180deg,rgba(246,244,238,0) 10%,rgba(246,244,238,.92) 85%); '
             f'display:flex; align-items:flex-end; justify-content:center; padding-bottom:4px;">'
-            f'<span style="font-size:15px; color:{T2};">194 more, all scored. Scroll or export the lot.</span></div></div></div>')
-    return root(app_bar(1, 0) + body, 'S05: picking a video offers the breakdown, and says what it costs.')
+            f'<span style="font-size:15px; color:{T2};">More below, all scored. Scroll or export the lot.</span></div></div></div>')
+    return root(app_bar(1, 0) + body, 'S05: picking a video opens its breakdown.')
 
-def d05():
-    """S05 Prompt to analyze. The cost of the action is on the button, not in the small print."""
-    pal, cap, hd, sc, fol = TILES[0]
-    sheet = (f'<div style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:600px; background:{SURF}; border-radius:24px; '
-             f'padding:28px; box-sizing:border-box; box-shadow:{SH3}; display:flex; gap:24px; align-items:flex-start;">'
-             f'{tile(150, pal, "", "", "0:20", sc, small=True, h=266)}'
-             f'<div style="flex-grow:1; display:flex; flex-direction:column; gap:16px; min-width:0;">'
-             f'<div style="display:flex; flex-direction:column; gap:8px;">{label("Top breakout")}'
-             f'<span style="font-size:22px; font-weight:800; letter-spacing:-0.02em; line-height:1.25;">&ldquo;Name me a better marketing brand&rdquo;</span>'
-             f'<span style="font-size:14px; color:{T2};">@cyr1n32 &middot; 8.9M views &middot; 8,637&times; its creator&rsquo;s baseline</span></div>'
-             f'<span style="font-size:15px; color:{T2}; line-height:1.55;">We&rsquo;ll read the video, the caption and the comments and write back the four things that made it travel, plus what to do with it.</span>'
-             f'<div style="display:flex; flex-direction:column; gap:8px;">{analyze_btn(50, 16, True)}'
-             f'<span style="font-size:13px; color:{T3}; text-align:center;">Uses 1 of your 3 free breakdowns &middot; about 40 seconds</span></div></div></div>')
-    base = app_bar(1, 0) + (f'<div style="flex-grow:1; padding:28px 48px 0; display:flex; gap:20px; overflow:hidden;">'
-                            + ''.join(result_card(i, 188, cta=(i == 0), highlight=(i == 0)) for i in range(4)) + '</div>')
-    inner = (f'<div style="position:absolute; inset:0; display:flex; flex-direction:column; filter:blur(3px);">{base}</div>'
-             f'<div style="position:absolute; inset:0; background:rgba(23,21,15,.5);"></div>{sheet}')
-    return root(inner, 'S06: the breakdown opens, with Share as the main action.')
-
-def d06():
+def d06_main():
     """S06 Analysis detail with share. Carries the Do this next block agreed on 23 Sept."""
     pal, cap, hd, sc, fol = TILES[0]
     right = (f'<div style="flex-grow:1; display:flex; flex-direction:column; gap:11px; min-width:0;">'
@@ -590,22 +573,90 @@ def d06():
     main = (f'<div style="flex-grow:1; padding:24px 40px; display:flex; flex-direction:column; gap:16px; overflow:hidden;">'
             f'<span style="font-size:14px; color:{T2};"><a href="#" style="color:{T2}; text-decoration:none;">@rhode</a> &nbsp;/&nbsp; <strong style="color:{INK};">Top breakout</strong></span>'
             f'<div style="display:flex; gap:28px; align-items:flex-start;">{tile(250, pal, "", hd, "0:20", sc, rank=1, embed=True, h=445)}{right}</div></div>')
-    return root(app_bar(1, 1) + main, 'S07: after the breakdown, the next brand is offered.')
+    return main
+
+def d06():
+    return root(app_bar(1, 1) + d06_main(), 'S06: pressing Share opens the link and the ways to send it.')
+
+def share_sheet(mobile=False):
+    pal = TILES[0][0]
+    chan = [('Email', P_MAIL), ('Slack', P_HASH), ('Download image', P_DOWN)]
+    btns = ''.join(f'<button type="button" style="display:flex; align-items:center; gap:10px; height:{44 if mobile else 46}px; padding:0 16px; '
+                   f'border-radius:12px; border:1px solid {LINE2}; background:{SURF}; font-family:inherit; font-size:{14 if mobile else 15}px; '
+                   f'font-weight:600; color:{INK}; cursor:pointer;">{ic(ip, 17, T2)}{lbl}</button>' for lbl, ip in chan)
+    link = (f'<div style="display:flex; gap:8px;">'
+            f'<div style="flex-grow:1; display:flex; align-items:center; gap:10px; height:48px; padding:0 14px; border-radius:12px; '
+            f'background:{PAGE}; border:1px solid {LINE}; font-size:{13 if mobile else 14}px; color:{T2}; overflow:hidden; white-space:nowrap;">'
+            f'{ic(P_LINK, 16, T3)}brandbeacon.io/b/rhode/8f2ac1</div>{btn("Copy", "primary", 48, 15)}</div>')
+    preview = (f'<div style="display:flex; gap:12px; padding:12px; border-radius:14px; border:1px solid {LINE}; background:{PAGE};">'
+               f'{tile(52, pal, "", "", "0:20", None, small=True, h=88, radius=9)}'
+               f'<span style="display:flex; flex-direction:column; gap:2px; min-width:0;">'
+               f'<span style="font-size:{13 if mobile else 14}px; font-weight:700; line-height:1.3;">Why this video ran 8,637&times; its creator&rsquo;s usual views</span>'
+               f'<span style="font-size:12px; color:{T3};">brandbeacon.io &middot; opens with no account</span></span></div>')
+    body = (f'<div style="display:flex; flex-direction:column; gap:6px;">'
+            f'<h2 style="margin:0; font-size:{22 if mobile else 26}px; font-weight:800; letter-spacing:-0.025em;">Share this breakout</h2>'
+            f'<p style="margin:0; font-size:{14 if mobile else 15}px; color:{T2}; line-height:1.5;">Anyone with the link can read the '
+            f'breakdown. They do not need an account, and it does not spend one of yours.</p></div>'
+            f'{link}{preview}'
+            f'<div style="display:{"grid" if mobile else "flex"}; {"grid-template-columns:1fr 1fr;" if mobile else ""} gap:10px; flex-wrap:wrap;">{btns}</div>')
+    if mobile:
+        return (f'<div style="position:absolute; left:0; right:0; bottom:0; background:{SURF}; border-radius:24px 24px 0 0; padding:12px 16px 20px; '
+                f'box-shadow:{SH3}; display:flex; flex-direction:column; gap:16px;">'
+                f'<span style="align-self:center; width:40px; height:4px; border-radius:999px; background:{LINE2};"></span>{body}</div>')
+    return (f'<div style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:560px; background:{SURF}; border-radius:24px; '
+            f'padding:32px; box-sizing:border-box; box-shadow:{SH3}; display:flex; flex-direction:column; gap:20px;">'
+            f'<div style="display:flex; justify-content:space-between; align-items:center;">{logo(28,16)}'
+            f'<button type="button" aria-label="Close" style="width:40px; height:40px; border-radius:999px; border:none; background:{PAGE}; '
+            f'display:flex; align-items:center; justify-content:center; cursor:pointer;">{ic(P_CLOSE, 16, T2, 2)}</button></div>{body}</div>')
+
+def d06s():
+    """Ivan, 24 Sept: 'need to show what will happen after the user selects to share in page 6'."""
+    inner = (f'<div style="position:absolute; inset:0; display:flex; flex-direction:column; filter:blur(3px);">{app_bar(1, 1) + d06_main()}</div>'
+             f'<div style="position:absolute; inset:0; background:rgba(23,21,15,.5);"></div>{share_sheet()}')
+    return root(inner, 'S07: the link opens this, for someone with no account.')
+
+def video_stats(mobile=False):
+    rows = [('8.9M', 'views'), ('1.7M', 'likes'), ('24.1K', 'comments'), ('61.2K', 'shares'), ('9.4K', 'saves')]
+    return ('<div style="display:flex; gap:%dpx; flex-wrap:wrap;">' % (20 if mobile else 30)
+            + ''.join(f'<span style="display:flex; flex-direction:column; gap:1px;">'
+                      f'<span style="font-size:{18 if mobile else 22}px; font-weight:800; letter-spacing:-0.02em;">{n}</span>'
+                      f'<span style="font-size:{12 if mobile else 13}px; color:{T2};">{l}</span></span>' for n, l in rows)
+            + '</div>')
+
+def score_explainer(mobile=False):
+    return (f'<div style="background:{SURF}; border-radius:16px; border-left:4px solid {Y}; padding:{14 if mobile else 18}px; '
+            f'box-shadow:{SH1}; display:flex; flex-direction:column; gap:6px;">'
+            f'<span style="display:flex; align-items:baseline; gap:10px;">'
+            f'<span style="font-size:{24 if mobile else 30}px; font-weight:800; color:{Y_TXT}; letter-spacing:-0.03em;">8,637&times;</span>'
+            f'<span style="font-size:{14 if mobile else 15}px; font-weight:700;">Breakout Score</span></span>'
+            f'<span style="font-size:{13 if mobile else 14}px; color:{T2}; line-height:1.5;">This creator normally reaches about 1,030 views. '
+            f'This one reached 8.9M, which is 8,637 times their own baseline. That is what we rank on, so a small account can outrank a household name.</span></div>')
 
 def d06b():
-    """Variant: what the share link opens for someone with no account. Unchanged from v3."""
+    """The page a share link opens. Ivan, 24 Sept: this is the front door for people with
+    no account, so it carries the whole video, not a summary of it."""
     pal, cap, hd, sc, fol = TILES[0]
     nav = topnav(right=btn('Try Brand Beacon free', 'secondary', 40, 14))
-    right = (f'<div style="flex-grow:1; display:flex; flex-direction:column; gap:24px;">'
-             f'<div style="display:flex; flex-direction:column; gap:12px;">{label("Breakout analysis by Brand Beacon", Y_TXT)}'
-             f'<h1 style="margin:0; font-size:36px; font-weight:800; letter-spacing:-0.03em; line-height:1.12;">Why this video ran 8,637&times; its creator&rsquo;s usual views</h1>'
-             f'<div style="display:flex; align-items:center; gap:12px;">{avatar("CY", 32, "berry")}<span style="font-size:14px;"><strong>@cyr1n32</strong> <span style="color:{T2};">&middot; 1.6K followers</span></span>{link("Watch on TikTok")}</div></div>'
-             f'{driver_list(3, fs_t=16, fs_d=14, gap=16)}'
-             f'<div style="background:{Y_TINT}; border:1px solid {Y_LINE}; border-radius:16px; padding:20px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px;">'
-             f'<span><span style="display:block; font-size:18px; font-weight:800;">Run this on your own brand</span>'
-             f'<span style="display:block; font-size:14px; color:{Y_TXT}; margin-top:4px;">3 searches and 3 breakdowns free. No card.</span></span>{btn("Start free", "primary", 48, 16)}</div></div>')
-    inner = nav + f'<div style="flex-grow:1; display:flex; justify-content:center; padding-top:40px;"><div style="width:1040px; display:flex; gap:48px; align-items:flex-start;">{tile(300, pal, cap, hd, "0:20", sc, embed=True)}{right}</div></div>'
-    return root(inner, 'Variant, not a step: the shared page is the one screen with no account behind it.')
+    left = (f'<div style="width:320px; flex-shrink:0; display:flex; flex-direction:column; gap:14px;">'
+            f'{tile(320, pal, cap, hd, "0:20", None, embed=True, h=569)}'
+            f'<div style="display:flex; align-items:center; gap:10px;">{avatar("CY", 36, "berry")}'
+            f'<span style="display:flex; flex-direction:column; line-height:1.3; flex-grow:1; min-width:0;">'
+            f'<span style="font-size:14px; font-weight:700;">@cyr1n32</span>'
+            f'<span style="font-size:12px; color:{T2};">1.6K followers &middot; posted Tue 16 Sep, 7:04pm</span></span>'
+            f'{link("Watch on TikTok")}</div></div>')
+    right = (f'<div style="flex-grow:1; display:flex; flex-direction:column; gap:18px; min-width:0;">'
+             f'<div style="display:flex; flex-direction:column; gap:10px;">{label("Breakout analysis by Brand Beacon", Y_TXT)}'
+             f'<h1 style="margin:0; font-size:32px; font-weight:800; letter-spacing:-0.03em; line-height:1.14;">'
+             f'Why this video ran 8,637&times; its creator&rsquo;s usual views</h1>'
+             f'<span style="font-size:15px; color:{T2};">&ldquo;{cap}&rdquo; &middot; for @rhode, Skincare</span></div>'
+             f'{video_stats()}{score_explainer()}'
+             f'<div style="background:{SURF}; border-radius:16px; padding:18px; box-shadow:{SH1};">{driver_list(4, fs_t=15, fs_d=14, gap=12)}</div>'
+             f'<div style="background:{Y_TINT}; border:1px solid {Y_LINE}; border-radius:16px; padding:18px 22px; display:flex; align-items:center; justify-content:space-between; gap:16px;">'
+             f'<span><span style="display:block; font-size:17px; font-weight:800;">Run this on your own brand</span>'
+             f'<span style="display:block; font-size:14px; color:{Y_TXT}; margin-top:3px;">3 brand or product searches and 3 breakdowns free. No card.</span></span>'
+             f'{btn("Start free", "primary", 48, 16)}</div></div>')
+    inner = nav + f'<div style="flex-grow:1; display:flex; justify-content:center; padding:28px 48px 0;"><div style="width:1100px; display:flex; gap:40px; align-items:flex-start;">{left}{right}</div></div>'
+    return root(inner, 'S08: back in the app, the next brand is offered.', w=1280, h=860)
 
 def d07():
     """S07 Prompt to search another term. Competitors of the brand just searched."""
@@ -625,7 +676,7 @@ def d07():
             f'<div style="flex-grow:1;">{fake_field("Or type any other brand or product", icon=ic(P_SEARCH, 16, T3, 2))}</div>'
             f'{btn("Search", "primary", 44, 15)}</div></div>')
     inner = (app_bar(1, 1) + f'<div style="flex-grow:1; display:flex; align-items:center; justify-content:center; padding:0 64px;">{card}</div>')
-    return root(inner, 'S08: the fourth search is where Free stops.')
+    return root(inner, 'S09: the fourth search is where Free stops.')
 
 def d08():
     """S08 Paywall on the 4th search."""
@@ -636,7 +687,7 @@ def d08():
                        f'{check_dot(20)}<span style="font-size:14px;">{x}</span></div>'
                        for x in ['@rhode, @glowrecipe and @summerfridays', 'The 2 breakdowns you ran', 'Every share link you have sent'])
              + f'<span style="font-size:13px; color:{T3}; line-height:1.5; padding:0 4px;">Nothing is deleted and nothing expires. The wall is on new searches only.</span></div></div>')
-    return root(inner, 'S09: the same wall on the fourth breakdown.')
+    return root(inner, 'S10: the same wall on the fourth breakdown.')
 
 def d09():
     """S09 Paywall on the 4th analysis."""
@@ -656,8 +707,8 @@ def d09():
 def m01():
     copy = (f'<div style="display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;">'
             f'<h1 style="margin:0; font-size:32px; font-weight:800; letter-spacing:-0.03em; line-height:1.1;">Find the TikToks that broke out for any brand</h1>'
-            f'<p style="margin:0; font-size:16px; color:{T2}; line-height:1.5;">Facebook has an ad library. Organic TikTok doesn&rsquo;t, so we index 11,000+ brands every Monday.</p>'
-            f'{offer_row(True)}</div>')
+            f'<p style="margin:0; font-size:16px; color:{T2}; line-height:1.5;">Facebook has an ad library. Organic TikTok doesn&rsquo;t, so we built it. 11,000+ brands indexed and counting.</p>'
+            f'<div style="margin-top:12px;">{offer_row(True)}</div></div>')
     action = (f'<div style="display:flex; flex-direction:column; align-items:center; gap:10px;">{google_btn(True, 54, 16, solid=True)}'
               f'<span style="font-size:13px; color:{T3};"><a href="#" style="color:{Y_TXT}; font-weight:700;">Use email instead</a>'
               f' &middot; <a href="#" style="color:{T2};">Sign in</a></span></div>')
@@ -674,11 +725,6 @@ def m01b():
                 f'<span style="font-size:18px; font-weight:800; letter-spacing:-0.02em;">{title}</span>'
                 f'<span style="font-size:15px; color:{T2}; line-height:1.55;">{body}</span></div>')
     pal, cap, hd, sc, fol = TILES[0]
-    stats = (f'<div style="background:{INK}; border-radius:20px; padding:24px; display:flex; flex-wrap:wrap; gap:20px; justify-content:space-around;">'
-             + ''.join(f'<div style="display:flex; flex-direction:column; gap:2px; align-items:center;">'
-                       f'<span style="font-size:26px; font-weight:800; letter-spacing:-0.03em; color:{Y};">{n}</span>'
-                       f'<span style="font-size:12px; color:#cdc7b9;">{l}</span></div>'
-                       for n, l in [('11,000+', 'brands indexed'), ('200', 'per brand'), ('Mondays', 'refreshed')]) + '</div>')
     sample = (f'<div style="background:{SURF}; border-radius:20px; padding:18px; box-shadow:{SH2}; display:flex; flex-direction:column; gap:14px;">'
               f'<div style="display:flex; gap:14px;">{tile(120, pal, "", "", "0:20", sc, small=True, h=213, embed=True)}'
               f'<div style="display:flex; flex-direction:column; gap:8px; justify-content:center; min-width:0;">{pill("1 of your 3 free", G_TINT, G_TXT)}'
@@ -686,8 +732,8 @@ def m01b():
               f'<span style="font-size:12px; color:{T2};">@cyr1n32 &middot; 8.9M views</span></div></div>'
               f'{driver_list(3, fs_t=14, fs_d=13, gap=10)}</div>')
     price = (f'<div style="display:flex; flex-direction:column; gap:12px;">'
-             f'{price_card("Free", "$0", "forever", ["3 brand searches", "3 AI breakdowns", "Share any breakout"])}'
-             f'{price_card("Growth", "$49", "a month", ["Unlimited searches", "100 breakdowns a month", "Creator lists and exports"], True)}</div>')
+             f'{price_card("Free", "$0", "forever", ["3 brand or product searches", "3 AI breakdowns", "Share any breakout"])}'
+             f'{price_card("Growth", "$49", "a month", ["Unlimited brand and product searches", "100 breakdowns a month", "Creator lists and exports"], True)}</div>')
     cta = (f'<div style="background:{Y_TINT}; border:1px solid {Y_LINE}; border-radius:20px; padding:24px; display:flex; flex-direction:column; gap:14px; text-align:center;">'
            f'<span style="font-size:24px; font-weight:800; letter-spacing:-0.03em; line-height:1.15;">Three searches, on us</span>'
            f'<span style="font-size:15px; color:{Y_TXT};">No card. About twenty seconds to start.</span>{google_btn(True, 52, 16)}</div>')
@@ -697,33 +743,30 @@ def m01b():
             f'{sec(1, "Type a brand", "A brand name works best. A product term resolves to the brand behind it.")}'
             f'{sec(2, "See its real breakouts", "Every video that beat its creator&rsquo;s own baseline, ranked and scored.")}'
             f'{sec(3, "Read why it broke out", "The four things that made it travel. Share it, or brief a creator with it.")}</div>'
-            f'{stats}'
             f'<div style="display:flex; flex-direction:column; gap:14px;"><h2 style="margin:0; font-size:25px; font-weight:800; letter-spacing:-0.03em; line-height:1.15;">This is the whole output</h2>{sample}</div>'
             f'<div style="display:flex; flex-direction:column; gap:14px;"><h2 style="margin:0; font-size:25px; font-weight:800; letter-spacing:-0.03em; line-height:1.15;">Free is a real plan</h2>{price}</div>'
             f'{cta}</div>')
     return body
 
 def m01_page():
-    return root(m01() + m01b() + fold(844, True), 'M2: signed in, the first thing asked for is a brand.', True, w=390, h=2900)
+    return root(m01() + m01b() + fold(844, True), 'M2: signed in, the first thing asked for is a brand or a product.', True, w=390, h=2900)
 
 def m02():
-    expand = (f'<div style="background:{SURF}; border-radius:14px; padding:14px; box-shadow:{SH1}; display:flex; flex-direction:column; gap:10px;">'
-              f'<div style="display:flex; align-items:center; justify-content:space-between;">'
-              f'<span style="display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:700;">{ic(P_TARGET, 15, T3)}Narrow it down <span style="font-weight:500; color:{T3};">(optional)</span></span>'
-              f'{ic(P_CHEV, 16, T3, 2)}</div>'
-              f'<div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">'
-              + f'<button type="button" style="height:30px; padding:0 11px; border-radius:999px; border:1px solid {Y_LINE}; background:{Y_TINT}; font-family:inherit; font-size:12px; font-weight:600; color:{Y_TXT};">peptide lip tint &times;</button>'
-              + ''.join(f'<button type="button" style="height:30px; padding:0 11px; border-radius:999px; border:1px solid {LINE2}; background:{SURF}; font-family:inherit; font-size:12px; font-weight:600; color:{T2};">+ {k}</button>' for k in ['glazing milk', 'pocket blush'])
-              + '</div></div>')
     search = (f'<div style="background:{SURF}; border-radius:20px; padding:14px; box-shadow:{SH3}; display:flex; flex-direction:column; gap:12px;">'
               f'<div style="display:flex; align-items:center; gap:10px; height:52px; padding:0 16px; border-radius:999px; background:{PAGE}; border:1px solid {LINE};">'
-              f'{ic(P_SEARCH, 20, T3, 2)}<span style="font-size:16px; color:{T3};">Which brand?</span></div>'
+              f'{ic(P_SEARCH, 20, T3, 2)}<span style="font-size:16px; color:{T3};">Brand or product</span></div>'
               f'{btn("Find breakouts","primary",52,17,True)}</div>')
-    inner = (app_bar(0, 0, True) + f'<div style="flex-grow:1; padding:24px 16px; display:flex; flex-direction:column; gap:16px; overflow:hidden;">'
-             f'<div style="display:flex; flex-direction:column; gap:8px;">'
-             f'<h1 style="margin:0; font-size:27px; font-weight:800; letter-spacing:-0.03em; line-height:1.12;">Which brand do you want to see?</h1>'
-             f'<p style="margin:0; font-size:15px; color:{T2}; line-height:1.5;">A brand name works best. Type a product and we&rsquo;ll find the brand behind it.</p></div>'
-             f'{search}{chips(["rhode", "olipop", "nike"], 13)}{expand}'
+    kinds = (f'<div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; justify-content:center;">'
+             + ''.join(f'<button type="button" style="height:32px; padding:0 12px; border-radius:999px; border:1px solid {LINE2}; '
+                       f'background:{SURF}; font-family:inherit; font-size:13px; font-weight:600; color:{INK}; '
+                       f'display:inline-flex; align-items:center; gap:6px;">{ic(P_BRAND if k == "brand" else P_TARGET, 13, T3)}{n}</button>'
+                       for n, k in [('rhode', 'brand'), ('olipop', 'brand'), ('peptide lip tint', 'product')])
+             + '</div>')
+    inner = (app_bar(0, 0, True) + f'<div style="flex-grow:1; padding:24px 16px; display:flex; flex-direction:column; justify-content:center; gap:18px; overflow:hidden;">'
+             f'<div style="display:flex; flex-direction:column; gap:8px; text-align:center;">'
+             f'<h1 style="margin:0; font-size:27px; font-weight:800; letter-spacing:-0.03em; line-height:1.12;">Search a brand or a product</h1>'
+             f'<p style="margin:0; font-size:15px; color:{T2}; line-height:1.5;">A brand returns everything posted about it. A product returns that line, and the brand behind it.</p></div>'
+             f'{search}{kinds}'
              f'<span style="font-size:13px; color:{T3}; text-align:center;">Uses 1 of your 3 free searches.</span></div>')
     return root(inner, 'M3: the search runs while a short welcome plays.', True)
 
@@ -743,34 +786,16 @@ def m04():
     peek = ''.join(f'<div>{tile(w, TILES[2+i][0], "", "", "0:12", TILES[2+i][3], rank=3+i, small=True, h=150)}</div>' for i in range(2))
     head = (f'<div style="display:flex; align-items:center; gap:12px;">{avatar("RH", 40, "berry")}'
             f'<div style="display:flex; flex-direction:column; gap:2px;"><span style="font-size:20px; font-weight:800; letter-spacing:-0.02em;">@rhode</span>'
-            f'<span style="font-size:12px; color:{T2};">200 breakouts &middot; by Breakout Score</span></div></div>')
+            f'<span style="font-size:12px; color:{T2};">Ranked by Breakout Score</span></div></div>')
     inner = (app_bar(1, 0, True) + f'<div style="flex-grow:1; padding:16px; display:flex; flex-direction:column; gap:14px; overflow:hidden;">{head}'
              f'<div style="display:flex; gap:16px;">{cards}</div>'
              f'<div style="position:relative; height:132px; overflow:hidden;"><div style="display:flex; gap:16px;">{peek}</div>'
              f'<div style="position:absolute; inset:0; background:linear-gradient(180deg,rgba(246,244,238,0) 10%,rgba(246,244,238,.94) 85%); '
              f'display:flex; align-items:flex-end; justify-content:center; padding-bottom:2px;">'
-             f'<span style="font-size:13px; color:{T2};">194 more, all scored</span></div></div></div>')
-    return root(inner, 'M5: picking a video offers the breakdown, and says what it costs.', True)
+             f'<span style="font-size:13px; color:{T2};">More below, all scored</span></div></div></div>')
+    return root(inner, 'M5: picking a video opens its breakdown.', True)
 
-def m05():
-    pal, cap, hd, sc, fol = TILES[0]
-    sheet = (f'<div style="position:absolute; left:0; right:0; bottom:0; background:{SURF}; border-radius:24px 24px 0 0; padding:12px 16px 20px; '
-             f'box-shadow:{SH3}; display:flex; flex-direction:column; gap:16px;">'
-             f'<span style="align-self:center; width:40px; height:4px; border-radius:999px; background:{LINE2};"></span>'
-             f'<div style="display:flex; gap:14px;">{tile(104, pal, "", "", "0:20", sc, small=True, h=185)}'
-             f'<div style="display:flex; flex-direction:column; gap:6px; min-width:0; justify-content:center;">{label("Top breakout")}'
-             f'<span style="font-size:17px; font-weight:800; line-height:1.28;">&ldquo;Name me a better marketing brand&rdquo;</span>'
-             f'<span style="font-size:12px; color:{T2};">@cyr1n32 &middot; 8,637&times; baseline</span></div></div>'
-             f'<span style="font-size:14px; color:{T2}; line-height:1.5;">We&rsquo;ll read the video, the caption and the comments and write back the four things that made it travel.</span>'
-             f'<div style="display:flex; flex-direction:column; gap:8px;">{analyze_btn(50, 16, True)}'
-             f'<span style="font-size:12px; color:{T3}; text-align:center;">Uses 1 of your 3 free breakdowns &middot; about 40 seconds</span></div></div>')
-    base = app_bar(1, 0, True) + (f'<div style="flex-grow:1; padding:16px; display:flex; gap:16px; overflow:hidden;">'
-                                  + ''.join(f'<div>{tile(171, TILES[i][0], TILES[i][1], TILES[i][2], "0:14", TILES[i][3], rank=i+1, small=True, h=250)}</div>' for i in range(2)) + '</div>')
-    inner = (f'<div style="position:absolute; inset:0; display:flex; flex-direction:column; filter:blur(3px);">{base}</div>'
-             f'<div style="position:absolute; inset:0; background:rgba(23,21,15,.5);"></div>{sheet}')
-    return root(inner, 'M6: the breakdown opens, with Share as the main action.', True)
-
-def m06():
+def m06_body():
     pal, cap, hd, sc, fol = TILES[0]
     head = (f'<div style="height:56px; flex-shrink:0; display:flex; align-items:center; justify-content:space-between; padding:0 16px; background:{SURF}; border-bottom:1px solid {LINE};">'
             f'<span style="font-size:16px; font-weight:800;">Top breakout</span>{quota(1, 1, True)}</div>')
@@ -783,7 +808,33 @@ def m06():
              f'<div style="flex-shrink:0; padding:12px 16px 16px; background:{SURF}; border-top:1px solid {LINE}; display:flex; flex-direction:column; gap:8px;">'
              f'{btn("Share this breakout", "primary", 48, 16, True, ic(P_SHARE, 16, INK, 2))}'
              f'<span style="font-size:12px; color:{T2}; text-align:center;">Sharing is free on every plan</span></div>')
-    return root(inner, 'M7: after the breakdown, the next brand is offered.', True)
+    return inner
+
+def m06():
+    return root(m06_body(), 'M6: pressing Share opens the link and the ways to send it.', True)
+
+def m06s():
+    base = m06_body()
+    inner = (f'<div style="position:absolute; inset:0; display:flex; flex-direction:column; filter:blur(3px);">{base}</div>'
+             f'<div style="position:absolute; inset:0; background:rgba(23,21,15,.5);"></div>{share_sheet(True)}')
+    return root(inner, 'M7: the link opens this, for someone with no account.', True)
+
+def m06b():
+    pal, cap, hd, sc, fol = TILES[0]
+    inner = (topnav(True, btn('Try free', 'secondary', 36, 14))
+             + f'<div style="flex-grow:1; padding:18px 16px; display:flex; flex-direction:column; gap:14px; overflow:hidden;">'
+             f'{label("Breakout analysis by Brand Beacon", Y_TXT)}'
+             f'<h1 style="margin:0; font-size:23px; font-weight:800; letter-spacing:-0.03em; line-height:1.18;">Why this video ran 8,637&times; its creator&rsquo;s usual views</h1>'
+             f'<div style="display:flex; gap:12px;">{tile(132, pal, "", "", "0:20", None, small=True, h=234, embed=True)}'
+             f'<div style="display:flex; flex-direction:column; gap:8px; min-width:0; justify-content:center;">'
+             f'<span style="font-size:13px; font-weight:700;">@cyr1n32</span>'
+             f'<span style="font-size:12px; color:{T2}; line-height:1.4;">1.6K followers<br>Tue 16 Sep, 7:04pm</span>{link("Watch on TikTok", 13)}</div></div>'
+             f'{video_stats(True)}{score_explainer(True)}'
+             f'<div style="background:{SURF}; border-radius:14px; padding:14px; box-shadow:{SH1};">{driver_list(2, fs_t=14, fs_d=13, gap=10)}</div></div>'
+             f'<div style="flex-shrink:0; padding:12px 16px 16px; background:{SURF}; border-top:1px solid {LINE}; display:flex; flex-direction:column; gap:8px;">'
+             f'{btn("Start free", "primary", 48, 16, True)}'
+             f'<span style="font-size:12px; color:{T2}; text-align:center;">3 brand or product searches and 3 breakdowns free</span></div>')
+    return root(inner, 'M8: back in the app, the next brand is offered.', True, w=390, h=1000)
 
 def m07():
     def sug(name, cat, pal_i):
@@ -798,13 +849,13 @@ def m07():
              f'<p style="margin:0; font-size:15px; color:{T2}; line-height:1.5;">Most people spend the next one on a competitor.</p></div>'
              f'<div style="display:flex; flex-direction:column; gap:10px;">{sug("glowrecipe", "Skincare", 1)}{sug("summerfridays", "Skincare", 2)}{sug("kosas", "Beauty", 3)}</div>'
              f'{fake_field("Or type any other brand", icon=ic(P_SEARCH, 16, T3, 2))}</div>')
-    return root(inner, 'M8: the fourth search is where Free stops.', True)
+    return root(inner, 'M9: the fourth search is where Free stops.', True)
 
 def m08():
     inner = (app_bar(3, 1, True) + f'<div style="flex-grow:1; padding:18px 16px; display:flex; flex-direction:column; gap:14px; overflow:hidden;">'
              f'{plan_wall("You have used your three free searches", "Everything you already ran is still here and still shareable.", True)}'
              f'<span style="font-size:12px; color:{T3}; text-align:center; line-height:1.5;">@rhode, @glowrecipe and @summerfridays stay open. Nothing expires.</span></div>')
-    return root(inner, 'M9: the same wall on the fourth breakdown.', True)
+    return root(inner, 'M10: the same wall on the fourth breakdown.', True)
 
 def m09():
     inner = (app_bar(3, 3, True) + f'<div style="flex-grow:1; padding:18px 16px; display:flex; flex-direction:column; gap:14px; overflow:hidden;">'
@@ -813,14 +864,17 @@ def m09():
     return root(inner, 'The loop from here is Growth, or the shared pages bringing someone else in.', True)
 
 FILES = {
- '01-Landing.dc.html': d01_page, '02-Keyword.dc.html': d02,
- '03-Processing.dc.html': d03, '04-Results.dc.html': d04, '05-AnalyzePrompt.dc.html': d05,
- '06-Analysis.dc.html': d06, '06b-Public.dc.html': d06b, '07-SearchAgain.dc.html': d07,
- '08-SearchPaywall.dc.html': d08, '09-AnalysisPaywall.dc.html': d09,
- 'M1-Landing.dc.html': m01_page, 'M2-Keyword.dc.html': m02,
- 'M3-Processing.dc.html': m03, 'M4-Results.dc.html': m04, 'M5-AnalyzePrompt.dc.html': m05,
- 'M6-Analysis.dc.html': m06, 'M7-SearchAgain.dc.html': m07, 'M8-SearchPaywall.dc.html': m08,
- 'M9-AnalysisPaywall.dc.html': m09}
+ # desktop: ten steps after Ivan's 24 Sept notes (the analyze confirm is gone,
+ # the share action and the shared page are now steps of their own)
+ '01-Landing.dc.html': d01_page, '02-Search.dc.html': d02, '03-Processing.dc.html': d03,
+ '04-Results.dc.html': d04, '05-Breakdown.dc.html': d06, '06-Share.dc.html': d06s,
+ '07-SharedPage.dc.html': d06b, '08-SearchAgain.dc.html': d07,
+ '09-SearchPaywall.dc.html': d08, '10-AnalysisPaywall.dc.html': d09,
+ # mobile
+ 'M1-Landing.dc.html': m01_page, 'M2-Search.dc.html': m02, 'M3-Processing.dc.html': m03,
+ 'M4-Results.dc.html': m04, 'M5-Breakdown.dc.html': m06, 'M6-Share.dc.html': m06s,
+ 'M7-SharedPage.dc.html': m06b, 'M8-SearchAgain.dc.html': m07,
+ 'M9-SearchPaywall.dc.html': m08, 'M10-AnalysisPaywall.dc.html': m09}
 for name, fn in FILES.items():
     open(os.path.join(OUT, name), 'w', encoding='utf-8').write(fn())
 print('generated', len(FILES))
