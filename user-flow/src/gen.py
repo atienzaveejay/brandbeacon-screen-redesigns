@@ -443,7 +443,7 @@ def d01():
             f'border-radius:50%; background:radial-gradient(closest-side, rgba(255,198,41,.22), rgba(255,198,41,0)); pointer-events:none;"></div>')
     copy = (f'<div style="display:flex; flex-direction:column; align-items:center; gap:18px; text-align:center;">'
             f'<h1 style="margin:0; font-size:48px; font-weight:800; letter-spacing:-0.035em; line-height:1.06; max-width:15em;">'
-            f'Find the TikToks that broke out for any brand</h1>'
+            f'Find the TikToks that broke out for any brand or product</h1>'
             f'<p style="margin:0; font-size:18px; color:{T2}; line-height:1.5; max-width:32em;">Facebook has an ad library. '
             f'Organic TikTok doesn&rsquo;t, so we built it. 11,000+ brands indexed and counting.</p></div>')
     action = (f'<div style="display:flex; flex-direction:column; align-items:center; gap:12px;">'
@@ -681,7 +681,7 @@ def d07():
 def d08():
     """S08 Paywall on the 4th search."""
     inner = (app_bar(3, 1) + f'<div style="flex-grow:1; display:flex; align-items:center; justify-content:center; gap:56px; padding:0 72px;">'
-             f'{plan_wall("You have used your three free searches", "Everything you already ran is still here and still shareable. A fourth brand is what needs Growth.")}'
+             f'{plan_wall("You have used your three free searches", "Everything you already ran is still here and still shareable. A fourth search is what needs Growth.")}'
              f'<div style="width:380px; display:flex; flex-direction:column; gap:14px;">{label("Still yours on Free")}'
              + ''.join(f'<div style="display:flex; align-items:center; gap:12px; background:{SURF}; border-radius:14px; padding:14px 16px; box-shadow:{SH1};">'
                        f'{check_dot(20)}<span style="font-size:14px;">{x}</span></div>'
@@ -706,7 +706,7 @@ def d09():
 # =================== MOBILE ===================
 def m01():
     copy = (f'<div style="display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;">'
-            f'<h1 style="margin:0; font-size:32px; font-weight:800; letter-spacing:-0.03em; line-height:1.1;">Find the TikToks that broke out for any brand</h1>'
+            f'<h1 style="margin:0; font-size:32px; font-weight:800; letter-spacing:-0.03em; line-height:1.1;">Find the TikToks that broke out for any brand or product</h1>'
             f'<p style="margin:0; font-size:16px; color:{T2}; line-height:1.5;">Facebook has an ad library. Organic TikTok doesn&rsquo;t, so we built it. 11,000+ brands indexed and counting.</p>'
             f'<div style="margin-top:12px;">{offer_row(True)}</div></div>')
     action = (f'<div style="display:flex; flex-direction:column; align-items:center; gap:10px;">{google_btn(True, 54, 16, solid=True)}'
@@ -848,7 +848,7 @@ def m07():
              f'<h1 style="margin:0; font-size:25px; font-weight:800; letter-spacing:-0.03em; line-height:1.15;">That is one. You have two searches left.</h1>'
              f'<p style="margin:0; font-size:15px; color:{T2}; line-height:1.5;">Most people spend the next one on a competitor.</p></div>'
              f'<div style="display:flex; flex-direction:column; gap:10px;">{sug("glowrecipe", "Skincare", 1)}{sug("summerfridays", "Skincare", 2)}{sug("kosas", "Beauty", 3)}</div>'
-             f'{fake_field("Or type any other brand", icon=ic(P_SEARCH, 16, T3, 2))}</div>')
+             f'{fake_field("Or type any other brand or product", icon=ic(P_SEARCH, 16, T3, 2))}</div>')
     return root(inner, 'M9: the fourth search is where Free stops.', True)
 
 def m08():
