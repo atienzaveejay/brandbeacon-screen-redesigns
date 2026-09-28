@@ -319,7 +319,7 @@ def do_next_card(mobile=False):
                f'{btn("Add to creator list", "secondary", 36, 13)}</div>')
     return (f'<div style="background:{SURF}; border-radius:16px; border-left:4px solid {Y}; padding:{14 if mobile else 15}px; '
             f'box-shadow:{SH1}; display:flex; flex-direction:column; gap:10px;">'
-            f'{label("Do this next")}<ul style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:8px;">{li}</ul>{creator}</div>')
+            f'{label("Do this next")}<ul style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:8px;">{li}</ul></div>')  # creator line out: Breakout creators paused, Ivan 28 Sept
 
 def tile_meta(fol, w):
     return f'<span style="display:block; width:{w}px; margin-top:8px; font-size:14px; color:{T2};">{fol}</span>'
@@ -580,7 +580,8 @@ def d06():
 
 def share_sheet(mobile=False):
     pal = TILES[0][0]
-    chan = [('Email', P_MAIL), ('Slack', P_HASH), ('Download image', P_DOWN)]
+    # Ivan, 28 Sept: 'i dont think we can slack'. Copy link, email and an image only.
+    chan = [('Email', P_MAIL), ('Download image', P_DOWN)]
     btns = ''.join(f'<button type="button" style="display:flex; align-items:center; gap:10px; height:{44 if mobile else 46}px; padding:0 16px; '
                    f'border-radius:12px; border:1px solid {LINE2}; background:{SURF}; font-family:inherit; font-size:{14 if mobile else 15}px; '
                    f'font-weight:600; color:{INK}; cursor:pointer;">{ic(ip, 17, T2)}{lbl}</button>' for lbl, ip in chan)
@@ -633,30 +634,25 @@ def score_explainer(mobile=False):
             f'This one reached 8.9M, which is 8,637 times their own baseline. That is what we rank on, so a small account can outrank a household name.</span></div>')
 
 def d06b():
-    """The page a share link opens. Ivan, 24 Sept: this is the front door for people with
-    no account, so it carries the whole video, not a summary of it."""
+    """The page a share link opens. Ivan, 28 Sept: 'doesnt the shared page look like the page 5
+    breakdown'. So it is the breakdown page itself, read-only: same video, title, creator line and
+    tabs. The Do this next block and the app actions are swapped for one sign-up strip."""
     pal, cap, hd, sc, fol = TILES[0]
     nav = topnav(right=btn('Try Brand Beacon free', 'secondary', 40, 14))
-    left = (f'<div style="width:320px; flex-shrink:0; display:flex; flex-direction:column; gap:14px;">'
-            f'{tile(320, pal, cap, hd, "0:20", None, embed=True, h=569)}'
-            f'<div style="display:flex; align-items:center; gap:10px;">{avatar("CY", 36, "berry")}'
-            f'<span style="display:flex; flex-direction:column; line-height:1.3; flex-grow:1; min-width:0;">'
-            f'<span style="font-size:14px; font-weight:700;">@cyr1n32</span>'
-            f'<span style="font-size:12px; color:{T2};">1.6K followers &middot; posted Tue 16 Sep, 7:04pm</span></span>'
-            f'{link("Watch on TikTok")}</div></div>')
-    right = (f'<div style="flex-grow:1; display:flex; flex-direction:column; gap:18px; min-width:0;">'
-             f'<div style="display:flex; flex-direction:column; gap:10px;">{label("Breakout analysis by Brand Beacon", Y_TXT)}'
-             f'<h1 style="margin:0; font-size:32px; font-weight:800; letter-spacing:-0.03em; line-height:1.14;">'
-             f'Why this video ran 8,637&times; its creator&rsquo;s usual views</h1>'
-             f'<span style="font-size:15px; color:{T2};">&ldquo;{cap}&rdquo; &middot; for @rhode, Skincare</span></div>'
-             f'{video_stats()}{score_explainer()}'
-             f'<div style="background:{SURF}; border-radius:16px; padding:18px; box-shadow:{SH1};">{driver_list(4, fs_t=15, fs_d=14, gap=12)}</div>'
-             f'<div style="background:{Y_TINT}; border:1px solid {Y_LINE}; border-radius:16px; padding:18px 22px; display:flex; align-items:center; justify-content:space-between; gap:16px;">'
-             f'<span><span style="display:block; font-size:17px; font-weight:800;">Run this on your own brand</span>'
+    strip = (f'<div style="background:{Y_TINT}; border:1px solid {Y_LINE}; border-radius:16px; padding:16px 20px; display:flex; align-items:center; justify-content:space-between; gap:16px;">'
+             f'<span><span style="display:block; font-size:16px; font-weight:800;">Run this on your own brand</span>'
              f'<span style="display:block; font-size:14px; color:{Y_TXT}; margin-top:3px;">3 brand or product searches and 3 breakdowns free. No card.</span></span>'
-             f'{btn("Start free", "primary", 48, 16)}</div></div>')
-    inner = nav + f'<div style="flex-grow:1; display:flex; justify-content:center; padding:28px 48px 0;"><div style="width:1100px; display:flex; gap:40px; align-items:flex-start;">{left}{right}</div></div>'
-    return root(inner, 'S08: back in the app, the next brand is offered.', w=1280, h=860)
+             f'{btn("Start free", "primary", 46, 15)}</div>')
+    right = (f'<div style="flex-grow:1; display:flex; flex-direction:column; gap:11px; min-width:0;">'
+             f'<div><h1 style="margin:0; font-size:24px; font-weight:800; letter-spacing:-0.02em; line-height:1.25;">&ldquo;Name me a better marketing brand&rdquo;</h1>'
+             f'<div style="display:flex; align-items:center; gap:12px; margin-top:10px;">{avatar("CY", 32, "berry")}<span style="font-size:14px;"><strong>@cyr1n32</strong> <span style="color:{T2};">&middot; 1.6K followers &middot; 8.9M views &middot; 1.7M likes</span></span></div></div>'
+             f'{tabs()}<div style="background:{SURF}; border-radius:16px; padding:14px; box-shadow:{SH1};">{driver_list(3, fs_t=15, fs_d=13, gap=10)}</div>'
+             f'{strip}'
+             f'<div style="display:flex; align-items:center; gap:12px;">{btn("Open on TikTok", "secondary", 46, 15)}</div></div>')
+    main = (f'<div style="flex-grow:1; padding:24px 40px; display:flex; flex-direction:column; gap:16px; overflow:hidden;">'
+            f'<span style="font-size:14px; color:{T2};">Shared from Brand Beacon &nbsp;/&nbsp; <strong style="color:{INK};">@rhode</strong></span>'
+            f'<div style="display:flex; gap:28px; align-items:flex-start;">{tile(250, pal, "", hd, "0:20", sc, rank=1, embed=True, h=445)}{right}</div></div>')
+    return root(nav + main, 'S08: back in the app, the next brand is offered.')
 
 def d07():
     """S07 Prompt to search another term. Competitors of the brand just searched."""
@@ -671,6 +667,7 @@ def d07():
             f'<div style="display:flex; flex-direction:column; gap:8px;">'
             f'<h1 style="margin:0; font-size:28px; font-weight:800; letter-spacing:-0.025em; line-height:1.2;">That is one. You have two searches left.</h1>'
             f'<p style="margin:0; font-size:16px; color:{T2}; line-height:1.5; max-width:34em;">Most people spend the next one on a competitor, to see what is working for them that is not working for you.</p></div></div>'
+            f'{label("Close to @rhode")}'
             f'<div style="display:flex; gap:16px;">{sug("glowrecipe", "Skincare", 1)}{sug("summerfridays", "Skincare", 2)}{sug("kosas", "Beauty", 3)}</div>'
             f'<div style="display:flex; align-items:center; gap:12px; padding-top:4px;">'
             f'<div style="flex-grow:1;">{fake_field("Or type any other brand or product", icon=ic(P_SEARCH, 16, T3, 2))}</div>'
@@ -820,21 +817,19 @@ def m06s():
     return root(inner, 'M7: the link opens this, for someone with no account.', True)
 
 def m06b():
+    """Mobile shared page: the M5 breakdown, read-only, with the sign-up bar in place of Share."""
     pal, cap, hd, sc, fol = TILES[0]
+    top = (f'<div style="display:flex; gap:12px;">{tile(112, pal, "", "", "0:20", sc, small=True, h=168)}<div style="display:flex; flex-direction:column; gap:6px; min-width:0;">'
+           f'<span style="font-size:16px; font-weight:800; line-height:1.3;">&ldquo;Name me a better marketing brand&rdquo;</span>'
+           f'<span style="font-size:12px; color:{T2};"><strong style="color:{INK};">@cyr1n32</strong> &middot; 8.9M views</span>{link("Watch on TikTok", 13)}</div></div>')
     inner = (topnav(True, btn('Try free', 'secondary', 36, 14))
-             + f'<div style="flex-grow:1; padding:18px 16px; display:flex; flex-direction:column; gap:14px; overflow:hidden;">'
-             f'{label("Breakout analysis by Brand Beacon", Y_TXT)}'
-             f'<h1 style="margin:0; font-size:23px; font-weight:800; letter-spacing:-0.03em; line-height:1.18;">Why this video ran 8,637&times; its creator&rsquo;s usual views</h1>'
-             f'<div style="display:flex; gap:12px;">{tile(132, pal, "", "", "0:20", None, small=True, h=234, embed=True)}'
-             f'<div style="display:flex; flex-direction:column; gap:8px; min-width:0; justify-content:center;">'
-             f'<span style="font-size:13px; font-weight:700;">@cyr1n32</span>'
-             f'<span style="font-size:12px; color:{T2}; line-height:1.4;">1.6K followers<br>Tue 16 Sep, 7:04pm</span>{link("Watch on TikTok", 13)}</div></div>'
-             f'{video_stats(True)}{score_explainer(True)}'
-             f'<div style="background:{SURF}; border-radius:14px; padding:14px; box-shadow:{SH1};">{driver_list(2, fs_t=14, fs_d=13, gap=10)}</div></div>'
+             + f'<div style="flex-grow:1; padding:16px; display:flex; flex-direction:column; gap:14px; overflow:hidden;">'
+             f'<span style="font-size:13px; color:{T2};">Shared from Brand Beacon &middot; <strong style="color:{INK};">@rhode</strong></span>{top}{tabs(True)}'
+             f'<div style="background:{SURF}; border-radius:14px; padding:14px; box-shadow:{SH1};">{driver_list(3, fs_t=14, fs_d=13, gap=10)}</div></div>'
              f'<div style="flex-shrink:0; padding:12px 16px 16px; background:{SURF}; border-top:1px solid {LINE}; display:flex; flex-direction:column; gap:8px;">'
-             f'{btn("Start free", "primary", 48, 16, True)}'
+             f'{btn("Run this on your own brand", "primary", 48, 16, True)}'
              f'<span style="font-size:12px; color:{T2}; text-align:center;">3 brand or product searches and 3 breakdowns free</span></div>')
-    return root(inner, 'M8: back in the app, the next brand is offered.', True, w=390, h=1000)
+    return root(inner, 'M8: back in the app, the next brand is offered.', True)
 
 def m07():
     def sug(name, cat, pal_i):
@@ -847,7 +842,7 @@ def m07():
              f'<div style="display:flex; flex-direction:column; gap:8px;">'
              f'<h1 style="margin:0; font-size:25px; font-weight:800; letter-spacing:-0.03em; line-height:1.15;">That is one. You have two searches left.</h1>'
              f'<p style="margin:0; font-size:15px; color:{T2}; line-height:1.5;">Most people spend the next one on a competitor.</p></div>'
-             f'<div style="display:flex; flex-direction:column; gap:10px;">{sug("glowrecipe", "Skincare", 1)}{sug("summerfridays", "Skincare", 2)}{sug("kosas", "Beauty", 3)}</div>'
+             f'{label("Close to @rhode")}<div style="display:flex; flex-direction:column; gap:10px;">{sug("glowrecipe", "Skincare", 1)}{sug("summerfridays", "Skincare", 2)}{sug("kosas", "Beauty", 3)}</div>'
              f'{fake_field("Or type any other brand or product", icon=ic(P_SEARCH, 16, T3, 2))}</div>')
     return root(inner, 'M9: the fourth search is where Free stops.', True)
 

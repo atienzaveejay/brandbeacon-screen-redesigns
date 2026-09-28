@@ -56,31 +56,32 @@ STEPS = [
  step('05', 's05', 'Breakdown, with Share',
       ('flow-05.jpg', 'Desktop'), ('flow-m5.jpg', 'Mobile'),
       ['<b>The confirm step before this is deleted.</b> Picking a video runs the breakdown the way the live app does now.',
-       'This is the existing breakdown page with a Share button added, as you said, plus the <b>Do this next</b> block and creator line '
-       'from the 23 Sept round. Say the word if those should come out and it goes back to the page as it stands.',
+       'This is the existing breakdown page with a Share button added, as you said, plus the <b>Do this next</b> block '
+       'from the 23 Sept round. The Add to creator list line came out on 28 Sept, since Breakout creators is paused. Say the word if those should come out and it goes back to the page as it stands.',
        'Share is the primary action and is free on every plan.'],
       '&ldquo;I dont think we need this [the analyze prompt], we&rsquo;ll use the same as existing&rdquo; and &ldquo;the breakdown page, we&rsquo;ll just add a share button to what we have already.&rdquo;'),
  step('06', 's06', 'What happens when Share is pressed',
       ('flow-06.jpg', 'Desktop'), ('flow-m6.jpg', 'Mobile'),
-      ['New screen. The link is generated and shown ready to copy, with a preview of the card that will appear when it is pasted.',
-       'It states plainly that the recipient needs no account and that sharing does not spend one of the three.',
-       'Copy link, email, Slack and a downloadable image. On mobile it is a bottom sheet.'],
-      '&ldquo;Also need to show what will happen after the user selects to share in page 6.&rdquo;'),
+      ['<b>Slack is out.</b> The ways to send are now copy link, email and a downloadable image.',
+       'The link is generated and shown ready to copy, with a preview of the card that will appear when it is pasted.',
+       'It states plainly that the recipient needs no account and that sharing does not spend one of the three. On mobile it is a bottom sheet.'],
+      '&ldquo;Page 6, i dont think we can slack.&rdquo;'),
  step('07', 's07', 'The page a share link opens',
       ('flow-07.jpg', 'Desktop'), ('flow-m7.jpg', 'Mobile'),
-      ['<b>Built out properly.</b> It was a summary; it now carries the whole video: the embed, the five engagement figures, '
-       'the creator and when they posted, and all four drivers rather than three.',
-       '<b>The Breakout Score is explained on the page</b>, with the baseline it is measured against, because most people arriving here '
-       'have never seen the number before.',
-       'This is the only screen in the flow with no account behind it, so it is the one front door a stranger meets.'],
-      '&ldquo;I feel the share receive page is not complete? Is this the whole video details?&rdquo;'),
+      ['<b>It is now the step 5 breakdown page, read-only.</b> Same video, same title and creator line, same three tabs, '
+       'so dev builds one template with a shared mode rather than a second page.',
+       '<b>What differs from step 5:</b> no quota or Upgrade in the bar, no Share or Save, and the Do this next block '
+       '(which speaks to the sender&rsquo;s own brand) is swapped for one sign-up strip.',
+       'The separate stats row and Breakout Score explainer from the last version came out. The score chip on the video carries it, as it does on step 5.'],
+      '&ldquo;Page 7, doesnt the shared page look like the page 5 breakdown.&rdquo;'),
  step('08', 's08', 'Prompt to search another brand',
       ('flow-08.jpg', 'Desktop'), ('flow-m8.jpg', 'Mobile'),
-      ['<b>When it shows up:</b> on the way back from a breakdown, the first time someone returns to search with credits left. '
+      ['<b>Dev note: the suggestions must be closely related to the first search.</b> Search @rhode and you are offered '
+       'brands in the same category and price band, not random popular brands. The card labels them &ldquo;Close to @rhode&rdquo; so the link is visible.',
+       '<b>When it shows up:</b> on the way back from a breakdown, the first time someone returns to search with credits left. '
        'Not on a timer and not on every visit, or it becomes nagging.',
-       'It suggests competitors of the brand just searched, which is the reason a brand team runs a second search at all.',
        'If that trigger is wrong, the alternative is to fold it into the results page as a quiet strip rather than a full screen.'],
-      '&ldquo;When will 7 show up?&rdquo;'),
+      '&ldquo;Page 8, make a dev note that the suggestions should be closely related to the first search they made.&rdquo;'),
  step('09', 's09', 'Paywall on the fourth search',
       ('flow-09.jpg', 'Desktop'), ('flow-m9.jpg', 'Mobile'),
       ['The wall names what is still free beside what is blocked: the brands already searched, the breakdowns already run, '
@@ -155,7 +156,7 @@ t = re.sub(r'<p class="lede">.*?</p>',
 t = t.replace('content="The Brand Beacon new-user flow rebuilt against Ivan’s 23 Sept feedback: six steps, a search-led homepage with a sales page under it, and one press to sign in."',
               'content="The Brand Beacon new-user flow built to Ivan’s 24 Sept list: Google sign-in first, three free searches and three free breakdowns, paywall on the fourth of each."')
 t = t.replace('<footer>Prepared 22 Sept 2026, revised 23 Sept 2026 against Ivan&rsquo;s feedback.',
-              '<footer>Prepared 22 Sept 2026, rebuilt 24 Sept 2026 to Ivan&rsquo;s sign-in-first flow. The previous preview-first version is in the repo history.')
+              '<footer>Prepared 22 Sept 2026, rebuilt 24 Sept 2026 to Ivan&rsquo;s sign-in-first flow, steps 6 to 8 revised 28 Sept. The previous preview-first version is in the repo history.')
 # --- notes toggle (hidden by default, remembered per viewer) ---
 CSS = (".notes-off .stepnote{display:none}\n"
        ".notes-off .stepgrid{grid-template-columns:minmax(0,1fr) 300px}\n"
