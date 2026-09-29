@@ -596,7 +596,7 @@ def share_sheet(mobile=False):
                f'<span style="font-size:12px; color:{T3};">brandbeacon.io &middot; opens with no account</span></span></div>')
     body = (f'<div style="display:flex; flex-direction:column; gap:6px;">'
             f'<h2 style="margin:0; font-size:{22 if mobile else 26}px; font-weight:800; letter-spacing:-0.025em;">Share this breakout</h2>'
-            f'<p style="margin:0; font-size:{14 if mobile else 15}px; color:{T2}; line-height:1.5;">Anyone with the link can read the '
+            f'<p style="margin:0; font-size:{14 if mobile else 15}px; color:{T2}; line-height:1.5;">Send it to your team or to a creator. Anyone with the link can read the '
             f'breakdown. They do not need an account, and it does not spend one of yours.</p></div>'
             f'{link}{preview}'
             f'<div style="display:{"grid" if mobile else "flex"}; {"grid-template-columns:1fr 1fr;" if mobile else ""} gap:10px; flex-wrap:wrap;">{btns}</div>')
@@ -643,11 +643,16 @@ def d06b():
              f'<span><span style="display:block; font-size:16px; font-weight:800;">Run this on your own brand</span>'
              f'<span style="display:block; font-size:14px; color:{Y_TXT}; margin-top:3px;">3 brand or product searches and 3 breakdowns free. No card.</span></span>'
              f'{btn("Start free", "primary", 46, 15)}</div>')
+    # Ivan, 30 Sept: the link also goes to creators, and their CTA will be Viral Video Finder.
+    creator = (f'<div style="border:1px solid {LINE}; background:{SURF}; border-radius:16px; padding:14px 20px; display:flex; align-items:center; justify-content:space-between; gap:16px;">'
+               f'<span><span style="display:block; font-size:15px; font-weight:800;">Make TikToks? Find your next video idea</span>'
+               f'<span style="display:block; font-size:13px; color:{T2}; margin-top:3px;">Viral Video Finder shows what is breaking out in your niche.</span></span>'
+               f'{btn("Try Viral Video Finder", "secondary", 42, 14)}</div>')
     right = (f'<div style="flex-grow:1; display:flex; flex-direction:column; gap:11px; min-width:0;">'
              f'<div><h1 style="margin:0; font-size:24px; font-weight:800; letter-spacing:-0.02em; line-height:1.25;">&ldquo;Name me a better marketing brand&rdquo;</h1>'
              f'<div style="display:flex; align-items:center; gap:12px; margin-top:10px;">{avatar("CY", 32, "berry")}<span style="font-size:14px;"><strong>@cyr1n32</strong> <span style="color:{T2};">&middot; 1.6K followers &middot; 8.9M views &middot; 1.7M likes</span></span></div></div>'
              f'{tabs()}<div style="background:{SURF}; border-radius:16px; padding:14px; box-shadow:{SH1};">{driver_list(3, fs_t=15, fs_d=13, gap=10)}</div>'
-             f'{strip}'
+             f'{strip}{creator}'
              f'<div style="display:flex; align-items:center; gap:12px;">{btn("Open on TikTok", "secondary", 46, 15)}</div></div>')
     main = (f'<div style="flex-grow:1; padding:24px 40px; display:flex; flex-direction:column; gap:16px; overflow:hidden;">'
             f'<span style="font-size:14px; color:{T2};">Shared from Brand Beacon &nbsp;/&nbsp; <strong style="color:{INK};">@rhode</strong></span>'
@@ -828,7 +833,8 @@ def m06b():
              f'<div style="background:{SURF}; border-radius:14px; padding:14px; box-shadow:{SH1};">{driver_list(3, fs_t=14, fs_d=13, gap=10)}</div></div>'
              f'<div style="flex-shrink:0; padding:12px 16px 16px; background:{SURF}; border-top:1px solid {LINE}; display:flex; flex-direction:column; gap:8px;">'
              f'{btn("Run this on your own brand", "primary", 48, 16, True)}'
-             f'<span style="font-size:12px; color:{T2}; text-align:center;">3 brand or product searches and 3 breakdowns free</span></div>')
+             f'<span style="font-size:12px; color:{T2}; text-align:center;">3 brand or product searches and 3 breakdowns free</span>'
+             f'<span style="font-size:13px; color:{T2}; text-align:center;">Make TikToks? {link("Try Viral Video Finder", 13)}</span></div>')
     return root(inner, 'M8: back in the app, the next brand is offered.', True)
 
 def m07():
