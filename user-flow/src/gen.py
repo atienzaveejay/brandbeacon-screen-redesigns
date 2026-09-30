@@ -931,10 +931,21 @@ def next_list(fs=14):
                  f'<span><span style="display:block; font-size:{fs}px; font-weight:700;">{a}</span><span style="display:block; font-size:{fs-1}px; color:{T2}; line-height:1.45;">{b}</span></span></li>' for i, (a, b) in enumerate(NEXT))
     return f'<ul style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:10px;">{li}</ul>'
 
+
+def improve_block(mobile=False):
+    """Live app section, kept (Veejay, 30 Sept). For this video the live app found nothing, so it
+    shows its own empty line; when there are items they list like the drivers."""
+    body = (f'<div style="display:flex; align-items:center; gap:10px; font-size:{13 if mobile else 14}px; color:{T2};">'
+            f'<span style="width:22px; height:22px; border-radius:999px; background:{G_TINT}; display:inline-flex; align-items:center; justify-content:center; flex-shrink:0;">{ic(P_CHECK, 12, G_TXT, 2.6)}</span>'
+            f'Nothing measurable held this video back.</div>')
+    return (f'<div style="background:{SURF}; border:1px solid {LINE}; border-radius:14px; padding:{12 if mobile else 12}px 16px; display:flex; flex-direction:column; gap:8px;">'
+            f'<span style="font-size:15px; font-weight:800;">What could be improved</span>{body}</div>')
+
 def analysis(mobile=False, n=3):
     fs = 14 if mobile else 15
     return (f'{tabs(mobile, TABS2)}'
             + section('Why it worked', driver_list(n, fs_t=fs - 1, fs_d=13, gap=9), count=f'{n} DRIVERS')
+            + improve_block(mobile)
             + section('What you should do next', next_list(14 if not mobile else 13), tint=True, count='2 ACTIONS'))
 
 def modal_title(close=True):
@@ -1018,7 +1029,7 @@ def d06b():
     main = (f'<div style="flex-grow:1; padding:18px 48px; display:flex; flex-direction:column; gap:14px; overflow:hidden;">{note_banner()}'
             f'<div style="display:flex; gap:24px; align-items:flex-start;">{video_card(236, 290, actions=False)}'
             f'<div style="flex-grow:1; display:flex; flex-direction:column; gap:12px; min-width:0;">{right}</div></div></div>')
-    return root(nav + main, 'S08: back in the app, the next brand is offered.', w=1280, h=870)
+    return root(nav + main, 'S08: back in the app, the next brand is offered.', w=1280, h=940)
 
 # mobile: the modal is a full-screen sheet; Share swaps its content the same way
 def m_sheet_head(title):

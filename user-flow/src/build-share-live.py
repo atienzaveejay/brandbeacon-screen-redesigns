@@ -40,9 +40,9 @@ button {{ cursor:pointer; }}
 </style>
 </head>
 <body>
-{frame("s-analysis", step_a, 870, True)}
-{frame("s-share", step_b, 870)}
-{frame("s-shared", step_c, 870)}
+{frame("s-analysis", step_a, 940, True)}
+{frame("s-share", step_b, 940)}
+{frame("s-shared", step_c, 940)}
 <script>
 (function(){{
   function show(id){{ document.querySelectorAll('.state').forEach(function(s){{ s.style.display = s.id===id ? 'flex' : 'none'; }});
