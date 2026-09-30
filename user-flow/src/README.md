@@ -17,3 +17,7 @@ its artboard is clipped: raise the `w=` / `h=` on that screen's `root(...)` call
 
 `build-index.py` is the page itself. The `STEPS` list near the top is the whole
 flow; edit a note there rather than in the generated HTML.
+
+`build-share-live.py` writes `../../screens/share-flow.html`: the three Share steps
+(5 to 7) as one live, clickable page built from the same gen.py pieces. Re-run it
+after any change to the share screens in gen.py.
