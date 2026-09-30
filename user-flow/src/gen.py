@@ -891,11 +891,23 @@ def stat_row(fs=13):
     return ('<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px 8px; padding-top:10px; border-top:1px solid %s;">' % LINE
             + ''.join(cell(*i) for i in items) + '</div>')
 
+
+# ---------- real thumbnails (30 Sept): the live rhode skin videos ----------
+IMG = '../../../img/'
+def photo_tile(w, h, img, score=None, rank=None, dur='0:20', radius=16, small=False):
+    top = (f'<span style="height:24px; min-width:24px; padding:0 8px; border-radius:999px; background:rgba(23,21,15,.72); color:#fff; font-size:12px; font-weight:700; display:inline-flex; align-items:center; justify-content:center;">{rank}</span>' if rank is not None else '<span></span>')
+    top += f'<span style="height:24px; padding:0 8px; border-radius:999px; background:rgba(23,21,15,.72); color:#fff; font-size:12px; font-weight:600; display:inline-flex; align-items:center;">{dur}</span>'
+    chip = f'<div style="position:absolute; left:12px; bottom:12px;">{score_chip(score, False, small)}</div>' if score else ''
+    return (f'<div style="position:relative; width:{w}px; height:{h}px; flex-shrink:0; border-radius:{radius}px; overflow:hidden; background:#222;">'
+            f'<img src="{IMG}{img}.jpg" alt="" style="width:100%; height:100%; object-fit:cover; display:block;">'
+            f'<div style="position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,.18) 0%,rgba(0,0,0,0) 22%,rgba(0,0,0,0) 60%,rgba(0,0,0,.45) 100%);"></div>'
+            f'<div style="position:absolute; top:12px; left:12px; right:12px; display:flex; justify-content:space-between;">{top}</div>{chip}</div>')
+
 def video_card(w=250, th=300, actions=True):
     """The live modal's left column, kept as it is."""
     pal, cap, hd, sc, fol = TILES[0]
     card = (f'<div style="width:{w}px; flex-shrink:0; background:{SURF}; border:1px solid {LINE}; border-radius:18px; overflow:hidden; box-shadow:{SH1};">'
-            f'{tile(w, pal, "", "", "0:20", sc, rank=1, h=th, radius=0)}'
+            f'{photo_tile(w, th, "v1", sc, rank=1, radius=0)}'
             f'<div style="padding:12px 14px 14px; display:flex; flex-direction:column; gap:8px;">'
             f'<div style="display:flex; align-items:center; gap:10px;">{avatar("CY", 30, "berry")}'
             f'<span style="display:flex; flex-direction:column; line-height:1.25; flex-grow:1;"><strong style="font-size:14px;">@cyr1n32</strong>'
@@ -932,7 +944,8 @@ def modal_title(close=True):
             f'<h1 style="margin:0; font-size:20px; font-weight:800; letter-spacing:-0.015em; line-height:1.3;">&ldquo;Name me a better marketing brand #rhode #best #aesthetic&rdquo;</h1>{x}</div>')
 
 def backdrop():
-    row = ''.join(result_card(i, 188) for i in range(5))
+    row = ''.join(f'<div>{photo_tile(188, 334, v, TILES[i][3], rank=i+1, small=True)}'
+                  f'<span style="display:block; margin-top:8px; font-size:13px; color:{T2};">{TILES[i][4]}</span></div>' for i, v in enumerate(['v1','v2','v3','v4','v5']))
     body = f'<div style="padding:28px 48px; display:flex; gap:20px;">{row}</div>'
     return (f'<div style="position:absolute; inset:0; display:flex; flex-direction:column; filter:blur(3px);">{app_bar(1, 1)}{body}</div>'
             f'<div style="position:absolute; inset:0; background:rgba(23,21,15,.5);"></div>')
@@ -1015,7 +1028,7 @@ def m_sheet_head(title):
 
 def m_top():
     pal, cap, hd, sc, fol = TILES[0]
-    return (f'<div style="display:flex; gap:12px;">{tile(104, pal, "", "", "0:20", sc, small=True, h=156)}<div style="display:flex; flex-direction:column; gap:6px; min-width:0;">'
+    return (f'<div style="display:flex; gap:12px;">{photo_tile(104, 156, "v1", sc, small=True, radius=12)}<div style="display:flex; flex-direction:column; gap:6px; min-width:0;">'
             f'<span style="font-size:15px; font-weight:800; line-height:1.3;">&ldquo;Name me a better marketing brand #rhode&rdquo;</span>'
             f'<span style="font-size:12px; color:{T2};"><strong style="color:{INK};">@cyr1n32</strong> &middot; 1.6K followers</span>'
             f'<span style="font-size:12px; color:{T2};">8.9M views &middot; 1.7M likes</span></div></div>')
