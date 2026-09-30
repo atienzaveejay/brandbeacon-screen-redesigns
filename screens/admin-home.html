@@ -12,7 +12,7 @@
 *{box-sizing:border-box}
 body{margin:0;font-family:Figtree,'Segoe UI',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.45}
 a{color:#7A5600;text-decoration:none}
-.app{display:flex;min-height:1120px}
+.app{display:flex;min-height:2000px}
 .side{width:232px;flex-shrink:0;background:#fff;border-right:1px solid var(--line);display:flex;flex-direction:column;padding:20px 16px;gap:4px}
 .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;padding:4px 6px 22px}
 .mark{width:32px;height:32px;border-radius:9px;background:var(--y);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px}
@@ -72,6 +72,34 @@ table{width:100%;border-collapse:collapse;font-size:14px}
 th{text-align:left;font-size:12px;letter-spacing:.04em;color:var(--muted);font-weight:800;padding:0 12px 10px}
 td{padding:12px;border-top:1px solid var(--line2);vertical-align:top}
 td:first-child{font-weight:700;width:190px}
+.rng{display:inline-flex;gap:2px;padding:3px;border-radius:999px;background:#fff;border:1px solid #E3DFD4}
+.rng button{height:30px;min-width:44px;padding:0 12px;border-radius:999px;border:0;background:none;font-family:inherit;font-size:13px;font-weight:700;color:#5E5A52;cursor:pointer}
+.rng button.on{background:var(--ink);color:#fff}
+.fun{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;align-items:end}
+.fcol{display:flex;flex-direction:column;gap:6px;padding:0 10px;position:relative}
+.fcol + .fcol{border-left:1px dashed #E3DFD4}
+.fbar{border-radius:10px 10px 4px 4px;background:#FFC72C}
+.fbar.ghost{background:repeating-linear-gradient(45deg,#F1EFE9,#F1EFE9 6px,#fff 6px,#fff 12px);border:1.5px dashed #CFC9BC}
+.fcol b{font-size:28px;font-weight:800;letter-spacing:-.01em;line-height:1}
+.fcol b.nt{font-size:15px;color:#8C877D;line-height:1.9}
+.fcol span{font-size:13px;font-weight:700;color:var(--ink2)}
+.fcol i{font-style:normal;font-size:12px;color:var(--muted)}
+.conv{position:absolute;left:-22px;top:6px;background:#fff;border:1px solid #E3DFD4;border-radius:999px;font-size:11px;font-weight:800;padding:2px 7px;color:var(--ink2)}
+.act{list-style:none;margin:0;padding:0}
+.act li{display:flex;align-items:center;gap:12px;padding:11px 0;border-top:1px solid var(--line2);font-size:14px}
+.act .d{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.act time{margin-left:auto;font-size:12px;color:var(--muted);white-space:nowrap}
+.ty{font-size:10.5px;font-weight:800;letter-spacing:.06em;padding:2px 6px;border-radius:5px;background:var(--grey);color:var(--greyd)}
+.kp{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.kp b{display:block;font-size:34px;font-weight:800;letter-spacing:-.01em}
+.kp .up{font-size:13px;font-weight:700;color:#16603A}
+.ideas{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px}
+.idea{background:#fff;border:1px dashed #D9D2BF;border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.idea h3{margin:0;font-size:14px;font-weight:800}
+.idea p{margin:0;font-size:12.5px;color:var(--muted)}
+.lg{display:flex;gap:14px;font-size:12px;font-weight:700;color:var(--ink2)}
+.lg i{display:inline-block;width:10px;height:3px;border-radius:2px;margin-right:5px;vertical-align:middle}
+.err{display:flex;align-items:center;gap:16px}
 .hidden{display:none}
 .foot{font-size:13px;color:var(--muted);margin:0}
 </style>
@@ -88,50 +116,28 @@ td:first-child{font-weight:700;width:190px}
 </nav>
 <main class="main">
 <div class="head">
-<div><h1>Admin home</h1><p class="sub">Last 30 days, Aug 20 to Sep 18, 2026. Figures from the admin pages saved on Sep 19.</p></div>
-<div class="ctrl"><button class="chip">This week</button><button class="chip on">Last 30 days</button><span class="switch"><span class="sw"></span>Show team and comped accounts</span></div>
+<div><h1>Admin home</h1><p class="sub">Aug 20 to Sep 18, 2026. Numbers from the admin pages saved on Sep 19.</p></div>
+<div class="ctrl"><div class="rng" role="group" aria-label="Time frame"><button>1D</button><button>3D</button><button>7D</button><button class="on">30D</button></div><span class="switch"><span class="sw"></span>Show team and comped accounts</span></div>
 </div>
 <div class="tabs" role="tablist"><button class="tab on" data-t="summary" role="tab">Summary</button><button class="tab" data-t="defs" role="tab">What each number counts</button></div>
 
 <div id="summary" class="pane" style="display:flex;flex-direction:column;gap:24px">
-<div class="alert"><div><b>392 unresolved errors, 3 error types</b><p>Every error in the old dashboard preview is the same one: the Apify video fetch returned no usable video. The count per type is not in the saved pages.</p></div><button class="btn">Review errors</button></div>
-
 <div class="card top3">
-<div><div class="lab">Paying customers <span class="tag t-fix">NEEDS CLEANUP</span></div><div class="big">12</div><p class="note">The admin counted 12 active paid on Sep 18, but that includes team and coupon accounts. At least one is a team account.</p><p class="def"><b>Counts:</b> accounts on an active paid plan that paid by card. <b>Leaves out:</b> team, Ignite and comped coupon accounts.</p></div>
-<div><div class="lab">MRR</div><div class="big nt">Not tracked yet</div><p class="note">No revenue figure exists anywhere in the admin today.</p><p class="def"><b>Counts:</b> the monthly amount paid after discounts, yearly plans divided by 12. <b>Leaves out:</b> the same accounts as paying customers.</p></div>
-<div><div class="lab">New sign-ups <span class="tag t-fix">NEEDS CLEANUP</span></div><div class="big">33</div><p class="note">At least 8 of the 25 newest accounts are ours. The real figure is lower. A second chart on the old dashboard said 8.</p><p class="def"><b>Counts:</b> accounts created in the range. <b>Leaves out:</b> team, Ignite and test accounts.</p></div>
+<div><div class="lab">Paying customers <span class="tag t-fix">NEEDS CLEANUP</span></div><div class="big">12</div><p class="note">Includes team and coupon accounts. At least one is ours.</p></div>
+<div><div class="lab">MRR</div><div class="big nt">Not tracked yet</div><p class="note">No revenue figure exists in the admin today.</p></div>
+<div><div class="lab">New sign-ups <span class="tag t-fix">NEEDS CLEANUP</span></div><div class="big">33</div><p class="note">At least 8 of the 25 newest accounts are ours.</p></div>
 </div>
-
-<div class="card sec">
-<h2>From sign-up to paid</h2>
-<p class="sub">People who signed up in the range, followed to today. This replaces the old 0, 4 and 12 paid counts.</p>
-<div class="steps">
-<div class="step"><span>Signed up</span><b>33</b><div class="bar"><div style="width:100%"></div></div><i>Includes team accounts</i></div>
-<div class="step"><span>Ran a first search</span><b>24</b><div class="bar"><div style="width:73%"></div></div><i>73% of sign-ups</i></div>
-<div class="step"><span>Started a trial</span><b>2</b><div class="bar"><div style="width:6%"></div></div><i>The 2 live trials are both ours</i></div>
-<div class="step"><span>Became paid</span><b>4</b><div class="bar"><div style="width:12%"></div></div><i>3 of the 4 used a coupon. 1 at most paid by card</i></div>
+<div class="card sec"><h2>From visitor to paid</h2><p class="sub">Everyone who landed in the range, followed through to today.</p><div class="fun"><div class="fcol"><div class="fbar ghost" style="height:170px"></div><b class="nt">Not tracked yet</b><span>Unique visitors</span><i>Needs site analytics on the landing page</i></div><div class="fcol"><span class="conv">?</span><div class="fbar" style="height:150px"></div><b>33</b><span>Signed up</span><i>Still counts our accounts</i></div><div class="fcol"><span class="conv">73%</span><div class="fbar" style="height:109px"></div><b>24</b><span>Ran a first search</span><i>of sign-ups</i></div><div class="fcol"><span class="conv">8%</span><div class="fbar" style="height:12px"></div><b>2</b><span>Started a trial</span><i>Both are ours</i></div><div class="fcol"><div class="fbar" style="height:20px;background:#6F7BD9"></div><b>4</b><span>Became paid</span><i>12% of sign-ups. 3 of 4 used a coupon</i></div></div></div>
+<div class="two" style="grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);">
+<div class="card sec"><h2>Daily momentum</h2><div class="lg" style="margin:4px 0 8px;"><span><i style="background:#D9486B"></i>Sign-ups</span><span><i style="background:#E0A800"></i>Trialing</span><span><i style="background:#6F7BD9"></i>Active paid</span></div><svg viewBox="-4 -4 628 172" width="100%" height="250" aria-label="Daily momentum"><line x1="0" x2="620" y1="0" y2="0" stroke="#F0EDE6"/><line x1="0" x2="620" y1="37.5" y2="37.5" stroke="#F0EDE6"/><line x1="0" x2="620" y1="75" y2="75" stroke="#F0EDE6"/><line x1="0" x2="620" y1="112.5" y2="112.5" stroke="#F0EDE6"/><line x1="0" x2="620" y1="150" y2="150" stroke="#F0EDE6"/><polyline fill="none" stroke="#6F7BD9" stroke-width="2.5" points="0.0,90.0 21.4,90.0 42.8,82.5 64.1,82.5 85.5,82.5 106.9,82.5 128.3,82.5 149.7,82.5 171.0,82.5 192.4,82.5 213.8,82.5 235.2,82.5 256.6,75.0 277.9,67.5 299.3,67.5 320.7,60.0 342.1,60.0 363.4,60.0 384.8,60.0 406.2,60.0 427.6,60.0 449.0,60.0 470.3,60.0 491.7,60.0 513.1,60.0 534.5,60.0 555.9,60.0 577.2,60.0 598.6,60.0 620.0,60.0"/><polyline fill="none" stroke="#D9486B" stroke-width="2" points="0.0,142.5 21.4,150.0 42.8,150.0 64.1,150.0 85.5,150.0 106.9,150.0 128.3,150.0 149.7,150.0 171.0,127.5 192.4,150.0 213.8,142.5 235.2,150.0 256.6,142.5 277.9,150.0 299.3,150.0 320.7,150.0 342.1,150.0 363.4,150.0 384.8,150.0 406.2,150.0 427.6,150.0 449.0,150.0 470.3,150.0 491.7,150.0 513.1,150.0 534.5,142.5 555.9,150.0 577.2,150.0 598.6,150.0 620.0,150.0"/><polyline fill="none" stroke="#E0A800" stroke-width="2" points="0.0,150.0 21.4,150.0 42.8,150.0 64.1,150.0 85.5,150.0 106.9,150.0 128.3,150.0 149.7,150.0 171.0,150.0 192.4,150.0 213.8,150.0 235.2,150.0 256.6,150.0 277.9,150.0 299.3,150.0 320.7,150.0 342.1,150.0 363.4,150.0 384.8,150.0 406.2,150.0 427.6,150.0 449.0,150.0 470.3,150.0 491.7,150.0 513.1,150.0 534.5,150.0 555.9,150.0 577.2,150.0 598.6,142.5 620.0,135.0"/><text x="0" y="168" font-size="11" fill="#6B675F">Aug 20</text><text x="290" y="168" font-size="11" fill="#6B675F">Sep 4</text><text x="580" y="168" font-size="11" fill="#6B675F">Sep 18</text></svg></div>
+<div class="card sec"><h2>Recent activity</h2><div style="display:flex;gap:6px;margin:6px 0 6px;flex-wrap:wrap;"><button class="chip on" style="height:28px;font-size:12px;">All</button><button class="chip" style="height:28px;font-size:12px;">Sign-ups</button><button class="chip" style="height:28px;font-size:12px;">Subscriptions</button><button class="chip" style="height:28px;font-size:12px;">Coupons</button></div><ul class="act"><li><span class="d" style="background:#6F7BD9"></span><span class="ty">ENGAGEMENT</span>Logged in<time>Sep 18</time></li><li><span class="d" style="background:#6F7BD9"></span><span class="ty">ENGAGEMENT</span>Logged in<time>Sep 18</time></li><li><span class="d" style="background:#6F7BD9"></span><span class="ty">SEARCH</span>Ran a product search: neck cream<time>Sep 18</time></li><li><span class="d" style="background:#E0A800"></span><span class="ty">COUPON</span>Redeemed IGNITEBB<time>Sep 4</time></li><li><span class="d" style="background:#E0A800"></span><span class="ty">COUPON</span>Redeemed IVANVIP<time>Sep 1</time></li></ul><a class="more" href="#">Show all</a></div>
 </div>
+<div class="two" style="grid-template-columns:repeat(2,minmax(0,1fr));">
+<div class="card sec"><h2>Where they come from</h2><p class="sub">First link or channel a person came through.</p><div class="src"><span>Not recorded</span><div class="bar"><div style="width:100%"></div></div><b>33 of 33</b></div><p class="foot" style="margin-top:14px;">Needs a tracking link per channel before this fills in.</p></div>
+<div class="card sec"><h2>Searches and viral videos</h2><div class="kp" style="margin-top:12px;"><div><b>286</b><span class="sub" style="margin:0;">keyword searches</span><div class="up">↑ 11 vs previous</div></div><div><b>29,541</b><span class="sub" style="margin:0;">viral videos indexed</span><div class="up">↑ 1,288 vs previous</div></div></div><a class="more" href="#">See searches</a></div>
 </div>
-
-<div class="two">
-<div class="card sec">
-<h2>Where sign-ups come from</h2>
-<p class="sub">First link or channel a person came through.</p>
-<div class="src"><span>Not recorded</span><div class="bar"><div style="width:100%"></div></div><b>33 of 33</b></div>
-<a class="more" href="#">Set up tracking links</a>
-</div>
-<div class="card sec">
-<h2>Usage and cost</h2>
-<p class="sub">Team searches included for now, the saved pages do not split them out.</p>
-<div class="stats">
-<div><b>286</b><span>searches run</span></div>
-<div><b>~515</b><span>analyses run</span></div>
-<div><b>29,541</b><span>videos indexed</span></div>
-<div><b class="nt">Not tracked yet</b><span>Apify cost per search</span></div>
-</div>
-<a class="more" href="#">See searches</a>
-</div>
-</div>
+<div class="card sec"><h2>What else we could track <span class="tag t-nt">PROPOSED · SAMPLE NUMBERS</span></h2><p class="sub">Five additions, each shown the way it would look. Pick the ones worth building.</p><div class="ideas"><div class="idea"><span class="tag t-nt">IDEA 1</span><h3>Free limit walls</h3><div style="display:flex;align-items:center;gap:8px;font-size:12px;"><span style="width:92px;flex-shrink:0;">Search wall</span><div style="flex:1;height:8px;border-radius:4px;background:#F0EDE6;"><div style="width:100%;height:100%;border-radius:4px;background:#FFC72C;"></div></div><b style="width:22px;text-align:right;">18</b></div><div style="display:flex;align-items:center;gap:8px;font-size:12px;"><span style="width:92px;flex-shrink:0;">Breakdown wall</span><div style="flex:1;height:8px;border-radius:4px;background:#F0EDE6;"><div style="width:61%;height:100%;border-radius:4px;background:#FFC72C;"></div></div><b style="width:22px;text-align:right;">11</b></div><div style="display:flex;align-items:center;gap:8px;font-size:12px;"><span style="width:92px;flex-shrink:0;">Upgraded</span><div style="flex:1;height:8px;border-radius:4px;background:#F0EDE6;"><div style="width:17%;height:100%;border-radius:4px;background:#FFC72C;"></div></div><b style="width:22px;text-align:right;">3</b></div><p>Who hits the 4th search or breakdown, and how many upgrade from there.</p></div><div class="idea"><span class="tag t-nt">IDEA 2</span><h3>Shares</h3><div style="display:flex;align-items:center;gap:8px;font-size:12px;"><span style="width:92px;flex-shrink:0;">Links copied</span><div style="flex:1;height:8px;border-radius:4px;background:#F0EDE6;"><div style="width:100%;height:100%;border-radius:4px;background:#6F7BD9;"></div></div><b style="width:22px;text-align:right;">40</b></div><div style="display:flex;align-items:center;gap:8px;font-size:12px;"><span style="width:92px;flex-shrink:0;">Links opened</span><div style="flex:1;height:8px;border-radius:4px;background:#F0EDE6;"><div style="width:65%;height:100%;border-radius:4px;background:#6F7BD9;"></div></div><b style="width:22px;text-align:right;">26</b></div><div style="display:flex;align-items:center;gap:8px;font-size:12px;"><span style="width:92px;flex-shrink:0;">Signed up</span><div style="flex:1;height:8px;border-radius:4px;background:#F0EDE6;"><div style="width:12%;height:100%;border-radius:4px;background:#6F7BD9;"></div></div><b style="width:22px;text-align:right;">5</b></div><p>Whether shared breakouts bring new people in.</p></div><div class="idea"><span class="tag t-nt">IDEA 3</span><h3>Coming back</h3><div style="display:flex;flex-direction:column;gap:3px;"><div style="display:flex;gap:3px;"><span style="width:22px;height:16px;border-radius:3px;background:rgba(255,199,44,1);"></span><span style="width:22px;height:16px;border-radius:3px;background:rgba(255,199,44,0.55);"></span><span style="width:22px;height:16px;border-radius:3px;background:rgba(255,199,44,0.35);"></span><span style="width:22px;height:16px;border-radius:3px;background:rgba(255,199,44,0.25);"></span></div><div style="display:flex;gap:3px;"><span style="width:22px;height:16px;border-radius:3px;background:rgba(255,199,44,1);"></span><span style="width:22px;height:16px;border-radius:3px;background:rgba(255,199,44,0.5);"></span><span style="width:22px;height:16px;border-radius:3px;background:rgba(255,199,44,0.3);"></span><span style="width:22px;height:16px;border-radius:3px;background:rgba(255,199,44,0);"></span></div><div style="display:flex;gap:3px;"><span style="width:22px;height:16px;border-radius:3px;background:rgba(255,199,44,1);"></span><span style="width:22px;height:16px;border-radius:3px;background:rgba(255,199,44,0.6);"></span><span style="width:22px;height:16px;border-radius:3px;background:rgba(255,199,44,0);"></span><span style="width:22px;height:16px;border-radius:3px;background:rgba(255,199,44,0);"></span></div><div style="display:flex;gap:3px;"><span style="width:22px;height:16px;border-radius:3px;background:rgba(255,199,44,1);"></span><span style="width:22px;height:16px;border-radius:3px;background:rgba(255,199,44,0);"></span><span style="width:22px;height:16px;border-radius:3px;background:rgba(255,199,44,0);"></span><span style="width:22px;height:16px;border-radius:3px;background:rgba(255,199,44,0);"></span></div></div><p>Each row is a sign-up week. Each square is a later week they came back.</p></div><div class="idea"><span class="tag t-nt">IDEA 4</span><h3>Most searched</h3><div style="display:flex;align-items:center;gap:8px;font-size:12px;"><span style="width:92px;flex-shrink:0;">rhode skin</span><div style="flex:1;height:8px;border-radius:4px;background:#F0EDE6;"><div style="width:100%;height:100%;border-radius:4px;background:#FFC72C;"></div></div><b style="width:22px;text-align:right;">14</b></div><div style="display:flex;align-items:center;gap:8px;font-size:12px;"><span style="width:92px;flex-shrink:0;">neck cream</span><div style="flex:1;height:8px;border-radius:4px;background:#F0EDE6;"><div style="width:64%;height:100%;border-radius:4px;background:#FFC72C;"></div></div><b style="width:22px;text-align:right;">9</b></div><div style="display:flex;align-items:center;gap:8px;font-size:12px;"><span style="width:92px;flex-shrink:0;">lip tint</span><div style="flex:1;height:8px;border-radius:4px;background:#F0EDE6;"><div style="width:50%;height:100%;border-radius:4px;background:#FFC72C;"></div></div><b style="width:22px;text-align:right;">7</b></div><div style="display:flex;align-items:center;gap:8px;font-size:12px;"><span style="width:92px;flex-shrink:0;">sunscreen</span><div style="flex:1;height:8px;border-radius:4px;background:#F0EDE6;"><div style="width:36%;height:100%;border-radius:4px;background:#FFC72C;"></div></div><b style="width:22px;text-align:right;">5</b></div><p>Top brands and products this period, to pick content and outreach targets.</p></div><div class="idea"><span class="tag t-nt">IDEA 5</span><h3>Cost per search</h3><b style="font-size:26px;">$0.04</b><svg viewBox="0 0 160 50" width="100%" height="56"><polyline fill="none" stroke="#6F7BD9" stroke-width="2.5" points="0,30 20,26 40,34 60,22 80,28 100,18 120,24 140,16 160,20"/></svg><p>Apify spend divided by searches, so pricing stays ahead of cost.</p></div></div></div>
+<div class="card sec err"><div style="flex-grow:1;"><h2>Errors</h2><p class="sub" style="margin:0;">392 unresolved, 3 types. The one in every preview row: the Apify video fetch returned no usable video.</p></div><button class="btn" style="background:#fff;border:1px solid #E3DFD4;">Review errors</button></div>
 <p class="foot">Amber tag: a real number that still counts our own accounts.</p>
 </div>
 
@@ -144,6 +150,7 @@ td:first-child{font-weight:700;width:190px}
 <tr><td>Team account</td><td>Staff, Ignite and test logins, marked once on the account</td><td>n/a</td><td>No flag. Every page counts them as customers.</td></tr>
 <tr><td>Paying customers</td><td>Active paid plan, paid by card, amount after discount above $0</td><td>Team, comped coupons, trials</td><td>0 (insights card), 4 (funnel) and 12 (live count)</td></tr>
 <tr><td>MRR</td><td>Monthly amount after discounts, yearly plans divided by 12</td><td>Same as paying customers</td><td>Not shown</td></tr>
+<tr><td>Unique visitors</td><td>Distinct people who loaded any page in the range</td><td>Bots, our own IPs</td><td>Not shown</td></tr>
 <tr><td>New sign-ups</td><td>Accounts created in the range</td><td>Team accounts</td><td>8 (chart) and 33 (funnel) for the same range</td></tr>
 <tr><td>Trial starts</td><td>Trials started in the range</td><td>Team accounts</td><td>1 (trends card) and 2 (live count), both team</td></tr>
 <tr><td>Trial to paid</td><td>Trials started in the range that are paying today</td><td>Team accounts</td><td>Not shown</td></tr>

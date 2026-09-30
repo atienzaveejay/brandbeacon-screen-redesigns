@@ -864,6 +864,174 @@ def m09():
              f'<span style="font-size:12px; color:{T3}; text-align:center; line-height:1.5;">The score and the video stay free. Only the written breakdown is behind the wall.</span></div>')
     return root(inner, 'The loop from here is Growth, or the shared pages bringing someone else in.', True)
 
+
+# ---------- Share v3, Ivan's 30 Sept call ----------
+# 'keep the existing modal', a big call to action at the bottom of it, and pressing it turns the same
+# modal into the share view, so there is never a pop-up over a pop-up. Copy URL and Download PDF only
+# (email out, image becomes PDF), plus a note from the sender that locks in when the link is copied.
+# The shared page is that same modal content, no transcript, with the note on top.
+P_CMT = 'M4 5h16v11H9l-5 4z'
+P_BACK = 'M19 12H5M11 6l-6 6 6 6'
+P_BOOK = 'M7 4h10v16l-5-3.5L7 20z'
+P_PDF = 'M7 3h7l5 5v13H7zM14 3v5h5M9.5 13h5M9.5 16.5h5'
+TABS2 = ['Why it worked', 'Hook']
+NEXT = [('Open with a direct challenge', 'One bold, countable question viewers can answer in the comments.'),
+        ('Tag what the audience already follows', 'The brand and the celebrity tags carried this one to people who cared.')]
+NOTE = 'Can we brief two creators on this hook before the lip tint drop? The opening line is the part to copy.'
+
+def stat_row(fs=13):
+    items = [(P_EYE, '8.9M'), (P_HEART, '1.7M'), (P_CMT, '2.5K'), (P_SHARE, '25K')]
+    return ('<div style="display:flex; justify-content:space-between; padding-top:10px; border-top:1px solid %s;">' % LINE
+            + ''.join(f'<span style="display:inline-flex; align-items:center; gap:5px; font-size:{fs}px; font-weight:600;">{ic(p, 14, T2)}{n}</span>' for p, n in items)
+            + '</div>')
+
+def video_card(w=250, th=300, actions=True):
+    """The live modal's left column, kept as it is."""
+    pal, cap, hd, sc, fol = TILES[0]
+    card = (f'<div style="width:{w}px; flex-shrink:0; background:{SURF}; border:1px solid {LINE}; border-radius:18px; overflow:hidden; box-shadow:{SH1};">'
+            f'{tile(w, pal, "", "", "0:20", sc, rank=1, h=th, radius=0)}'
+            f'<div style="padding:12px 14px 14px; display:flex; flex-direction:column; gap:8px;">'
+            f'<div style="display:flex; align-items:center; gap:10px;">{avatar("CY", 30, "berry")}'
+            f'<span style="display:flex; flex-direction:column; line-height:1.25; flex-grow:1;"><strong style="font-size:14px;">@cyr1n32</strong>'
+            f'<span style="font-size:12px; color:{T3};">1.6K followers</span></span><span style="font-size:12px; color:{T3};">Apr 25</span></div>'
+            f'<span style="font-size:13px; color:{T2}; line-height:1.4;">Name me a better marketing brand <span style="color:{Y_TXT};">#rhode #best</span></span>'
+            f'{stat_row()}</div></div>')
+    if not actions:
+        return card
+    acts = (f'<div style="display:flex; gap:8px; width:{w}px;">{btn("Analysis ready", "secondary", 40, 13, True, ic(P_CHECK, 14, G_TXT, 2.4))}'
+            f'{btn("Save", "secondary", 40, 13, False, ic(P_BOOK, 14, T2))}</div>')
+    return f'<div style="display:flex; flex-direction:column; gap:10px; flex-shrink:0;">{card}{acts}</div>'
+
+def section(title, body, tint=False, count=None):
+    c = f'<span style="font-size:11px; font-weight:800; letter-spacing:.08em; color:{T3}; margin-left:8px;">{count}</span>' if count else ''
+    bg = f'background:{Y_TINT}; border:1px solid {Y_LINE};' if tint else f'background:{SURF}; border:1px solid {LINE};'
+    return (f'<div style="{bg} border-radius:14px; padding:14px 16px; display:flex; flex-direction:column; gap:10px;">'
+            f'<span style="font-size:15px; font-weight:800;">{title}{c}</span>{body}</div>')
+
+def next_list(fs=14):
+    li = ''.join(f'<li style="display:flex; gap:10px;"><span style="width:22px; height:22px; border-radius:7px; background:{SURF}; color:{Y_TXT}; font-size:11px; font-weight:800; display:inline-flex; align-items:center; justify-content:center; flex-shrink:0;">0{i+1}</span>'
+                 f'<span><span style="display:block; font-size:{fs}px; font-weight:700;">{a}</span><span style="display:block; font-size:{fs-1}px; color:{T2}; line-height:1.45;">{b}</span></span></li>' for i, (a, b) in enumerate(NEXT))
+    return f'<ul style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:10px;">{li}</ul>'
+
+def analysis(mobile=False, n=3):
+    fs = 14 if mobile else 15
+    return (f'{tabs(mobile, TABS2)}'
+            + section('Why it worked', driver_list(n, fs_t=fs - 1, fs_d=13, gap=9), count=f'{n} DRIVERS')
+            + section('What you should do next', next_list(14 if not mobile else 13), tint=True, count='2 ACTIONS'))
+
+def modal_title(close=True):
+    x = (f'<button type="button" aria-label="Close" style="width:36px; height:36px; border-radius:999px; border:1px solid {LINE}; background:{SURF}; '
+         f'display:flex; align-items:center; justify-content:center; flex-shrink:0;">{ic(P_CLOSE, 14, T2, 2)}</button>') if close else ''
+    return (f'<div style="display:flex; justify-content:space-between; gap:16px; align-items:flex-start;">'
+            f'<h1 style="margin:0; font-size:20px; font-weight:800; letter-spacing:-0.015em; line-height:1.3;">&ldquo;Name me a better marketing brand #rhode #best #aesthetic&rdquo;</h1>{x}</div>')
+
+def backdrop():
+    row = ''.join(result_card(i, 188) for i in range(5))
+    body = f'<div style="padding:28px 48px; display:flex; gap:20px;">{row}</div>'
+    return (f'<div style="position:absolute; inset:0; display:flex; flex-direction:column; filter:blur(3px);">{app_bar(1, 1)}{body}</div>'
+            f'<div style="position:absolute; inset:0; background:rgba(23,21,15,.5);"></div>')
+
+def modal(right, footer=''):
+    return (f'<div style="position:absolute; left:64px; right:64px; top:28px; bottom:20px; background:{PAGE}; border-radius:24px; box-shadow:{SH3}; '
+            f'display:flex; flex-direction:column; overflow:hidden;">'
+            f'<div style="flex-grow:1; display:flex; gap:24px; padding:24px 24px 16px; overflow:hidden;">{video_card(236, 290)}'
+            f'<div style="flex-grow:1; display:flex; flex-direction:column; gap:12px; min-width:0;">{right}</div></div>{footer}</div>')
+
+def share_cta_bar(mobile=False):
+    b = btn('Share with your team and creators', 'primary', 52 if not mobile else 50, 16, True, ic(P_SHARE, 18, INK, 2.2))
+    sub = f'<span style="font-size:12px; color:{T2}; text-align:center;">They do not need an account to open it, and it does not use any of your credits.</span>'
+    pad = '12px 16px 16px' if mobile else '14px 24px 16px'
+    return (f'<div style="flex-shrink:0; padding:{pad}; background:{SURF}; border-top:1px solid {LINE}; display:flex; flex-direction:column; gap:6px;">{b}{sub}</div>')
+
+def share_view(mobile=False):
+    """The same modal, its analysis swapped for the share options."""
+    back = (f'<a href="#" style="display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:700; color:{T2}; text-decoration:none;">'
+            f'{ic(P_BACK, 14, T2, 2)}Back to the analysis</a>')
+    head = (f'<div style="display:flex; flex-direction:column; gap:6px;">'
+            f'<h2 style="margin:0; font-size:{22 if mobile else 26}px; font-weight:800; letter-spacing:-0.025em;">Share this breakout</h2>'
+            f'<p style="margin:0; font-size:{14 if mobile else 15}px; color:{T2}; line-height:1.5;">Send it to your team and creators. '
+            f'They do not need an account to open it, and it does not use any of your credits.</p></div>')
+    note = (f'<div style="display:flex; flex-direction:column; gap:6px;">'
+            f'<span style="font-size:13px; font-weight:700;">Add a note <span style="font-weight:500; color:{T3};">(optional)</span></span>'
+            f'<div style="min-height:{84 if mobile else 76}px; box-sizing:border-box; padding:12px 14px; border-radius:12px; background:{SURF}; border:1.5px solid {Y}; '
+            f'font-size:14px; color:{INK}; line-height:1.5;">{NOTE}</div>'
+            f'<span style="font-size:12px; color:{T3};">Shows at the top of the shared page. It locks in when you copy the link.</span></div>')
+    url = (f'<div style="display:flex; gap:8px;">'
+           f'<div style="flex-grow:1; min-width:0; display:flex; align-items:center; gap:10px; height:50px; padding:0 14px; border-radius:12px; '
+           f'background:{SURF}; border:1px solid {LINE}; font-size:{13 if mobile else 14}px; color:{T2}; overflow:hidden; white-space:nowrap;">'
+           f'{ic(P_LINK, 16, T3)}brandbeacon.io/b/rhode/8f2ac1</div>{btn("Copy link", "primary", 50, 15)}</div>')
+    pdf = btn('Download PDF', 'secondary', 46, 15, mobile, ic(P_PDF, 17, T2))
+    return f'{back}{head}{note}{url}<div>{pdf}</div>'
+
+def d06_main():
+    return backdrop() + modal(modal_title() + analysis(), share_cta_bar())
+
+def d06():
+    return root(d06_main(), 'S06: the Share button turns this same window into the share view.')
+
+def d06s():
+    return root(backdrop() + modal(share_view()), 'S07: the copied link opens this, with the note on top.')
+
+def dev_note(txt):
+    return (f'<div style="border:1.5px dashed #b58a00; border-radius:10px; padding:8px 12px; font-size:12px; color:{Y_TXT}; background:#fffdf4; line-height:1.45;">'
+            f'<strong style="letter-spacing:.06em;">DEV NOTE</strong> &nbsp;{txt}</div>')
+
+def note_banner(mobile=False):
+    return (f'<div style="background:{SURF}; border:1px solid {LINE}; border-left:4px solid {Y}; border-radius:14px; padding:{12 if mobile else 14}px {14 if mobile else 18}px; '
+            f'display:flex; gap:12px; align-items:flex-start; box-shadow:{SH1};">{avatar("SM", 34, "peach")}'
+            f'<span style="display:flex; flex-direction:column; gap:3px; min-width:0;"><span style="font-size:13px; color:{T2};"><strong style="color:{INK};">Sam</strong> shared this breakout with you</span>'
+            f'<span style="font-size:{14 if mobile else 15}px; line-height:1.5;">{NOTE}</span></span></div>')
+
+def signup_strip(mobile=False):
+    if mobile:
+        return (f'{btn("Run this on your own brand", "primary", 48, 16, True)}'
+                f'<span style="font-size:12px; color:{T2}; text-align:center;">3 brand or product searches and 3 breakdowns free</span>')
+    return (f'<div style="background:{Y_TINT}; border:1px solid {Y_LINE}; border-radius:16px; padding:14px 18px; display:flex; align-items:center; justify-content:space-between; gap:16px;">'
+            f'<span><span style="display:block; font-size:16px; font-weight:800;">Run this on your own brand</span>'
+            f'<span style="display:block; font-size:13px; color:{Y_TXT}; margin-top:3px;">3 brand or product searches and 3 breakdowns free. No card.</span></span>'
+            f'{btn("Start free", "primary", 44, 15)}</div>')
+
+DEV_UGC = 'This call to action changes to UGC Breakouts once UGC Breakouts is live.'
+
+def d06b():
+    nav = topnav(right=btn('Try Brand Beacon free', 'secondary', 40, 14))
+    right = (modal_title(close=False) + analysis(n=3) + signup_strip() + dev_note(DEV_UGC))
+    main = (f'<div style="flex-grow:1; padding:18px 48px; display:flex; flex-direction:column; gap:14px; overflow:hidden;">{note_banner()}'
+            f'<div style="display:flex; gap:24px; align-items:flex-start;">{video_card(236, 290, actions=False)}'
+            f'<div style="flex-grow:1; display:flex; flex-direction:column; gap:12px; min-width:0;">{right}</div></div></div>')
+    return root(nav + main, 'S08: back in the app, the next brand is offered.', w=1280, h=870)
+
+# mobile: the modal is a full-screen sheet; Share swaps its content the same way
+def m_sheet_head(title):
+    return (f'<div style="height:56px; flex-shrink:0; display:flex; align-items:center; justify-content:space-between; padding:0 16px; background:{SURF}; border-bottom:1px solid {LINE};">'
+            f'<span style="font-size:16px; font-weight:800;">{title}</span>'
+            f'<button type="button" aria-label="Close" style="width:36px; height:36px; border-radius:999px; border:1px solid {LINE}; background:{SURF}; display:flex; align-items:center; justify-content:center;">{ic(P_CLOSE, 14, T2, 2)}</button></div>')
+
+def m_top():
+    pal, cap, hd, sc, fol = TILES[0]
+    return (f'<div style="display:flex; gap:12px;">{tile(104, pal, "", "", "0:20", sc, small=True, h=156)}<div style="display:flex; flex-direction:column; gap:6px; min-width:0;">'
+            f'<span style="font-size:15px; font-weight:800; line-height:1.3;">&ldquo;Name me a better marketing brand #rhode&rdquo;</span>'
+            f'<span style="font-size:12px; color:{T2};"><strong style="color:{INK};">@cyr1n32</strong> &middot; 1.6K followers</span>'
+            f'<span style="font-size:12px; color:{T2};">8.9M views &middot; 1.7M likes</span></div></div>')
+
+def m06_body():
+    return (m_sheet_head('Breakdown') + f'<div style="flex-grow:1; padding:16px; display:flex; flex-direction:column; gap:12px; overflow:hidden;">{m_top()}{analysis(True, 2)}</div>'
+            + share_cta_bar(True))
+
+def m06():
+    return root(m06_body(), 'M6: the Share button turns this same sheet into the share view.', True)
+
+def m06s():
+    inner = m_sheet_head('Breakdown') + f'<div style="flex-grow:1; padding:16px; display:flex; flex-direction:column; gap:14px; overflow:hidden;">{share_view(True)}</div>'
+    return root(inner, 'M7: the copied link opens this, with the note on top.', True)
+
+def m06b():
+    inner = (topnav(True, btn('Try free', 'secondary', 36, 14))
+             + f'<div style="flex-grow:1; padding:14px 16px; display:flex; flex-direction:column; gap:12px; overflow:hidden;">{note_banner(True)}{m_top()}{analysis(True, 2)}</div>'
+             f'<div style="flex-shrink:0; padding:12px 16px 16px; background:{SURF}; border-top:1px solid {LINE}; display:flex; flex-direction:column; gap:8px;">'
+             f'{signup_strip(True)}{dev_note("Becomes UGC Breakouts once it is live.")}</div>')
+    return root(inner, 'M8: back in the app, the next brand is offered.', True, w=390, h=960)
+
 FILES = {
  # desktop: ten steps after Ivan's 24 Sept notes (the analyze confirm is gone,
  # the share action and the shared page are now steps of their own)
