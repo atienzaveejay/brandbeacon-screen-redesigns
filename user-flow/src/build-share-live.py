@@ -83,6 +83,23 @@ button {{ cursor:pointer; }}
   back.textContent='↺ Start over'; back.style.cssText='position:absolute; left:16px; bottom:16px; z-index:30; height:36px; padding:0 14px; border-radius:999px; border:1px solid #d6d1c4; background:#fff; font:700 13px {gen.FONT};';
   back.addEventListener('click', function(){{ location.reload(); }});
   C.appendChild(back);
+  // Why it worked / Hook tabs, in every state
+  [].forEach.call(document.querySelectorAll('[role="tablist"][aria-label="Analysis"]'), function(tl){{
+    var panel = tl.parentNode;
+    [].forEach.call(tl.querySelectorAll('button'), function(b){{
+      b.addEventListener('click', function(){{
+        var hook = /Hook/.test(b.textContent);
+        [].forEach.call(tl.querySelectorAll('button'), function(o){{ var on = o===b;
+          o.style.background = on ? '#ffffff' : 'transparent'; o.style.boxShadow = on ? '0 1px 2px rgba(23,21,15,.06), 0 1px 3px rgba(23,21,15,.08)' : 'none';
+          o.style.color = on ? '#17150f' : '#5c584f'; o.style.fontWeight = on ? 700 : 600; o.setAttribute('aria-selected', on ? 'true' : 'false'); }});
+        var w = panel.querySelector('[data-tab="why"]'), h = panel.querySelector('[data-tab="hook"]');
+        if (w) w.style.display = hook ? 'none' : 'flex'; if (h) h.style.display = hook ? 'flex' : 'none';
+      }});
+    }});
+  }});
+  [].forEach.call(document.querySelectorAll('button'), function(b){{ if (/Copy hook for a brief/.test(b.textContent)) b.addEventListener('click', function(){{
+    try {{ navigator.clipboard.writeText('Hook: open on a bold claim in on-screen text, then dare viewers to name a better one. Reference: @cyr1n32 "Name me a better marketing brand"'); }} catch(e) {{}}
+    if (window.bbToast) window.bbToast('Hook copied for a creator brief'); }}); }});
   // opened from a Share button elsewhere: start on the share view
   if (location.hash === '#share') show('s-share');
   var t = function(m){{ if (window.bbToast) window.bbToast(m); }};

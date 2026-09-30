@@ -941,12 +941,37 @@ def improve_block(mobile=False):
     return (f'<div style="background:{SURF}; border:1px solid {LINE}; border-radius:14px; padding:{12 if mobile else 12}px 16px; display:flex; flex-direction:column; gap:8px;">'
             f'<span style="font-size:15px; font-weight:800;">What could be improved</span>{body}</div>')
 
+def hook_block(mobile=False):
+    """Hook tab (Veejay, 30 Sept). Only what can be read off this video: the caption and the
+    text on its first frame. Timing and spoken words wait for the real analysis."""
+    fs = 13 if mobile else 14
+    def row(label, value):
+        return (f'<div style="display:flex; {"flex-direction:column; gap:3px;" if mobile else "gap:16px;"} padding:9px 0; border-top:1px solid {LINE};">'
+                f'<span style="{"" if mobile else "width:150px; flex-shrink:0; "}font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:{T3}; padding-top:2px;">{label}</span>'
+                f'<span style="font-size:{fs}px; line-height:1.45;">{value}</span></div>')
+    quote = (f'<div style="display:flex; gap:12px; align-items:flex-start;">'
+             f'<span style="font-size:{30 if not mobile else 26}px; line-height:.8; font-weight:900; color:{Y};">&ldquo;</span>'
+             f'<span style="font-size:{18 if not mobile else 16}px; font-weight:800; line-height:1.35; letter-spacing:-.01em;">Name me a better marketing brand</span></div>')
+    body = (quote
+            + '<div>'
+            + row('Hook type', '<b>Direct challenge.</b> It dares the viewer to disagree.')
+            + row('Text on screen', '&ldquo;Rhode is literally the definition of the best marketing brand ever&rdquo;')
+            + row('Visual', 'Product shot: the lip tint on frozen raspberries. No face, no voiceover needed.')
+            + row('Why it stops the scroll', 'A bold claim plus a dare. People comment to name another brand, and every reply pushes it further.')
+            + '</div>')
+    use = (f'<div style="font-size:{fs}px; line-height:1.5;">Open on a bold claim about your product in on-screen text, then dare viewers to name a better one. Keep the first frame on the product.</div>'
+           f'<div>{btn("Copy hook for a brief", "secondary", 38, 13, icon=ic(P_LINK, 14, T2))}</div>')
+    return (section('The hook', body, count='FROM THE CAPTION AND FIRST FRAME')
+            + section('Use this hook', use, tint=True))
+
 def analysis(mobile=False, n=3):
     fs = 14 if mobile else 15
+    why = (section('Why it worked', driver_list(n, fs_t=fs - 1, fs_d=13, gap=9), count=f'{n} DRIVERS')
+           + improve_block(mobile)
+           + section('What you should do next', next_list(14 if not mobile else 13), tint=True, count='2 ACTIONS'))
     return (f'{tabs(mobile, TABS2)}'
-            + section('Why it worked', driver_list(n, fs_t=fs - 1, fs_d=13, gap=9), count=f'{n} DRIVERS')
-            + improve_block(mobile)
-            + section('What you should do next', next_list(14 if not mobile else 13), tint=True, count='2 ACTIONS'))
+            f'<div data-tab="why" style="display:flex; flex-direction:column; gap:12px;">{why}</div>'
+            f'<div data-tab="hook" style="display:none; flex-direction:column; gap:12px;">{hook_block(mobile)}</div>')
 
 def modal_title(close=True):
     x = (f'<button type="button" aria-label="Close" style="width:36px; height:36px; border-radius:999px; border:1px solid {LINE}; background:{SURF}; '
