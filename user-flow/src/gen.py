@@ -880,10 +880,16 @@ NEXT = [('Open with a direct challenge', 'One bold, countable question viewers c
 NOTE = 'Can we brief two creators on this hook before the lip tint drop? The opening line is the part to copy.'
 
 def stat_row(fs=13):
-    items = [(P_EYE, '8.9M'), (P_HEART, '1.7M'), (P_CMT, '2.5K'), (P_SHARE, '25K')]
-    return ('<div style="display:flex; justify-content:space-between; padding-top:10px; border-top:1px solid %s;">' % LINE
-            + ''.join(f'<span style="display:inline-flex; align-items:center; gap:5px; font-size:{fs}px; font-weight:600;">{ic(p, 14, T2)}{n}</span>' for p, n in items)
-            + '</div>')
+    """Same icon tiles as the My Feed and readout cards (30 Sept pass)."""
+    P_SEND = 'M21 3L10 14M21 3l-7 18-4-7-7-4z'
+    items = [(P_EYE, '8.9M', 'views', '#EEF0F7', '#3F4A7A'), (P_HEART, '1.7M', 'likes', '#FCE9EC', '#B0304E'),
+             (P_CMT, '2.5K', 'comments', '#E8F1FB', '#23578C'), (P_SEND, '25.5K', 'shares', '#E7F4EC', '#16603A')]
+    cell = lambda p, n, l, bg, fg: (f'<span style="display:flex; align-items:center; gap:8px;"><span style="width:28px; height:28px; border-radius:9px; background:{bg}; '
+                                    f'display:inline-flex; align-items:center; justify-content:center; flex-shrink:0;">{ic(p, 14, fg, 2)}</span>'
+                                    f'<span style="display:flex; flex-direction:column; line-height:1.15;"><span style="font-size:{fs+1}px; font-weight:800;">{n}</span>'
+                                    f'<span style="font-size:11px; color:{T3};">{l}</span></span></span>')
+    return ('<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px 8px; padding-top:10px; border-top:1px solid %s;">' % LINE
+            + ''.join(cell(*i) for i in items) + '</div>')
 
 def video_card(w=250, th=300, actions=True):
     """The live modal's left column, kept as it is."""
