@@ -50,6 +50,7 @@ main{max-width:1800px;margin:0 auto;padding:32px 24px 80px}
 .missing{display:flex;background:var(--bg)}.missing img{width:30%;display:block}
 .missing div{display:flex;flex-direction:column;justify-content:center;gap:8px;padding:24px;font-size:14px;color:var(--muted)}.missing b{color:var(--ink);font-size:18px}
 details.more-box{margin:24px 0 0;background:#fff;border:1px solid var(--line);border-radius:16px;padding:0 20px}details.more-box>summary{cursor:pointer;padding:14px 0;font-weight:800;font-size:14px;color:var(--muted)}details.more-box[open]{padding-bottom:18px}details.more-box .grid2{margin:6px 0 0}
+.scrollbtn{margin-left:auto;font:700 12.5px Figtree,system-ui,sans-serif;height:30px;padding:0 12px;border-radius:999px;border:1px solid var(--line);background:#fff;cursor:pointer;color:var(--ink)}.scrollbtn.on{background:var(--y);border-color:var(--y)}.scrollbtn+a{margin-left:10px!important}.withnotes.scrollmode .annot li{position:relative!important;left:auto!important;right:auto!important;margin:10px}
 footer{max-width:1800px;margin:0 auto;padding:24px;color:var(--muted);font-size:13px}
 @media (max-width:1100px){.pair,.grid2{grid-template-columns:minmax(0,1fr)}.stick{position:static}}
 @media (max-width:700px){.withnotes{flex-direction:column}.annot{width:auto;border-left:0;border-top:1px solid var(--line);padding:10px}.annot li{position:static;margin-bottom:8px}main{padding:20px 16px 60px}.bar{padding:10px 16px}nav.toc{margin-left:0}}
@@ -58,7 +59,7 @@ footer{max-width:1800px;margin:0 auto;padding:24px;color:var(--muted);font-size:
 <body>
 <header class="top"><div class="bar"><span class="logo"><span class="mark">BB</span>Brand Beacon redesigns</span><nav class="toc" aria-label="Screens"><a href="user-flow/" style="background:#FFC72C;border-color:#FFC72C">User flow v4</a><a href="#my-feed">My Feed</a><a href="#dashboard">Brand readout</a><a href="#breakout-creators">Creator export</a><a href="#share">Share this video</a><a href="#my-brand">My Brand Intelligence (paused)</a><a href="#admin-home">Admin dashboard</a></nav></div></header>
 <main>
-<section class="hero"><h1>Brand Beacon screen redesigns</h1><p>Left: the live app on 19 Sep. Right: the redesign, with a short note beside each change. Updated 30 Sep after the call with Ivan.</p></section>
+<section class="hero"><h1>Brand Beacon screen redesigns</h1><p>Left: the live app on 19 Sep. Right: the redesign, with a short note beside each change. Updated 30 Sep after the call with Ivan.</p><p>The redesigns are clickable. Press <b>Scroll inside</b> on any screen to scroll it like the real app, or open it full size.</p></section>
 <details class="more-box"><summary>Research and live bugs from 19 Sep</summary><div class="grid2"><div class="box research"><h4>RESEARCH, 19 SEP: what the market does</h4>
 <p>Checked: TikTok One, Kalodata, FastMoss, Reacher, Euka, Modash, Upfluence, Aspire, GRIN, Insense, Billo, Foreplay, Motion, vidIQ, 1of10, Viewstats, Virlo, Rival IQ, Dash Social, Sprout, Exolyt, Metricool.</p>
 <ul>
@@ -119,14 +120,26 @@ footer{max-width:1800px;margin:0 auto;padding:24px;color:var(--muted);font-size:
 <script>
 function fit(){
  document.querySelectorAll('.withnotes').forEach(function(wn){
-  var s=wn.querySelector('.scaler'),w=+s.dataset.w,h=+s.dataset.h,k=Math.min(1,s.clientWidth/w);
-  s.querySelector('iframe').style.transform='scale('+k+')';var sh=Math.round(h*k);s.style.height=sh+'px';
+  var s=wn.querySelector('.scaler'),w=+s.dataset.w,full=+s.dataset.h,live=wn.classList.contains('scrollmode'),h=live?Math.min(900,full):full,k=Math.min(1,s.clientWidth/w);
+  var f=s.querySelector('iframe');f.style.transform='scale('+k+')';f.setAttribute('height',h);f.style.height=h+'px';var sh=Math.round(h*k);s.style.height=sh+'px';
   var ol=wn.querySelector('.annot');if(!ol)return;
-  if(getComputedStyle(ol.querySelector('li')).position!=='absolute'){ol.style.height='';return;}
+  if(live||getComputedStyle(ol.querySelector('li')).position!=='absolute'){ol.style.height='';ol.querySelectorAll('li').forEach(function(li){li.style.top='';});return;}
   var prev=0;ol.querySelectorAll('li').forEach(function(li){var t=Math.max(Math.round(+li.dataset.frac*sh),prev);li.style.top=t+'px';prev=t+li.offsetHeight+8;});
   ol.style.height=Math.max(sh,prev)+'px';
  });
 }
+document.querySelectorAll('.withnotes').forEach(function(wn){
+ var fig=wn.closest('figure'),cap=fig&&fig.querySelector('figcaption');if(!cap)return;
+ var b=document.createElement('button');b.type='button';b.className='scrollbtn';b.textContent='Scroll inside';
+ var open=cap.querySelector('a');cap.insertBefore(b,open);
+ b.addEventListener('click',function(){
+  var on=!wn.classList.contains('scrollmode');wn.classList.toggle('scrollmode',on);
+  var f=wn.querySelector('iframe'),src=f.getAttribute('src').split('?')[0];
+  f.setAttribute('src',on?src+'?live=1':src);
+  b.textContent=on?'Show whole page':'Scroll inside';b.classList.toggle('on',on);
+  fit();
+ });
+});
 window.addEventListener('resize',fit);window.addEventListener('load',fit);fit();
 </script>
 </body>

@@ -83,8 +83,16 @@ button {{ cursor:pointer; }}
   back.textContent='↺ Start over'; back.style.cssText='position:absolute; left:16px; bottom:16px; z-index:30; height:36px; padding:0 14px; border-radius:999px; border:1px solid #d6d1c4; background:#fff; font:700 13px {gen.FONT};';
   back.addEventListener('click', function(){{ location.reload(); }});
   C.appendChild(back);
+  // opened from a Share button elsewhere: start on the share view
+  if (location.hash === '#share') show('s-share');
+  var t = function(m){{ if (window.bbToast) window.bbToast(m); }};
+  byText(B,'button','Download PDF').forEach(function(b){{ b.addEventListener('click', function(){{ t('PDF downloaded: the breakdown with your note'); }}); }});
+  [].forEach.call(document.querySelectorAll('button[aria-label="Close"]'), function(b){{ b.addEventListener('click', function(){{ t('Closes the window and goes back to the results'); }}); }});
+  byText(A,'button','Save').concat(byText(B,'button','Save')).forEach(function(b){{ b.addEventListener('click', function(){{ t('Saved to Library'); }}); }});
+  byText(C,'button','Start free').concat(byText(C,'button','Try Brand Beacon free')).forEach(function(b){{ b.addEventListener('click', function(){{ t('Opens sign-up: 3 searches and 3 breakdowns free'); }}); }});
 }})();
 </script>
+<script src="interact.js"></script>
 </body>
 </html>
 '''
