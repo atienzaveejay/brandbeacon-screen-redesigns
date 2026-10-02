@@ -3,6 +3,8 @@ from PIL import Image
 HERE = os.path.dirname(os.path.abspath(__file__))
 HI = os.path.join(HERE, 'hi')
 OUT = os.path.expanduser('~/brandbeacon-screen-redesigns/user-flow/img')
+WEB = os.path.join(OUT, 'web')
+os.makedirs(WEB, exist_ok=True)
 MAP = {
  '01-Landing': 'flow-01', 'M1-Landing': 'flow-m1',
  '02-Search': 'flow-02', 'M2-Search': 'flow-m2',
@@ -20,8 +22,12 @@ for src, dst in MAP.items():
     im = Image.open(p).convert('RGB')
     q = os.path.join(OUT, dst + '.jpg')
     im.save(q, 'JPEG', quality=82, optimize=True, progressive=True)
-    print(f'{dst}.jpg  {im.size[0]}x{im.size[1]}  {os.path.getsize(q)//1024}KB')
+    tw = 1600 if im.size[0] > 1000 else 560
+    sm = im.resize((tw, round(im.size[1] * tw / im.size[0])), Image.LANCZOS)
+    w = os.path.join(WEB, dst + '.jpg')
+    sm.save(w, 'JPEG', quality=78, optimize=True, progressive=True)
+    print(f'{dst}.jpg  {im.size[0]}x{im.size[1]}  {os.path.getsize(q)//1024}KB, web {os.path.getsize(w)//1024}KB')
 keep = {v + '.jpg' for v in MAP.values()}
-for p in glob.glob(os.path.join(OUT, 'flow-*.jpg')):
+for p in glob.glob(os.path.join(OUT, 'flow-*.jpg')) + glob.glob(os.path.join(WEB, 'flow-*.jpg')):
     if os.path.basename(p) not in keep:
         os.remove(p); print('removed', os.path.basename(p))

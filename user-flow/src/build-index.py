@@ -4,7 +4,7 @@ t = io.open(SRC, encoding='utf-8').read()
 
 def shot(src, cap, cls='shot'):
     return (f'<figure class="{cls}"><div class="imgwrap"><a href="img/{src}" target="_blank" rel="noopener">'
-            f'<img src="img/{src}" alt="{cap}" loading="lazy"></a></div><figcaption>{cap}</figcaption></figure>')
+            f'<img src="img/{"web/" if src.startswith("flow-") else ""}{src}" alt="{cap}" loading="lazy" decoding="async"></a></div><figcaption>{cap}</figcaption></figure>')
 
 def step(n, sid, title, desk, mob, notes, ivan, extra=None, tall=False):
     ex = ''
