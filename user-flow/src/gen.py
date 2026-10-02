@@ -277,8 +277,8 @@ def video_player(w, h, mobile=False):
             f'<div style="position:absolute; left:50%; top:{round(h*0.5)}px; width:{round(h*0.62)}px; height:{round(h*0.6)}px; margin-left:{-round(h*0.31)}px; border-radius:{round(h*0.3)}px {round(h*0.3)}px 0 0; background:rgba(255,238,200,.12);"></div>'
             f'<div style="position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,0) 50%,rgba(0,0,0,.55) 100%);"></div>'
             f'<span style="position:absolute; top:12px; right:12px; height:24px; padding:0 8px; border-radius:999px; background:rgba(23,21,15,.72); color:#fff; font-size:12px; font-weight:600; display:inline-flex; align-items:center;">1:30</span>'
-            f'<button type="button" aria-label="Play the welcome video from Ivan" style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:{56 if mobile else 72}px; height:{56 if mobile else 72}px; border-radius:999px; border:none; background:{Y}; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 8px 24px rgba(255,198,41,.35);"><svg width="{24 if mobile else 28}" height="{24 if mobile else 28}" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="{INK}"/></svg></button>'
-            f'<div style="position:absolute; left:{16 if mobile else 20}px; bottom:{16 if mobile else 20}px; display:flex; align-items:center; gap:12px;">{"" if mobile else avatar("IV", 40, "sand")}<span style="display:flex; flex-direction:column; gap:2px;"><span style="font-size:{14 if mobile else 16}px; font-weight:700; color:#fff;">A 90 second welcome from Ivan</span><span style="font-size:12px; color:#efe9dc;">How to read a Breakout Score</span></span></div></div>')
+            f'<button type="button" aria-label="Play the Brand Beacon tour" style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:{56 if mobile else 72}px; height:{56 if mobile else 72}px; border-radius:999px; border:none; background:{Y}; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 8px 24px rgba(255,198,41,.35);"><svg width="{24 if mobile else 28}" height="{24 if mobile else 28}" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="{INK}"/></svg></button>'
+            f'<div style="position:absolute; left:{16 if mobile else 20}px; bottom:{16 if mobile else 20}px; display:flex; align-items:center; gap:12px;">{"" if mobile else avatar("IV", 40, "sand")}<span style="display:flex; flex-direction:column; gap:2px;"><span style="font-size:{14 if mobile else 16}px; font-weight:700; color:#fff;">A quick tour of Brand Beacon</span><span style="font-size:12px; color:#efe9dc;">How to find a breakout worth copying</span></span></div></div>')
 
 def progress(mobile=False):
     steps = [('Searching TikTok for @rhode', 'done'), ('Scoring every breakout we find', 'done'), ('Writing your free breakdown', 'now')]
@@ -372,6 +372,15 @@ P_CLOCK = 'M12 3a9 9 0 100 18 9 9 0 000-18zM12 7v5l3.5 2'
 P_LINK = 'M10 13a5 5 0 007.5.5l2-2a5 5 0 00-7-7l-1 1M14 11a5 5 0 00-7.5-.5l-2 2a5 5 0 007 7l1-1'
 P_HASH = 'M5 9h14M5 15h14M10 4L8 20M16 4l-2 16'
 P_DOWN = 'M12 4v11M8 11l4 4 4-4M5 19h14'
+P_REFRESH = 'M20 11a8 8 0 10-2.3 5.7M20 4v7h-7'
+def refresh_btn(size=34):
+    return (f'<button type="button" aria-label="Show other suggestions" title="Show other suggestions" style="width:{size}px; height:{size}px; border-radius:999px; '
+            f'border:1px solid {LINE2}; background:{SURF}; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0;">{ic(P_REFRESH, 15, T2, 2)}</button>')
+def search_bg(mobile=False):
+    glow = (f'<div style="position:absolute; top:{-160 if mobile else -200}px; left:50%; transform:translateX(-50%); width:{560 if mobile else 1200}px; height:{420 if mobile else 560}px; '
+            f'border-radius:50%; background:radial-gradient(closest-side, rgba(255,198,41,.24), rgba(255,198,41,0)); pointer-events:none;"></div>')
+    row = f'<div style="position:absolute; left:0; right:0; bottom:0; opacity:.55; pointer-events:none;">{hero_row(mobile)}</div>'
+    return glow + row
 
 def analyze_btn(h=40, fs=14, full=False, label='Analyze this breakout', kind='primary'):
     return btn(label, kind, h, fs, full, ic(P_SPARK, 16, INK if kind == 'primary' else T2, 2))
@@ -525,24 +534,24 @@ def d02():
                        f'display:inline-flex; align-items:center; gap:7px;">{ic(P_BRAND if k == "brand" else P_TARGET, 14, T3)}{n}</button>'
                        for n, k in [('rhode', 'brand'), ('olipop', 'brand'), ('peptide lip tint', 'product'),
                                     ('drunk elephant', 'brand'), ('glazing milk', 'product')])
-             + '</div>')
-    inner = (app_bar(0, 0) + f'<div style="flex-grow:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:24px; padding:0 64px;">'
+             + refresh_btn() + '</div>')
+    inner = (app_bar(0, 0) + f'<div style="position:relative; flex-grow:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:24px; padding:0 64px 120px;">{search_bg()}'
              f'<div style="display:flex; flex-direction:column; align-items:center; gap:10px; text-align:center;">'
              f'<h1 style="margin:0; font-size:38px; font-weight:800; letter-spacing:-0.03em; line-height:1.1;">Search a brand or a product</h1>'
              f'<p style="margin:0; font-size:17px; color:{T2}; max-width:34em;">A brand returns everything posted about it. '
              f'A product returns the videos about that line, and the brand behind it.</p></div>'
              f'{hero_search(720)}{kinds}'
              f'<span style="font-size:13px; color:{T3}; margin-top:4px;">This uses 1 of your 3 free searches.</span></div>')
-    return root(inner, 'S03: the search runs while a short welcome plays.')
+    return root(inner, 'S03: the search runs while a quick tour of the app plays.')
 
 def d03():
     """S03 Processing + the welcome video (Ivan or AI VO)."""
     main = (f'<div style="flex-grow:1; display:flex; flex-direction:column; justify-content:center; gap:26px; padding:0 56px;">'
             f'<div><h1 style="margin:0; font-size:32px; font-weight:800; letter-spacing:-0.025em;">Pulling @rhode now</h1>'
-            f'<p style="margin:8px 0 0; font-size:17px; color:{T2};">Two minutes at most. While you wait, here is how to read what comes back.</p></div>'
+            f'<p style="margin:8px 0 0; font-size:17px; color:{T2};">This usually takes a minute or two. While you wait, take a quick tour of how to win with Brand Beacon.</p></div>'
             f'<div style="display:flex; gap:28px; align-items:center;">{video_player(660, 400)}'
             f'<div style="flex-grow:1;">{progress()}</div></div></div>')
-    return root(app_bar(1, 0) + main, 'S04: the results land, every score already visible.')
+    return root(app_bar(1, 0) + main, 'S04: results land on the live results page, and picking a video opens its breakdown.')
 
 def d04():
     """S04 Search results. Signed in, so nothing is masked."""
@@ -576,7 +585,7 @@ def d06_main():
     return main
 
 def d06():
-    return root(app_bar(1, 1) + d06_main(), 'S06: pressing Share opens the link and the ways to send it.')
+    return root(app_bar(1, 1) + d06_main(), 'S05: pressing Share opens the link and the ways to send it.')
 
 def share_sheet(mobile=False):
     pal = TILES[0][0]
@@ -614,7 +623,7 @@ def d06s():
     """Ivan, 24 Sept: 'need to show what will happen after the user selects to share in page 6'."""
     inner = (f'<div style="position:absolute; inset:0; display:flex; flex-direction:column; filter:blur(3px);">{app_bar(1, 1) + d06_main()}</div>'
              f'<div style="position:absolute; inset:0; background:rgba(23,21,15,.5);"></div>{share_sheet()}')
-    return root(inner, 'S07: the link opens this, for someone with no account.')
+    return root(inner, 'S06: the link opens this, for someone with no account.')
 
 def video_stats(mobile=False):
     rows = [('8.9M', 'views'), ('1.7M', 'likes'), ('24.1K', 'comments'), ('61.2K', 'shares'), ('9.4K', 'saves')]
@@ -657,7 +666,7 @@ def d06b():
     main = (f'<div style="flex-grow:1; padding:24px 40px; display:flex; flex-direction:column; gap:16px; overflow:hidden;">'
             f'<span style="font-size:14px; color:{T2};">Shared from Brand Beacon &nbsp;/&nbsp; <strong style="color:{INK};">@rhode</strong></span>'
             f'<div style="display:flex; gap:28px; align-items:flex-start;">{tile(250, pal, "", hd, "0:20", sc, rank=1, embed=True, h=445)}{right}</div></div>')
-    return root(nav + main, 'S08: back in the app, the next brand is offered.')
+    return root(nav + main, 'S07: back in the app, the next brand is offered.')
 
 def d07():
     """S07 Prompt to search another term. Competitors of the brand just searched."""
@@ -678,7 +687,7 @@ def d07():
             f'<div style="flex-grow:1;">{fake_field("Or type any other brand or product", icon=ic(P_SEARCH, 16, T3, 2))}</div>'
             f'{btn("Search", "primary", 44, 15)}</div></div>')
     inner = (app_bar(1, 1) + f'<div style="flex-grow:1; display:flex; align-items:center; justify-content:center; padding:0 64px;">{card}</div>')
-    return root(inner, 'S09: the fourth search is where Free stops.')
+    return root(inner, 'S08: the fourth search is where Free stops.')
 
 def d08():
     """S08 Paywall on the 4th search."""
@@ -689,7 +698,7 @@ def d08():
                        f'{check_dot(20)}<span style="font-size:14px;">{x}</span></div>'
                        for x in ['@rhode, @glowrecipe and @summerfridays', 'The 2 breakdowns you ran', 'Every share link you have sent'])
              + f'<span style="font-size:13px; color:{T3}; line-height:1.5; padding:0 4px;">Nothing is deleted and nothing expires. The wall is on new searches only.</span></div></div>')
-    return root(inner, 'S10: the same wall on the fourth breakdown.')
+    return root(inner, 'S09: the same wall on the fourth breakdown.')
 
 def d09():
     """S09 Paywall on the 4th analysis."""
@@ -763,21 +772,21 @@ def m02():
                        f'background:{SURF}; font-family:inherit; font-size:13px; font-weight:600; color:{INK}; '
                        f'display:inline-flex; align-items:center; gap:6px;">{ic(P_BRAND if k == "brand" else P_TARGET, 13, T3)}{n}</button>'
                        for n, k in [('rhode', 'brand'), ('olipop', 'brand'), ('peptide lip tint', 'product')])
-             + '</div>')
-    inner = (app_bar(0, 0, True) + f'<div style="flex-grow:1; padding:24px 16px; display:flex; flex-direction:column; justify-content:center; gap:18px; overflow:hidden;">'
+             + refresh_btn(32) + '</div>')
+    inner = (app_bar(0, 0, True) + f'<div style="position:relative; flex-grow:1; padding:24px 16px 150px; display:flex; flex-direction:column; justify-content:center; gap:18px; overflow:hidden;">{search_bg(True)}'
              f'<div style="display:flex; flex-direction:column; gap:8px; text-align:center;">'
              f'<h1 style="margin:0; font-size:27px; font-weight:800; letter-spacing:-0.03em; line-height:1.12;">Search a brand or a product</h1>'
              f'<p style="margin:0; font-size:15px; color:{T2}; line-height:1.5;">A brand returns everything posted about it. A product returns that line, and the brand behind it.</p></div>'
              f'{search}{kinds}'
              f'<span style="font-size:13px; color:{T3}; text-align:center;">Uses 1 of your 3 free searches.</span></div>')
-    return root(inner, 'M3: the search runs while a short welcome plays.', True)
+    return root(inner, 'M3: the search runs while a quick tour of the app plays.', True)
 
 def m03():
     inner = (app_bar(1, 0, True) + f'<div style="flex-grow:1; padding:20px 16px; display:flex; flex-direction:column; justify-content:center; gap:18px; overflow:hidden;">'
              f'<div><h1 style="margin:0; font-size:23px; font-weight:800; letter-spacing:-0.025em;">Pulling @rhode now</h1>'
-             f'<p style="margin:4px 0 0; font-size:14px; color:{T2};">Two minutes at most. Here is how to read what comes back.</p></div>'
+             f'<p style="margin:4px 0 0; font-size:14px; color:{T2};">Usually a minute or two. Meanwhile, a quick tour of how to win with Brand Beacon.</p></div>'
              f'{video_player(358, 208, True)}{progress(True)}</div>')
-    return root(inner, 'M4: the results land, every score already visible.', True)
+    return root(inner, 'M4: results land on the live results page, and picking a video opens its breakdown.', True)
 
 def m04():
     w = 171
@@ -813,13 +822,13 @@ def m06_body():
     return inner
 
 def m06():
-    return root(m06_body(), 'M6: pressing Share opens the link and the ways to send it.', True)
+    return root(m06_body(), 'M5: pressing Share opens the link and the ways to send it.', True)
 
 def m06s():
     base = m06_body()
     inner = (f'<div style="position:absolute; inset:0; display:flex; flex-direction:column; filter:blur(3px);">{base}</div>'
              f'<div style="position:absolute; inset:0; background:rgba(23,21,15,.5);"></div>{share_sheet(True)}')
-    return root(inner, 'M7: the link opens this, for someone with no account.', True)
+    return root(inner, 'M6: the link opens this, for someone with no account.', True)
 
 def m06b():
     """Mobile shared page: the M5 breakdown, read-only, with the sign-up bar in place of Share."""
@@ -835,7 +844,7 @@ def m06b():
              f'{btn("Run this on your own brand", "primary", 48, 16, True)}'
              f'<span style="font-size:12px; color:{T2}; text-align:center;">3 brand or product searches and 3 breakdowns free</span>'
              f'<span style="font-size:13px; color:{T2}; text-align:center;">Make TikToks? {link("Try Viral Video Finder", 13)}</span></div>')
-    return root(inner, 'M8: back in the app, the next brand is offered.', True)
+    return root(inner, 'M7: back in the app, the next brand is offered.', True)
 
 def m07():
     def sug(name, cat, pal_i):
@@ -850,13 +859,13 @@ def m07():
              f'<p style="margin:0; font-size:15px; color:{T2}; line-height:1.5;">Most people spend the next one on a competitor.</p></div>'
              f'{label("Close to @rhode")}<div style="display:flex; flex-direction:column; gap:10px;">{sug("glowrecipe", "Skincare", 1)}{sug("summerfridays", "Skincare", 2)}{sug("kosas", "Beauty", 3)}</div>'
              f'{fake_field("Or type any other brand or product", icon=ic(P_SEARCH, 16, T3, 2))}</div>')
-    return root(inner, 'M9: the fourth search is where Free stops.', True)
+    return root(inner, 'M8: the fourth search is where Free stops.', True)
 
 def m08():
     inner = (app_bar(3, 1, True) + f'<div style="flex-grow:1; padding:18px 16px; display:flex; flex-direction:column; gap:14px; overflow:hidden;">'
              f'{plan_wall("You have used your three free searches", "Everything you already ran is still here and still shareable.", True)}'
              f'<span style="font-size:12px; color:{T3}; text-align:center; line-height:1.5;">@rhode, @glowrecipe and @summerfridays stay open. Nothing expires.</span></div>')
-    return root(inner, 'M10: the same wall on the fourth breakdown.', True)
+    return root(inner, 'M9: the same wall on the fourth breakdown.', True)
 
 def m09():
     inner = (app_bar(3, 3, True) + f'<div style="flex-grow:1; padding:18px 16px; display:flex; flex-direction:column; gap:14px; overflow:hidden;">'
@@ -1022,10 +1031,10 @@ def d06_main():
     return backdrop() + modal(modal_title() + analysis(), share_cta_bar())
 
 def d06():
-    return root(d06_main(), 'S06: the Share button turns this same window into the share view.')
+    return root(d06_main(), 'S05: the Share button turns this same window into the share view.')
 
 def d06s():
-    return root(backdrop() + modal(share_view()), 'S07: the copied link opens this, with the note on top.')
+    return root(backdrop() + modal(share_view()), 'S06: the copied link opens this, with the note on top.')
 
 def dev_note(txt):
     return (f'<div style="border:1.5px dashed #b58a00; border-radius:10px; padding:8px 12px; font-size:12px; color:{Y_TXT}; background:#fffdf4; line-height:1.45;">'
@@ -1054,7 +1063,7 @@ def d06b():
     main = (f'<div style="flex-grow:1; padding:18px 48px; display:flex; flex-direction:column; gap:14px; overflow:hidden;">{note_banner()}'
             f'<div style="display:flex; gap:24px; align-items:flex-start;">{video_card(236, 290, actions=False)}'
             f'<div style="flex-grow:1; display:flex; flex-direction:column; gap:12px; min-width:0;">{right}</div></div></div>')
-    return root(nav + main, 'S08: back in the app, the next brand is offered.', w=1280, h=940)
+    return root(nav + main, 'S07: back in the app, the next brand is offered.', w=1280, h=940)
 
 # mobile: the modal is a full-screen sheet; Share swaps its content the same way
 def m_sheet_head(title):
@@ -1074,31 +1083,30 @@ def m06_body():
             + share_cta_bar(True))
 
 def m06():
-    return root(m06_body(), 'M6: the Share button turns this same sheet into the share view.', True)
+    return root(m06_body(), 'M5: the Share button turns this same sheet into the share view.', True)
 
 def m06s():
     inner = m_sheet_head('Breakdown') + f'<div style="flex-grow:1; padding:16px; display:flex; flex-direction:column; gap:14px; overflow:hidden;">{share_view(True)}</div>'
-    return root(inner, 'M7: the copied link opens this, with the note on top.', True)
+    return root(inner, 'M6: the copied link opens this, with the note on top.', True)
 
 def m06b():
     inner = (topnav(True, btn('Try free', 'secondary', 36, 14))
              + f'<div style="flex-grow:1; padding:14px 16px; display:flex; flex-direction:column; gap:12px; overflow:hidden;">{note_banner(True)}{m_top()}{analysis(True, 2)}</div>'
              f'<div style="flex-shrink:0; padding:12px 16px 16px; background:{SURF}; border-top:1px solid {LINE}; display:flex; flex-direction:column; gap:8px;">'
              f'{signup_strip(True)}{dev_note("Becomes UGC Breakouts once it is live.")}</div>')
-    return root(inner, 'M8: back in the app, the next brand is offered.', True, w=390, h=960)
+    return root(inner, 'M7: back in the app, the next brand is offered.', True, w=390, h=960)
 
 FILES = {
- # desktop: ten steps after Ivan's 24 Sept notes (the analyze confirm is gone,
- # the share action and the shared page are now steps of their own)
+ # desktop: nine steps after Ivan's 2 Oct notes (Results dropped: the live page stays as it is)
  '01-Landing.dc.html': d01_page, '02-Search.dc.html': d02, '03-Processing.dc.html': d03,
- '04-Results.dc.html': d04, '05-Breakdown.dc.html': d06, '06-Share.dc.html': d06s,
- '07-SharedPage.dc.html': d06b, '08-SearchAgain.dc.html': d07,
- '09-SearchPaywall.dc.html': d08, '10-AnalysisPaywall.dc.html': d09,
+ '04-Breakdown.dc.html': d06, '05-Share.dc.html': d06s,
+ '06-SharedPage.dc.html': d06b, '07-SearchAgain.dc.html': d07,
+ '08-SearchPaywall.dc.html': d08, '09-AnalysisPaywall.dc.html': d09,
  # mobile
  'M1-Landing.dc.html': m01_page, 'M2-Search.dc.html': m02, 'M3-Processing.dc.html': m03,
- 'M4-Results.dc.html': m04, 'M5-Breakdown.dc.html': m06, 'M6-Share.dc.html': m06s,
- 'M7-SharedPage.dc.html': m06b, 'M8-SearchAgain.dc.html': m07,
- 'M9-SearchPaywall.dc.html': m08, 'M10-AnalysisPaywall.dc.html': m09}
+ 'M4-Breakdown.dc.html': m06, 'M5-Share.dc.html': m06s,
+ 'M6-SharedPage.dc.html': m06b, 'M7-SearchAgain.dc.html': m07,
+ 'M8-SearchPaywall.dc.html': m08, 'M9-AnalysisPaywall.dc.html': m09}
 for name, fn in FILES.items():
     open(os.path.join(OUT, name), 'w', encoding='utf-8').write(fn())
 print('generated', len(FILES))
