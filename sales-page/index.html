@@ -365,16 +365,6 @@ body.notes .note{display:block}
 }
 
 /* motion */
-.strip{margin-top:34px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
-.strip .track{display:flex;gap:14px;width:max-content;animation:marquee 46s linear infinite}
-.strip:hover .track{animation-play-state:paused}
-@keyframes marquee{to{transform:translateX(calc(-50% - 7px))}}
-.tile{position:relative;width:112px;height:150px;border-radius:14px;overflow:hidden;flex:none;background:#eee;box-shadow:0 6px 16px rgba(20,15,0,.10)}
-.tile img{width:100%;height:100%;object-fit:cover}
-.tile:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 45%,rgba(20,15,0,.72))}
-.tile .q{position:absolute;left:8px;top:8px;z-index:1;font-family:'Space Mono',monospace;font-size:9.5px;color:#fff;background:rgba(20,15,0,.7);border-radius:6px;padding:2px 6px}
-.tile .sc{position:absolute;left:8px;bottom:8px;z-index:1;font-weight:900;font-size:17px;color:var(--y)}
-@media (prefers-reduced-motion: reduce){.strip .track{animation:none}.strip{overflow-x:auto}}
 .chart.anim .bars i{transform:scaleY(0);transform-origin:bottom;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
 .chart.anim .bars i.hot{transition:transform .9s cubic-bezier(.25,1.3,.4,1)}
 .chart.anim .bars i.hot:after{opacity:0;transition:opacity .3s}
@@ -497,10 +487,9 @@ body.notes .note{display:block}
 </header>
 
 <div class="trackline rel"><div class="wrap">
-  <div class="note"><b>Q</b> 11,000+ confirmed by Veejay, 10 Oct. No logos: they read as customers. The strip shows real breakouts from our searches instead.</div>
+  <div class="note"><b>Q</b> 11,000+ confirmed by Veejay, 10 Oct. No logo strip: logos would read as customers.</div>
   <div class="stat"><span class="count" id="brandCount" data-to="11000">11,000+</span><p class="eyebrow">brands tracked on TikTok</p></div>
 </div>
-<div class="strip" aria-label="Recent breakouts from live Brand Beacon searches"><div class="track"><div class="tile"><img src="img/v1.jpg" alt="" loading="lazy"><span class="q">rhode skin</span><span class="sc">8.6K×</span></div><div class="tile"><img src="img/v5.jpg" alt="" loading="lazy"><span class="q">Dr. Scholl's</span><span class="sc">318×</span></div><div class="tile"><img src="img/v2.jpg" alt="" loading="lazy"><span class="q">rhode skin</span><span class="sc">7.1K×</span></div><div class="tile"><img src="img/v6.jpg" alt="" loading="lazy"><span class="q">CurrentBody</span><span class="sc">93×</span></div><div class="tile"><img src="img/v3.jpg" alt="" loading="lazy"><span class="q">rhode skin</span><span class="sc">6.2K×</span></div><div class="tile"><img src="img/v7.jpg" alt="" loading="lazy"><span class="q">Dr. Scholl's</span><span class="sc">149×</span></div><div class="tile"><img src="img/v4.jpg" alt="" loading="lazy"><span class="q">rhode skin</span><span class="sc">5.9K×</span></div><div class="tile"><img src="img/v8.jpg" alt="" loading="lazy"><span class="q">Dr. Scholl's</span><span class="sc">132×</span></div><div class="tile" aria-hidden="true"><img src="img/v1.jpg" alt="" loading="lazy"><span class="q">rhode skin</span><span class="sc">8.6K×</span></div><div class="tile" aria-hidden="true"><img src="img/v5.jpg" alt="" loading="lazy"><span class="q">Dr. Scholl's</span><span class="sc">318×</span></div><div class="tile" aria-hidden="true"><img src="img/v2.jpg" alt="" loading="lazy"><span class="q">rhode skin</span><span class="sc">7.1K×</span></div><div class="tile" aria-hidden="true"><img src="img/v6.jpg" alt="" loading="lazy"><span class="q">CurrentBody</span><span class="sc">93×</span></div><div class="tile" aria-hidden="true"><img src="img/v3.jpg" alt="" loading="lazy"><span class="q">rhode skin</span><span class="sc">6.2K×</span></div><div class="tile" aria-hidden="true"><img src="img/v7.jpg" alt="" loading="lazy"><span class="q">Dr. Scholl's</span><span class="sc">149×</span></div><div class="tile" aria-hidden="true"><img src="img/v4.jpg" alt="" loading="lazy"><span class="q">rhode skin</span><span class="sc">5.9K×</span></div><div class="tile" aria-hidden="true"><img src="img/v8.jpg" alt="" loading="lazy"><span class="q">Dr. Scholl's</span><span class="sc">132×</span></div></div></div>
 </div>
 
 <section class="grey rel" id="proof"><div class="wrap">
@@ -527,7 +516,7 @@ body.notes .note{display:block}
       <div class="cb">
         <div class="who"><b>@cyr1n32</b><span>1.7K followers</span></div>
         <div class="nums"><div>8.9M<small>views</small></div><div>1.7M<small>likes</small></div><div>25K<small>shares</small></div></div>
-        <a class="lnk" href="https://www.tiktok.com/@cyr1n32" target="_blank" rel="noopener">Watch on TikTok ↗</a><span class="ph" style="display:block;margin-top:6px;font-size:12px">[Video link from Ivan's rhode skin results]</span>
+        <a class="lnk" href="https://www.tiktok.com/@cyr1n32" target="_blank" rel="noopener">Watch on TikTok ↗</a>
       </div>
     </article>
     <article class="card">
