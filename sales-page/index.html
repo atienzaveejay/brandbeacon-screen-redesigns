@@ -44,23 +44,23 @@ nav.top .wrap{display:flex;align-items:center;justify-content:space-between;heig
 .navr .lnk:hover{color:var(--ink)}
 
 /* hero */
-.hero{text-align:center;padding:48px 0 40px}
+.hero{text-align:center;padding:76px 0 56px}
 .pill{display:inline-flex;gap:8px;align-items:center;border:1px solid var(--line);background:var(--off);border-radius:999px;padding:7px 15px;font-size:14px;font-weight:600;color:var(--ink2)}
 .pill i{width:8px;height:8px;border-radius:50%;background:var(--y)}
-h1{font-size:64px;line-height:1.04;font-weight:800;letter-spacing:-.025em;margin:22px auto 18px;max-width:1060px}
+h1{font-size:60px;line-height:1.06;font-weight:800;letter-spacing:-.025em;margin:0 auto 20px;max-width:1000px}
 h1 mark{white-space:nowrap;background:linear-gradient(transparent 64%,var(--y) 64%);color:inherit;padding:0 2px}
 .sub{font-size:20px;line-height:1.5;color:var(--ink2);max-width:640px;margin:0 auto}
-.search{max-width:620px;margin:32px auto 0}
-.inp{display:flex;align-items:center;gap:10px;border:1.5px solid var(--line);border-radius:18px;padding:8px 8px 8px 20px;background:#fff;box-shadow:0 10px 30px rgba(20,15,0,.07);transition:border-color .15s,box-shadow .15s}
+.search{max-width:680px;margin:48px auto 0}
+.inp{display:flex;align-items:center;gap:12px;border:2px solid var(--y);border-radius:20px;padding:10px 10px 10px 22px;background:#fff;box-shadow:0 0 0 6px rgba(255,198,41,.16),0 14px 36px rgba(20,15,0,.08);transition:border-color .15s,box-shadow .15s}
 .inp:focus-within{border-color:var(--y);box-shadow:0 0 0 5px rgba(255,198,41,.22),0 10px 30px rgba(20,15,0,.07)}
 .inp svg{flex:0 0 auto;color:var(--ink3)}
-.inp input{flex:1;min-width:0;border:0;outline:0;font:inherit;font-size:17px;color:var(--ink);background:transparent;padding:10px 0}
+.inp input{flex:1;min-width:0;border:0;outline:0;font:inherit;font-size:18.5px;color:var(--ink);background:transparent;padding:10px 0}
 .inp input::placeholder{color:#a8a397}
-.micro{font-size:14px;color:var(--ink2);margin-top:12px}
+.micro{font-size:14px;color:var(--ink2);margin-top:14px}
 .micro b{color:var(--ink);font-weight:700}
 
 /* hero media */
-.media{max-width:960px;margin:44px auto 0;position:relative}
+.media{max-width:960px;margin:84px auto 0;position:relative}
 .media [data-pane]{display:none}
 .media[data-show=video] [data-pane=video],.media[data-show=app] [data-pane=app]{display:block}
 
@@ -216,7 +216,7 @@ h2{font-size:44px;line-height:1.08;font-weight:800;letter-spacing:-.02em;margin-
 .stp .num{font-family:'Space Mono',monospace;font-weight:700;color:var(--brown);font-size:13px}
 .stp h3{font-size:21px;margin-top:10px;font-weight:800}
 .stp p{font-size:15.5px;color:var(--ink2);margin-top:6px;line-height:1.5}
-.stp .vis{margin-top:20px;height:92px;border-radius:14px;background:var(--off);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;overflow:hidden}
+.stp .vis{margin-top:20px;height:104px;border-radius:14px;background:var(--off);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;overflow:hidden}
 .mini-inp{width:100%;height:42px;background:#fff;border:1.5px solid var(--line);border-radius:10px;display:flex;align-items:center;padding:0 12px;font-weight:600;font-size:15px}
 .mini-inp:after{content:"";width:2px;height:18px;background:var(--ink);margin-left:2px;animation:blink 1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
@@ -375,6 +375,32 @@ body.notes .note{display:block}
 .cards.anim.in .card:nth-child(2){transition-delay:.14s}
 .cards.anim.in .card:nth-child(3){transition-delay:.28s}
 .card .score b{font-variant-numeric:tabular-nums}
+
+.logos{margin-top:34px;display:grid;gap:14px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.lrow{display:flex;gap:14px;width:max-content;animation:lmove 48s linear infinite}
+.lrow.b{animation-direction:reverse;animation-duration:54s}
+.logos:hover .lrow{animation-play-state:paused}
+@keyframes lmove{to{transform:translateX(calc(-50% - 7px))}}
+.bchip{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px 18px 10px 10px;box-shadow:0 4px 14px rgba(20,15,0,.05)}
+.bchip img{width:42px;height:42px;border-radius:11px;border:1px solid var(--line)}
+.bchip span{display:flex;flex-direction:column;text-align:left;line-height:1.2}
+.bchip b{font-size:15px}
+.bchip small{font-size:12.5px;color:var(--ink3)}
+@media (prefers-reduced-motion: reduce){.lrow{animation:none}.logos{overflow-x:auto}}
+.th .playbtn{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;background:rgba(255,198,41,.95);display:grid;place-items:center;border:0;cursor:pointer;box-shadow:0 0 0 10px rgba(255,198,41,.25);transition:transform .15s;z-index:2}
+.th .playbtn:hover{transform:translate(-50%,-50%) scale(1.06)}
+.card .th[data-vid]:not([data-vid=""]){cursor:pointer}
+.card .th[data-vid=""] .playbtn{display:none}
+.vmodal{position:fixed;inset:0;background:rgba(20,15,0,.78);display:none;align-items:center;justify-content:center;z-index:100;padding:20px}
+.vmodal.on{display:flex}
+.vmodal .box{position:relative;height:min(86vh,760px);aspect-ratio:9/16;max-width:100%;border-radius:18px;overflow:hidden;background:#000}
+.vmodal iframe{width:100%;height:100%;border:0}
+.vmodal .x{position:absolute;top:10px;right:10px;z-index:2;width:38px;height:38px;border-radius:50%;border:0;background:rgba(255,255,255,.92);font-size:20px;cursor:pointer}
+.stp .kw{width:100%;align-self:stretch;display:flex;flex-direction:column;justify-content:center}
+.stp .kw .chips{justify-content:flex-start;gap:6px}
+.stp .kw .chip{font-size:11.5px;padding:3px 9px;gap:5px}
+.stp .kw .chip:before{width:10px;height:10px}
+.stp .kw .q{font-size:12px;color:var(--ink3);font-weight:700;margin-bottom:6px;text-align:left}
 </style>
 </head>
 <body>
@@ -399,8 +425,7 @@ body.notes .note{display:block}
 
 <header class="hero rel" id="top">
   <div class="wrap">
-    <div class="note"><b>2</b> Headline names the outcome. One subhead line. <b>5</b> Header button scrolls here instead of opening Google sign in.</div>
-    <span class="pill"><i></i>For brand, social and TikTok Shop teams</span>
+    <div class="note"><b>2</b> Headline names the outcome. One subhead line. Audience label dropped and more space around the search box (Ivan, 9 Oct). <b>5</b> Header button scrolls here instead of opening Google sign in.</div>
     <h1>See which TikToks are <mark>breaking out</mark> <br class="d">in your category this week</h1>
     <p class="sub">Facebook has an ad library. Organic TikTok doesn't. So we built it.</p>
 
@@ -487,23 +512,23 @@ body.notes .note{display:block}
 </header>
 
 <div class="trackline rel"><div class="wrap">
-  <div class="note"><b>Q</b> 11,000+ confirmed by Veejay, 10 Oct. No logo strip: logos would read as customers.</div>
+  <div class="note"><b>Q</b> 11,000+ confirmed by Veejay, 10 Oct. Brand strip as on the live page (Ivan, 9 Oct). Follower counts are copied from the live site.</div>
   <div class="stat"><span class="count" id="brandCount" data-to="11000">11,000+</span><p class="eyebrow">brands tracked on TikTok</p></div>
 </div>
+<div class="logos" aria-label="Brands tracked on Brand Beacon"><div class="lrow a"><div class="bchip"><img src="img/brands/glossier.svg" alt="Glossier logo" loading="lazy"><span><b>Glossier</b><small>Beauty · 4.2M</small></span></div><div class="bchip"><img src="img/brands/gopure.svg" alt="GoPure logo" loading="lazy"><span><b>GoPure</b><small>Skincare · 1.8M</small></span></div><div class="bchip"><img src="img/brands/ridge.svg" alt="Ridge logo" loading="lazy"><span><b>Ridge</b><small>Accessories · 3.1M</small></span></div><div class="bchip"><img src="img/brands/olipop.svg" alt="Olipop logo" loading="lazy"><span><b>Olipop</b><small>Beverage · 6.7M</small></span></div><div class="bchip"><img src="img/brands/caraway.svg" alt="Caraway logo" loading="lazy"><span><b>Caraway</b><small>Home · 2.4M</small></span></div><div class="bchip"><img src="img/brands/loops.svg" alt="Loops logo" loading="lazy"><span><b>Loops</b><small>Skincare · 980K</small></span></div><div class="bchip" aria-hidden="true"><img src="img/brands/glossier.svg" alt="Glossier logo" loading="lazy"><span><b>Glossier</b><small>Beauty · 4.2M</small></span></div><div class="bchip" aria-hidden="true"><img src="img/brands/gopure.svg" alt="GoPure logo" loading="lazy"><span><b>GoPure</b><small>Skincare · 1.8M</small></span></div><div class="bchip" aria-hidden="true"><img src="img/brands/ridge.svg" alt="Ridge logo" loading="lazy"><span><b>Ridge</b><small>Accessories · 3.1M</small></span></div><div class="bchip" aria-hidden="true"><img src="img/brands/olipop.svg" alt="Olipop logo" loading="lazy"><span><b>Olipop</b><small>Beverage · 6.7M</small></span></div><div class="bchip" aria-hidden="true"><img src="img/brands/caraway.svg" alt="Caraway logo" loading="lazy"><span><b>Caraway</b><small>Home · 2.4M</small></span></div><div class="bchip" aria-hidden="true"><img src="img/brands/loops.svg" alt="Loops logo" loading="lazy"><span><b>Loops</b><small>Skincare · 980K</small></span></div></div><div class="lrow b"><div class="bchip"><img src="img/brands/hexclad.svg" alt="Hexclad logo" loading="lazy"><span><b>Hexclad</b><small>Kitchen · 5.3M</small></span></div><div class="bchip"><img src="img/brands/vessi.svg" alt="Vessi logo" loading="lazy"><span><b>Vessi</b><small>Footwear · 1.2M</small></span></div><div class="bchip"><img src="img/brands/bala.svg" alt="Bala logo" loading="lazy"><span><b>Bala</b><small>Fitness · 2.9M</small></span></div><div class="bchip"><img src="img/brands/mudwtr.svg" alt="Mud\Wtr logo" loading="lazy"><span><b>Mud\Wtr</b><small>Beverage · 3.8M</small></span></div><div class="bchip"><img src="img/brands/solawave.svg" alt="Solawave logo" loading="lazy"><span><b>Solawave</b><small>Beauty Tech · 4.6M</small></span></div><div class="bchip"><img src="img/brands/jonesroad.svg" alt="Jones Road logo" loading="lazy"><span><b>Jones Road</b><small>Beauty · 7.1M</small></span></div><div class="bchip" aria-hidden="true"><img src="img/brands/hexclad.svg" alt="Hexclad logo" loading="lazy"><span><b>Hexclad</b><small>Kitchen · 5.3M</small></span></div><div class="bchip" aria-hidden="true"><img src="img/brands/vessi.svg" alt="Vessi logo" loading="lazy"><span><b>Vessi</b><small>Footwear · 1.2M</small></span></div><div class="bchip" aria-hidden="true"><img src="img/brands/bala.svg" alt="Bala logo" loading="lazy"><span><b>Bala</b><small>Fitness · 2.9M</small></span></div><div class="bchip" aria-hidden="true"><img src="img/brands/mudwtr.svg" alt="Mud\Wtr logo" loading="lazy"><span><b>Mud\Wtr</b><small>Beverage · 3.8M</small></span></div><div class="bchip" aria-hidden="true"><img src="img/brands/solawave.svg" alt="Solawave logo" loading="lazy"><span><b>Solawave</b><small>Beauty Tech · 4.6M</small></span></div><div class="bchip" aria-hidden="true"><img src="img/brands/jonesroad.svg" alt="Jones Road logo" loading="lazy"><span><b>Jones Road</b><small>Beauty · 7.1M</small></span></div></div></div>
 </div>
 
 <section class="grey rel" id="proof"><div class="wrap">
-  <div class="note"><b>1</b> Real breakouts from three live searches replace the six testimonials. <b>4</b> One Breakout Score definition, worded as in the live app.</div>
+  <div class="note"><b>1</b> Real breakouts from three live searches replace the six testimonials. <b>4</b> One Breakout Score definition everywhere: against the creator's average video (Ivan, 9 Oct). Videos play here instead of linking out.</div>
   <div class="proof-top">
     <div class="explain">
-      <p class="eyebrow">What a breakout is</p>
-      <h2>A breakout outperforms its follower count</h2>
-      <p>A breakout gets far more engagement than its creator's follower count predicts. <b>Breakout Score</b> measures that gap, so you see which ideas worked, not which accounts are big.</p>
+      <h2>A Breakout outperforms the creator's average video</h2>
+      <p>A Breakout gets far more views and engagement than that creator usually gets. <b>Breakout Score</b> measures that gap, so you see which ideas worked, not which accounts are big.</p>
     </div>
-    <div class="chart" aria-label="Illustration of a breakout against what an account that size usually gets">
-      <div class="ttl"><span>Ten videos from accounts with about 2K followers</span><span>engagement</span></div>
+    <div class="chart" aria-label="Illustration of a breakout against what that creator usually gets">
+      <div class="ttl"><span>One creator's last 10 videos</span><span>views</span></div>
       <div class="bars">
-        <div class="baseline"><span>usual for that size</span></div>
+        <div class="baseline"><span>their usual</span></div>
         <i style="height:16%"></i><i style="height:22%"></i><i style="height:14%"></i><i style="height:19%"></i><i style="height:25%"></i><i style="height:17%"></i><i class="hot" style="height:92%"></i><i style="height:21%"></i><i style="height:15%"></i><i style="height:20%"></i>
       </div>
       <p class="cap2">Example. Each bar is one video. The yellow one broke out.</p>
@@ -512,27 +537,24 @@ body.notes .note{display:block}
 
   <div class="cards">
     <article class="card">
-      <div class="th"><img src="img/v1.jpg" alt="TikTok frame: rhode peptide lip tint on raspberries in ice"><span class="tag">SEARCH: RHODE SKIN</span><span class="score"><b>8.6K×</b><span>Breakout<br>Score</span></span></div>
+      <div class="th" data-vid=""><button class="playbtn" aria-label="Play video"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#140f00"/></svg></button><img src="img/v1.jpg" alt="TikTok frame: rhode peptide lip tint on raspberries in ice"><span class="tag">SEARCH: RHODE SKIN</span><span class="score"><b>8.6K×</b><span>Breakout<br>Score</span></span></div>
       <div class="cb">
         <div class="who"><b>@cyr1n32</b><span>1.7K followers</span></div>
         <div class="nums"><div>8.9M<small>views</small></div><div>1.7M<small>likes</small></div><div>25K<small>shares</small></div></div>
-        <a class="lnk" href="https://www.tiktok.com/@cyr1n32" target="_blank" rel="noopener">Watch on TikTok ↗</a>
       </div>
     </article>
     <article class="card">
-      <div class="th"><img src="img/v5.jpg" alt="TikTok frame: creator zipping up a brown wide calf boot on a porch"><span class="tag">SEARCH: DR. SCHOLL'S</span><span class="score"><b>318×</b><span>Breakout<br>Score</span></span></div>
+      <div class="th" data-vid="7667704326613159182"><button class="playbtn" aria-label="Play video"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#140f00"/></svg></button><img src="img/v5.jpg" alt="TikTok frame: creator zipping up a brown wide calf boot on a porch"><span class="tag">SEARCH: DR. SCHOLL'S</span><span class="score"><b>318×</b><span>Breakout<br>Score</span></span></div>
       <div class="cb">
         <div class="who"><b>@makaylasargent13</b><span>7.5K followers</span></div>
         <div class="nums"><div>2.3M<small>views</small></div><div>28.7K<small>likes</small></div><div>1.4K<small>shares</small></div></div>
-        <a class="lnk" href="https://www.tiktok.com/@makaylasargent13/video/7667704326613159182" target="_blank" rel="noopener">Watch on TikTok ↗</a>
       </div>
     </article>
     <article class="card">
-      <div class="th"><img src="img/v6.jpg" alt="TikTok frame: CurrentBody LED face masks on sale in a store display"><span class="tag">SEARCH: CURRENTBODY</span><span class="score"><b>93×</b><span>Breakout<br>Score</span></span></div>
+      <div class="th" data-vid="7570361891399142670"><button class="playbtn" aria-label="Play video"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#140f00"/></svg></button><img src="img/v6.jpg" alt="TikTok frame: CurrentBody LED face masks on sale in a store display"><span class="tag">SEARCH: CURRENTBODY</span><span class="score"><b>93×</b><span>Breakout<br>Score</span></span></div>
       <div class="cb">
         <div class="who"><b>@by_swetha</b><span>890 followers</span></div>
         <div class="nums"><div>89K<small>views</small></div><div>1.2K<small>likes</small></div><div>435<small>shares</small></div></div>
-        <a class="lnk" href="https://www.tiktok.com/@by_swetha/video/7570361891399142670" target="_blank" rel="noopener">Watch on TikTok ↗</a>
       </div>
     </article>
   </div>
@@ -546,8 +568,8 @@ body.notes .note{display:block}
   <h2>One search in, Viral Breakouts out</h2>
   <div class="steps">
     <div class="stp"><span class="num">01</span><h3>Type a brand or product</h3><p>Yours, a competitor's, or something you sell.</p><div class="vis"><div class="mini-inp">rhode skin</div></div></div>
-    <div class="stp"><span class="num">02</span><h3>Keep the keywords that fit</h3><p>We suggest the terms people already pair with it on TikTok.</p><div class="vis"><div class="chips"><span class="chip sel">rhode beauty</span><span class="chip sel">tula skincare</span><span class="chip">rhode skin review</span></div></div></div>
-    <div class="stp"><span class="num">03</span><h3>See the breakouts</h3><p>Ranked by Breakout Score: weighted engagement relative to the creator's follower count.</p><div class="vis"><div class="stack"><img src="img/v1.jpg" alt=""><img src="img/v3.jpg" alt=""><img src="img/v4.jpg" alt=""><img src="img/v2.jpg" alt=""></div></div></div>
+    <div class="stp"><span class="num">02</span><h3>Keep the keywords that fit</h3><p>We suggest the terms people already pair with it on TikTok.</p><div class="vis"><div class="kw"><p class="q">Keywords for rhode skin</p><div class="chips"><span class="chip sel">rhode beauty</span><span class="chip sel">rhode skin review</span><span class="chip">rhode skin unboxing</span></div></div></div></div>
+    <div class="stp"><span class="num">03</span><h3>See the breakouts</h3><p>Ranked by Breakout Score: how far each video beat that creator's average.</p><div class="vis"><div class="stack"><img src="img/v1.jpg" alt=""><img src="img/v3.jpg" alt=""><img src="img/v4.jpg" alt=""><img src="img/v2.jpg" alt=""></div></div></div>
   </div>
   <div class="after"><a class="btn lg js-cta" href="#search">Run your free search <span class="arr">→</span></a></div>
 </div></section>
@@ -564,7 +586,7 @@ body.notes .note{display:block}
     </div>
     <div class="box muted"><h3 class="eyebrow" style="color:var(--ink2)">Not built for</h3>
       <div class="li"><span class="no">×</span>Instagram or YouTube research. Brand Beacon covers TikTok only.</div>
-      <div class="li"><span class="no">×</span>Ranking videos by raw views. We score each one against the creator's follower count.</div>
+      <div class="li"><span class="no">×</span>Ranking videos by raw views. We score each one against that creator's average.</div>
     </div>
   </div>
   <div class="after"><a class="btn lg js-cta" href="#search">Run your free search <span class="arr">→</span></a></div>
@@ -608,7 +630,7 @@ body.notes .note{display:block}
   <div class="faq">
     <details open><summary>What does a free search show me?</summary><p>The TikToks about your brand or product that broke out, ranked by Breakout Score, with views, likes and each creator's followers. A breakdown of why each video worked comes with Growth and Scale.</p></details>
     <details><summary>What counts as one search?</summary><p>One brand or one product. Add as many related keywords as you like and it still counts as one search.</p></details>
-    <details><summary>Why focus on breakouts?</summary><p>4 million views from a creator with 4 million followers is normal. 4 million views from a creator with 4 thousand followers means the video itself did something right. Those are breakouts, and they're the ones worth learning from.</p></details>
+    <details><summary>Why focus on breakouts?</summary><p>4 million views from a creator who usually gets 4 million is normal. 4 million views from a creator who usually gets 4 thousand means the video itself did something right. Those are breakouts, and they're the ones worth learning from.</p></details>
     <details><summary>Is the free search a trial?</summary><p>No. You get 3 free searches, no credit card needed. The 8-day free trial of Growth or Scale is separate, and that one does need a card.</p></details>
     <details><summary>What happens after the 8-day trial?</summary><p>If you don't cancel before the 8 days are up, we charge your card for the plan you picked, monthly or yearly.</p></details>
     <details><summary>How do I cancel my trial?</summary><p>Go to Settings, then Subscription, and cancel before the trial ends. You won't be charged.</p></details>
@@ -629,6 +651,7 @@ body.notes .note{display:block}
   <span>© 2026 Brand Beacon</span>
 </div></footer>
 
+<div class="vmodal" id="vmodal" role="dialog" aria-label="TikTok video"><div class="box"><button class="x" aria-label="Close">×</button><div id="vframe" style="height:100%"></div></div></div>
 <script>
 // Real results from a rhode skin search on brandbeacon.io, last run Oct 9 2026 (Ivan's account).
 const VIDS=[
@@ -658,7 +681,7 @@ $('#chips').addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c
 // run search
 function run(){
   go('s2');const fill=$('#barFill'),txt=$('#stepTxt');const n=document.querySelectorAll('#chips .chip.sel').length||1;
-  const steps=['Pulling TikToks for '+n+' keyword'+(n>1?'s':''),"Comparing each video to its creator's follower count",'Ranking by Breakout Score'];
+  const steps=['Pulling TikToks for '+n+' keyword'+(n>1?'s':''),"Comparing each video to its creator's average",'Ranking by Breakout Score'];
   let t=0;fill.style.transition='none';fill.style.width='0';requestAnimationFrame(()=>{fill.style.transition='width 2.1s ease';fill.style.width='100%'});
   txt.textContent=steps[0];setTimeout(()=>txt.textContent=steps[1],700);setTimeout(()=>txt.textContent=steps[2],1400);
   setTimeout(()=>go('s3'),2250);
@@ -679,7 +702,7 @@ function openRO(i){
   $('#ro').innerHTML=`<div class="ro">
     <div class="side"><div class="th"><img src="${v.img}" alt=""></div><div class="h">${v.h}</div><div class="f">${v.f} · posted ${v.date}</div>
       <div class="st"><span>▶ ${v.views}</span><span>♥ ${v.likes}</span><span>💬 ${v.com}</span><span>↗ ${v.sh}</span></div></div>
-    <div><div class="panel"><div class="big"><b>${v.exact||v.score}</b><span>Breakout Score, weighted engagement vs ${v.h}'s follower count</span></div><p class="cap">“${v.cap}”</p>${analysis}</div></div>
+    <div><div class="panel"><div class="big"><b>${v.exact||v.score}</b><span>Breakout Score: how far it beat ${v.h}'s average</span></div><p class="cap">“${v.cap}”</p>${analysis}</div></div>
   </div>`;
   const tabs=$('#roTabs');if(tabs)tabs.onclick=e=>{const b=e.target.closest('button');if(!b)return;tabs.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));
     $('#tWhy').style.display=b.dataset.t==='why'?'':'none';$('#tNext').style.display=b.dataset.t==='next'?'':'none'};
@@ -748,6 +771,13 @@ const onView=(el,fn,th=.35)=>{const io=new IntersectionObserver(es=>{if(es.some(
     for(let i=1;i<=w.length&&!stop;i++){inp.placeholder=w.slice(0,i);await wait(70)}
     await wait(1500);for(let i=w.length;i>=0&&!stop;i--){inp.placeholder=w.slice(0,i);await wait(30)}await wait(300)}
     inp.placeholder=base})()})();
+// proof cards play the TikTok in place
+(()=>{const m=$('#vmodal'),f=$('#vframe');if(!m)return;
+  const close=()=>{m.classList.remove('on');f.innerHTML=''};
+  document.querySelectorAll('#proof .th[data-vid]').forEach(th=>th.addEventListener('click',()=>{const id=th.dataset.vid;if(!id)return;
+    f.innerHTML=`<iframe src="https://www.tiktok.com/player/v1/${id}?autoplay=1&rel=0&description=1" allow="autoplay; fullscreen; encrypted-media" allowfullscreen title="TikTok video"></iframe>`;m.classList.add('on')}));
+  m.addEventListener('click',e=>{if(e.target===m||e.target.closest('.x'))close()});
+  addEventListener('keydown',e=>{if(e.key==='Escape')close()})})();
 </script>
 </body>
 </html>
