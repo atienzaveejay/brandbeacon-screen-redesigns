@@ -174,8 +174,9 @@ h2{font-size:44px;line-height:1.08;font-weight:800;letter-spacing:-.02em;margin-
 
 .trackline{text-align:center;padding:10px 0 72px}
 .trackline .eyebrow{color:var(--ink);letter-spacing:.16em}
-.trackline .count{display:inline-block;font-variant-numeric:tabular-nums;min-width:7.2ch;text-align:right;color:var(--ink);font-weight:800;font-size:1.45em;vertical-align:-.1em;letter-spacing:.04em}
-.trackline .count .plus{display:inline-block;opacity:0;transform:scale(.4);transition:opacity .3s,transform .35s cubic-bezier(.3,1.6,.5,1)}
+.trackline .stat{display:flex;flex-direction:column;align-items:center;gap:10px}
+.trackline .count{display:inline-block;font-variant-numeric:tabular-nums;min-width:6.2ch;text-align:center;color:var(--ink);font-weight:800;font-size:clamp(46px,6vw,68px);line-height:1;letter-spacing:-.02em}
+.trackline .count .plus{display:inline-block;color:var(--yd);opacity:0;transform:scale(.4);transition:opacity .3s,transform .35s cubic-bezier(.3,1.6,.5,1)}
 .trackline .count.done .plus{opacity:1;transform:none}
 
 /* proof */
@@ -223,6 +224,16 @@ h2{font-size:44px;line-height:1.08;font-weight:800;letter-spacing:-.02em;margin-
 .stp .chip{font-size:12.5px;padding:4px 10px;cursor:default}
 .stack{display:flex;gap:8px}
 .stack img{width:52px;height:66px;object-fit:cover;border-radius:8px}
+.stp .chip{transition:background .25s,border-color .25s}
+.anim .stp{opacity:0;transform:translateY(18px);transition:opacity .5s,transform .6s cubic-bezier(.2,.8,.2,1)}
+.anim.in .stp{opacity:1;transform:none}
+.anim.in .stp:nth-child(2){transition-delay:.12s}
+.anim.in .stp:nth-child(3){transition-delay:.24s}
+.anim .mini-inp:after{animation:none}
+.anim .mini-inp.typing:after{animation:blink 1s steps(1) infinite}
+.anim .stack img{opacity:0;transform:translateY(16px) scale(.8);transition:opacity .3s,transform .5s cubic-bezier(.3,1.5,.5,1),box-shadow .3s}
+.anim .stack img.on{opacity:1;transform:none}
+.anim .stack img.top{box-shadow:0 0 0 3px var(--y);transform:translateY(-4px)}
 
 /* who */
 .two{display:grid;grid-template-columns:1.25fr 1fr;gap:24px;margin-top:48px;text-align:left}
@@ -464,8 +475,8 @@ body.notes .note{display:block}
 </header>
 
 <div class="trackline rel"><div class="wrap">
-  <div class="note"><b>Q</b> 11,000+ confirmed by Veejay, 10 Oct. Logo strip stays cut until its follower numbers are confirmed.</div>
-  <p class="eyebrow">Tracking the TikTok footprint of <span class="count" id="brandCount" data-to="11000">11,000+</span> brands</p>
+  <div class="note"><b>Q</b> 11,000+ confirmed by Veejay, 10 Oct. Shown as a stat on its own; the logo strip stays cut until its follower numbers are confirmed.</div>
+  <div class="stat"><span class="count" id="brandCount" data-to="11000">11,000+</span><p class="eyebrow">brands tracked on TikTok</p></div>
 </div></div>
 
 <section class="grey rel" id="proof"><div class="wrap">
@@ -482,7 +493,7 @@ body.notes .note{display:block}
         <div class="baseline"><span>usual for that size</span></div>
         <i style="height:16%"></i><i style="height:22%"></i><i style="height:14%"></i><i style="height:19%"></i><i style="height:25%"></i><i style="height:17%"></i><i class="hot" style="height:92%"></i><i style="height:21%"></i><i style="height:15%"></i><i style="height:20%"></i>
       </div>
-      <p class="cap2">Illustration. Brand Beacon finds the tall bar among every account that posts about you.</p>
+      <p class="cap2">Example. Each bar is one video. The yellow one broke out.</p>
     </div>
   </div>
 
@@ -512,7 +523,7 @@ body.notes .note{display:block}
       </div>
     </article>
   </div>
-  <p class="srcline">Breakout Scores and views from live Brand Beacon searches: rhode skin (Oct 9), Dr. Scholl's and CurrentBody (Sep 28). Followers, likes and shares checked on TikTok, Oct 10.</p>
+  <p class="srcline">Real results from live Brand Beacon searches.</p>
   <div class="after"><a class="btn lg js-cta" href="#search">Run your free search <span class="arr">→</span></a></div>
 </div></section>
 
@@ -683,13 +694,25 @@ $('#heroGo').onclick=()=>{const q=$('#heroInput').value.trim();setMedia('app');g
 addEventListener('scroll',()=>$('#nav').classList.toggle('scrolled',scrollY>8),{passive:true});
 // count up the brand number when it scrolls into view
 (()=>{const el=$('#brandCount');if(!el)return;const to=+el.dataset.to,fmt=n=>n.toLocaleString('en-US');
-  if(matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window))return;
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window)){el.innerHTML=fmt(to)+'<span class="plus">+</span>';el.classList.add('done');return}
   el.innerHTML='0<span class="plus">+</span>';
   const run=()=>{const t0=performance.now(),dur=1600;
     const tick=t=>{const k=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-k,4);
       el.firstChild.nodeValue=fmt(Math.round(to*e));if(k<1)requestAnimationFrame(tick);else el.classList.add('done')};
     requestAnimationFrame(tick)};
   const io=new IntersectionObserver(es=>{if(es.some(x=>x.isIntersecting)){io.disconnect();run()}},{threshold:.6});io.observe(el)})();
+// How it works plays once on scroll: type the search, tick keywords, deal out the breakouts
+(()=>{const sec=$('#how');if(!sec||matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window))return;
+  const inp=sec.querySelector('.mini-inp'),chips=[...sec.querySelectorAll('.stp .chip')],imgs=[...sec.querySelectorAll('.stack img')];
+  const word=inp.textContent.trim(),picked=chips.filter(c=>c.classList.contains('sel'));
+  sec.classList.add('anim');inp.textContent='';chips.forEach(c=>c.classList.remove('sel'));
+  const wait=ms=>new Promise(r=>setTimeout(r,ms));
+  const play=async()=>{sec.classList.add('in');await wait(500);inp.classList.add('typing');
+    for(const ch of word){inp.textContent+=ch;await wait(85)}
+    await wait(350);for(const c of picked){c.classList.add('sel');await wait(380)}
+    await wait(250);for(const im of imgs){im.classList.add('on');await wait(140)}
+    await wait(400);imgs[0]&&imgs[0].classList.add('top')};
+  const io=new IntersectionObserver(es=>{if(es.some(x=>x.isIntersecting)){io.disconnect();play()}},{threshold:.35});io.observe(sec.querySelector('.steps'))})();
 </script>
 </body>
 </html>
