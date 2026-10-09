@@ -363,6 +363,28 @@ body.notes .note{display:block}
   .seg button{padding:5px 9px;font-size:12px}
   .note{position:static;margin:0 0 14px;max-width:none}
 }
+
+/* motion */
+.strip{margin-top:34px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.strip .track{display:flex;gap:14px;width:max-content;animation:marquee 46s linear infinite}
+.strip:hover .track{animation-play-state:paused}
+@keyframes marquee{to{transform:translateX(calc(-50% - 7px))}}
+.tile{position:relative;width:112px;height:150px;border-radius:14px;overflow:hidden;flex:none;background:#eee;box-shadow:0 6px 16px rgba(20,15,0,.10)}
+.tile img{width:100%;height:100%;object-fit:cover}
+.tile:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 45%,rgba(20,15,0,.72))}
+.tile .q{position:absolute;left:8px;top:8px;z-index:1;font-family:'Space Mono',monospace;font-size:9.5px;color:#fff;background:rgba(20,15,0,.7);border-radius:6px;padding:2px 6px}
+.tile .sc{position:absolute;left:8px;bottom:8px;z-index:1;font-weight:900;font-size:17px;color:var(--y)}
+@media (prefers-reduced-motion: reduce){.strip .track{animation:none}.strip{overflow-x:auto}}
+.chart.anim .bars i{transform:scaleY(0);transform-origin:bottom;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.chart.anim .bars i.hot{transition:transform .9s cubic-bezier(.25,1.3,.4,1)}
+.chart.anim .bars i.hot:after{opacity:0;transition:opacity .3s}
+.chart.anim.in .bars i{transform:none}
+.chart.anim.in .bars i.hot:after{opacity:1;transition-delay:1.75s}
+.cards.anim .card{opacity:0;transform:translateY(26px);transition:opacity .5s,transform .65s cubic-bezier(.2,.8,.2,1)}
+.cards.anim.in .card{opacity:1;transform:none}
+.cards.anim.in .card:nth-child(2){transition-delay:.14s}
+.cards.anim.in .card:nth-child(3){transition-delay:.28s}
+.card .score b{font-variant-numeric:tabular-nums}
 </style>
 </head>
 <body>
@@ -475,9 +497,11 @@ body.notes .note{display:block}
 </header>
 
 <div class="trackline rel"><div class="wrap">
-  <div class="note"><b>Q</b> 11,000+ confirmed by Veejay, 10 Oct. Shown as a stat on its own; the logo strip stays cut until its follower numbers are confirmed.</div>
+  <div class="note"><b>Q</b> 11,000+ confirmed by Veejay, 10 Oct. No logos: they read as customers. The strip shows real breakouts from our searches instead.</div>
   <div class="stat"><span class="count" id="brandCount" data-to="11000">11,000+</span><p class="eyebrow">brands tracked on TikTok</p></div>
-</div></div>
+</div>
+<div class="strip" aria-label="Recent breakouts from live Brand Beacon searches"><div class="track"><div class="tile"><img src="img/v1.jpg" alt="" loading="lazy"><span class="q">rhode skin</span><span class="sc">8.6K×</span></div><div class="tile"><img src="img/v5.jpg" alt="" loading="lazy"><span class="q">Dr. Scholl's</span><span class="sc">318×</span></div><div class="tile"><img src="img/v2.jpg" alt="" loading="lazy"><span class="q">rhode skin</span><span class="sc">7.1K×</span></div><div class="tile"><img src="img/v6.jpg" alt="" loading="lazy"><span class="q">CurrentBody</span><span class="sc">93×</span></div><div class="tile"><img src="img/v3.jpg" alt="" loading="lazy"><span class="q">rhode skin</span><span class="sc">6.2K×</span></div><div class="tile"><img src="img/v7.jpg" alt="" loading="lazy"><span class="q">Dr. Scholl's</span><span class="sc">149×</span></div><div class="tile"><img src="img/v4.jpg" alt="" loading="lazy"><span class="q">rhode skin</span><span class="sc">5.9K×</span></div><div class="tile"><img src="img/v8.jpg" alt="" loading="lazy"><span class="q">Dr. Scholl's</span><span class="sc">132×</span></div><div class="tile" aria-hidden="true"><img src="img/v1.jpg" alt="" loading="lazy"><span class="q">rhode skin</span><span class="sc">8.6K×</span></div><div class="tile" aria-hidden="true"><img src="img/v5.jpg" alt="" loading="lazy"><span class="q">Dr. Scholl's</span><span class="sc">318×</span></div><div class="tile" aria-hidden="true"><img src="img/v2.jpg" alt="" loading="lazy"><span class="q">rhode skin</span><span class="sc">7.1K×</span></div><div class="tile" aria-hidden="true"><img src="img/v6.jpg" alt="" loading="lazy"><span class="q">CurrentBody</span><span class="sc">93×</span></div><div class="tile" aria-hidden="true"><img src="img/v3.jpg" alt="" loading="lazy"><span class="q">rhode skin</span><span class="sc">6.2K×</span></div><div class="tile" aria-hidden="true"><img src="img/v7.jpg" alt="" loading="lazy"><span class="q">Dr. Scholl's</span><span class="sc">149×</span></div><div class="tile" aria-hidden="true"><img src="img/v4.jpg" alt="" loading="lazy"><span class="q">rhode skin</span><span class="sc">5.9K×</span></div><div class="tile" aria-hidden="true"><img src="img/v8.jpg" alt="" loading="lazy"><span class="q">Dr. Scholl's</span><span class="sc">132×</span></div></div></div>
+</div>
 
 <section class="grey rel" id="proof"><div class="wrap">
   <div class="note"><b>1</b> Real breakouts from three live searches replace the six testimonials. <b>4</b> One Breakout Score definition, worded as in the live app.</div>
@@ -713,6 +737,27 @@ addEventListener('scroll',()=>$('#nav').classList.toggle('scrolled',scrollY>8),{
     await wait(250);for(const im of imgs){im.classList.add('on');await wait(140)}
     await wait(400);imgs[0]&&imgs[0].classList.add('top')};
   const io=new IntersectionObserver(es=>{if(es.some(x=>x.isIntersecting)){io.disconnect();play()}},{threshold:.35});io.observe(sec.querySelector('.steps'))})();
+// shared: run fn once when el scrolls into view, skip motion if the viewer asked for less
+const calm=matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window);
+const onView=(el,fn,th=.35)=>{const io=new IntersectionObserver(es=>{if(es.some(x=>x.isIntersecting)){io.disconnect();fn()}},{threshold:th});io.observe(el)};
+// breakout chart: ordinary bars rise, then the breakout shoots past the line
+(()=>{const ch=$('.chart');if(!ch||calm)return;const bars=[...ch.querySelectorAll('.bars i')];let k=0;
+  bars.forEach(b=>{b.style.transitionDelay=b.classList.contains('hot')?'1.05s':(k++*.08)+'s'});
+  ch.classList.add('anim');onView(ch,()=>ch.classList.add('in'),.5)})();
+// proof cards slide up, each Breakout Score counts up
+(()=>{const cs=$('#proof .cards');if(!cs||calm)return;cs.classList.add('anim');
+  const bs=[...cs.querySelectorAll('.score b')].map(b=>{const m=b.textContent.match(/^([\d.]+)(K?)(×)$/);return m&&{b,to:+m[1],d:m[1].includes('.')?1:0,suf:m[2]+m[3]}}).filter(Boolean);
+  bs.forEach(x=>x.b.textContent=(0).toFixed(x.d)+x.suf);
+  onView(cs,()=>{cs.classList.add('in');bs.forEach((x,i)=>setTimeout(()=>{const t0=performance.now(),dur=1300;
+    const tick=t=>{const k=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-k,3);x.b.textContent=(x.to*e).toFixed(x.d)+x.suf;if(k<1)requestAnimationFrame(tick)};requestAnimationFrame(tick)},250+i*140))},.3)})();
+// hero placeholder types example searches until the visitor clicks in
+(()=>{const inp=$('#heroInput');if(!inp||calm)return;const base=inp.placeholder,ex=['rhode skin',"Dr. Scholl's",'LED face mask','your competitor'];
+  let stop=false;inp.addEventListener('focus',()=>{stop=true;inp.placeholder=base});
+  const wait=ms=>new Promise(r=>setTimeout(r,ms));
+  (async()=>{await wait(1800);for(let n=0;!stop;n++){const w=ex[n%ex.length];
+    for(let i=1;i<=w.length&&!stop;i++){inp.placeholder=w.slice(0,i);await wait(70)}
+    await wait(1500);for(let i=w.length;i>=0&&!stop;i--){inp.placeholder=w.slice(0,i);await wait(30)}await wait(300)}
+    inp.placeholder=base})()})();
 </script>
 </body>
 </html>
