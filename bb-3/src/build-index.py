@@ -101,12 +101,20 @@ rows = [
      (.27, 'A search that is still running shows here with a progress bar, then a toast when it is ready.'),
      (.78, '<b>Searches added</b> next to Breakdowns (live shows searches only on Library and mobile). <i>Ivan: "searches, breakdowns, etc. in this little bar."</i>')]),
    'no separate Library page. Each sidebar item opens its own list, with the same filters Library has today.'),
- row(5, "my-feed", "My Feed: keep, or replace with search terms",
+ row(5, "my-feed", "Home is your searches, My Feed moves to the left bar",
    before("../img/live-oct11-feed.jpg", "My Feed, live on 11 Oct", "One column feed with This week, Your searches, Hashtags and Climbing", 900),
-   after("app.html", "home", 900, "Home: search terms instead of a feed", [
-     (.07, 'My Feed is removed. Home is the search and the suggestions.'),
-     (.35, '<b>Your searches</b>: each search term with its breakouts, top score, new count and next refresh. <i>Ivan, 6 Oct: "I don\'t even know if we should have one. I think we should just have search terms."</i>')]),
-   'remove My Feed and show your search terms on Home, as you said.'),
+   after("app.html", "home", 900, "A. Your searches as rows, with top breakouts and options", [
+     (.07, '<b>My Feed is a left-bar item</b>, under Home. <i>Ivan, 11 Oct: "defaut home to be search terms but have a left bar option of \'my feed\'."</i>'),
+     (.40, 'Each search adds its top 3 breakouts and three quiet options: Alert me, Keywords, more. <i>Ivan: "it seems kinda bare? should we add or expand \'searches\'? ... but still keep it super simple."</i>')], tag="Option")
+   + after("app.html", "home-b", 1000, "B. One card per search", [
+     (.40, 'Each search gets a card with its three top breakouts, big enough to see the video. Same options, plus Open.'),
+     (.75, 'The last tile adds a search, with how many the plan includes.')], tag="Option")
+   + after("app.html", "home-c", 1000, "C. Rows as before, then new videos", [
+     (.40, 'Your searches stays a plain list.'),
+     (.65, '<b>New in your searches</b>: the four newest breakouts across all searches, with See all in My Feed.')], tag="Pick")
+   + after("app.html", "feed", 1500, "My Feed, from the left bar", [
+     (.05, 'Same as live: one column of cards with This week, Your searches, Hashtags and Climbing beside it.')]),
+   'C. It keeps Your searches as simple as it was and fills Home with the videos people come back for, linking to My Feed for the rest. A and B are there if you would rather expand the searches themselves.'),
  row(6, "onboarding", "Onboarding checklist",
    before(None, "Onboarding", "Not on live: new accounts land on My Feed with no next step."),
    after("app.html", "home-checklist", 900, "Get started, from the sidebar", [

@@ -98,6 +98,7 @@ def sug(items):
 side = f'''<nav class="side" aria-label="Main">
  <a class="logo" href="#home"><span class="logo-mark">{ico('<circle cx="12" cy="12" r="2"/><path d="M8.5 8.5a5 5 0 0 0 0 7"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M5.6 5.6a9 9 0 0 0 0 12.8"/><path d="M18.4 5.6a9 9 0 0 1 0 12.8"/>',18)}</span>Brand Beacon</a>
  <a class="nav on" data-nav="home" href="#home">{ico(I['spark'])}<span id="homelabel">Home</span></a>
+ <a class="nav" data-nav="feed" href="#feed">{ico(I['play'])}My Feed</a>
  <div class="navlabel">SAVED SEARCHES</div>
  <a class="nav ss-item" href="#results"><span class="ssav">rh</span>rhode skin<span class="cnt">3 new</span></a>
  <a class="nav ss-item" href="#results-product"><span class="ssav gl">gl</span>glass skin routine</a>
@@ -178,18 +179,61 @@ rail = f'''<aside class="rail">
   {"".join(f'<div class="hrow"><span>#{t}</span><span class="upg">+{p}%</span></div>' for t,p in [("peptidelip",240),("glazedskin",185),("lipoil",120)])}</div>
 </aside>'''
 
-# ---------- Home without My Feed. Ivan 6 Oct: "I don't even know if we should have one. I think we should just have search terms."
-TERMS = [("rh","","rhode skin","BRAND","55 breakouts · top 8.6K× · next refresh Sep 25","3 new","#results"),
-         ("pl","pl","peptide lip tint","PRODUCT","14 breakouts · top 8.6K× · next refresh Oct 17","","#results-product"),
-         ("gl","gl","glass skin routine","PRODUCT","191 videos · next refresh Oct 14","","#results-product")]
-terms = "".join(f'<a class="term" href="{h}"><span class="ssav lg {c}">{ini}</span><span class="tm"><span class="row"><b>{E(n)}</b><span class="tag gr">{t}</span>{"<span class=cnt>"+nw+"</span>" if nw else ""}</span><i>{d}</i></span>{ico(I["back"].replace("M19 12H5","M5 12h14").replace("M11 6l-6 6 6 6","M13 6l6 6-6 6"),16)}</a>' for ini,c,n,t,d,nw,h in TERMS)
+# ---------- Home = search terms (Ivan 6 Oct: "I think we should just have search terms"; 11 Oct Slack: "defaut home to be search terms
+# but have a left bar option of 'my feed'"). Your searches gets three simple options (11 Oct: "it seems kinda bare? - should we add or
+# expand 'searches'? ... but still keep it super simple ... maybe options?").
+ARROW = ico(I["back"].replace("M19 12H5","M5 12h14").replace("M11 6l-6 6 6 6","M13 6l6 6-6 6"),16)
+TERMS = [dict(ini="rh",c="",n="rhode skin",t="BRAND",d="55 breakouts · top 8.6K× · next refresh Sep 25",nw="3 new",h="#results",
+              top="8.6K×",bk="55",imgs=[0,1,2],alert=True),
+         dict(ini="pl",c="pl",n="peptide lip tint",t="PRODUCT",d="14 breakouts · top 8.6K× · next refresh Oct 17",nw="",h="#results-product",
+              top="8.6K×",bk="14",imgs=[3,4,0],alert=False),
+         dict(ini="gl",c="gl",n="glass skin routine",t="PRODUCT",d="191 videos · next refresh Oct 14",nw="",h="#results-product",
+              top="",bk="0",imgs=[],alert=False)]
+def thumbs(ix, cls="tn"):
+    return "".join(f'<span class="{cls}"><img src="{V[i]["img"]}" alt=""><b>{V[i]["s"]}×</b></span>' for i in ix)
+def opts(x):
+    on = " on" if x["alert"] else ""
+    return (f'<span class="opts"><button class="mini2{on}" data-act="alert-mini" type="button">{ico(I["bell"],13)}<span>{"Alerts on" if x["alert"] else "Alert me"}</span></button>'
+            f'<button class="mini2" type="button" data-act="edit-kw">{ico(I["edit"],13)}Keywords</button>'
+            f'<button class="mini2 ic" type="button" aria-label="More options">{ico(I["more"],13)}</button></span>')
+def head(x):
+    return f'<span class="row"><b>{E(x["n"])}</b><span class="tag gr">{x["t"]}</span>{"<span class=cnt>"+x["nw"]+"</span>" if x["nw"] else ""}</span>'
+# Option A: same list, each row adds its top 3 breakouts and a few quiet options
+termsA = "".join(f'''<div class="term tA"><a class="tlink" href="{x['h']}"><span class="ssav lg {x['c']}">{x['ini']}</span><span class="tm">{head(x)}<i>{x['d']}</i></span></a>
+ <a class="tstrip" href="{x['h']}">{thumbs(x['imgs']) if x['imgs'] else '<span class="quiet">No breakouts yet. Next refresh Oct 14.</span>'}</a>{opts(x)}</div>''' for x in TERMS)
+# Option B: one card per search, two across
+termsB = "".join(f'''<div class="card tB"><a class="row" href="{x['h']}"><span class="ssav lg {x['c']}">{x['ini']}</span><span class="tm">{head(x)}<i>{x['d'].split(' · next')[0]}</i></span></a>
+ <a class="tgrid" href="{x['h']}">{thumbs(x['imgs'],"tn big") if x['imgs'] else '<span class="tnone">No breakouts yet</span>'}</a>
+ <div class="row sb">{opts(x)}<a class="lnk" href="{x['h']}">Open {ARROW}</a></div></div>''' for x in TERMS)
+termsB += f'<a class="card tB add" href="#home-typing">{ico(I["plus"],22)}<b>Add a search</b><span class="quiet">Free includes 3 searches</span></a>'
+# Option C: the list as before, then the newest breakouts across all your searches
+termsC = "".join(f'<a class="term" href="{x["h"]}"><span class="ssav lg {x["c"]}">{x["ini"]}</span><span class="tm">{head(x)}<i>{x["d"]}</i></span>{ARROW}</a>' for x in TERMS)
+newest = "".join(f'''<a class="card nb" href="#results"><span class="thumb"><img src="{V[i]['img']}" alt="">{score(V[i]['s'])}</span><span class="nbb"><b>@{E(V[i]['h'])}</b><i>{w}</i></span></a>'''
+                 for i,w in [(2,"rhode skin · 2 days ago"),(3,"rhode skin · 2 days ago"),(4,"peptide lip tint · 3 days ago"),(0,"rhode skin · 5 days ago")])
 home = f"""<section class="view" id="v-home">
  {searchcard}
  {expand}
- <div id="nofeed">
+ <div class="hopt" data-opt="a">
   <div class="row sb"><h2 class="h2">Your searches</h2><a class="lnk" href="#home">Search history</a></div>
-  <div class="card terms">{terms}</div>
+  <div class="card terms">{termsA}</div>
  </div>
+ <div class="hopt" data-opt="b" hidden>
+  <div class="row sb"><h2 class="h2">Your searches</h2><a class="lnk" href="#home">Search history</a></div>
+  <div class="tBgrid">{termsB}</div>
+ </div>
+ <div class="hopt" data-opt="c" hidden>
+  <div class="row sb"><h2 class="h2">Your searches</h2><a class="lnk" href="#home">Search history</a></div>
+  <div class="card terms">{termsC}</div>
+  <div class="row sb"><h2 class="h2">New in your searches</h2><a class="lnk" href="#feed">See all in My Feed {ARROW}</a></div>
+  <div class="nbgrid">{newest}</div>
+ </div>
+</section>"""
+
+# ---------- My Feed, kept as a left-bar page (Ivan 11 Oct). Same as live: one column of cards, sidebar on the right.
+feed = f"""<section class="view" id="v-feed">
+ <div><h2 class="h2">My Feed</h2><p class="sub">Breakouts from your searches, plus some from across BrandBeacon.</p></div>
+ <div class="feedgrid"><div class="feedcol">{"".join(feed_card(v) for v in V[:3])}</div>{rail}</div>
+ <div class="same">Same as live from here: the feed keeps scrolling.</div>
 </section>"""
 
 # ---------- results. Top numbers per Ivan 6 Oct ("number of breakouts in this run. Average breakout score ... top views, average views");
@@ -353,6 +397,23 @@ a{color:inherit;text-decoration:none}i{font-style:normal}button{font-family:inhe
 .dn{margin-top:8px;font-size:13px;color:#3A3731;background:#FAF8F2;border-radius:10px;padding:8px 12px}
 .plan{font-size:10px;font-weight:800;letter-spacing:.06em;color:#234C8C;background:#EAF0FB;padding:2px 6px;border-radius:6px}.btn.alert.on{background:#FFF6D6;border-color:#F2DE99;color:#6B4B00}
 .mtop{display:none}
+.hopt{display:flex;flex-direction:column;gap:14px}.hopt .h2+*{margin-top:0}.hopt>.card+.row{margin-top:12px}
+.tA{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:10px 16px;padding:14px 12px}.tA+.tA{border-top:1px solid #F0EDE6}
+.tlink{display:flex;align-items:center;gap:14px;min-width:0}.tstrip{display:flex;gap:6px;justify-content:flex-end}
+.tA .opts{grid-column:1/-1;padding-left:50px}
+.tn{position:relative;width:52px;height:66px;border-radius:10px;overflow:hidden;background:#222;flex-shrink:0}.tn img{width:100%;height:100%;object-fit:cover;display:block}
+.tn b{position:absolute;left:3px;right:3px;bottom:3px;background:#fff;border-radius:999px;font-size:10px;font-weight:900;color:#6B4B00;text-align:center;padding:1px 0}
+.opts{display:flex;gap:6px;flex-wrap:wrap}
+.mini2{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;color:#4A463F;border:1px solid #E3DFD4;border-radius:999px;padding:4px 10px}
+.mini2.ic{padding:4px 7px}.mini2.on{background:#FFF6D6;border-color:#F2DE99;color:#6B4B00}
+.tBgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.tB{padding:16px 18px;display:flex;flex-direction:column;gap:14px}
+.tgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;min-height:120px}
+.tn.big{width:auto;height:auto;aspect-ratio:4/5}.tn.big b{font-size:12px;padding:2px 0}
+.tnone{grid-column:1/-1;display:flex;align-items:center;justify-content:center;border:1.5px dashed #DAD6CC;border-radius:12px;color:#6B675F;font-size:13px}
+.tB.add{align-items:center;justify-content:center;gap:6px;border-style:dashed;color:#4A463F;min-height:200px}
+.nbgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.nb{overflow:hidden;display:flex;flex-direction:column}.nb .thumb{aspect-ratio:4/5}.nbb{padding:10px 12px;font-size:13px}.nbb b{display:block}.nbb i{display:block;font-size:12px;color:#6B675F}
 @media (max-width:700px){
  .side{display:none}.app{flex-direction:column}
  .mtop{display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:40;background:#fff;border-bottom:1px solid #ECE9E1;padding:10px 16px}
@@ -363,12 +424,14 @@ a{color:inherit;text-decoration:none}i{font-style:normal}button{font-family:inhe
  .grid3,.ins,.kpis{grid-template-columns:minmax(0,1fr)}.kp+.kp{border-left:0;border-top:1px solid #ECE9E1}
  .rhead .top{flex-direction:column;gap:12px}.acts2{flex-wrap:wrap}.h1{font-size:24px}.kn{font-size:28px}
  .ptabs{overflow-x:auto;white-space:nowrap}.qrow{gap:6px 16px}
+ .tA{grid-template-columns:minmax(0,1fr)}.tstrip{justify-content:flex-start;padding-left:50px}.tBgrid{grid-template-columns:minmax(0,1fr)}.nbgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .feedgrid{grid-template-columns:minmax(0,1fr)}.fc{grid-template-columns:minmax(0,1fr);min-height:0}.fc .thumb{aspect-ratio:4/5}
  .pop{left:16px;right:16px;width:auto;bottom:16px}.statebar{display:none}.thumb.tall{aspect-ratio:4/5}
 }
 .statebar a{color:#fff;font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px;background:#2A2723}.statebar a.on{background:#FFC72C;color:#1A1300}
 '''
 
-states = [("home","Home"),("home-typing","Typing"),("expand","Keywords"),
+states = [("home","Home A: rows"),("home-b","Home B: cards"),("home-c","Home C: + new videos"),("feed","My Feed"),("home-typing","Typing"),("expand","Keywords"),
           ("home-running","Search running"),("home-checklist","Checklist"),("results","Brand results"),("results-product","Product results")]
 statebar = '<div class="statebar">' + "".join(f'<a href="#{k}">{t}</a>' for k,t in states) + '</div>'
 
@@ -380,9 +443,11 @@ function toast(h,ms){var t=$('toast');t.innerHTML=h;t.classList.add('on');clearT
 function markStep(k){var li=document.querySelector('[data-step="'+k+'"]');if(!li||li.classList.contains('done'))return;li.classList.add('done');
  li.querySelector('.ck').innerHTML='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5 9-10"/></svg>';
  var n=document.querySelectorAll('.steps li.done').length;$('obn').textContent=n;$('obbar').style.width=(n*25)+'%';}
-function route(){var h=(location.hash||'#home').slice(1);var v=h==='results'?'results':(h==='results-product'?'results-product':'home');
- ['home','results','results-product'].forEach(function(x){$('v-'+x).classList.toggle('on',x===v)});
- document.querySelector('[data-nav=home]').classList.toggle('on',v==='home');
+function route(){var h=(location.hash||'#home').slice(1);var v=['results','results-product','feed'].indexOf(h)>-1?h:'home';
+ ['home','feed','results','results-product'].forEach(function(x){$('v-'+x).classList.toggle('on',x===v)});
+ document.querySelector('[data-nav=home]').classList.toggle('on',v==='home');document.querySelector('[data-nav=feed]').classList.toggle('on',v==='feed');
+ var opt=h==='home-b'?'b':(h==='home-c'?'c':(h==='home'?'a':(window._opt||'a')));if(h==='home-b'||h==='home-c'||h==='home')window._opt=opt;
+ document.querySelectorAll('.hopt').forEach(function(d){d.hidden=d.dataset.opt!==opt});
  
  $('dd').hidden=h!=='home-typing';$('q').value=(h==='home-typing'||h==='expand')?'rhode':'';
  $('xcard').hidden=h!=='expand';document.querySelector('.scard').hidden=h==='expand';
@@ -401,6 +466,8 @@ document.addEventListener('click',function(e){var b=e.target.closest('[data-act]
  var a=b.getAttribute('data-act');e.preventDefault();
  if(a==='checklist'){var p=$('obpop');p.hidden=!p.hidden;return}
  if(a==='alert'){var on=!b.classList.contains('on');b.classList.toggle('on',on);b.querySelector('span').textContent=on?'Alerts on':'Alert me';toast(on?'We will email you when this search gets a new breakout.':'Alerts off');return}
+ if(a==='alert-mini'){var on2=!b.classList.contains('on');b.classList.toggle('on',on2);b.querySelector('span').textContent=on2?'Alerts on':'Alert me';toast(on2?'We will email you when this search gets a new breakout.':'Alerts off');return}
+ if(a==='edit-kw'){location.hash='#expand';return}
  if(a==='share'){toast('Share link copied. It does not use any of your credits.');return}
  if(a==='analyze'){markStep('analyze');toast('Analyzing. Uses 1 breakdown.')}
  if(a==='save'){markStep('save');b.classList.add('on');toast('Saved to Saved videos')}
@@ -414,7 +481,7 @@ page = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>{css}</style></head><body>
 {statebar}
-<div class="app">{side}{mtop}<main class="main">{home}{results}</main></div>
+<div class="app">{side}{mtop}<main class="main">{home}{feed}{results}</main></div>
 {pop}
 <div class="toast" id="toast" role="status"></div>
 <script>{js}</script></body></html>'''
