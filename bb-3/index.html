@@ -1,0 +1,195 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, nofollow">
+<title>BrandBeacon 3.0 Mockups</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700;800;900&display=swap">
+<style>
+/* Layout: one reading column; each Sheet row is a section with its screen, then short notes and the question for Ivan. */
+:root{
+  --bg:#F5F4F0; --surface:#FFFFFF; --fg:#0B0B0B; --muted:#6B675F; --line:#ECE9E1;
+  --accent:#FFC72C; --accent-soft:#FFF6D6; --accent-ink:#6B4B00;
+  --sans:Figtree,'Segoe UI',system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#141310; --surface:#1D1B17; --fg:#F3F1EC; --muted:#A9A398; --line:#2E2B25;
+  --accent:#FFC72C; --accent-soft:#3A2F10; --accent-ink:#FFD866; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141310; --surface:#1D1B17; --fg:#F3F1EC; --muted:#A9A398; --line:#2E2B25;
+  --accent:#FFC72C; --accent-soft:#3A2F10; --accent-ink:#FFD866; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:16px;line-height:1.55;padding-inline:16px;padding-block:40px 72px}
+.wrap{max-width:980px;margin:0 auto;display:flex;flex-direction:column;gap:56px}
+h1,h2,h3{text-wrap:balance;margin:0;letter-spacing:-.01em}
+h1{font-size:clamp(30px,5vw,44px);font-weight:900;line-height:1.1}
+h2{font-size:24px;font-weight:800}
+h3{font-size:18px;font-weight:800}
+header{display:flex;flex-direction:column;gap:14px}
+.lede{max-width:65ch;color:var(--muted);margin:0}
+.meta{font-size:13px;color:var(--muted)}
+.cta{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;background:var(--accent);color:#1A1300;font-weight:800;padding:12px 20px;border-radius:12px;text-decoration:none}
+.cta:focus-visible,a:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+.states{display:flex;flex-wrap:wrap;gap:8px;font-size:13px}
+.states a{color:var(--accent-ink);background:var(--accent-soft);padding:5px 10px;border-radius:999px;text-decoration:none;font-weight:700}
+section{display:flex;flex-direction:column;gap:16px}
+.opt{display:flex;flex-direction:column;gap:12px;padding-top:8px}
+.row-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 14px}
+.owner{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.pick{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#16603A;background:#E7F4EC;padding:3px 8px;border-radius:6px}
+figure{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+figure img{display:block;width:100%;height:auto}
+figure.narrow{max-width:560px}
+.notes{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;max-width:68ch}
+.ask{max-width:68ch;margin:0;padding:12px 16px;border-radius:12px;background:var(--accent-soft);color:var(--fg)}
+.ask b{color:var(--accent-ink)}
+.sample{font-size:11px;font-weight:800;letter-spacing:.06em;color:#234C8C;background:#EAF0FB;padding:2px 6px;border-radius:6px}
+footer{border-top:1px solid var(--line);padding-top:20px;font-size:14px;color:var(--muted);max-width:68ch}
+footer a,section a{color:var(--accent-ink)}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+</style></head><body>
+
+<div class="wrap">
+<header>
+  <h1>BrandBeacon 3.0 mockups</h1>
+  <p class="lede">The 3.0 rows from the Ivan Sheet, drawn from the picks in the 3.0 Questions Doc. One search box, no My Feed, everything you own in the left sidebar. All numbers come from the real rhode skin run (Sep 18) unless marked <span class="sample">SAMPLE</span>.</p>
+  <span class="meta">Veejay, 9 Oct 2026, first search rows added 10 Oct · desktop, 1440 wide</span>
+  <a class="cta" href="app.html" target="_blank" rel="noopener">Open the clickable prototype</a>
+  <div class="states" aria-label="Jump to a state in the prototype">
+    <a href="app.html#home" target="_blank" rel="noopener">Home</a>
+    <a href="app.html#home-typing" target="_blank" rel="noopener">Typing</a>
+    <a href="app.html#home-running" target="_blank" rel="noopener">Search running</a>
+    <a href="app.html#home-checklist" target="_blank" rel="noopener">Checklist</a>
+    <a href="app.html#results" target="_blank" rel="noopener">Results</a>
+    <a href="app.html#results-updating" target="_blank" rel="noopener">Updating</a>
+    <a href="first-search.html#a" target="_blank" rel="noopener">First search: A, B, C</a>
+  </div>
+</header>
+
+<section id="one-search">
+  <div class="row-head"><h2>One search for brands and products</h2><span class="owner">Veejay</span></div>
+  <figure><img src="shots/search.jpg" alt="Search box with 'rhode' typed. The dropdown shows the TikTok account rhode skin on top, then four keyword suggestions." loading="lazy"></figure>
+  <ul class="notes">
+    <li>No Brand / Product toggle. One box: "Search a brand, product or keyword".</li>
+    <li>If the term matches a TikTok account, the account shows first. Pressing Enter searches everything for one credit.</li>
+  </ul>
+  <p class="ask"><b>For Ivan:</b> when "rhode" matches @rhodeskin, does Enter open the brand page, or keyword results with the brand card on top? The mock does the second.</p>
+</section>
+
+<section id="suggestions">
+  <div class="row-head"><h2>Smarter keyword suggestions</h2><span class="owner">Veejay</span></div>
+  <figure><img src="shots/results.jpg" alt="Results page for rhode skin with a 'Related to rhode skin' card listing five brands and five product terms." loading="lazy"></figure>
+  <ul class="notes">
+    <li>Before a search: two short rows on Home, Brands and Products.</li>
+    <li>After a search: "Related to rhode skin" gives 5 brands and 5 product terms picked for that keyword. Cached, so each keyword costs one AI call a week.</li>
+    <li>No hashtags, since search is keywords only.</li>
+  </ul>
+  <p class="ask"><b>For Ivan:</b> OK to drop hashtags from suggestions?</p>
+</section>
+
+<section id="results-data">
+  <div class="row-head"><h2>Results page data</h2><span class="owner">Veejay</span></div>
+  <ul class="notes">
+    <li>Three numbers up top: Breakouts (55 of 200), Top Breakout Score (8.6K×), Median Breakout Score.</li>
+    <li>Median, not average, because one 8.6K× video drags an average far above a typical breakout. 40 of the 55 sit between 3× and 8×.</li>
+    <li>Views move to a quieter line below: top views, average views, new since your last visit.</li>
+  </ul>
+  <p class="ask"><b>For Ivan:</b> are these the three numbers? You also listed average and top views; they're on the second line.</p>
+</section>
+
+<section id="sidebar">
+  <div class="row-head"><h2>Left sidebar: saved searches, video analyses, search history</h2><span class="owner">Veejay</span></div>
+  <figure class="narrow"><img src="shots/sidebar.jpg" alt="Sidebar with Search, Saved searches (rhode skin with 3 new, peptide lip tint with a progress bar), then Video analyses, Saved videos and History." loading="lazy"></figure>
+  <ul class="notes">
+    <li>Library is gone. Saved searches sit up front, each with a count of new breakouts.</li>
+    <li>A search that's still running shows in the list with a progress bar, then a toast when it's ready. You can keep browsing.</li>
+  </ul>
+  <p class="ask"><b>For Ivan:</b> keep Video analyses and Saved videos as separate items, or merge them into one?</p>
+</section>
+
+<section id="my-feed">
+  <div class="row-head"><h2>My Feed: keep, or replace with search terms</h2><span class="owner">Veejay</span></div>
+  <figure><img src="shots/home.jpg" alt="Home page: a large search box, Brands and Products suggestion rows, and a 'New since your last visit' row of three videos." loading="lazy"></figure>
+  <ul class="notes">
+    <li>My Feed is removed. Home is the big search, the suggestions, and one row of 3 new breakouts from saved searches.</li>
+    <li>Home only reads stored results, so it opens instantly.</li>
+  </ul>
+  <p class="ask"><b>For Ivan:</b> keep the "New since your last visit" row, or show only the search?</p>
+</section>
+
+<section id="onboarding">
+  <div class="row-head"><h2>Onboarding checklist</h2><span class="owner">Veejay</span></div>
+  <figure class="narrow"><img src="shots/checklist.jpg" alt="Get started checklist open from the sidebar: run your first search (done), analyze a video, save a video, share with your team." loading="lazy"></figure>
+  <ul class="notes">
+    <li>A small "1 of 4 done" card at the bottom of the sidebar. Click it to see the steps. It goes away once all four are done.</li>
+    <li>The steps tick themselves off in the prototype as you analyze, save and share.</li>
+  </ul>
+  <p class="ask"><b>For Ivan:</b> Free gets 0 video analyses today. Does Free get one, so "Analyze a video" can be finished?</p>
+</section>
+
+<section id="speed">
+  <div class="row-head"><h2>Speed: slow results, brands stuck loading</h2><span class="owner">Lester</span></div>
+  <figure><img src="shots/updating.jpg" alt="Results page with a yellow 'Updating' bar above the stored results and a placeholder card where new videos will load." loading="lazy"></figure>
+  <ul class="notes">
+    <li>Every page opens on its last stored run. A thin "Updating" bar and placeholder cards show while new videos load. No full-page spinner.</li>
+    <li>For Lester: the brand page never waits on a TikTok fetch. Fetches happen on the weekly refresh or on Refresh now.</li>
+  </ul>
+  <p class="ask"><b>For Lester, once he's back:</b> can every search and brand page load from the database in under 2 seconds?</p>
+</section>
+
+<section id="first-search">
+  <div class="row-head"><h2>First search journey: where BB drops people after Run search</h2><span class="owner">Veejay</span></div>
+  <p class="lede" style="color:var(--fg)">Today: keyword, expand keywords, Run search, then a loading page with nothing to do. Three options for that page. All three keep the search running in the sidebar, email when it's ready, and end on the same Ready screen.</p>
+
+  <div class="opt">
+    <div class="row-head"><h3>A. Wait and learn</h3><span class="pick">My pick for the first search</span></div>
+    <figure><img src="shots/first-a.jpg" alt="Finding peptide lip tint breakouts: three progress steps, an email-me toggle, a How to read your results video, and three breakouts found this week." loading="lazy"></figure>
+    <ul class="notes">
+      <li>Same pattern as UGC Breakouts processing: three steps that say what's happening, a "How to read your results" video, then breakouts other searches found this week.</li>
+      <li>The wait teaches what a Breakout Score is, so the results make sense when they land.</li>
+      <li>"Email me when it's ready" is on by default and says they can leave.</li>
+    </ul>
+  </div>
+
+  <div class="opt">
+    <div class="row-head"><h3>B. Back to Home and keep browsing</h3><span class="owner">Ivan's idea</span></div>
+    <figure><img src="shots/first-b.jpg" alt="Home with a yellow 'peptide lip tint is running' bar on top, the big search box, and breakouts found this week." loading="lazy"></figure>
+    <ul class="notes">
+      <li>Run search lands on Home. A slim bar says it's running, with See progress. Breakouts found this week fill the page.</li>
+      <li>Good for later searches. On the first one, a new user hasn't seen a result yet, so the browse row is easy to misread as their results.</li>
+    </ul>
+  </div>
+
+  <div class="opt">
+    <div class="row-head"><h3>C. Results appear as they're found</h3><span class="owner">Needs Lester</span></div>
+    <figure><img src="shots/first-c.jpg" alt="peptide lip tint results page showing 2 breakouts so far, still checking 140 of 200 videos, with a placeholder card for the next one." loading="lazy"></figure>
+    <ul class="notes">
+      <li>The results page fills in as each video is scored: "2 breakouts so far. Still checking 140 of 200 videos."</li>
+      <li>No empty wait at all, and the best fix long term. It depends on the backend scoring videos one at a time, which belongs with the Speed row.</li>
+    </ul>
+  </div>
+
+  <div class="opt">
+    <div class="row-head"><h3>Ready (all three)</h3></div>
+    <figure><img src="shots/first-ready.jpg" alt="Your peptide lip tint breakouts are ready, three steps ticked, Open your results button. Sidebar shows the search with a Ready tag." loading="lazy"></figure>
+  </div>
+  <ul class="notes">
+    <li>The thumbnails come from the stored rhode skin run; a real peptide lip tint search would show its own. "Usually 1 to 2 minutes" is from our 22 Sept test and should match whatever Lester measures.</li>
+    <li>Recommendation: A now (it only needs the stored "this week" breakouts and the how-to video), C once the Speed work lands, B for every search after the first.</li>
+  </ul>
+  <p class="ask"><b>For Ivan:</b> A for the first search, B for every search after that? And is the how-to video the one from the UGC Breakouts processing screen, or a BB version?</p>
+</section>
+
+<section id="first-email">
+  <div class="row-head"><h2>First search complete email</h2><span class="owner">Veejay</span></div>
+  <figure class="narrow"><img src="shots/first-email.jpg" alt="Email from Ivan: Your peptide lip tint breakouts are ready, with the count, the top Breakout Score, a video still and a See your breakouts button." loading="lazy"></figure>
+  <ul class="notes">
+    <li>Trigger: the first search completes. Once per account, never for later searches. Skip it if they already opened the results.</li>
+    <li>Subject: "Your {{search_term}} breakouts are ready". Preview: "{{breakout_count}} TikTok videos beat their creator's usual views."</li>
+    <li>Type, one picture (the top video's still) and one button, signed by Ivan, like the rest of the program.</li>
+    <li>It replaces B1 "Results ready" in the approved free flow emails, written for someone who left. B1 also listed searches and analyses left; that's dropped, since the free plan has changed since 24 Sept.</li>
+    <li>For Lester: event search_completed (first one), merge tags first_name, search_term, breakout_count, top_score, top_video_thumb, results_url. The 14 and 8.6K× in the mock are merge tag samples.</li>
+  </ul>
+  <p class="ask"><b>For Ivan:</b> did B1 ever go live? If it did, this is a copy change only.</p>
+</section>
+
+<footer>The reasons and competitor notes behind each pick are in the <a href="https://docs.google.com/document/d/1RC3jywBBYKvj5XdEBHXkDCML3vXBOUW6a2Aqc02ulnA/edit" target="_blank" rel="noopener">BB 3.0 Questions Doc</a>. The free flow emails are in the <a href="https://docs.google.com/document/d/1XbB4VjZY8-mr9k32FR8XjxlnrXy6caANthXTwaBgIiw/edit" target="_blank" rel="noopener">Free Flow Emails Doc</a>. The median Breakout Score (6.1×) and average views (2.4M) are placeholders until a live run gives the real figures.</footer>
+</div>
+
+</body></html>

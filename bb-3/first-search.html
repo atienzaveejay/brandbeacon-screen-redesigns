@@ -1,0 +1,190 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex, nofollow"><meta name="viewport" content="width=1440">
+<title>BrandBeacon first search</title>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:Figtree,'Segoe UI',system-ui,sans-serif;color:#0B0B0B;background:#F5F4F0}
+a{color:#7A5600;text-decoration:none}a:hover{color:#4F3800}
+*{box-sizing:border-box}
+.side{width:252px;flex-shrink:0;position:sticky;top:0;height:100vh;align-self:flex-start;background:#fff;border-right:1px solid #ECE9E1;display:flex;flex-direction:column;padding:20px 16px;gap:4px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;padding:4px 6px 22px;color:#0B0B0B}
+.logo-mark{width:32px;height:32px;border-radius:9px;background:#FFC72C;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px}
+.nav{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:12px;font-size:15px;font-weight:600;color:#1F1D1A}
+.nav:hover{background:#FAF8F2;color:#0B0B0B}
+.nav.on{background:#FFF6D6;color:#6B4B00}
+.navlabel{font-size:11px;font-weight:800;letter-spacing:.08em;color:#8C877D;padding:18px 12px 6px}
+.new{margin-left:auto;font-size:10px;font-weight:800;letter-spacing:.06em;color:#6B4B00;background:#FFE58A;padding:3px 7px;border-radius:6px}
+.me{margin-top:auto;display:flex;align-items:center;gap:10px;border:1px solid #ECE9E1;border-radius:14px;padding:10px 12px}
+.av{width:30px;height:30px;border-radius:50%;background:#FFF6D6;color:#6B4B00;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex-shrink:0}
+.main{flex-grow:1;padding:28px 32px 40px;display:flex;flex-direction:column;gap:24px;min-width:0}
+.card{background:#fff;border:1px solid #ECE9E1;border-radius:22px}
+.h1{font-size:30px;font-weight:800;margin:0;letter-spacing:-.01em}
+.h2{font-size:20px;font-weight:800;margin:0;display:flex;align-items:center;gap:10px}
+.h2:before{content:"";width:4px;height:18px;border-radius:2px;background:#FFC72C}
+.h3{font-size:15px;font-weight:800;margin:0}
+.sub{font-size:14px;color:#5E5A52;margin:0;line-height:1.45}
+.muted{color:#6B675F}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 18px;border-radius:12px;font-weight:700;font-size:14px;border:1px solid #E3DFD4;background:#fff;color:#0B0B0B;font-family:inherit;cursor:pointer}
+.btn.y{background:#FFC72C;border-color:#FFC72C;color:#1A1300}
+.btn.k{background:#0B0B0B;border-color:#0B0B0B;color:#fff}
+.btn.sm{height:36px;padding:0 12px;font-size:13px;border-radius:10px}
+.ib{width:44px;height:44px;border-radius:12px;border:1px solid #E3DFD4;background:#fff;display:inline-flex;align-items:center;justify-content:center;color:#0B0B0B;cursor:pointer;flex-shrink:0}
+.chip{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 13px;border-radius:999px;border:1px solid #E3DFD4;background:#fff;font-size:13px;font-weight:600;color:#1F1D1A}
+.chip.on{background:#0B0B0B;border-color:#0B0B0B;color:#fff}
+.dot{width:6px;height:6px;border-radius:50%;background:#FFC72C;display:inline-block}
+.tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;letter-spacing:.06em;padding:4px 8px;border-radius:7px;background:#FFF6D6;color:#6B4B00}
+.tag.g{background:#E7F4EC;color:#16603A}
+.tag.gr{background:#F1EFE9;color:#4A463F}
+.tag.b{background:#EAF0FB;color:#234C8C}
+.score{position:absolute;left:10px;bottom:10px;background:#fff;border-radius:999px;padding:5px 11px 5px 10px;display:flex;align-items:center;gap:6px}
+.score b{font-size:17px;font-weight:900;color:#6B4B00}
+.score span{font-size:10px;font-weight:700;line-height:1.05}
+.dur{position:absolute;right:10px;top:10px;background:rgba(0,0,0,.65);color:#fff;font-size:11px;font-weight:700;padding:3px 7px;border-radius:7px}
+.rank{position:absolute;left:10px;top:10px;background:rgba(0,0,0,.65);color:#fff;font-size:11px;font-weight:800;padding:3px 8px;border-radius:7px}
+.thumb{position:relative;overflow:hidden;background:#222}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.stat4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;border-top:1px solid #F0EDE6;border-bottom:1px solid #F0EDE6;padding:10px 0}
+.stat4 b{display:block;font-size:14px;font-weight:800}
+.stat4 span{font-size:11px;color:#6B675F}
+.cap{font-size:13px;line-height:1.4;color:#2A2723;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin:0}
+.kpi{padding:18px 20px;display:flex;flex-direction:column;gap:4px}
+.kpi .k{font-size:12px;font-weight:700;color:#6B675F}
+.kpi .n{font-size:28px;font-weight:900;letter-spacing:-.01em}
+.kpi .s{font-size:12px;color:#6B675F}
+.row{display:flex;align-items:center;gap:12px}
+.rail-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid #F0EDE6;font-size:14px}
+.bar{height:6px;border-radius:3px;background:#FFC72C}
+.bartrack{height:6px;border-radius:3px;background:#F3F0E8;flex-grow:1;display:flex}
+table{border-collapse:collapse;width:100%}
+th{font-size:11px;letter-spacing:.07em;font-weight:800;color:#6B675F;text-align:left;padding:12px 14px;border-bottom:1px solid #ECE9E1;text-transform:uppercase}
+td{padding:12px 14px;border-bottom:1px solid #F0EDE6;font-size:14px;vertical-align:middle}
+.cb{width:20px;height:20px;border-radius:6px;border:1.5px solid #CFCABF;display:inline-flex;align-items:center;justify-content:center;background:#fff}
+.cb.on{background:#0B0B0B;border-color:#0B0B0B;color:#fff}
+.field{border:1px solid #E3DFD4;border-radius:14px;padding:10px 12px;background:#fff}
+.lbl{font-size:12px;font-weight:800;color:#3A3731;margin-bottom:6px;display:block}
+.toggle{width:40px;height:24px;border-radius:12px;background:#0B0B0B;position:relative;flex-shrink:0}
+.toggle:after{content:"";position:absolute;right:3px;top:3px;width:18px;height:18px;border-radius:50%;background:#FFC72C}
+.toggle.off{background:#DAD6CC}
+.toggle.off:after{left:3px;right:auto;background:#fff}
+
+.tabs{display:flex;gap:4px;border-bottom:1px solid #E6E2D8}
+.tab{padding:10px 14px;font-size:14px;font-weight:700;color:#6B675F;border-bottom:2px solid transparent;margin-bottom:-1px}
+.tab.on{color:#0B0B0B;border-color:#0B0B0B}
+.tab .c{font-weight:600;color:#8C877D;margin-left:4px}
+.link{font-size:14px;font-weight:700;color:#7A5600}
+.quiet{font-size:13px;color:#6B675F}
+.sample{font-size:11px;font-weight:800;letter-spacing:.06em;color:#234C8C;background:#EAF0FB;padding:4px 8px;border-radius:7px}
+
+
+.nav{position:relative}
+.sub2{padding:8px 12px;font-size:14px}
+.ss{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,#F4B6C6,#D9708F);color:#fff;font-weight:900;font-size:11px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.cnt{margin-left:auto;font-size:11px;font-weight:800;color:#6B4B00;background:#FFE58A;padding:2px 7px;border-radius:999px}
+.num{margin-left:auto;font-size:12px;font-weight:700;color:#8C877D}
+.obcard{all:unset;cursor:pointer;border:1px solid #F2DE99;background:#FFFBEB;border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:8px}
+.obcard:focus-visible{outline:2px solid #0B0B0B}
+.pop{position:fixed;left:268px;bottom:150px;width:320px;padding:18px 18px 8px;z-index:30;box-shadow:0 18px 50px rgba(23,21,15,.18)}
+.steps{list-style:none;margin:12px 0 0;padding:0}
+.steps li{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-top:1px solid #F0EDE6}
+.steps li>span:last-child{display:flex;flex-direction:column;gap:2px;font-size:14px}
+.steps .quiet{font-size:12px}
+.ck{width:22px;height:22px;border-radius:50%;border:1.5px solid #CFCABF;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.steps li.done .ck{background:#16603A;border-color:#16603A;color:#fff}
+.steps li.done b{text-decoration:line-through;color:#8C877D}
+.main{padding:32px 48px 64px}
+.view{display:none;flex-direction:column;gap:22px}
+.view.on{display:flex}
+.sbox{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #E3DFD4;border-radius:999px;padding:6px 6px 6px 20px;color:#6B675F}
+.sbox input{all:unset;flex-grow:1;font-size:16px;color:#0B0B0B;font-family:inherit}
+.sbox.big{padding:8px 8px 8px 24px;box-shadow:0 8px 30px rgba(23,21,15,.08)}
+.sbox.big input{font-size:19px}
+.sbox.big .btn{height:52px;border-radius:999px;padding:0 24px;font-size:15px}
+.sbox .btn.sm{border-radius:999px}
+.sbox-wrap{position:relative}
+.dd{position:absolute;left:0;right:0;top:calc(100% + 8px);padding:8px;z-index:20;box-shadow:0 18px 50px rgba(23,21,15,.14)}
+.ddl{font-size:11px;font-weight:800;letter-spacing:.08em;color:#8C877D;padding:10px 12px 6px}
+.ddi{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;color:#0B0B0B;font-size:15px}
+.ddi:hover,.ddi.hi{background:#FAF8F2;color:#0B0B0B}
+.ddi>svg:last-child{margin-left:auto;color:#8C877D}
+.ddi.kw{color:#3A3731}.ddi.kw svg{color:#8C877D}
+.ddi .quiet{font-size:13px}
+.ddf{border-top:1px solid #F0EDE6;margin-top:6px;padding:10px 12px 4px;font-size:12px}
+.tries{display:flex;flex-direction:column;gap:10px;align-items:center}
+.tries .row{justify-content:center}
+.trl{font-size:12px;font-weight:800;color:#8C877D;width:64px;letter-spacing:.04em}
+.chip{cursor:pointer;font-family:inherit}
+.chip:hover{border-color:#0B0B0B}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.nums{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #F0EDE6;padding-top:20px}
+.nums>div{display:flex;flex-direction:column;gap:2px;padding:0 24px;border-left:1px solid #F0EDE6}
+.nums>div:first-child{padding-left:0;border-left:0}
+.nums b{font-size:34px;font-weight:900;letter-spacing:-.01em}
+.nums div:nth-child(2) b{color:#6B4B00}
+.nums span{font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px}
+.nums em{font-style:normal;font-size:13px;color:#6B675F;margin-top:6px;line-height:1.4}
+.sample{font-style:normal;font-size:10px;font-weight:800;letter-spacing:.06em;color:#234C8C;background:#EAF0FB;padding:2px 6px;border-radius:6px}
+.quietrow{display:flex;gap:28px;font-size:13px;color:#6B675F;border-top:1px solid #F0EDE6;padding-top:14px;flex-wrap:wrap}
+.quietrow b{color:#0B0B0B;font-weight:800}
+.rel{padding:18px 22px;display:flex;flex-direction:column;gap:12px}
+.upd{display:flex;align-items:center;gap:10px;font-size:14px;background:#FFFBEB;border:1px solid #F2DE99;border-radius:14px;padding:12px 16px;color:#3A3731}
+.spin{width:16px;height:16px;border-radius:50%;border:2px solid #F2DE99;border-top-color:#6B4B00;animation:sp 0.9s linear infinite;flex-shrink:0}
+@keyframes sp{to{transform:rotate(360deg)}}
+.sk{background:linear-gradient(90deg,#F1EFE9 0%,#F8F6F1 50%,#F1EFE9 100%);background-size:200% 100%;animation:sh 1.4s ease infinite;border-radius:8px}
+@keyframes sh{to{background-position:-200% 0}}
+.toast{position:fixed;right:28px;bottom:28px;background:#0B0B0B;color:#fff;border-radius:14px;padding:14px 18px;font-size:14px;display:flex;align-items:center;gap:12px;box-shadow:0 12px 30px rgba(0,0,0,.25);z-index:40;transform:translateY(160%);visibility:hidden;transition:transform .25s,visibility .25s}
+.toast.on{transform:none;visibility:visible}
+.toast a{color:#FFC72C;font-weight:800}
+.running{cursor:default}
+.prog{animation:pg 3s ease-in-out infinite alternate}
+@keyframes pg{from{width:20%}to{width:85%}}
+[hidden]{display:none!important}
+.statebar{position:fixed;top:12px;right:16px;z-index:50;display:flex;gap:6px;background:rgba(11,11,11,.85);padding:6px;border-radius:12px}
+.statebar a{color:#fff;font-size:12px;font-weight:700;padding:6px 10px;border-radius:8px}
+.statebar a.on{background:#FFC72C;color:#1A1300}
+</style></head><body><div class="statebar" data-hide-in-shot><a href="#a">A · Wait and learn</a><a href="#b">B · Back to Home</a><a href="#c">C · Results as they come</a><a href="#ready">Ready</a></div><div class="opt" id="o-a" style="display:none;min-height:100vh"><nav class="side" aria-label="Main"><a class="logo" href="#a"><span class="logo-mark">BB</span><span>Brand Beacon</span></a>
+<a class="nav" href="#a"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span>Search</span></a>
+<div class="navlabel">SAVED SEARCHES</div>
+<div class="nav sub2"><span class="ss" style="background:#EAF0FB;color:#234C8C">pl</span><span style="display:flex;flex-direction:column;gap:5px;flex-grow:1;min-width:0"><span>peptide lip tint</span><span class="bartrack" style="height:4px"><span class="bar prog" style="height:4px;width:45%"></span></span></span></div>
+<div class="navlabel">YOUR WORK</div>
+<span class="nav"><span>Video analyses</span><span class="num">0</span></span><span class="nav"><span>Saved videos</span><span class="num">0</span></span>
+<div style="margin-top:auto" class="me"><span class="av">V</span><span style="display:flex;flex-direction:column"><b style="font-size:14px">Veejay Atienza</b><span class="quiet" style="font-size:12px">Free plan</span></span></div></nav><main class="main" style="flex-grow:1;min-width:0"><div style="max-width:880px;margin:24px auto 0;width:100%;display:flex;flex-direction:column;gap:28px">
+<div class="card" style="padding:28px 32px;display:flex;flex-direction:column;gap:18px">
+<div style="display:flex;flex-direction:column;gap:6px"><h1 class="h1">Finding peptide lip tint breakouts</h1><span class="quiet">Usually 1 to 2 minutes. You can leave this page.</span></div>
+<ol class="steps" style="margin:0"><li class="done"><span class="ck"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg></span><span><b>Pulling TikTok videos that mention peptide lip tint</b></span></li><li><span class="spin" style="width:22px;height:22px;margin-top:1px"></span><span><b style="color:#0B0B0B">Comparing each one to that creator's usual views</b></span></li><li><span class="ck"></span><span><b style="color:#8C877D">Picking the breakouts</b></span></li></ol><label class="row" style="gap:10px;font-size:14px"><span class="toggle"></span><span>Email me when it's ready <span class="quiet">· veejay@…</span></span></label></div>
+<div class="row" style="gap:20px;align-items:stretch"><div class="thumb" style="width:300px;aspect-ratio:16/9;border-radius:16px;flex-shrink:0;background:#1F1D1A;display:flex;align-items:center;justify-content:center"><span style="width:56px;height:56px;border-radius:50%;background:#FFC72C;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="#1A1300"><path d="M8 5v14l11-7z"/></svg></span><span class="dur">1:30</span></div>
+<div style="display:flex;flex-direction:column;justify-content:center;gap:6px"><h2 class="h3" style="font-size:18px">How to read your results</h2><span class="quiet">What a Breakout Score means and which video to open first. From Ivan.</span></div></div>
+<div style="display:flex;flex-direction:column;gap:16px"><h2 class="h2">Breakouts found this week</h2><div class="grid3"><article class="card vc" style="overflow:hidden;display:flex;flex-direction:column"><div class="thumb" style="aspect-ratio:4/5"><img src="../img/v1.jpg" alt=""><span class="dur">0:20</span><div class="score"><b>8.6K×</b><span>Breakout<br>Score</span></div></div><div style="padding:14px 16px 16px;display:flex;flex-direction:column;gap:10px;flex-grow:1"><div class="row" style="justify-content:space-between"><span style="font-weight:800;font-size:15px">@cyr1n32</span><span class="quiet">Apr 24</span></div><p class="cap">Name me a better marketing brand #rhode #best #aesthetic</p><div class="quiet"><b style="color:#0B0B0B">8.9M</b> views · 1.6K followers</div><div class="row" style="gap:8px;margin-top:auto"><button class="btn sm" style="flex-grow:1" data-act="soon">Open video</button></div></div></article><article class="card vc" style="overflow:hidden;display:flex;flex-direction:column"><div class="thumb" style="aspect-ratio:4/5"><img src="../img/v2.jpg" alt=""><span class="dur">0:11</span><div class="score"><b>7.1K×</b><span>Breakout<br>Score</span></div></div><div style="padding:14px 16px 16px;display:flex;flex-direction:column;gap:10px;flex-grow:1"><div class="row" style="justify-content:space-between"><span style="font-weight:800;font-size:15px">@_ellapalmer_</span><span class="quiet">Oct 31</span></div><p class="cap">Impaled by rhode @rhode skin @Hailey Bieber #halloween2024</p><div class="quiet"><b style="color:#0B0B0B">19.7M</b> views · 3.8K followers</div><div class="row" style="gap:8px;margin-top:auto"><button class="btn sm" style="flex-grow:1" data-act="soon">Open video</button></div></div></article><article class="card vc" style="overflow:hidden;display:flex;flex-direction:column"><div class="thumb" style="aspect-ratio:4/5"><img src="../img/v3.jpg" alt=""><span class="dur">0:10</span><div class="score"><b>6.2K×</b><span>Breakout<br>Score</span></div></div><div style="padding:14px 16px 16px;display:flex;flex-direction:column;gap:10px;flex-grow:1"><div class="row" style="justify-content:space-between"><span style="font-weight:800;font-size:15px">@em_ireland</span><span class="quiet">Jul 9</span></div><p class="cap">It's SO CUTE!! #rhodehoodie #vancouverhoodie #rhodepopup</p><div class="quiet"><b style="color:#0B0B0B">4.8M</b> views · 905 followers</div><div class="row" style="gap:8px;margin-top:auto"><button class="btn sm" style="flex-grow:1" data-act="soon">Open video</button></div></div></article></div></div>
+</div></main></div><div class="opt" id="o-b" style="display:none;min-height:100vh"><nav class="side" aria-label="Main"><a class="logo" href="#a"><span class="logo-mark">BB</span><span>Brand Beacon</span></a>
+<a class="nav" href="#a"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span>Search</span></a>
+<div class="navlabel">SAVED SEARCHES</div>
+<div class="nav sub2"><span class="ss" style="background:#EAF0FB;color:#234C8C">pl</span><span style="display:flex;flex-direction:column;gap:5px;flex-grow:1;min-width:0"><span>peptide lip tint</span><span class="bartrack" style="height:4px"><span class="bar prog" style="height:4px;width:45%"></span></span></span></div>
+<div class="navlabel">YOUR WORK</div>
+<span class="nav"><span>Video analyses</span><span class="num">0</span></span><span class="nav"><span>Saved videos</span><span class="num">0</span></span>
+<div style="margin-top:auto" class="me"><span class="av">V</span><span style="display:flex;flex-direction:column"><b style="font-size:14px">Veejay Atienza</b><span class="quiet" style="font-size:12px">Free plan</span></span></div></nav><main class="main" style="flex-grow:1;min-width:0"><div style="max-width:880px;margin:24px auto 0;width:100%;display:flex;flex-direction:column;gap:28px">
+<div class="upd" style="padding:16px 20px;justify-content:space-between"><span class="row" style="gap:12px"><span class="spin"></span><span><b>peptide lip tint is running.</b> About 1 to 2 minutes. We'll tell you here and by email.</span></span><a class="link" href="#a">See progress</a></div>
+<form class="sbox big"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input placeholder="Search a brand, product or keyword"><button class="btn y" type="button">Find breakouts</button></form>
+<div style="display:flex;flex-direction:column;gap:16px"><h2 class="h2">Breakouts found this week</h2><div class="grid3"><article class="card vc" style="overflow:hidden;display:flex;flex-direction:column"><div class="thumb" style="aspect-ratio:4/5"><img src="../img/v1.jpg" alt=""><span class="dur">0:20</span><div class="score"><b>8.6K×</b><span>Breakout<br>Score</span></div></div><div style="padding:14px 16px 16px;display:flex;flex-direction:column;gap:10px;flex-grow:1"><div class="row" style="justify-content:space-between"><span style="font-weight:800;font-size:15px">@cyr1n32</span><span class="quiet">Apr 24</span></div><p class="cap">Name me a better marketing brand #rhode #best #aesthetic</p><div class="quiet"><b style="color:#0B0B0B">8.9M</b> views · 1.6K followers</div><div class="row" style="gap:8px;margin-top:auto"><button class="btn sm" style="flex-grow:1" data-act="soon">Open video</button></div></div></article><article class="card vc" style="overflow:hidden;display:flex;flex-direction:column"><div class="thumb" style="aspect-ratio:4/5"><img src="../img/v2.jpg" alt=""><span class="dur">0:11</span><div class="score"><b>7.1K×</b><span>Breakout<br>Score</span></div></div><div style="padding:14px 16px 16px;display:flex;flex-direction:column;gap:10px;flex-grow:1"><div class="row" style="justify-content:space-between"><span style="font-weight:800;font-size:15px">@_ellapalmer_</span><span class="quiet">Oct 31</span></div><p class="cap">Impaled by rhode @rhode skin @Hailey Bieber #halloween2024</p><div class="quiet"><b style="color:#0B0B0B">19.7M</b> views · 3.8K followers</div><div class="row" style="gap:8px;margin-top:auto"><button class="btn sm" style="flex-grow:1" data-act="soon">Open video</button></div></div></article><article class="card vc" style="overflow:hidden;display:flex;flex-direction:column"><div class="thumb" style="aspect-ratio:4/5"><img src="../img/v3.jpg" alt=""><span class="dur">0:10</span><div class="score"><b>6.2K×</b><span>Breakout<br>Score</span></div></div><div style="padding:14px 16px 16px;display:flex;flex-direction:column;gap:10px;flex-grow:1"><div class="row" style="justify-content:space-between"><span style="font-weight:800;font-size:15px">@em_ireland</span><span class="quiet">Jul 9</span></div><p class="cap">It's SO CUTE!! #rhodehoodie #vancouverhoodie #rhodepopup</p><div class="quiet"><b style="color:#0B0B0B">4.8M</b> views · 905 followers</div><div class="row" style="gap:8px;margin-top:auto"><button class="btn sm" style="flex-grow:1" data-act="soon">Open video</button></div></div></article></div></div>
+</div></main></div><div class="opt" id="o-c" style="display:none;min-height:100vh"><nav class="side" aria-label="Main"><a class="logo" href="#a"><span class="logo-mark">BB</span><span>Brand Beacon</span></a>
+<a class="nav" href="#a"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span>Search</span></a>
+<div class="navlabel">SAVED SEARCHES</div>
+<div class="nav sub2"><span class="ss" style="background:#EAF0FB;color:#234C8C">pl</span><span style="display:flex;flex-direction:column;gap:5px;flex-grow:1;min-width:0"><span>peptide lip tint</span><span class="bartrack" style="height:4px"><span class="bar prog" style="height:4px;width:45%"></span></span></span></div>
+<div class="navlabel">YOUR WORK</div>
+<span class="nav"><span>Video analyses</span><span class="num">0</span></span><span class="nav"><span>Saved videos</span><span class="num">0</span></span>
+<div style="margin-top:auto" class="me"><span class="av">V</span><span style="display:flex;flex-direction:column"><b style="font-size:14px">Veejay Atienza</b><span class="quiet" style="font-size:12px">Free plan</span></span></div></nav><main class="main" style="flex-grow:1;min-width:0"><div style="max-width:880px;margin:24px auto 0;width:100%;display:flex;flex-direction:column;gap:22px">
+<div class="card" style="padding:24px 28px;display:flex;flex-direction:column;gap:16px">
+<h1 class="h1">peptide lip tint</h1>
+<div class="upd"><span class="spin"></span><span><b>2 breakouts so far.</b> Still checking 140 of 200 videos. New ones appear here as we find them.</span></div>
+<label class="row" style="gap:10px;font-size:14px"><span class="toggle"></span><span>Email me when it's ready <span class="quiet">· veejay@…</span></span></label></div>
+<div style="display:flex;flex-direction:column;gap:16px"><h2 class="h2">Breakouts</h2><div class="grid3"><article class="card vc" style="overflow:hidden;display:flex;flex-direction:column"><div class="thumb" style="aspect-ratio:4/5"><img src="../img/v1.jpg" alt=""><span class="dur">0:20</span><div class="score"><b>8.6K×</b><span>Breakout<br>Score</span></div></div><div style="padding:14px 16px 16px;display:flex;flex-direction:column;gap:10px;flex-grow:1"><div class="row" style="justify-content:space-between"><span style="font-weight:800;font-size:15px">@cyr1n32</span><span class="quiet">Apr 24</span></div><p class="cap">Name me a better marketing brand #rhode #best #aesthetic</p><div class="quiet"><b style="color:#0B0B0B">8.9M</b> views · 1.6K followers</div><div class="row" style="gap:8px;margin-top:auto"><button class="btn sm" style="flex-grow:1" data-act="soon">Open video</button></div></div></article><article class="card vc" style="overflow:hidden;display:flex;flex-direction:column"><div class="thumb" style="aspect-ratio:4/5"><img src="../img/v2.jpg" alt=""><span class="dur">0:11</span><div class="score"><b>7.1K×</b><span>Breakout<br>Score</span></div></div><div style="padding:14px 16px 16px;display:flex;flex-direction:column;gap:10px;flex-grow:1"><div class="row" style="justify-content:space-between"><span style="font-weight:800;font-size:15px">@_ellapalmer_</span><span class="quiet">Oct 31</span></div><p class="cap">Impaled by rhode @rhode skin @Hailey Bieber #halloween2024</p><div class="quiet"><b style="color:#0B0B0B">19.7M</b> views · 3.8K followers</div><div class="row" style="gap:8px;margin-top:auto"><button class="btn sm" style="flex-grow:1" data-act="soon">Open video</button></div></div></article><article class="card" style="overflow:hidden"><div class="sk" style="aspect-ratio:4/5"></div><div style="padding:14px 16px 16px;display:flex;flex-direction:column;gap:10px"><div class="sk" style="height:14px;width:60%"></div><div class="sk" style="height:12px"></div><div class="sk" style="height:36px;border-radius:10px"></div></div></article></div></div>
+</div></main></div><div class="opt" id="o-ready" style="display:none;min-height:100vh"><nav class="side" aria-label="Main"><a class="logo" href="#a"><span class="logo-mark">BB</span><span>Brand Beacon</span></a>
+<a class="nav" href="#a"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span>Search</span></a>
+<div class="navlabel">SAVED SEARCHES</div>
+<a class="nav sub2" href="app.html#results"><span class="ss" style="background:#EAF0FB;color:#234C8C">pl</span><span>peptide lip tint</span><span class="cnt">Ready</span></a>
+<div class="navlabel">YOUR WORK</div>
+<span class="nav"><span>Video analyses</span><span class="num">0</span></span><span class="nav"><span>Saved videos</span><span class="num">0</span></span>
+<div style="margin-top:auto" class="me"><span class="av">V</span><span style="display:flex;flex-direction:column"><b style="font-size:14px">Veejay Atienza</b><span class="quiet" style="font-size:12px">Free plan</span></span></div></nav><main class="main" style="flex-grow:1;min-width:0"><div style="max-width:880px;margin:24px auto 0;width:100%;display:flex;flex-direction:column;gap:28px">
+<div class="card" style="padding:28px 32px;display:flex;flex-direction:column;gap:18px">
+<div style="display:flex;flex-direction:column;gap:6px"><h1 class="h1">Your peptide lip tint breakouts are ready</h1><span class="quiet">Start with the top one. It beat that creator's usual views by the most.</span></div>
+<ol class="steps" style="margin:0"><li class="done"><span class="ck"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg></span><span><b>Pulling TikTok videos that mention peptide lip tint</b></span></li><li class="done"><span class="ck"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg></span><span><b>Comparing each one to that creator's usual views</b></span></li><li class="done"><span class="ck"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg></span><span><b>Picking the breakouts</b></span></li></ol><a class="btn y" style="align-self:flex-start" href="app.html#results">Open your results</a></div>
+</div></main></div><script>if(/shot/.test(location.search)){document.querySelector('.statebar').remove()}
+function r(){var h=(location.hash||'#a').slice(1);document.querySelectorAll('.opt').forEach(function(o){o.style.display=o.id==='o-'+h?'flex':'none'});document.querySelectorAll('.statebar a').forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+h)});scrollTo(0,0)}
+addEventListener('hashchange',r);r();</script></body></html>
