@@ -201,8 +201,7 @@ h2{font-size:44px;line-height:1.08;font-weight:800;letter-spacing:-.02em;margin-
 .vprev .vi small{font-size:11px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em}
 .vprev .vi>span{font-size:12px;color:var(--ink2);margin-top:5px}
 .chart.anim .vprev{opacity:0;transform:translateX(-10px) scale(.96);transition:opacity .35s,transform .45s cubic-bezier(.3,1.4,.5,1)}
-.chart.anim.in .vprev{opacity:1;transform:none;transition-delay:2s}
-.chart.anim.out .vprev{transition-delay:0s}
+.chart.anim.in .vprev{opacity:1;transform:none;transition-delay:1s}
 .chart .cap2{font-size:12.5px;color:var(--ink3);margin-top:10px}
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
 .card{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);text-align:left}
@@ -380,14 +379,12 @@ body.notes .vbelow{display:block}
 }
 
 /* motion */
-.chart.anim .bars i{transform:scaleY(0);transform-origin:bottom;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
-.chart.anim .bars i.hot{transition:transform .9s cubic-bezier(.25,1.3,.4,1)}
+.chart.anim .bars i{transform:scaleY(0);transform-origin:bottom;transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.chart.anim .bars i.hot{transition:transform .55s cubic-bezier(.25,1.3,.4,1)}
 .chart.anim .bars i.hot:after{opacity:0;transition:opacity .3s}
 .chart.anim.in .bars i{transform:none}
-.chart.anim.in .bars i.hot:after{opacity:1;transition-delay:1.75s}
-.chart.anim.out .bars i{transition:transform .45s cubic-bezier(.5,0,.75,0);transition-delay:0s!important}
-.chart.anim.out .bars i.hot:after{transition-delay:0s}
-.chart.anim.in .bars i.hot{animation:hotglow 2.4s ease-in-out 2s infinite}
+.chart.anim.in .bars i.hot:after{opacity:1;transition-delay:.9s}
+.chart.anim.in .bars i.hot{animation:hotglow 1.2s ease-in-out 1s 1}
 @keyframes hotglow{50%{box-shadow:0 0 0 6px rgba(255,198,41,.28)}}
 .cards.anim .card{opacity:0;transform:translateY(26px);transition:opacity .5s,transform .65s cubic-bezier(.2,.8,.2,1)}
 .cards.anim.in .card{opacity:1;transform:none}
@@ -766,30 +763,19 @@ addEventListener('scroll',()=>$('#nav').classList.toggle('scrolled',scrollY>8),{
   const word=inp.textContent.trim(),picked=chips.filter(c=>c.classList.contains('sel'));
   sec.classList.add('anim');inp.textContent='';chips.forEach(c=>c.classList.remove('sel'));
   const wait=ms=>new Promise(r=>setTimeout(r,ms));
-  // loops while the steps are on screen: type, pick keywords, results land, hold, reset
-  let vis=false,running=false;
-  const reset=()=>{inp.classList.remove('typing');inp.textContent='';chips.forEach(c=>c.classList.remove('sel'));imgs.forEach(im=>im.classList.remove('on','top'))};
-  const play=async()=>{if(running)return;running=true;sec.classList.add('in');await wait(500);
-    while(vis){inp.classList.add('typing');
-      for(const ch of word){inp.textContent+=ch;await wait(85)}
-      await wait(350);for(const c of picked){c.classList.add('sel');await wait(380)}
-      await wait(250);for(const im of imgs){im.classList.add('on');await wait(140)}
-      await wait(400);imgs[0]&&imgs[0].classList.add('top');
-      await wait(2600);if(!vis)break;reset();await wait(700)}
-    running=false};
-  new IntersectionObserver(es=>{vis=es.some(x=>x.isIntersecting);if(vis)play()},{threshold:.35}).observe(sec.querySelector('.steps'))})();
+  const play=async()=>{sec.classList.add('in');await wait(250);inp.classList.add('typing');
+    for(const ch of word){inp.textContent+=ch;await wait(45)}
+    await wait(150);for(const c of picked){c.classList.add('sel');await wait(200)}
+    await wait(100);for(const im of imgs){im.classList.add('on');await wait(80)}
+    await wait(200);imgs[0]&&imgs[0].classList.add('top')};
+  const io=new IntersectionObserver(es=>{if(es.some(x=>x.isIntersecting)){io.disconnect();play()}},{threshold:.35});io.observe(sec.querySelector('.steps'))})();
 // shared: run fn once when el scrolls into view, skip motion if the viewer asked for less
 const calm=matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window);
 const onView=(el,fn,th=.35)=>{const io=new IntersectionObserver(es=>{if(es.some(x=>x.isIntersecting)){io.disconnect();fn()}},{threshold:th});io.observe(el)};
 // breakout chart: ordinary bars rise, then the breakout shoots past the line
 (()=>{const ch=$('.chart');if(!ch||calm)return;const bars=[...ch.querySelectorAll('.bars i')];let k=0;
-  bars.forEach(b=>{b.style.transitionDelay=b.classList.contains('hot')?'1.05s':(k++*.08)+'s'});
-  // loops while on screen: bars rise, breakout shoots up, hold, drop, repeat
-  ch.classList.add('anim');let vis=false,running=false;const wait=ms=>new Promise(r=>setTimeout(r,ms));
-  const loop=async()=>{if(running)return;running=true;
-    while(vis){ch.classList.add('in');await wait(4600);if(!vis)break;ch.classList.add('out');ch.classList.remove('in');await wait(700);ch.classList.remove('out');await wait(300)}
-    running=false};
-  new IntersectionObserver(es=>{vis=es.some(x=>x.isIntersecting);if(vis)loop()},{threshold:.5}).observe(ch)})();
+  bars.forEach(b=>{b.style.transitionDelay=b.classList.contains('hot')?'.45s':(k++*.035)+'s'});
+  ch.classList.add('anim');onView(ch,()=>ch.classList.add('in'),.5)})();
 // proof cards slide up, each Breakout Score counts up
 (()=>{const cs=$('#proof .cards');if(!cs||calm)return;cs.classList.add('anim');
   const bs=[...cs.querySelectorAll('.score b')].map(b=>{const m=b.textContent.match(/^([\d.]+)(K?)(×)$/);return m&&{b,to:+m[1],d:m[1].includes('.')?1:0,suf:m[2]+m[3]}}).filter(Boolean);
