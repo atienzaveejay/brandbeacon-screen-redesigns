@@ -36,6 +36,8 @@ I = {
  "bolt": '<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',
  "score": '<path d="M4 20V10"/><path d="M10 20V4"/><path d="M16 20v-7"/><path d="M22 20H2"/>',
  "avg": '<path d="M3 12h18"/><path d="M7 7l-4 5 4 5"/><path d="M17 7l4 5-4 5"/>',
+ "bell": '<path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 20a2 2 0 0 0 4 0"/>',
+ "menu": '<path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/>',
  "tiktok": '<path d="M14 4v10.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 4c.5 2.5 2.5 4 5 4"/>',
 }
 
@@ -94,7 +96,7 @@ side = f'''<nav class="side" aria-label="Main">
  <a class="nav on" data-nav="home" href="#home">{ico(I['spark'])}<span id="homelabel">Home</span></a>
  <div class="navlabel">SAVED SEARCHES</div>
  <a class="nav ss-item" href="#results"><span class="ssav">rh</span>rhode skin<span class="cnt">3 new</span></a>
- <a class="nav ss-item" href="#results"><span class="ssav gl">gl</span>glass skin routine</a>
+ <a class="nav ss-item" href="#results-product"><span class="ssav gl">gl</span>glass skin routine</a>
  <div class="nav run" id="runline" style="display:none"><span class="ssav pl">pl</span><span class="runtxt"><span>peptide lip tint</span><span class="bartrack"><span class="bar prog"></span></span></span></div>
  <div class="navlabel">YOUR WORK</div>
  <a class="nav" href="#home">{ico(I['bookmark'])}Saved videos<span class="num">12</span></a>
@@ -137,12 +139,13 @@ dd = f'''<div class="card dd" id="dd" hidden>
 
 searchcard = f'''<div class="card scard">
  <form class="sbox-wrap" data-search>
-  <div class="sbox">{ico(I['search'],20)}<input id="q" placeholder="Search a brand, product or keyword" autocomplete="off"><button class="btn y pill" type="submit">{ico(I['search'],16)} Find breakouts</button></div>
+  <div class="sbox">{ico(I['search'],20)}<input id="q" placeholder="Search a brand, product or keyword" autocomplete="off"><button class="btn y pill" type="submit" aria-label="Find breakouts">{ico(I['search'],16)}<span class="bl">Find breakouts</span></button></div>
   {dd}
  </form>
  <div class="sugg">
   <div class="srow"><span class="slbl">Brands</span><span class="chipwrap">{sug(["rare beauty","e.l.f.","olipop","drunk elephant","crocs"])}</span></div>
   <div class="srow"><span class="slbl">Products</span><span class="chipwrap">{sug(["peptide lip tint","glazed skin","lip oil","barrier cream","tinted sunscreen"])}</span></div>
+  <div class="srow"><span class="slbl">Hashtags</span><span class="chipwrap">{sug(["#glazedskin","#lipcombo","#skincareroutine","#grwm","#makeuptok"])}</span></div>
  </div>
 </div>'''
 
@@ -158,6 +161,7 @@ expand = f'''<div class="card xcard" id="xcard" hidden>
  <div class="row end"><a class="btn" href="#home">Cancel</a><a class="btn y" href="#results">Run search {ico('<path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>',16)}</a></div>
 </div>'''
 
+mtop = f'''<header class="mtop"><a class="logo" href="#home"><span class="logo-mark">{ico('<circle cx="12" cy="12" r="2"/><path d="M8.5 8.5a5 5 0 0 0 0 7"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/>',16)}</span>Brand Beacon</a><span class="mpill"><b>25</b> of 100 searches</span><button class="ib" aria-label="Menu">{ico(I['menu'],18)}</button></header>'''
 rail = f'''<aside class="rail">
  <div class="card rp"><div class="row sb"><b class="h3">This week</b><span class="quiet sm">since Sep 18</span></div>
   <div class="two"><div><b class="big">55</b><i>new breakouts</i></div><div><b class="big gold">8.6K×</b><i>top Breakout Score</i></div></div></div>
@@ -170,38 +174,64 @@ rail = f'''<aside class="rail">
   {"".join(f'<div class="hrow"><span>#{t}</span><span class="upg">+{p}%</span></div>' for t,p in [("peptidelip",240),("glazedskin",185),("lipoil",120)])}</div>
 </aside>'''
 
-home = f'''<section class="view" id="v-home">
+# ---------- Home without My Feed. Ivan 6 Oct: "I don't even know if we should have one. I think we should just have search terms."
+TERMS = [("rh","","rhode skin","BRAND","55 breakouts · top 8.6K× · next refresh Sep 25","3 new","#results"),
+         ("pl","pl","peptide lip tint","PRODUCT","14 breakouts · top 8.6K× · next refresh Oct 17","","#results-product"),
+         ("gl","gl","glass skin routine","PRODUCT","191 videos · next refresh Oct 14","","#results-product")]
+terms = "".join(f'<a class="term" href="{h}"><span class="ssav lg {c}">{ini}</span><span class="tm"><span class="row"><b>{E(n)}</b><span class="tag gr">{t}</span>{"<span class=cnt>"+nw+"</span>" if nw else ""}</span><i>{d}</i></span>{ico(I["back"].replace("M19 12H5","M5 12h14").replace("M11 6l-6 6 6 6","M13 6l6 6-6 6"),16)}</a>' for ini,c,n,t,d,nw,h in TERMS)
+home = f"""<section class="view" id="v-home">
  {searchcard}
  {expand}
  <div id="nofeed">
-  <div class="row sb"><h2 class="h2">New since your last visit</h2><a class="lnk" href="#results">See all 3 in rhode skin</a></div>
-  <div class="grid3">{"".join(result_card(v,i+1).replace('<span class="rank">'+str(i+1)+'</span>','<span class="rank newb">NEW</span>') for i,v in enumerate(V[2:5]))}</div>
+  <div class="row sb"><h2 class="h2">Your searches</h2><a class="lnk" href="#home">Search history</a></div>
+  <div class="card terms">{terms}</div>
  </div>
-</section>'''
+</section>"""
 
-# ---------- results (live readout kept; top numbers per Ivan 6 Oct: "number of breakouts in this run. Average breakout score
-# ... top views, average views, and then top score, average score")
-results = f'''<section class="view" id="v-results">
+# ---------- results. Top numbers per Ivan 6 Oct ("number of breakouts in this run. Average breakout score ... top views, average views");
+# Insights moved up under the header ("this should be about the content, this should be moved up here");
+# per-keyword alerts ("having notifications on each other keyword"); product search presented on its own terms
+# ("when you do a product search ... how can we present this better?").
+def results_view(vid, kind):
+    brand = kind == "brand"
+    av = '<span class="ssav xl">rh</span>' if brand else '<span class="ssav xl pl">pl</span>'
+    name = "rhode skin" if brand else "peptide lip tint"
+    sub = (f'<span class="tag">BRAND</span><span>@rhodeskin</span>{ico(I["edit"],13)}' if brand else
+           '<span class="tag">PRODUCT</span><span class="quiet">peptide lip tint · peptide lip treatment · lip tint</span>')
+    run = "last run Sep 18 · next refresh Sep 25" if brand else "last run Oct 10 · next refresh Oct 17"
+    n, tot = ("55","200") if brand else ("14","200")
+    S = '' if brand else ' <span class="sample">SAMPLE</span>'
+    kpis = f"""<div class="kpis">
+   <div class="kp"><span class="ti y">{ico(I['bolt'],16)}</span><span class="kl">Breakouts this run{S}</span><b class="kn">{n}</b><span class="ks">{n} of {tot} videos scanned broke out</span></div>
+   <div class="kp"><span class="ti y">{ico(I['score'],16)}</span><span class="kl">Top Breakout Score</span><b class="kn">8.6K×</b><span class="ks">@cyr1n32 got 8.9M views with 1.6K followers.</span></div>
+   <div class="kp"><span class="ti y">{ico(I['avg'],16)}</span><span class="kl">Average Breakout Score <span class="sample">SAMPLE</span></span><b class="kn">740×</b><span class="ks">Across the {n} breakouts in this run.</span></div>
+  </div>"""
+    brands = "" if brand else f"""<div class="brands"><b class="h3">Brands in these breakouts <span class="sample">SAMPLE</span></b><div class="chipwrap">{"".join(f'<a class="chip" href="#results"><span class="ssav sm {c}">{i}</span>{E(t)} <span class="quiet">{k}</span></a>' for i,c,t,k in [("rh","","rhode skin","9"),("t2","gl","tower 28","2"),("gl","gl","glossier","2"),("la","gl","laneige","1")])}</div></div>"""
+    ins = f"""<div><h2 class="h2">Insights</h2><p class="sub">Counted from this run's top breakouts.</p></div>
+ <div class="ins">
+  <div class="card ic"><b class="kn">5 of 5</b><span class="ks">top breakouts come from accounts under 4K followers.</span><span class="dn"><b>Do next:</b> brief small creators. Follower count does not predict a breakout here.</span></div>
+  <div class="card ic"><b class="kn">4 of 5</b><span class="ks">top breakouts run under 15 seconds.</span><span class="dn"><b>Do next:</b> keep the first cut short.</span></div>
+ </div>"""
+    return f"""<section class="view" id="{vid}">
  <a class="goback" href="#home">{ico(I['back'],15)} Go back</a>
  <div class="card rhead">
-  <div class="row sb top"><div class="row"><span class="ssav xl">rh</span><span class="hn"><span class="row"><b class="h1">rhode skin</b></span>
-   <span class="row meta"><span class="tag">BRAND</span><span>@rhodeskin</span>{ico(I['edit'],13)}</span>
-   <span class="row meta"><span class="tag y2">WEEKLY</span><span class="quiet">last run Sep 18 · next refresh Sep 25</span><span class="tag g">● Ready</span></span></span></div>
-   <div class="row"><button class="btn">{ico(I['dl'],16)} Export creator list</button><button class="ib on" aria-label="Saved">{ico(I['bookmark'],16)}</button><button class="ib" aria-label="More">{ico(I['more'],16)}</button></div></div>
-  <div class="kpis">
-   <div class="kp"><span class="ti y">{ico(I['bolt'],16)}</span><span class="kl">Breakouts this run</span><b class="kn">55</b><span class="ks">55 of 200 videos scanned broke out</span></div>
-   <div class="kp"><span class="ti y">{ico(I['score'],16)}</span><span class="kl">Top Breakout Score</span><b class="kn">8.6K×</b><span class="ks">@cyr1n32 got 8.9M views with 1.6K followers.</span></div>
-   <div class="kp"><span class="ti y">{ico(I['avg'],16)}</span><span class="kl">Average Breakout Score <span class="sample">SAMPLE</span></span><b class="kn">740×</b><span class="ks">Across the 55 breakouts in this run.</span></div>
-  </div>
-  <div class="qrow"><span><b>200</b> videos this run</span><span><b>3</b> new this run</span><span><b>19.7M</b> top views</span><span><b>2.4M</b> average views <span class="sample">SAMPLE</span></span><span>first run <b>Sep 18</b></span></div>
+  <div class="row sb top"><div class="row">{av}<span class="hn"><span class="row"><b class="h1">{name}</b></span>
+   <span class="row meta">{sub}</span>
+   <span class="row meta"><span class="tag y2">WEEKLY</span><span class="quiet">{run}</span><span class="tag g">● Ready</span></span></span></div>
+   <div class="row acts2"><button class="btn alert" data-act="alert">{ico(I['bell'],16)} <span>Alert me</span></button><button class="btn">{ico(I['dl'],16)} Export creator list</button><button class="ib on" aria-label="Saved">{ico(I['bookmark'],16)}</button><button class="ib" aria-label="More">{ico(I['more'],16)}</button></div></div>
+  {kpis}
+  <div class="qrow"><span><b>{tot}</b> videos this run</span><span><b>3</b> new this run</span><span><b>19.7M</b> top views</span><span><b>2.4M</b> average views <span class="sample">SAMPLE</span></span><span>first run <b>{"Sep 18" if brand else "Oct 3"}</b></span></div>
  </div>
- <div class="ptabs"><span class="pt on">Videos</span><span class="pt">Insights</span><span class="pt">Analytics</span><span class="pt">When they post</span><span class="pt">More data</span><span class="pt">Hashtags</span></div>
- <div class="row sb"><div><h2 class="h2">Top breakout videos</h2><p class="sub">Ranked by Breakout Score: weighted engagement relative to the creator's follower count.</p></div>
+ {brands}
+ {ins}
+ <div class="ptabs"><span class="pt on">Videos</span><span class="pt">Analytics</span><span class="pt">When they post</span><span class="pt">More data</span><span class="pt">Hashtags</span></div>
+ <div class="row sb wrap"><div><h2 class="h2">Top breakout videos</h2><p class="sub">Ranked by Breakout Score: weighted engagement relative to the creator's follower count.</p></div>
   <div class="row"><button class="btn sm">New this run (3) {ico(I['down'],14)}</button><button class="btn sm">Breakout Score {ico(I['down'],14)}</button></div></div>
  <div class="grid3">{"".join(result_card(v,i+1) for i,v in enumerate(V))}</div>
- <button class="btn loadm">Load 50 more</button>
- <div class="same">Below this, unchanged from live: Insights, AI summary, Analytics, When they post, More data and Hashtags they used.</div>
-</section>'''
+ <button class="btn loadm">Load {int(n)-5} more</button>
+ <div class="same">Below this, unchanged from live: AI summary, Analytics, When they post, More data and Hashtags they used.</div>
+</section>"""
+results = results_view("v-results","brand") + results_view("v-results-product","product")
 
 css = '''
 [hidden]{display:none!important}*{box-sizing:border-box}body{margin:0;font-family:Figtree,'Segoe UI',system-ui,sans-serif;color:#0B0B0B;background:#F5F4F0}
@@ -310,11 +340,32 @@ a{color:inherit;text-decoration:none}i{font-style:normal}button{font-family:inhe
 .toast{visibility:hidden;position:fixed;left:50%;bottom:24px;transform:translate(-50%,120px);background:#0B0B0B;color:#fff;border-radius:14px;padding:12px 18px;font-size:14px;display:flex;gap:14px;align-items:center;transition:transform .25s;z-index:50}
 .toast.on{visibility:visible;transform:translate(-50%,0)}.toast a{color:#FFC72C;font-weight:800}
 .statebar{position:sticky;top:0;z-index:60;display:flex;gap:6px;flex-wrap:wrap;padding:8px 16px;background:#0B0B0B}
+.wrap{flex-wrap:wrap;gap:12px}
+.terms{padding:6px 8px}.term{display:flex;align-items:center;gap:14px;padding:14px 12px;border-radius:14px}.term+.term{border-top:1px solid #F0EDE6}.term:hover{background:#FAF8F2}
+.tm{display:flex;flex-direction:column;gap:3px;flex-grow:1;min-width:0}.tm b{font-size:16px}.tm i{font-size:13px;color:#6B675F}.term>svg{color:#6B675F;flex-shrink:0}
+.ssav.sm{width:20px;height:20px;border-radius:6px;font-size:9px}
+.brands{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.ins{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.ic{padding:18px 20px;display:flex;flex-direction:column;gap:4px}
+.dn{margin-top:8px;font-size:13px;color:#3A3731;background:#FAF8F2;border-radius:10px;padding:8px 12px}
+.btn.alert.on{background:#FFF6D6;border-color:#F2DE99;color:#6B4B00}
+.mtop{display:none}
+@media (max-width:700px){
+ .side{display:none}.app{flex-direction:column}
+ .mtop{display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:40;background:#fff;border-bottom:1px solid #ECE9E1;padding:10px 16px}
+ .mtop .logo{padding:0;font-size:15px;margin-right:auto}.mpill{font-size:12px;color:#6B675F;border:1px solid #ECE9E1;border-radius:999px;padding:4px 10px}.mpill b{color:#0B0B0B}
+ .main{padding:16px 16px 48px}.view{gap:16px}
+ .scard,.xcard,.rhead{padding:16px}.sbox{padding:4px 4px 4px 14px}.sbox input{font-size:16px}.btn.pill{height:44px;width:44px;padding:0;font-size:14px}.bl{display:none}
+ .srow,.krow{flex-direction:column;gap:6px}.srow .slbl,.krow .slbl{line-height:1.4;width:auto}
+ .grid3,.ins,.kpis{grid-template-columns:minmax(0,1fr)}.kp+.kp{border-left:0;border-top:1px solid #ECE9E1}
+ .rhead .top{flex-direction:column;gap:12px}.acts2{flex-wrap:wrap}.h1{font-size:24px}.kn{font-size:28px}
+ .ptabs{overflow-x:auto;white-space:nowrap}.qrow{gap:6px 16px}
+ .pop{left:16px;right:16px;width:auto;bottom:16px}.statebar{display:none}.thumb.tall{aspect-ratio:4/5}
+}
 .statebar a{color:#fff;font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px;background:#2A2723}.statebar a.on{background:#FFC72C;color:#1A1300}
 '''
 
 states = [("home","Home"),("home-typing","Typing"),("expand","Keywords"),
-          ("home-running","Search running"),("home-checklist","Checklist"),("results","Results")]
+          ("home-running","Search running"),("home-checklist","Checklist"),("results","Brand results"),("results-product","Product results")]
 statebar = '<div class="statebar">' + "".join(f'<a href="#{k}">{t}</a>' for k,t in states) + '</div>'
 
 js = '''
@@ -325,8 +376,8 @@ function toast(h,ms){var t=$('toast');t.innerHTML=h;t.classList.add('on');clearT
 function markStep(k){var li=document.querySelector('[data-step="'+k+'"]');if(!li||li.classList.contains('done'))return;li.classList.add('done');
  li.querySelector('.ck').innerHTML='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5 9-10"/></svg>';
  var n=document.querySelectorAll('.steps li.done').length;$('obn').textContent=n;$('obbar').style.width=(n*25)+'%';}
-function route(){var h=(location.hash||'#home').slice(1);var v=h==='results'?'results':'home';
- ['home','results'].forEach(function(x){$('v-'+x).classList.toggle('on',x===v)});
+function route(){var h=(location.hash||'#home').slice(1);var v=h==='results'?'results':(h==='results-product'?'results-product':'home');
+ ['home','results','results-product'].forEach(function(x){$('v-'+x).classList.toggle('on',x===v)});
  document.querySelector('[data-nav=home]').classList.toggle('on',v==='home');
  
  $('dd').hidden=h!=='home-typing';$('q').value=(h==='home-typing'||h==='expand')?'rhode':'';
@@ -345,6 +396,7 @@ document.addEventListener('click',function(e){var b=e.target.closest('[data-act]
  if(b.hasAttribute('data-q')){q.value=b.getAttribute('data-q');location.hash='#expand';document.querySelector('.xt').textContent=b.getAttribute('data-q');return}
  var a=b.getAttribute('data-act');e.preventDefault();
  if(a==='checklist'){var p=$('obpop');p.hidden=!p.hidden;return}
+ if(a==='alert'){var on=!b.classList.contains('on');b.classList.toggle('on',on);b.querySelector('span').textContent=on?'Alerts on':'Alert me';toast(on?'We will email you when this search gets a new breakout.':'Alerts off');return}
  if(a==='analyze'){markStep('analyze');toast('Analyzing. Uses 1 breakdown.')}
  if(a==='save'){markStep('save');b.classList.add('on');toast('Saved to Saved videos')}
 });
@@ -352,12 +404,12 @@ document.querySelectorAll('.rhead .ib.on').forEach(function(b){b.addEventListene
 })();
 '''
 
-page = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex, nofollow"><meta name="viewport" content="width=1440">
+page = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex, nofollow"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>BrandBeacon 3.0 prototype</title>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>{css}</style></head><body>
 {statebar}
-<div class="app">{side}<main class="main">{home}{results}</main></div>
+<div class="app">{side}{mtop}<main class="main">{home}{results}</main></div>
 {pop}
 <div class="toast" id="toast" role="status"></div>
 <script>{js}</script></body></html>'''
