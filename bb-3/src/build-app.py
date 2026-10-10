@@ -191,9 +191,9 @@ results = f'''<section class="view" id="v-results">
   <div class="kpis">
    <div class="kp"><span class="ti y">{ico(I['bolt'],16)}</span><span class="kl">Breakouts this run</span><b class="kn">55</b><span class="ks">55 of 200 videos scanned broke out</span></div>
    <div class="kp"><span class="ti y">{ico(I['score'],16)}</span><span class="kl">Top Breakout Score</span><b class="kn">8.6K×</b><span class="ks">@cyr1n32 got 8.9M views with 1.6K followers.</span></div>
-   <div class="kp"><span class="ti y">{ico(I['avg'],16)}</span><span class="kl">Median Breakout Score <span class="sample">SAMPLE</span></span><b class="kn">6.1×</b><span class="ks">A typical breakout here. Most land between 3× and 8×.</span></div>
+   <div class="kp"><span class="ti y">{ico(I['avg'],16)}</span><span class="kl">Average Breakout Score <span class="sample">SAMPLE</span></span><b class="kn">740×</b><span class="ks">Across the 55 breakouts in this run.</span></div>
   </div>
-  <div class="qrow"><span><b>200</b> videos this run</span><span><b>3</b> new this run</span><span><b>740×</b> average score <span class="sample">SAMPLE</span></span><span><b>19.7M</b> top views</span><span><b>2.4M</b> average views <span class="sample">SAMPLE</span></span><span>first run <b>Sep 18</b></span></div>
+  <div class="qrow"><span><b>200</b> videos this run</span><span><b>3</b> new this run</span><span><b>19.7M</b> top views</span><span><b>2.4M</b> average views <span class="sample">SAMPLE</span></span><span>first run <b>Sep 18</b></span></div>
  </div>
  <div class="ptabs"><span class="pt on">Videos</span><span class="pt">Insights</span><span class="pt">Analytics</span><span class="pt">When they post</span><span class="pt">More data</span><span class="pt">Hashtags</span></div>
  <div class="row sb"><div><h2 class="h2">Top breakout videos</h2><p class="sub">Ranked by Breakout Score: weighted engagement relative to the creator's follower count.</p></div>

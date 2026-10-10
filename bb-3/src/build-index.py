@@ -81,11 +81,11 @@ rows = [
    before("../img/live-oct11-results.jpg", "Results, live on 11 Oct", "Breakouts this refresh, Top Breakout Score, Last refresh", 1000),
    after("app.html", "results", 2194, "Live results page, new top numbers", [
      (.03, 'Header, Export creator list, save, WEEKLY, last run and next refresh, Ready: all as live.'),
-     (.095, '<b>Median Breakout Score</b> replaces the Last refresh box (last and next run are already in the header). The value is a sample.'),
-     (.17, 'Quiet second line: videos this run, new this run, <b>average score</b>, top views, average views, first run. <i>Ivan, 6 Oct: "top views, average views, and then top score, average score."</i>'),
+     (.095, '<b>Average Breakout Score</b> replaces the Last refresh box (last and next run are already in the header). <i>Ivan, 6 Oct: "number of breakouts in this run. Average breakout score."</i> The value is a sample.'),
+     (.17, 'Quiet second line: videos this run, new this run, top views, average views, first run. <i>Ivan: "top views, average views, and then top score, average score."</i>'),
      (.26, 'Tabs, New this run and Breakout Score filters, cards with all four stats, Analyze and save: as live.'),
      (.94, 'Insights, AI summary, Analytics, When they post, More data and Hashtags: unchanged from live.')]),
-   'median up top, because one 8.6K× video pulls an average far above a typical breakout (40 of the 55 sit between 3× and 8×). The average you asked for stays on the second line.'),
+   'average Breakout Score up top, as you asked, next to breakouts this run and the top score.'),
  row(4, "sidebar", "Left sidebar: saved searches, video analyses, search history",
    before("../img/live-oct11-sidebar.jpg", "Sidebar, live on 11 Oct", "My Feed, Brand searches, Product searches, Library, Breakdowns", natural=252),
    after("app.html", "home-running", 1053, "Library items up front", [
