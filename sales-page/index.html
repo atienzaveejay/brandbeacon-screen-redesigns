@@ -191,6 +191,18 @@ h2{font-size:44px;line-height:1.08;font-weight:800;letter-spacing:-.02em;margin-
 .bars i.hot:after{content:"Breakout";position:absolute;top:-28px;left:50%;transform:translateX(-50%);font-size:12px;font-weight:800;background:var(--ink);color:#fff;border-radius:6px;padding:3px 8px;white-space:nowrap;font-style:normal}
 .baseline{position:absolute;left:0;right:0;bottom:34px;border-top:2px dashed #b9b3a3}
 .baseline span{position:absolute;right:0;top:-22px;font-size:11.5px;font-weight:700;color:var(--ink3);background:#fff;padding-left:6px}
+.vprev{position:absolute;left:0;top:0;z-index:3;display:flex;gap:11px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:14px;padding:7px 12px 7px 7px;box-shadow:0 10px 26px rgba(20,15,0,.12);cursor:pointer;font:inherit;color:var(--ink);text-align:left;transition:transform .15s}
+.vprev:hover{transform:translateY(-2px)}
+.vprev .vt{position:relative;flex:0 0 auto;width:62px;height:82px;border-radius:9px;overflow:hidden;background:#222}
+.vprev .vt img{width:100%;height:100%;object-fit:cover;display:block}
+.vprev .pb{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:28px;height:28px;border-radius:50%;background:rgba(255,198,41,.95);display:grid;place-items:center;box-shadow:0 0 0 5px rgba(255,198,41,.25)}
+.vprev .vi{display:flex;flex-direction:column;line-height:1.25}
+.vprev .vi b{font-size:19px;font-weight:800;color:var(--brown)}
+.vprev .vi small{font-size:11px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em}
+.vprev .vi>span{font-size:12px;color:var(--ink2);margin-top:5px}
+.chart.anim .vprev{opacity:0;transform:translateX(-10px) scale(.96);transition:opacity .35s,transform .45s cubic-bezier(.3,1.4,.5,1)}
+.chart.anim.in .vprev{opacity:1;transform:none;transition-delay:2s}
+.chart.anim.out .vprev{transition-delay:0s}
 .chart .cap2{font-size:12.5px;color:var(--ink3);margin-top:10px}
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
 .card{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);text-align:left}
@@ -308,6 +320,7 @@ body.notes .vbelow{display:block}
   .steps{grid-template-columns:1fr}
 }
 @media (max-width:720px){
+  .vprev{padding:5px 9px 5px 5px;gap:8px}.vprev .vt{width:44px;height:58px}.vprev .vi b{font-size:16px}.vprev .vi>span{display:none}
   .wrap{padding:0 16px}
   nav.top .wrap{height:62px}
   .navr .lnk{display:none}
@@ -537,9 +550,10 @@ body.notes .vbelow{display:block}
       <div class="ttl"><span>One creator's last 10 videos</span><span>views</span></div>
       <div class="bars">
         <div class="baseline"><span>their usual</span></div>
+        <button class="vprev" data-vid="7660633484918033682" aria-label="Play the breakout video: @em_ireland, rhode skin"><span class="vt"><img src="img/v3.jpg" alt=""><span class="pb"><svg width="12" height="12" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#140f00"/></svg></span></span><span class="vi"><b>6.2K×</b><small>Breakout Score</small><span>@em_ireland<br>4.8M views · 905 followers</span></span></button>
         <i style="height:16%"></i><i style="height:22%"></i><i style="height:14%"></i><i style="height:19%"></i><i style="height:25%"></i><i style="height:17%"></i><i class="hot" style="height:92%"></i><i style="height:21%"></i><i style="height:15%"></i><i style="height:20%"></i>
       </div>
-      <p class="cap2">Example. Each bar is one video. The yellow one broke out.</p>
+      <p class="cap2">Example. Each bar is one video. The yellow one broke out, like this real rhode video.</p>
     </div>
   </div>
 
@@ -793,7 +807,7 @@ const onView=(el,fn,th=.35)=>{const io=new IntersectionObserver(es=>{if(es.some(
 // proof cards play the TikTok in place
 (()=>{const m=$('#vmodal'),f=$('#vframe');if(!m)return;
   const close=()=>{m.classList.remove('on');f.innerHTML=''};
-  document.querySelectorAll('#proof .th[data-vid]').forEach(th=>th.addEventListener('click',()=>{const id=th.dataset.vid;if(!id)return;
+  document.querySelectorAll('#proof .th[data-vid], #proof .vprev[data-vid]').forEach(th=>th.addEventListener('click',()=>{const id=th.dataset.vid;if(!id)return;
     f.innerHTML=`<iframe src="https://www.tiktok.com/player/v1/${id}?autoplay=1&rel=0&description=1" allow="autoplay; fullscreen; encrypted-media" allowfullscreen title="TikTok video"></iframe>`;m.classList.add('on')}));
   m.addEventListener('click',e=>{if(e.target===m||e.target.closest('.x'))close()});
   addEventListener('keydown',e=>{if(e.key==='Escape')close()})})();
