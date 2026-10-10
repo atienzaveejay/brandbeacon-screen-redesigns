@@ -36,6 +36,7 @@ I = {
  "bolt": '<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',
  "score": '<path d="M4 20V10"/><path d="M10 20V4"/><path d="M16 20v-7"/><path d="M22 20H2"/>',
  "avg": '<path d="M3 12h18"/><path d="M7 7l-4 5 4 5"/><path d="M17 7l4 5-4 5"/>',
+ "share": '<path d="M12 3v12"/><path d="M7 8l5-5 5 5"/><path d="M5 13v7h14v-7"/>',
  "bell": '<path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 20a2 2 0 0 0 4 0"/>',
  "menu": '<path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/>',
  "tiktok": '<path d="M14 4v10.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 4c.5 2.5 2.5 4 5 4"/>',
@@ -81,11 +82,14 @@ def result_card(v, rank):
   <div class="who"><span class="av">{v['h'].strip('_')[0].upper()}</span><span><b>@{E(v['h'])}</b><i>{v['f']} followers</i></span><span class="date">{v['d']}</span></div>
   {new}<p class="capt">{E(v['cap'])}</p>
   <div class="st4"><span>{ico(I['eye'],14)} {v['v']}</span><span>{ico(I['heart'],14)} {v['l']}</span><span>{ico(I['msg'],14)} {v['c']}</span><span>{ico(I['send'],14)} {v['sh']}</span></div>
-  <div class="acts"><button class="btn y grow sm" data-act="analyze">{ico(I['spark'],15)} Analyze video</button><button class="ib round sm" data-act="save" aria-label="Save video">{ico(I['bookmark'],15)}</button></div>
+  <div class="acts"><button class="btn y grow sm" data-act="analyze">{ico(I['spark'],15)} Analyze video</button><button class="ib round sm" data-act="save" aria-label="Save video">{ico(I['bookmark'],15)}</button><button class="ib round sm" data-act="share" aria-label="Share video">{ico(I['share'],15)}</button></div>
  </div></article>'''
 
 def chips(items, on=()):
     return "".join(f'<button class="kw{" on" if t in on else ""}" type="button">{"<span class=cbx>"+ico(I["check"],11,3)+"</span>" if t in on else "<span class=cbx></span>"}{E(t)}</button>' for t in items)
+
+def sug_tags(pairs):
+    return "".join(f'<button class="chip" type="button" data-q="{E(k)}" title="Searches the keyword {E(k)}"><span class="dot"></span>{E(t)}</button>' for t,k in pairs)
 
 def sug(items):
     return "".join(f'<button class="chip" type="button" data-q="{E(t)}"><span class="dot"></span>{E(t)}</button>' for t in items)
@@ -145,7 +149,7 @@ searchcard = f'''<div class="card scard">
  <div class="sugg">
   <div class="srow"><span class="slbl">Brands</span><span class="chipwrap">{sug(["rare beauty","e.l.f.","olipop","drunk elephant","crocs"])}</span></div>
   <div class="srow"><span class="slbl">Products</span><span class="chipwrap">{sug(["peptide lip tint","glazed skin","lip oil","barrier cream","tinted sunscreen"])}</span></div>
-  <div class="srow"><span class="slbl">Hashtags</span><span class="chipwrap">{sug(["#glazedskin","#lipcombo","#skincareroutine","#grwm","#makeuptok"])}</span></div>
+  <div class="srow"><span class="slbl">Hashtags</span><span class="chipwrap">{sug_tags([("#glazedskin","glazed skin"),("#lipcombo","lip combo"),("#skincareroutine","skincare routine"),("#grwm","get ready with me"),("#makeuptok","makeup")])}</span></div>
  </div>
 </div>'''
 
@@ -203,7 +207,7 @@ def results_view(vid, kind):
     S = '' if brand else ' <span class="sample">SAMPLE</span>'
     kpis = f"""<div class="kpis">
    <div class="kp"><span class="ti y">{ico(I['bolt'],16)}</span><span class="kl">Breakouts this run{S}</span><b class="kn">{n}</b><span class="ks">{n} of {tot} videos scanned broke out</span></div>
-   <div class="kp"><span class="ti y">{ico(I['score'],16)}</span><span class="kl">Top Breakout Score</span><b class="kn">8.6K×</b><span class="ks">@cyr1n32 got 8.9M views with 1.6K followers.</span></div>
+   <div class="kp"><span class="ti y">{ico(I['score'],16)}</span><span class="kl">Top Breakout Score</span><b class="kn">8.6K×</b><span class="ks">@cyr1n32 got 8.9M views. Their usual is about 1K.</span></div>
    <div class="kp"><span class="ti y">{ico(I['avg'],16)}</span><span class="kl">Average Breakout Score <span class="sample">SAMPLE</span></span><b class="kn">740×</b><span class="ks">Across the {n} breakouts in this run.</span></div>
   </div>"""
     brands = "" if brand else f"""<div class="brands"><b class="h3">Brands in these breakouts <span class="sample">SAMPLE</span></b><div class="chipwrap">{"".join(f'<a class="chip" href="#results"><span class="ssav sm {c}">{i}</span>{E(t)} <span class="quiet">{k}</span></a>' for i,c,t,k in [("rh","","rhode skin","9"),("t2","gl","tower 28","2"),("gl","gl","glossier","2"),("la","gl","laneige","1")])}</div></div>"""
@@ -218,14 +222,14 @@ def results_view(vid, kind):
   <div class="row sb top"><div class="row">{av}<span class="hn"><span class="row"><b class="h1">{name}</b></span>
    <span class="row meta">{sub}</span>
    <span class="row meta"><span class="tag y2">WEEKLY</span><span class="quiet">{run}</span><span class="tag g">● Ready</span></span></span></div>
-   <div class="row acts2"><button class="btn alert" data-act="alert">{ico(I['bell'],16)} <span>Alert me</span></button><button class="btn">{ico(I['dl'],16)} Export creator list</button><button class="ib on" aria-label="Saved">{ico(I['bookmark'],16)}</button><button class="ib" aria-label="More">{ico(I['more'],16)}</button></div></div>
+   <div class="row acts2"><button class="btn alert" data-act="alert">{ico(I['bell'],16)} <span>Alert me</span><i class="plan">SCALE</i></button><button class="btn">{ico(I['dl'],16)} Export creator list</button><button class="ib on" aria-label="Saved">{ico(I['bookmark'],16)}</button><button class="ib" aria-label="More">{ico(I['more'],16)}</button></div></div>
   {kpis}
   <div class="qrow"><span><b>{tot}</b> videos this run</span><span><b>3</b> new this run</span><span><b>19.7M</b> top views</span><span><b>2.4M</b> average views <span class="sample">SAMPLE</span></span><span>first run <b>{"Sep 18" if brand else "Oct 3"}</b></span></div>
  </div>
  {brands}
  {ins}
  <div class="ptabs"><span class="pt on">Videos</span><span class="pt">Analytics</span><span class="pt">When they post</span><span class="pt">More data</span><span class="pt">Hashtags</span></div>
- <div class="row sb wrap"><div><h2 class="h2">Top breakout videos</h2><p class="sub">Ranked by Breakout Score: weighted engagement relative to the creator's follower count.</p></div>
+ <div class="row sb wrap"><div><h2 class="h2">Top breakout videos</h2><p class="sub">Ranked by Breakout Score: how far each video beat that creator's average video.</p></div>
   <div class="row"><button class="btn sm">New this run (3) {ico(I['down'],14)}</button><button class="btn sm">Breakout Score {ico(I['down'],14)}</button></div></div>
  <div class="grid3">{"".join(result_card(v,i+1) for i,v in enumerate(V))}</div>
  <button class="btn loadm">Load {int(n)-5} more</button>
@@ -347,7 +351,7 @@ a{color:inherit;text-decoration:none}i{font-style:normal}button{font-family:inhe
 .brands{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .ins{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.ic{padding:18px 20px;display:flex;flex-direction:column;gap:4px}
 .dn{margin-top:8px;font-size:13px;color:#3A3731;background:#FAF8F2;border-radius:10px;padding:8px 12px}
-.btn.alert.on{background:#FFF6D6;border-color:#F2DE99;color:#6B4B00}
+.plan{font-size:10px;font-weight:800;letter-spacing:.06em;color:#234C8C;background:#EAF0FB;padding:2px 6px;border-radius:6px}.btn.alert.on{background:#FFF6D6;border-color:#F2DE99;color:#6B4B00}
 .mtop{display:none}
 @media (max-width:700px){
  .side{display:none}.app{flex-direction:column}
@@ -396,7 +400,8 @@ document.addEventListener('click',function(e){var b=e.target.closest('[data-act]
  if(b.hasAttribute('data-q')){q.value=b.getAttribute('data-q');location.hash='#expand';document.querySelector('.xt').textContent=b.getAttribute('data-q');return}
  var a=b.getAttribute('data-act');e.preventDefault();
  if(a==='checklist'){var p=$('obpop');p.hidden=!p.hidden;return}
- if(a==='alert'){var on=!b.classList.contains('on');b.classList.toggle('on',on);b.querySelector('span').textContent=on?'Alerts on':'Alert me';toast(on?'We will email you when this search gets a new breakout.':'Alerts off');return}
+ if(a==='alert'){toast('<span>Alerts are on the Scale plan: an email when this search gets a new breakout.</span><a href="#home">Upgrade</a>',5000);return}
+ if(a==='share'){toast('Share link copied. It does not use any of your credits.');return}
  if(a==='analyze'){markStep('analyze');toast('Analyzing. Uses 1 breakdown.')}
  if(a==='save'){markStep('save');b.classList.add('on');toast('Saved to Saved videos')}
 });

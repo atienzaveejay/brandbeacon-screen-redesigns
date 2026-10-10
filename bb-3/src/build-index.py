@@ -68,7 +68,7 @@ rows = [
      (.07, '<b>No Brand / Product toggle.</b> One box: Search a brand, product or keyword. <i>Ivan, 6 Oct: "having one search. No picking, you just put the keyword."</i>'),
      (.15, 'If the term matches a TikTok account, it shows first in the dropdown.'),
      (.22, 'Find breakouts still opens the keyword step, as on live today (row 2).'),
-     (.30, '<b>Brands, Products and Hashtags</b> rows under the search, before typing. <i>Ivan: "suggest brands, suggest products, suggest hashtags, maybe."</i>')]),
+     (.30, '<b>Brands, Products and Hashtags</b> rows under the search, before typing. <i>Ivan: "suggest brands, suggest products, suggest hashtags, maybe."</i> A hashtag runs as its keyword (#glazedskin searches glazed skin), since search is keywords only (Ivan, 30 Sep).')]),
    'a matching account opens as its brand card (as on live), with the keyword breakouts underneath. One search credit.'),
  row(2, "suggestions", "Smarter keyword suggestions",
    before("../img/live-oct11-expand-panel.jpg", "Keyword step, live on 11 Oct", "rhode still suggests rhode jewelry, earrings and necklace"),
@@ -81,17 +81,18 @@ rows = [
    before("../img/live-oct11-results.jpg", "Results, live on 11 Oct", "Breakouts this refresh, Top Breakout Score, Last refresh", 1000),
    after("app.html", "results", 2413, "Brand results", [
      (.02, 'Header, Export creator list, save, WEEKLY, last run and next refresh, Ready: all as live.'),
-     (.05, '<b>Alert me</b> on each search: an email when it gets a new breakout. <i>Ivan, 6 Oct: "having notifications on each other keyword."</i>'),
+     (.05, '<b>Alert me</b> on each search: an email when it gets a new breakout. <i>Ivan, 6 Oct: "having notifications on each other keyword."</i> Marked Scale, since live pricing lists Virality alerts on Scale; other plans get an upgrade prompt.'),
      (.086, '<b>Average Breakout Score</b> replaces the Last refresh box (last and next run are already in the header). <i>Ivan: "number of breakouts in this run. Average breakout score."</i> The value is a sample.'),
+     (.13, 'Top Breakout Score reads against the creator\'s usual views, not followers. <i>Ivan, 9 Oct: "A Breakout outperforms the creator\'s average video... Breakout Score measures that gap."</i>'),
      (.16, 'Quiet second line: videos this run, new this run, top views, average views, first run. <i>Ivan: "top views, average views, and then top score, average score."</i>'),
      (.21, '<b>Insights moved up</b>, under the header, as counted stats with a Do next. <i>Ivan: "this should be about the content, this should be moved up here."</i>'),
-     (.33, 'Tabs, New this run and Breakout Score filters, cards with all four stats, Analyze and save: as live.'),
+     (.33, 'Tabs, filters and cards with all four stats as live, plus <b>Share</b> next to Analyze and save. <i>Ivan, 30 Sep: "add Share next to Analyze/Save."</i>'),
      (.95, 'AI summary, Analytics, When they post, More data and Hashtags: unchanged from live.')])
    + after("app.html", "results-product", 2469, "Product results", [
      (.02, '<b>PRODUCT</b> tag with the keywords this search ran, where a brand page shows the handle. <i>Ivan, 6 Oct: "when you do a product search ... how can we present this better?"</i>'),
      (.177, '<b>Brands in these breakouts</b>: which brands the winning videos feature, each linking to its brand page. Counts are samples.'),
      (.23, 'Same numbers, Insights, filters and cards as a brand search.')]),
-   'Average Breakout Score up top, as you asked, with Insights moved up and an alert on every search. Product searches lead with the brands in their breakouts.'),
+   'Average Breakout Score up top, as you asked, with Insights moved up, alerts on Scale and Share on every card. Product searches lead with the brands in their breakouts.'),
  row(4, "sidebar", "Left sidebar: saved searches, video analyses, search history",
    before("../img/live-oct11-sidebar.jpg", "Sidebar, live on 11 Oct", "My Feed, Brand searches, Product searches, Library, Breakdowns", natural=252),
    after("app.html", "home-running", 900, "Library items up front", [
