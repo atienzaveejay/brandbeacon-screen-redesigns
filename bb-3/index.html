@@ -1,185 +1,111 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, nofollow">
-<title>BrandBeacon 3.0 Mockups</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700;800;900&display=swap">
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>BrandBeacon 3.0 mockups</title>
+<meta name="description" content="The BrandBeacon 3.0 rows from the Ivan Sheet: live app on the left, the 3.0 design on the right, notes beside each change.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-/* Layout: one reading column; each Sheet row is a section with its screen, then short notes and the question for Ivan. */
-:root{
-  --bg:#F5F4F0; --surface:#FFFFFF; --fg:#0B0B0B; --muted:#6B675F; --line:#ECE9E1;
-  --accent:#FFC72C; --accent-soft:#FFF6D6; --accent-ink:#6B4B00;
-  --sans:Figtree,'Segoe UI',system-ui,sans-serif;
-}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#141310; --surface:#1D1B17; --fg:#F3F1EC; --muted:#A9A398; --line:#2E2B25;
-  --accent:#FFC72C; --accent-soft:#3A2F10; --accent-ink:#FFD866; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#141310; --surface:#1D1B17; --fg:#F3F1EC; --muted:#A9A398; --line:#2E2B25;
-  --accent:#FFC72C; --accent-soft:#3A2F10; --accent-ink:#FFD866; color-scheme:dark}
+:root{--bg:#F5F4F0;--ink:#0B0B0B;--muted:#5E5A52;--line:#E6E2D8;--y:#FFC72C;--ys:#FFF6D6}
 *{box-sizing:border-box}
-body{background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:16px;line-height:1.55;padding-inline:16px;padding-block:40px 72px}
-.wrap{max-width:980px;margin:0 auto;display:flex;flex-direction:column;gap:56px}
-h1,h2,h3{text-wrap:balance;margin:0;letter-spacing:-.01em}
-h1{font-size:clamp(30px,5vw,44px);font-weight:900;line-height:1.1}
-h2{font-size:24px;font-weight:800}
-h3{font-size:18px;font-weight:800}
-header{display:flex;flex-direction:column;gap:14px}
-.lede{max-width:65ch;color:var(--muted);margin:0}
-.meta{font-size:13px;color:var(--muted)}
-.cta{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;background:var(--accent);color:#1A1300;font-weight:800;padding:12px 20px;border-radius:12px;text-decoration:none}
-.cta:focus-visible,a:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
-.states{display:flex;flex-wrap:wrap;gap:8px;font-size:13px}
-.states a{color:var(--accent-ink);background:var(--accent-soft);padding:5px 10px;border-radius:999px;text-decoration:none;font-weight:700}
-section{display:flex;flex-direction:column;gap:16px}
-.opt{display:flex;flex-direction:column;gap:12px;padding-top:8px}
-.row-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 14px}
-.owner{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-.pick{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#16603A;background:#E7F4EC;padding:3px 8px;border-radius:6px}
-figure{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden}
-figure img{display:block;width:100%;height:auto}
-figure.narrow{max-width:560px}
-.notes{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;max-width:68ch}
-.ask{max-width:68ch;margin:0;padding:12px 16px;border-radius:12px;background:var(--accent-soft);color:var(--fg)}
-.ask b{color:var(--accent-ink)}
-.sample{font-size:11px;font-weight:800;letter-spacing:.06em;color:#234C8C;background:#EAF0FB;padding:2px 6px;border-radius:6px}
-footer{border-top:1px solid var(--line);padding-top:20px;font-size:14px;color:var(--muted);max-width:68ch}
-footer a,section a{color:var(--accent-ink)}
-@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
-</style></head><body>
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Figtree,'Segoe UI',system-ui,sans-serif;line-height:1.5}
+a{color:#7A5600}
+header.top{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+.bar{max-width:1800px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800}
+.mark{width:30px;height:30px;border-radius:9px;background:var(--y);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px}
+nav.toc{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+nav.toc a{text-decoration:none;color:var(--ink);font-size:13px;font-weight:700;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:#fff}
+main{max-width:1800px;margin:0 auto;padding:32px 24px 80px}
+.hero h1{font-size:clamp(28px,4vw,44px);line-height:1.1;margin:0 0 10px}
+.hero p{max-width:820px;color:var(--muted);margin:0 0 6px;font-size:16px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:28px 0 8px}
+.box{background:#fff;border:1px solid var(--line);border-radius:20px;padding:20px 22px}
+.box.research{border-top:4px solid #2E8B57}.box.bugs{border-top:4px solid #C0392B}
+.box h4{margin:0 0 8px;font-size:14px;letter-spacing:.04em}
+.box ul{margin:6px 0 10px;padding-left:20px}.box li{margin:4px 0;font-size:14px}.box p{margin:8px 0;font-size:14px}
+.ask{background:var(--ys);border-radius:10px;padding:8px 12px;font-weight:600}
+.row{margin-top:64px}
+.row h2{display:flex;align-items:center;gap:12px;font-size:26px;margin:0 0 16px}
+.num{width:34px;height:34px;border-radius:50%;background:var(--y);display:inline-flex;align-items:center;justify-content:center;font-size:15px;font-weight:900}
+.pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:20px;align-items:start}
+.col{display:flex;flex-direction:column;gap:20px;min-width:0}
+.stick{position:sticky;top:70px}
+.shot{margin:0;background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden}
+.shot figcaption{display:flex;align-items:center;gap:10px;padding:12px 16px;font-weight:800;font-size:14px;border-bottom:1px solid var(--line)}
+.shot figcaption a{margin-left:auto;font-size:13px;font-weight:700}
+.pill{font-size:11px;letter-spacing:.08em;font-weight:900;background:var(--ink);color:#fff;padding:4px 8px;border-radius:6px}
+.pill.after{background:var(--y);color:#1A1300}
+.cap{margin:0;padding:8px 16px;font-size:13px;color:var(--muted);background:#FBFAF7;border-bottom:1px solid var(--line)}
+.imgwrap{overflow:auto}.imgwrap img{width:100%;display:block}
+.withnotes{display:flex;align-items:stretch}
+.scaler{position:relative;overflow:hidden;background:var(--bg);flex:1 1 auto;min-width:0}
+.scaler iframe{border:0;transform-origin:0 0;position:absolute;left:0;top:0;background:var(--bg)}
+.annot{list-style:none;margin:0;padding:0;width:250px;flex-shrink:0;position:relative;border-left:1px solid var(--line);background:#FFFCF2}
+.annot li{position:absolute;left:10px;right:10px;font-size:12.5px;line-height:1.45;background:#fff;border:1px solid #F1E3AE;border-radius:10px;padding:8px 10px 8px 34px}
+.annot .n{position:absolute;left:8px;top:8px;width:19px;height:19px;border-radius:50%;background:var(--y);font-weight:900;font-size:11px;display:flex;align-items:center;justify-content:center}
+.missing{display:flex;background:var(--bg)}.missing img{width:30%;display:block}
+.missing div{display:flex;flex-direction:column;justify-content:center;gap:8px;padding:24px;font-size:14px;color:var(--muted)}.missing b{color:var(--ink);font-size:18px}
+details.more-box{margin:24px 0 0;background:#fff;border:1px solid var(--line);border-radius:16px;padding:0 20px}details.more-box>summary{cursor:pointer;padding:14px 0;font-weight:800;font-size:14px;color:var(--muted)}details.more-box[open]{padding-bottom:18px}details.more-box .grid2{margin:6px 0 0}
+.scrollbtn{margin-left:auto;font:700 12.5px Figtree,system-ui,sans-serif;height:30px;padding:0 12px;border-radius:999px;border:1px solid var(--line);background:#fff;cursor:pointer;color:var(--ink)}.scrollbtn.on{background:var(--y);border-color:var(--y)}.scrollbtn+a{margin-left:10px!important}.withnotes.scrollmode .annot li{position:relative!important;left:auto!important;right:auto!important;margin:10px}
+footer{max-width:1800px;margin:0 auto;padding:24px;color:var(--muted);font-size:13px}
+@media (max-width:1100px){.pair,.grid2{grid-template-columns:minmax(0,1fr)}.stick{position:static}}
+@media (max-width:700px){.withnotes{flex-direction:column}.annot{width:auto;border-left:0;border-top:1px solid var(--line);padding:10px}.annot li{position:static;margin-bottom:8px}main{padding:20px 16px 60px}.bar{padding:10px 16px}nav.toc{margin-left:0}}
 
-<div class="wrap">
-<header>
-  <h1>BrandBeacon 3.0 mockups</h1>
-  <p class="lede">The 3.0 rows from the Ivan Sheet, drawn from the picks in the 3.0 Questions Doc. One search box, no My Feed, everything you own in the left sidebar. All numbers come from the real rhode skin run (Sep 18) unless marked <span class="sample">SAMPLE</span>.</p>
-  <span class="meta">Veejay, 9 Oct 2026, first search rows added 10 Oct · desktop, 1440 wide</span>
-  <a class="cta" href="app.html" target="_blank" rel="noopener">Open the clickable prototype</a>
-  <div class="states" aria-label="Jump to a state in the prototype">
-    <a href="app.html#home" target="_blank" rel="noopener">Home</a>
-    <a href="app.html#home-typing" target="_blank" rel="noopener">Typing</a>
-    <a href="app.html#home-running" target="_blank" rel="noopener">Search running</a>
-    <a href="app.html#home-checklist" target="_blank" rel="noopener">Checklist</a>
-    <a href="app.html#results" target="_blank" rel="noopener">Results</a>
-    <a href="app.html#results-updating" target="_blank" rel="noopener">Updating</a>
-    <a href="first-search.html#a" target="_blank" rel="noopener">First search: A, B, C</a>
-  </div>
-</header>
-
-<section id="one-search">
-  <div class="row-head"><h2>One search for brands and products</h2><span class="owner">Veejay</span></div>
-  <figure><img src="shots/search.jpg" alt="Search box with 'rhode' typed. The dropdown shows the TikTok account rhode skin on top, then four keyword suggestions." loading="lazy"></figure>
-  <ul class="notes">
-    <li>No Brand / Product toggle. One box: "Search a brand, product or keyword".</li>
-    <li>If the term matches a TikTok account, the account shows first. Pressing Enter searches everything for one credit.</li>
-  </ul>
-  <p class="ask"><b>For Ivan:</b> when "rhode" matches @rhodeskin, does Enter open the brand page, or keyword results with the brand card on top? The mock does the second.</p>
+.ivan{margin:20px 0 0;max-width:900px;background:var(--ys);border:1px solid #F1E3AE;border-radius:14px;padding:12px 16px;font-size:15px}
+.ivan b{color:#7A5600}
+.sample{font-size:10px;font-weight:900;letter-spacing:.08em;color:#1F3A8A;background:#E6ECFB;padding:2px 6px;border-radius:5px;vertical-align:2px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.chips a{text-decoration:none;font-size:13px;font-weight:700;color:#6B4B00;background:var(--ys);padding:6px 12px;border-radius:999px}
+.chips a.go{background:var(--y);color:#1A1300}
+.tag{font-size:11px;letter-spacing:.06em;font-weight:900;padding:3px 8px;border-radius:6px;background:#EEF0F3;color:#3B4250;text-transform:uppercase}
+.tag.pick{background:#E7F4EC;color:#16603A}
+.static{display:flex;align-items:flex-start;justify-content:center;background:var(--bg);flex:1 1 auto;min-width:0;padding:20px}
+.static img{max-width:100%;display:block;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.annot.flow li{position:relative;left:auto;right:auto;margin:10px}
+.none{display:flex;flex-direction:column;justify-content:center;gap:6px;padding:28px 22px;color:var(--muted);font-size:14px;background:var(--bg)}
+.none b{color:var(--ink);font-size:17px}
+.foot-notes{margin:10px 0 0;padding-left:20px;max-width:900px;font-size:14px;color:var(--muted)}
+</style>
+</head>
+<body>
+<header class="top"><div class="bar"><span class="logo"><span class="mark">BB</span>BrandBeacon 3.0</span><nav class="toc" aria-label="Rows"><a href="app.html" target="_blank" rel="noopener" style="background:#FFC72C;border-color:#FFC72C">Prototype</a><a href="#one-search">One search</a><a href="#suggestions">Suggestions</a><a href="#results-data">Results data</a><a href="#sidebar">Sidebar</a><a href="#my-feed">My Feed</a><a href="#onboarding">Onboarding</a><a href="#first-search">First search</a><a href="#first-email">First search email</a><a href="../">All redesigns</a></nav></div></header>
+<main>
+<section class="hero"><h1>BrandBeacon 3.0 mockups</h1>
+<p>Left: the live app on 11 Oct. Right: the 3.0 design. Everything matches live except what Ivan asked for on the 6 Oct call, the 8 Oct call and in his 10 Oct Slack notes. Each note quotes him, or says <b>Ours</b> when it is our suggestion.</p>
+<p>The designs are clickable. Press <b>Scroll inside</b> on any screen to scroll it like the real app, or open it full size. Numbers come from the real rhode skin run (18 Sep) unless marked <span class="sample">SAMPLE</span>.</p>
+<div class="chips"><a class="go" href="app.html" target="_blank" rel="noopener">Open the clickable prototype</a><a href="app.html#home" target="_blank" rel="noopener">Home</a><a href="app.html#home-typing" target="_blank" rel="noopener">Typing</a><a href="app.html#home-running" target="_blank" rel="noopener">Search running</a><a href="app.html#expand" target="_blank" rel="noopener">Keywords</a><a href="app.html#home-checklist" target="_blank" rel="noopener">Checklist</a><a href="app.html#results" target="_blank" rel="noopener">Results</a><a href="app.html#home-nofeed" target="_blank" rel="noopener">Home without feed</a><a href="first-search.html#a" target="_blank" rel="noopener">First search: A, B, C</a></div>
 </section>
-
-<section id="suggestions">
-  <div class="row-head"><h2>Smarter keyword suggestions</h2><span class="owner">Veejay</span></div>
-  <figure><img src="shots/results.jpg" alt="Results page for rhode skin with a 'Related to rhode skin' card listing five brands and five product terms." loading="lazy"></figure>
-  <ul class="notes">
-    <li>Before a search: two short rows on Home, Brands and Products.</li>
-    <li>After a search: "Related to rhode skin" gives 5 brands and 5 product terms picked for that keyword. Cached, so each keyword costs one AI call a week.</li>
-    <li>No hashtags, since search is keywords only.</li>
-  </ul>
-  <p class="ask"><b>For Ivan:</b> OK to drop hashtags from suggestions?</p>
-</section>
-
-<section id="results-data">
-  <div class="row-head"><h2>Results page data</h2><span class="owner">Veejay</span></div>
-  <ul class="notes">
-    <li>Three numbers up top: Breakouts (55 of 200), Top Breakout Score (8.6K×), Median Breakout Score.</li>
-    <li>Median, not average, because one 8.6K× video drags an average far above a typical breakout. 40 of the 55 sit between 3× and 8×.</li>
-    <li>Views move to a quieter line below: top views, average views, new since your last visit.</li>
-  </ul>
-  <p class="ask"><b>For Ivan:</b> are these the three numbers? You also listed average and top views; they're on the second line.</p>
-</section>
-
-<section id="sidebar">
-  <div class="row-head"><h2>Left sidebar: saved searches, video analyses, search history</h2><span class="owner">Veejay</span></div>
-  <figure class="narrow"><img src="shots/sidebar.jpg" alt="Sidebar with Search, Saved searches (rhode skin with 3 new, peptide lip tint with a progress bar), then Video analyses, Saved videos and History." loading="lazy"></figure>
-  <ul class="notes">
-    <li>Library is gone. Saved searches sit up front, each with a count of new breakouts.</li>
-    <li>A search that's still running shows in the list with a progress bar, then a toast when it's ready. You can keep browsing.</li>
-  </ul>
-  <p class="ask"><b>For Ivan:</b> keep Video analyses and Saved videos as separate items, or merge them into one?</p>
-</section>
-
-<section id="my-feed">
-  <div class="row-head"><h2>My Feed: keep, or replace with search terms</h2><span class="owner">Veejay</span></div>
-  <figure><img src="shots/home.jpg" alt="Home page: a large search box, Brands and Products suggestion rows, and a 'New since your last visit' row of three videos." loading="lazy"></figure>
-  <ul class="notes">
-    <li>My Feed is removed. Home is the big search, the suggestions, and one row of 3 new breakouts from saved searches.</li>
-    <li>Home only reads stored results, so it opens instantly.</li>
-  </ul>
-  <p class="ask"><b>For Ivan:</b> keep the "New since your last visit" row, or show only the search?</p>
-</section>
-
-<section id="onboarding">
-  <div class="row-head"><h2>Onboarding checklist</h2><span class="owner">Veejay</span></div>
-  <figure class="narrow"><img src="shots/checklist.jpg" alt="Get started checklist open from the sidebar: run your first search (done), analyze a video, save a video, share with your team." loading="lazy"></figure>
-  <ul class="notes">
-    <li>A small "1 of 4 done" card at the bottom of the sidebar. Click it to see the steps. It goes away once all four are done.</li>
-    <li>The steps tick themselves off in the prototype as you analyze, save and share.</li>
-  </ul>
-  <p class="ask"><b>For Ivan:</b> Free gets 0 video analyses today. Does Free get one, so "Analyze a video" can be finished?</p>
-</section>
-
-<section id="first-search">
-  <div class="row-head"><h2>First search journey: where BB drops people after Run search</h2><span class="owner">Veejay</span></div>
-  <p class="lede" style="color:var(--fg)">Today: keyword, expand keywords, Run search, then a loading page with nothing to do. Three options for that page. All three keep the search running in the sidebar, email when it's ready, and end on the same Ready screen.</p>
-
-  <div class="opt">
-    <div class="row-head"><h3>A. Wait and learn</h3><span class="pick">My pick for the first search</span></div>
-    <figure><img src="shots/first-a.jpg" alt="Finding peptide lip tint breakouts: three progress steps, an email-me toggle, a How to read your results video, and three breakouts found this week." loading="lazy"></figure>
-    <ul class="notes">
-      <li>Same pattern as UGC Breakouts processing: three steps that say what's happening, a "How to read your results" video, then breakouts other searches found this week.</li>
-      <li>The wait teaches what a Breakout Score is, so the results make sense when they land.</li>
-      <li>"Email me when it's ready" is on by default and says they can leave.</li>
-    </ul>
-  </div>
-
-  <div class="opt">
-    <div class="row-head"><h3>B. Back to Home and keep browsing</h3><span class="owner">Ivan's idea</span></div>
-    <figure><img src="shots/first-b.jpg" alt="Home with a yellow 'peptide lip tint is running' bar on top, the big search box, and breakouts found this week." loading="lazy"></figure>
-    <ul class="notes">
-      <li>Run search lands on Home. A slim bar says it's running, with See progress. Breakouts found this week fill the page.</li>
-      <li>Good for later searches. On the first one, a new user hasn't seen a result yet, so the browse row is easy to misread as their results.</li>
-    </ul>
-  </div>
-
-  <div class="opt">
-    <div class="row-head"><h3>C. Results appear as they're found</h3><span class="owner">Needs Lester</span></div>
-    <figure><img src="shots/first-c.jpg" alt="peptide lip tint results page showing 2 breakouts so far, still checking 140 of 200 videos, with a placeholder card for the next one." loading="lazy"></figure>
-    <ul class="notes">
-      <li>The results page fills in as each video is scored: "2 breakouts so far. Still checking 140 of 200 videos."</li>
-      <li>No empty wait at all, and the best fix long term. It depends on the backend scoring videos one at a time, which is Lester's Speed work.</li>
-    </ul>
-  </div>
-
-  <div class="opt">
-    <div class="row-head"><h3>Ready (all three)</h3></div>
-    <figure><img src="shots/first-ready.jpg" alt="Your peptide lip tint breakouts are ready, three steps ticked, Open your results button. Sidebar shows the search with a Ready tag." loading="lazy"></figure>
-  </div>
-  <ul class="notes">
-    <li>The thumbnails come from the stored rhode skin run; a real peptide lip tint search would show its own. "Usually 1 to 2 minutes" is from our 22 Sept test and should match whatever Lester measures.</li>
-    <li>Recommendation: A now (it only needs the stored "this week" breakouts and the how-to video), C once the Speed work lands, B for every search after the first.</li>
-  </ul>
-  <p class="ask"><b>For Ivan:</b> A for the first search, B for every search after that? And is the how-to video the one from the UGC Breakouts processing screen, or a BB version?</p>
-</section>
-
-<section id="first-email">
-  <div class="row-head"><h2>First search complete email</h2><span class="owner">Veejay</span></div>
-  <figure class="narrow"><img src="shots/first-email.jpg" alt="Email from Ivan: Your peptide lip tint breakouts are ready, with the count, the top Breakout Score, a video still and a See your breakouts button." loading="lazy"></figure>
-  <ul class="notes">
-    <li>Trigger: the first search completes. Once per account, never for later searches. Skip it if they already opened the results.</li>
-    <li>Subject: "Your {{search_term}} breakouts are ready". Preview: "{{breakout_count}} TikTok videos beat their creator's usual views."</li>
-    <li>Type, one picture (the top video's still) and one button, signed by Ivan, like the rest of the program.</li>
-    <li>It replaces B1 "Results ready" in the approved free flow emails, written for someone who left. B1 also listed searches and analyses left; that's dropped, since the free plan has changed since 24 Sept.</li>
-    <li>For Lester: event search_completed (first one), merge tags first_name, search_term, breakout_count, top_score, top_video_thumb, results_url. The 14 and 8.6K× in the mock are merge tag samples.</li>
-  </ul>
-  <p class="ask"><b>For Ivan:</b> did B1 ever go live? If it did, this is a copy change only.</p>
-</section>
-
-<footer>The reasons and competitor notes behind each pick are in the <a href="https://docs.google.com/document/d/1RC3jywBBYKvj5XdEBHXkDCML3vXBOUW6a2Aqc02ulnA/edit" target="_blank" rel="noopener">BB 3.0 Questions Doc</a>. The free flow emails are in the <a href="https://docs.google.com/document/d/1XbB4VjZY8-mr9k32FR8XjxlnrXy6caANthXTwaBgIiw/edit" target="_blank" rel="noopener">Free Flow Emails Doc</a>. The median Breakout Score (6.1×) and average views (2.4M) are placeholders until a live run gives the real figures.</footer>
-</div>
-
-</body></html>
+<section class="row" id="one-search"><h2><span class="num">1</span>One search for brands and products</h2><div class="pair"><div class="col"><figure class="shot"><figcaption><span class="pill">BEFORE</span>Search, live on 11 Oct<a href="../img/live-oct11-feed.jpg" target="_blank" rel="noopener">Open full size</a></figcaption><p class="cap">Brand / Product toggle, then Find breakouts</p><div class="imgwrap" style="max-height:260px"><img src="../img/live-oct11-feed.jpg" alt="Before: Search, live on 11 Oct" loading="lazy"></div></figure></div><div class="col stick"><figure class="shot"><figcaption><span class="pill after">AFTER</span>One box, account first<a href="app.html#home-typing" target="_blank" rel="noopener">Open full size</a></figcaption><div class="withnotes"><div class="scaler" data-w="1440" data-h="1932"><iframe data-page="app.html" data-state="home-typing" data-v="1791656673" src="app.html?shot&v=1791656673#home-typing" title="One box, account first" loading="lazy" width="1440" height="1932"></iframe></div><ol class="annot"><li data-frac="0.0200"><span class="n">1</span><b>No Brand / Product toggle.</b> One box: Search a brand, product or keyword. <i>Ivan, 6 Oct: "having one search. No picking, you just put the keyword."</i></li><li data-frac="0.0700"><span class="n">2</span><b>Ours:</b> if the term matches a TikTok account, it shows first in the dropdown.</li><li data-frac="0.1200"><span class="n">3</span>Find breakouts still opens the keyword step, as on live today (row 2).</li></ol></div></figure></div></div><p class="ivan"><b>For Ivan:</b> when "rhode" matches @rhodeskin, should the results open as the brand page (as live does today), with keyword breakouts mixed in?</p></section><section class="row" id="suggestions"><h2><span class="num">2</span>Smarter keyword suggestions</h2><div class="pair"><div class="col"><figure class="shot"><figcaption><span class="pill">BEFORE</span>Keyword step, live on 11 Oct<a href="../img/live-oct11-expand-panel.jpg" target="_blank" rel="noopener">Open full size</a></figcaption><p class="cap">rhode still suggests rhode jewelry, earrings and necklace</p><div class="imgwrap"><img src="../img/live-oct11-expand-panel.jpg" alt="Before: Keyword step, live on 11 Oct" loading="lazy"></div></figure></div><div class="col stick"><figure class="shot"><figcaption><span class="pill after">AFTER</span>Same keyword step, smarter suggestions<a href="app.html#expand" target="_blank" rel="noopener">Open full size</a></figcaption><div class="withnotes"><div class="scaler" data-w="1440" data-h="2361"><iframe data-page="app.html" data-state="expand" data-v="1791656673" src="app.html?shot&v=1791656673#expand" title="Same keyword step, smarter suggestions" loading="lazy" width="1440" height="2361"></iframe></div><ol class="annot"><li data-frac="0.0200"><span class="n">1</span>Brands and Products rows under the search, before typing. <i>Ivan, 6 Oct: "suggest brands, suggest products, suggest hashtags, maybe."</i></li><li data-frac="0.1300"><span class="n">2</span>Same panel as live: Add keywords, Suggest different keywords, Add a keyword, Cancel, Run search.</li><li data-frac="0.1800"><span class="n">3</span><b>Keywords read the term</b>, so rhode gets lip tint, peptide lip treatment and glazing milk, not jewelry. <i>Ivan: "takes the current keyword and it reads it and then suggests keywords based on it."</i></li><li data-frac="0.2150"><span class="n">4</span><b>Similar brands</b> row. <i>Ivan: "here's a hot sauce keyword, give me all the hot sauce brands."</i></li></ol></div></figure></div></div><p class="ivan"><b>For Ivan:</b> hashtags in the suggestions too? You said "maybe" on the call; on 30 Sep you said we search keywords only, so they are out of this mock.</p></section><section class="row" id="results-data"><h2><span class="num">3</span>Results page data</h2><div class="pair"><div class="col"><figure class="shot"><figcaption><span class="pill">BEFORE</span>Results, live on 11 Oct<a href="../img/live-oct11-results.jpg" target="_blank" rel="noopener">Open full size</a></figcaption><p class="cap">Breakouts this refresh, Top Breakout Score, Last refresh</p><div class="imgwrap" style="max-height:1000px"><img src="../img/live-oct11-results.jpg" alt="Before: Results, live on 11 Oct" loading="lazy"></div></figure></div><div class="col stick"><figure class="shot"><figcaption><span class="pill after">AFTER</span>Live results page, new top numbers<a href="app.html#results" target="_blank" rel="noopener">Open full size</a></figcaption><div class="withnotes"><div class="scaler" data-w="1440" data-h="2192"><iframe data-page="app.html" data-state="results" data-v="1791656673" src="app.html?shot&v=1791656673#results" title="Live results page, new top numbers" loading="lazy" width="1440" height="2192"></iframe></div><ol class="annot"><li data-frac="0.0300"><span class="n">1</span>Header, Export creator list, save, WEEKLY, last run and next refresh, Ready: all as live.</li><li data-frac="0.1000"><span class="n">2</span><b>Average Breakout Score</b> replaces the Last refresh box (last and next run are already in the header). <i>Ivan, 6 Oct: "number of breakouts in this run. Average breakout score."</i> The value is a sample.</li><li data-frac="0.1700"><span class="n">3</span>Quiet second line: videos this run, new this run, top views, average views, first run. <i>Ivan: "top views, average views, and then top score, average score."</i></li><li data-frac="0.2100"><span class="n">4</span>Tabs, New this run and Breakout Score filters, cards with all four stats, Analyze and save: as live.</li><li data-frac="0.9400"><span class="n">5</span>Insights, AI summary, Analytics, When they post, More data and Hashtags: unchanged from live.</li></ol></div></figure></div></div><p class="ivan"><b>For Ivan:</b> average Breakout Score, as you said? Our suggestion was median, since one 8.6K× video pulls an average far above a typical breakout (40 of the 55 sit between 3× and 8×).</p></section><section class="row" id="sidebar"><h2><span class="num">4</span>Left sidebar: saved searches, video analyses, search history</h2><div class="pair"><div class="col"><figure class="shot"><figcaption><span class="pill">BEFORE</span>Sidebar, live on 11 Oct<a href="../img/live-oct11-sidebar.jpg" target="_blank" rel="noopener">Open full size</a></figcaption><p class="cap">My Feed, Brand searches, Product searches, Library, Breakdowns</p><div class="imgwrap"><img src="../img/live-oct11-sidebar.jpg" alt="Before: Sidebar, live on 11 Oct" loading="lazy" style="width:auto;max-width:min(100%,252px);margin:16px auto;border-radius:12px"></div></figure></div><div class="col stick"><figure class="shot"><figcaption><span class="pill after">AFTER</span>Library items up front<a href="app.html#home-running" target="_blank" rel="noopener">Open full size</a></figcaption><div class="withnotes"><div class="scaler" data-w="1440" data-h="1932"><iframe data-page="app.html" data-state="home-running" data-v="1791656673" src="app.html?shot&v=1791656673#home-running" title="Library items up front" loading="lazy" width="1440" height="1932"></iframe></div><ol class="annot"><li data-frac="0.0200"><span class="n">1</span><b>Saved searches, Saved videos, Video analyses, Search history</b> up front: the four Library tabs. <i>Ivan, 6 Oct: "why hide them behind the library if we can just put them up front?"</i></li><li data-frac="0.0800"><span class="n">2</span>Brand searches and Product searches become one Saved searches list, since search is now one box.</li><li data-frac="0.1300"><span class="n">3</span><b>Ours:</b> a search that is still running shows here with a progress bar, then a toast when it is ready.</li><li data-frac="0.8600"><span class="n">4</span><b>Searches added</b> next to Breakdowns (live shows searches only on Library and mobile). <i>Ivan: "searches, breakdowns, etc. in this little bar."</i></li></ol></div></figure></div></div><p class="ivan"><b>For Ivan:</b> keep a Library page for its filters and manage options, reached from "See all" in each list?</p></section><section class="row" id="my-feed"><h2><span class="num">5</span>My Feed: keep, or replace with search terms</h2><div class="pair"><div class="col"><figure class="shot"><figcaption><span class="pill">BEFORE</span>My Feed, live on 11 Oct<a href="../img/live-oct11-feed.jpg" target="_blank" rel="noopener">Open full size</a></figcaption><p class="cap">One column feed with This week, Your searches, Hashtags and Climbing</p><div class="imgwrap" style="max-height:900px"><img src="../img/live-oct11-feed.jpg" alt="Before: My Feed, live on 11 Oct" loading="lazy"></div></figure></div><div class="col stick"><figure class="shot"><figcaption><span class="pill after">AFTER</span>Keep: My Feed as live<a href="app.html#home" target="_blank" rel="noopener">Open full size</a></figcaption><div class="withnotes"><div class="scaler" data-w="1440" data-h="1932"><iframe data-page="app.html" data-state="home" data-v="1791656673" src="app.html?shot&v=1791656673#home" title="Keep: My Feed as live" loading="lazy" width="1440" height="1932"></iframe></div><ol class="annot"><li data-frac="0.0200"><span class="n">1</span>Only the search box changes (rows 1 and 2).</li><li data-frac="0.1800"><span class="n">2</span>Feed cards, Load more and the right sidebar stay exactly as live.</li></ol></div></figure><figure class="shot"><figcaption><span class="pill after">AFTER</span>Remove: Home without the feed <span class="tag pick">Our pick</span><a href="app.html#home-nofeed" target="_blank" rel="noopener">Open full size</a></figcaption><div class="withnotes"><div class="scaler" data-w="1440" data-h="1053"><iframe data-page="app.html" data-state="home-nofeed" data-v="1791656673" src="app.html?shot&v=1791656673#home-nofeed" title="Remove: Home without the feed" loading="lazy" width="1440" height="1053"></iframe></div><ol class="annot"><li data-frac="0.0400"><span class="n">1</span>Search and suggestions, then one row of 3 new breakouts from saved searches.</li><li data-frac="0.3000"><span class="n">2</span>Reads stored results only, so it opens instantly.</li></ol></div></figure></div></div><p class="ivan"><b>For Ivan:</b> keep My Feed or remove it? On the call: "I don't even know if we should have one. I think we should just have search terms." Both versions are above.</p></section><section class="row" id="onboarding"><h2><span class="num">6</span>Onboarding checklist</h2><div class="pair"><div class="col"><figure class="shot"><figcaption><span class="pill">BEFORE</span>Onboarding</figcaption><div class="none"><b>Not in the live app</b>Not on live: new accounts land on My Feed with no next step.</div></figure></div><div class="col stick"><figure class="shot"><figcaption><span class="pill after">AFTER</span>Get started, from the sidebar<a href="app.html#home-checklist" target="_blank" rel="noopener">Open full size</a></figcaption><div class="withnotes"><div class="scaler" data-w="1440" data-h="1932"><iframe data-page="app.html" data-state="home-checklist" data-v="1791656673" src="app.html?shot&v=1791656673#home-checklist" title="Get started, from the sidebar" loading="lazy" width="1440" height="1932"></iframe></div><ol class="annot"><li data-frac="0.8000"><span class="n">1</span>A <b>1 of 4 done</b> card above the usage meters; click to see the steps. <i>Ivan, 6 Oct: "do your first brand search, do your first analysis, do your first whatever."</i></li><li data-frac="0.8400"><span class="n">2</span>Steps: run a search, analyze a video, save a search, save a video. All four exist on live today.</li><li data-frac="0.8800"><span class="n">3</span>It goes away once all four are done.</li></ol></div></figure></div></div><p class="ivan"><b>For Ivan:</b> Free gets 0 video analyses today, so a Free user can't finish "Analyze a video". Give Free one analysis, or swap that step out for Free?</p></section><section class="row" id="first-search"><h2><span class="num">7</span>First search journey: where BB drops people after Run search</h2><div class="pair"><div class="col"><figure class="shot"><figcaption><span class="pill">BEFORE</span>After Run search, live on 22 Sep<a href="../user-flow/img/bb-building.jpg" target="_blank" rel="noopener">Open full size</a></figcaption><p class="cap">A loading page with nothing to do while the report builds</p><div class="imgwrap"><img src="../user-flow/img/bb-building.jpg" alt="Before: After Run search, live on 22 Sep" loading="lazy" style="width:auto;max-width:min(100%,420px);margin:16px auto;border-radius:12px"></div></figure></div><div class="col stick"><figure class="shot"><figcaption><span class="pill after">AFTER</span>A. Wait and learn <span class="tag pick">Pick: first search</span><a href="first-search.html#a" target="_blank" rel="noopener">Open full size</a></figcaption><div class="withnotes"><div class="scaler" data-w="1440" data-h="1219"><iframe data-page="first-search.html" data-state="a" data-v="1791656673" src="first-search.html?shot&v=1791656673#a" title="A. Wait and learn" loading="lazy" width="1440" height="1219"></iframe></div><ol class="annot"><li data-frac="0.0800"><span class="n">1</span>Three steps that say what is happening, like UGC Breakouts processing.</li><li data-frac="0.2600"><span class="n">2</span><b>Email me when it is ready</b> is on by default and says they can leave.</li><li data-frac="0.3800"><span class="n">3</span>A <b>How to read your results</b> video, so the Breakout Score makes sense when results land.</li><li data-frac="0.5000"><span class="n">4</span>Then breakouts other searches found this week.</li></ol></div></figure><figure class="shot"><figcaption><span class="pill after">AFTER</span>B. Back to Home and keep browsing <span class="tag">Ivan's idea</span><a href="first-search.html#b" target="_blank" rel="noopener">Open full size</a></figcaption><div class="withnotes"><div class="scaler" data-w="1440" data-h="900"><iframe data-page="first-search.html" data-state="b" data-v="1791656673" src="first-search.html?shot&v=1791656673#b" title="B. Back to Home and keep browsing" loading="lazy" width="1440" height="900"></iframe></div><ol class="annot"><li data-frac="0.0300"><span class="n">1</span>Run search lands on Home. A slim bar says it is running, with See progress.</li><li data-frac="0.2800"><span class="n">2</span><b>Pick for every search after the first.</b> On the first one, the browse row is easy to misread as their results.</li></ol></div></figure><figure class="shot"><figcaption><span class="pill after">AFTER</span>C. Results appear as they are found <span class="tag">Needs Lester</span><a href="first-search.html#c" target="_blank" rel="noopener">Open full size</a></figcaption><div class="withnotes"><div class="scaler" data-w="1440" data-h="900"><iframe data-page="first-search.html" data-state="c" data-v="1791656673" src="first-search.html?shot&v=1791656673#c" title="C. Results appear as they are found" loading="lazy" width="1440" height="900"></iframe></div><ol class="annot"><li data-frac="0.0800"><span class="n">1</span><b>2 breakouts so far. Still checking 140 of 200 videos.</b></li><li data-frac="0.3300"><span class="n">2</span>No empty wait. Depends on scoring videos one at a time (Lester).</li></ol></div></figure><figure class="shot"><figcaption><span class="pill after">AFTER</span>Ready, the same for A, B and C<a href="first-search.html#ready" target="_blank" rel="noopener">Open full size</a></figcaption><div class="withnotes"><div class="scaler" data-w="1440" data-h="900"><iframe data-page="first-search.html" data-state="ready" data-v="1791656673" src="first-search.html?shot&v=1791656673#ready" title="Ready, the same for A, B and C" loading="lazy" width="1440" height="900"></iframe></div><ol class="annot"><li data-frac="0.0800"><span class="n">1</span>All three keep the search in the sidebar, email when it is ready, and end here.</li><li data-frac="0.2200"><span class="n">2</span>Thumbnails reuse the rhode skin run; "usually 1 to 2 minutes" is from the 22 Sep test.</li></ol></div></figure></div></div><p class="ivan"><b>For Ivan:</b> A for the first search, B for every search after that? And is the how-to video the one from the UGC Breakouts processing screen, or a BB version?</p></section><section class="row" id="first-email"><h2><span class="num">8</span>First search complete email</h2><div class="pair"><div class="col"><figure class="shot"><figcaption><span class="pill">BEFORE</span>Results ready email</figcaption><div class="none"><b>Not in the live app</b>B1 Results ready was drafted in the free flow emails, not confirmed live.</div></figure></div><div class="col stick"><figure class="shot"><figcaption><span class="pill after">AFTER</span>Sent once, after the first search<a href="shots/first-email.jpg" target="_blank" rel="noopener">Open full size</a></figcaption><div class="withnotes"><div class="static"><img src="shots/first-email.jpg" alt="Sent once, after the first search" loading="lazy"></div><ol class="annot flow"><li data-frac="0.0000"><span class="n">1</span>Trigger: the first search completes. Once per account. Skipped if they already opened the results.</li><li data-frac="0.0000"><span class="n">2</span>Subject: "Your {{search_term}} breakouts are ready". Preview: "{{breakout_count}} TikTok videos beat their creator's usual views."</li><li data-frac="0.0000"><span class="n">3</span>One picture (the top video's still), one button, signed by Ivan.</li><li data-frac="0.0000"><span class="n">4</span>Replaces B1 Results ready, written for someone who left. Searches-left line dropped.</li><li data-frac="0.0000"><span class="n">5</span>For Lester: search_completed (first one); merge tags first_name, search_term, breakout_count, top_score, top_video_thumb, results_url. 14 and 8.6K× are samples.</li></ol></div></figure></div></div><p class="ivan"><b>For Ivan:</b> did B1 ever go live? If it did, this is a copy change only.</p></section>
+</main>
+<footer>The reasons and competitor notes behind each pick are in the <a href="https://docs.google.com/document/d/1RC3jywBBYKvj5XdEBHXkDCML3vXBOUW6a2Aqc02ulnA/edit" target="_blank" rel="noopener">BB 3.0 Questions Doc</a>. The free flow emails are in the <a href="https://docs.google.com/document/d/1XbB4VjZY8-mr9k32FR8XjxlnrXy6caANthXTwaBgIiw/edit" target="_blank" rel="noopener">Free Flow Emails Doc</a>.</footer>
+<script>
+function fit(){
+ document.querySelectorAll('.withnotes').forEach(function(wn){
+  var s=wn.querySelector('.scaler');if(!s)return;var w=+s.dataset.w,full=+s.dataset.h,live=wn.classList.contains('scrollmode'),h=live?Math.min(900,full):full,k=Math.min(1,s.clientWidth/w);
+  var f=s.querySelector('iframe');f.style.transform='scale('+k+')';f.setAttribute('height',h);f.style.height=h+'px';var sh=Math.round(h*k);s.style.height=sh+'px';
+  var ol=wn.querySelector('.annot');if(!ol)return;
+  if(live||getComputedStyle(ol.querySelector('li')).position!=='absolute'){ol.style.height='';ol.querySelectorAll('li').forEach(function(li){li.style.top='';});return;}
+  var prev=0;ol.querySelectorAll('li').forEach(function(li){var t=Math.max(Math.round(+li.dataset.frac*sh),prev);li.style.top=t+'px';prev=t+li.offsetHeight+8;});
+  ol.style.height=Math.max(sh,prev)+'px';
+ });
+}
+document.querySelectorAll('.withnotes').forEach(function(wn){
+ var fig=wn.closest('figure'),cap=fig&&fig.querySelector('figcaption');if(!cap||!wn.querySelector('iframe'))return;
+ var b=document.createElement('button');b.type='button';b.className='scrollbtn';b.textContent='Scroll inside';
+ var open=cap.querySelector('a');cap.insertBefore(b,open);
+ b.addEventListener('click',function(){
+  var on=!wn.classList.contains('scrollmode');wn.classList.toggle('scrollmode',on);
+  var f=wn.querySelector('iframe'),p=f.dataset.page,st=f.dataset.state;
+  f.setAttribute('src',p+(on?'?shot&live=1&v=':'?shot&v=')+f.dataset.v+'#'+st);
+  b.textContent=on?'Show whole page':'Scroll inside';b.classList.toggle('on',on);
+  fit();
+ });
+});
+window.addEventListener('resize',fit);window.addEventListener('load',fit);fit();
+</script>
+</body>
+</html>
