@@ -141,8 +141,8 @@ searchcard = f'''<div class="card scard">
   {dd}
  </form>
  <div class="sugg">
-  <div class="srow"><span class="slbl">Brands</span>{sug(["rare beauty","e.l.f.","olipop","drunk elephant","crocs"])}</div>
-  <div class="srow"><span class="slbl">Products</span>{sug(["peptide lip tint","glazed skin","lip oil","barrier cream","tinted sunscreen"])}</div>
+  <div class="srow"><span class="slbl">Brands</span><span class="chipwrap">{sug(["rare beauty","e.l.f.","olipop","drunk elephant","crocs"])}</span></div>
+  <div class="srow"><span class="slbl">Products</span><span class="chipwrap">{sug(["peptide lip tint","glazed skin","lip oil","barrier cream","tinted sunscreen"])}</span></div>
  </div>
 </div>'''
 
@@ -152,8 +152,8 @@ expand = f'''<div class="card xcard" id="xcard" hidden>
  <div class="row sb"><div class="row"><span class="ssav lg">rh</span><span><b class="xt">rhode</b> <a class="chg" href="#home-typing">Change</a><i class="blk">Search</i></span></div><a class="ib round" href="#home" aria-label="Close">×</a></div>
  <hr>
  <div class="row sb"><b class="h3">Add keywords to find more videos</b><button class="lnk" type="button">{ico(I['refresh'],15)} Suggest different keywords</button></div>
- <div class="krow"><span class="slbl">Keywords</span>{chips(["rhode","rhode skin","rhode lip tint","rhode peptide lip treatment","rhode glazing milk","rhode phone case"], on=("rhode","rhode skin"))}</div>
- <div class="krow"><span class="slbl">Similar brands</span>{chips(["glossier","summer fridays","laneige","tower 28"])}</div>
+ <div class="krow"><span class="slbl">Keywords</span><span class="chipwrap">{chips(["rhode","rhode skin","rhode lip tint","rhode peptide lip treatment","rhode glazing milk","rhode phone case"], on=("rhode","rhode skin"))}</span></div>
+ <div class="krow"><span class="slbl">Similar brands</span><span class="chipwrap">{chips(["glossier","summer fridays","laneige","tower 28"])}</span></div>
  <div class="addkw"><input placeholder="Add a keyword"><span class="plus">{ico(I['plus'],14,2.6)}</span></div>
  <div class="row end"><a class="btn" href="#home">Cancel</a><a class="btn y" href="#results">Run search {ico('<path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>',16)}</a></div>
 </div>'''
@@ -197,7 +197,7 @@ results = f'''<section class="view" id="v-results">
    <div class="kp"><span class="ti y">{ico(I['score'],16)}</span><span class="kl">Top Breakout Score</span><b class="kn">8.6K×</b><span class="ks">@cyr1n32 got 8.9M views with 1.6K followers.</span></div>
    <div class="kp"><span class="ti y">{ico(I['avg'],16)}</span><span class="kl">Average Breakout Score <span class="sample">SAMPLE</span></span><b class="kn">740×</b><span class="ks">Across the 55 breakouts in this run.</span></div>
   </div>
-  <div class="qrow"><span>Videos this run <b>200</b></span><span>New this run <b>3</b></span><span>Top views <b>19.7M</b></span><span>Average views <b>2.4M</b> <span class="sample">SAMPLE</span></span><span>First run <b>Sep 18</b></span></div>
+  <div class="qrow"><span><b>200</b> videos this run</span><span><b>3</b> new this run</span><span><b>19.7M</b> top views</span><span><b>2.4M</b> average views <span class="sample">SAMPLE</span></span><span>first run <b>Sep 18</b></span></div>
  </div>
  <div class="ptabs"><span class="pt on">Videos</span><span class="pt">Insights</span><span class="pt">Analytics</span><span class="pt">When they post</span><span class="pt">More data</span><span class="pt">Hashtags</span></div>
  <div class="row sb"><div><h2 class="h2">Top breakout videos</h2><p class="sub">Ranked by Breakout Score: weighted engagement relative to the creator's follower count.</p></div>
@@ -216,12 +216,12 @@ a{color:inherit;text-decoration:none}i{font-style:normal}button{font-family:inhe
 .logo-mark{width:32px;height:32px;border-radius:50%;background:#FFC72C;display:flex;align-items:center;justify-content:center;color:#1A1300}
 .nav{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;font-size:15px;font-weight:600;color:#1F1D1A}
 .nav:hover{background:#FAF8F2}.nav.on{background:#FFF6D6;color:#6B4B00}
-.navlabel{font-size:11px;font-weight:800;letter-spacing:.08em;color:#8C877D;padding:16px 12px 4px}
-.ssav{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,#F4B6C6,#D9708F);color:#fff;font-weight:900;font-size:11px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
-.ssav.gl{background:#FFF6D6;color:#6B4B00}.ssav.pl{background:linear-gradient(135deg,#F7C6A8,#E08A5E)}
+.navlabel{font-size:11px;font-weight:800;letter-spacing:.08em;color:#6B675F;padding:16px 12px 4px}
+.ssav{width:26px;height:26px;border-radius:8px;background:#FDECEF;color:#9C2F4A;font-weight:900;font-size:11px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.ssav.gl{background:#FFF6D6;color:#6B4B00}.ssav.pl{background:#FDEEE4;color:#9A4B1E}
 .ssav.lg{width:36px;height:36px;border-radius:50%;font-size:13px}.ssav.xl{width:56px;height:56px;border-radius:16px;font-size:18px}
 .cnt{margin-left:auto;font-size:11px;font-weight:800;color:#6B4B00;background:#FFE58A;padding:2px 7px;border-radius:999px}
-.num{margin-left:auto;font-size:12px;font-weight:700;color:#8C877D}
+.num{margin-left:auto;font-size:12px;font-weight:700;color:#6B675F}
 .run{align-items:flex-start}.runtxt{display:flex;flex-direction:column;gap:6px;flex-grow:1;font-size:14px}
 .prog{width:40%;animation:pg 3s ease-in-out infinite}@keyframes pg{50%{width:85%}}
 .sidefoot{margin-top:auto;display:flex;flex-direction:column;gap:10px;padding-top:16px}
@@ -248,15 +248,15 @@ a{color:inherit;text-decoration:none}i{font-style:normal}button{font-family:inhe
 .dot{width:6px;height:6px;border-radius:50%;background:#FFC72C}
 .tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;letter-spacing:.06em;padding:3px 8px;border-radius:7px;background:#FFF6D6;color:#6B4B00}
 .tag.g{background:#E7F4EC;color:#16603A}.tag.gr{background:#F1EFE9;color:#4A463F}.tag.y2{background:#FFF1BF;color:#7A5600}
-.sample{font-size:10px;font-weight:800;letter-spacing:.06em;color:#234C8C;background:#EAF0FB;padding:2px 6px;border-radius:6px}
+.sample{font-size:11px;font-weight:800;letter-spacing:.06em;color:#234C8C;background:#EAF0FB;padding:2px 6px;border-radius:6px}
 .scard{padding:22px 24px;display:flex;flex-direction:column;gap:16px}
 .sbox-wrap{position:relative}
 .sbox{display:flex;align-items:center;gap:12px;border:1.5px solid #F2DE99;border-radius:999px;padding:6px 6px 6px 22px;color:#6B675F;box-shadow:0 0 0 4px #FFF8DF}
 .sbox input{all:unset;flex-grow:1;font-size:18px;color:#0B0B0B}
 .sugg{border-top:1px solid #F0EDE6;padding-top:14px;display:flex;flex-direction:column;gap:10px}
-.srow,.krow{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.slbl{font-size:13px;font-weight:800;width:110px;flex-shrink:0}
-.dd{position:absolute;left:0;right:0;top:calc(100% + 8px);padding:8px;z-index:20;box-shadow:0 18px 50px rgba(23,21,15,.14)}
-.ddl{font-size:11px;font-weight:800;letter-spacing:.08em;color:#8C877D;padding:10px 12px 6px}
+.srow,.krow{display:flex;align-items:flex-start;gap:8px}.srow .slbl,.krow .slbl{line-height:34px}.chipwrap{display:flex;flex-wrap:wrap;gap:8px;flex:1}.slbl{font-size:13px;font-weight:800;width:110px;flex-shrink:0}
+.dd{position:absolute;left:0;right:0;top:calc(100% + 8px);padding:8px;z-index:20;box-shadow:0 5px 15px hsla(40,20%,10%,.12)}
+.ddl{font-size:11px;font-weight:800;letter-spacing:.08em;color:#6B675F;padding:10px 12px 6px}
 .ddi{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;font-size:15px}.ddi.hi,.ddi:hover{background:#FAF8F2}
 .ddi i{display:block;font-size:12px;color:#6B675F}.ddi>svg:last-child{margin-left:auto;color:#8C877D}
 .xcard{padding:22px 26px;display:flex;flex-direction:column;gap:16px}.xcard hr{border:0;border-top:1px solid #F0EDE6;margin:0}
@@ -306,7 +306,7 @@ a{color:inherit;text-decoration:none}i{font-style:normal}button{font-family:inhe
 .qrow{display:flex;flex-wrap:wrap;gap:8px 26px;font-size:13px;color:#6B675F;padding:2px 2px 0}.qrow b{color:#0B0B0B}
 .ptabs{display:flex;gap:6px;border-bottom:1px solid #E6E2D8;padding-bottom:12px}.pt{font-size:14px;font-weight:700;color:#6B675F;padding:7px 14px;border-radius:999px}.pt.on{background:#0B0B0B;color:#fff}
 .same{border:1.5px dashed #DAD6CC;border-radius:16px;padding:22px;text-align:center;color:#6B675F;font-size:14px}
-.pop{position:fixed;left:268px;bottom:150px;width:320px;padding:18px 18px 8px;z-index:30;box-shadow:0 18px 50px rgba(23,21,15,.18)}
+.pop{position:fixed;left:268px;bottom:150px;width:320px;padding:16px 16px 8px;z-index:30;box-shadow:0 10px 24px hsla(40,20%,10%,.16)}
 .steps{list-style:none;margin:12px 0 0;padding:0}.steps li{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-top:1px solid #F0EDE6}
 .steps li>span:last-child{display:flex;flex-direction:column;gap:2px;font-size:14px}.steps .quiet{font-size:12px}
 .ck{width:22px;height:22px;border-radius:50%;border:1.5px solid #CFCABF;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
@@ -334,7 +334,7 @@ function route(){var h=(location.hash||'#home').slice(1);var v=h==='results'?'re
  document.querySelector('[data-nav=home]').classList.toggle('on',v==='home');
  var nofeed=h==='home-nofeed';$('feed').hidden=nofeed;$('nofeed').hidden=!nofeed;$('homelabel').textContent=nofeed?'Home':'My Feed';
  $('dd').hidden=h!=='home-typing';$('q').value=(h==='home-typing'||h==='expand')?'rhode':'';
- $('xcard').hidden=h!=='expand';
+ $('xcard').hidden=h!=='expand';document.querySelector('.scard').hidden=h==='expand';
  $('obpop').hidden=h!=='home-checklist';
  $('runline').style.display=h==='home-running'?'flex':'none';
  if(h==='home-running')setTimeout(function(){toast('<span>peptide lip tint is ready</span><a href="#results">Open</a>',6000)},400);

@@ -67,15 +67,15 @@ rows = [
    after("app.html", "home-typing", 1932, "One box, account first", [
      (.02, '<b>No Brand / Product toggle.</b> One box: Search a brand, product or keyword. <i>Ivan, 6 Oct: "having one search. No picking, you just put the keyword."</i>'),
      (.07, '<b>Ours:</b> if the term matches a TikTok account, it shows first in the dropdown.'),
-     (.12, 'Find breakouts still opens the keyword step, as on live today (row 2).')]),
+     (.12, 'Find breakouts still opens the keyword step, as on live today (row 2).'),
+     (.16, 'Brands and Products rows under the search, before typing. <i>Ivan, 6 Oct: "suggest brands, suggest products, suggest hashtags, maybe."</i>')]),
    'when "rhode" matches @rhodeskin, should the results open as the brand page (as live does today), with keyword breakouts mixed in?'),
  row(2, "suggestions", "Smarter keyword suggestions",
    before("../img/live-oct11-expand-panel.jpg", "Keyword step, live on 11 Oct", "rhode still suggests rhode jewelry, earrings and necklace"),
-   after("app.html", "expand", 2361, "Same keyword step, smarter suggestions", [
-     (.02, 'Brands and Products rows under the search, before typing. <i>Ivan, 6 Oct: "suggest brands, suggest products, suggest hashtags, maybe."</i>'),
-     (.13, 'Same panel as live: Add keywords, Suggest different keywords, Add a keyword, Cancel, Run search.'),
-     (.18, '<b>Keywords read the term</b>, so rhode gets lip tint, peptide lip treatment and glazing milk, not jewelry. <i>Ivan: "takes the current keyword and it reads it and then suggests keywords based on it."</i>'),
-     (.215, '<b>Similar brands</b> row. <i>Ivan: "here\'s a hot sauce keyword, give me all the hot sauce brands."</i>')]),
+   after("app.html", "expand", 2117, "Same keyword step, smarter suggestions", [
+     (.01, 'Same panel as live, in place of the search box: Add keywords, Suggest different keywords, Add a keyword, Cancel, Run search.'),
+     (.07, '<b>Keywords read the term</b>, so rhode gets lip tint, peptide lip treatment and glazing milk, not jewelry. <i>Ivan: "takes the current keyword and it reads it and then suggests keywords based on it."</i>'),
+     (.12, '<b>Similar brands</b> row. <i>Ivan: "here\'s a hot sauce keyword, give me all the hot sauce brands."</i>')]),
    'hashtags in the suggestions too? You said "maybe" on the call; on 30 Sep you said we search keywords only, so they are out of this mock.'),
  row(3, "results-data", "Results page data",
    before("../img/live-oct11-results.jpg", "Results, live on 11 Oct", "Breakouts this refresh, Top Breakout Score, Last refresh", 1000),
