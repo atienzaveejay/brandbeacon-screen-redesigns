@@ -81,7 +81,7 @@ rows = [
    before("../img/live-oct11-results.jpg", "Results, live on 11 Oct", "Breakouts this refresh, Top Breakout Score, Last refresh", 1000),
    after("app.html", "results", 2413, "Brand results", [
      (.02, 'Header, Export creator list, save, WEEKLY, last run and next refresh, Ready: all as live.'),
-     (.05, '<b>Alert me</b> on each search: an email when it gets a new breakout. <i>Ivan, 6 Oct: "having notifications on each other keyword."</i> Marked Scale, since live pricing lists Virality alerts on Scale; other plans get an upgrade prompt.'),
+     (.05, '<b>Alert me</b> on each search: an email when it gets a new breakout. <i>Ivan, 6 Oct: "having notifications on each other keyword."</i> Live pricing has Virality alerts on Growth and Scale, so Free sees an upgrade prompt.'),
      (.086, '<b>Average Breakout Score</b> replaces the Last refresh box (last and next run are already in the header). <i>Ivan: "number of breakouts in this run. Average breakout score."</i> The value is a sample.'),
      (.13, 'Top Breakout Score reads against the creator\'s usual views, not followers. <i>Ivan, 9 Oct: "A Breakout outperforms the creator\'s average video... Breakout Score measures that gap."</i>'),
      (.16, 'Quiet second line: videos this run, new this run, top views, average views, first run. <i>Ivan: "top views, average views, and then top score, average score."</i>'),
@@ -92,7 +92,7 @@ rows = [
      (.02, '<b>PRODUCT</b> tag with the keywords this search ran, where a brand page shows the handle. <i>Ivan, 6 Oct: "when you do a product search ... how can we present this better?"</i>'),
      (.177, '<b>Brands in these breakouts</b>: which brands the winning videos feature, each linking to its brand page. Counts are samples.'),
      (.23, 'Same numbers, Insights, filters and cards as a brand search.')]),
-   'Average Breakout Score up top, as you asked, with Insights moved up, alerts on Scale and Share on every card. Product searches lead with the brands in their breakouts.'),
+   'Average Breakout Score up top, as you asked, with Insights moved up, an alert on every search and Share on every card. Product searches lead with the brands in their breakouts.'),
  row(4, "sidebar", "Left sidebar: saved searches, video analyses, search history",
    before("../img/live-oct11-sidebar.jpg", "Sidebar, live on 11 Oct", "My Feed, Brand searches, Product searches, Library, Breakdowns", natural=252),
    after("app.html", "home-running", 900, "Library items up front", [
@@ -111,9 +111,9 @@ rows = [
    before(None, "Onboarding", "Not on live: new accounts land on My Feed with no next step."),
    after("app.html", "home-checklist", 900, "Get started, from the sidebar", [
      (.66, 'A <b>1 of 4 done</b> card above the usage meters; click to see the steps. <i>Ivan, 6 Oct: "do your first brand search, do your first analysis, do your first whatever."</i>'),
-     (.74, 'Steps: run a search, analyze a video, save a search, save a video. All four exist on live today.'),
+     (.74, 'Steps: run a search, analyze a video, save a video, search a second brand or product. All four work on every plan, Free included.'),
      (.82, 'It goes away once all four are done.')]),
-   'Free gets one video analysis (today it gets 0), so every new account can finish the checklist.'),
+   'Free now includes 3 searches and 5 video analyses (agreed with Ivan on Slack), so every new account can finish the checklist.'),
  row(7, "first-search", "First search journey: where BB drops people after Run search",
    before("../user-flow/img/bb-building.jpg", "After Run search, live on 22 Sep", "A loading page with nothing to do while the report builds", natural=420),
    after("first-search.html", "a", 1219, "A. Wait and learn", [

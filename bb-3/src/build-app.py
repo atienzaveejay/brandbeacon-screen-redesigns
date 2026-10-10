@@ -126,8 +126,8 @@ pop = f'''<div class="card pop" id="obpop" hidden>
  <div class="row sb"><b class="h3">Get started</b><span class="quiet">4 steps</span></div>
  <ol class="steps">
   <li class="done" data-step="search"><span class="ck">{ico(I['check'],13,2.4)}</span><span><b>Run your first search</b><span class="quiet">rhode skin</span></span></li>
-  <li data-step="analyze"><span class="ck"></span><span><b>Analyze a video</b><span class="quiet">Free plans get one</span></span></li>
-  <li data-step="savesearch"><span class="ck"></span><span><b>Save a search</b><span class="quiet">New breakouts every week</span></span></li>
+  <li data-step="analyze"><span class="ck"></span><span><b>Analyze a video</b><span class="quiet">Free includes 5</span></span></li>
+  <li data-step="second"><span class="ck"></span><span><b>Search a second brand or product</b><span class="quiet">Free includes 3 searches</span></span></li>
   <li data-step="save"><span class="ck"></span><span><b>Save a video</b><span class="quiet">Keep it for your next brief</span></span></li>
  </ol></div>'''
 
@@ -222,7 +222,7 @@ def results_view(vid, kind):
   <div class="row sb top"><div class="row">{av}<span class="hn"><span class="row"><b class="h1">{name}</b></span>
    <span class="row meta">{sub}</span>
    <span class="row meta"><span class="tag y2">WEEKLY</span><span class="quiet">{run}</span><span class="tag g">● Ready</span></span></span></div>
-   <div class="row acts2"><button class="btn alert" data-act="alert">{ico(I['bell'],16)} <span>Alert me</span><i class="plan">SCALE</i></button><button class="btn">{ico(I['dl'],16)} Export creator list</button><button class="ib on" aria-label="Saved">{ico(I['bookmark'],16)}</button><button class="ib" aria-label="More">{ico(I['more'],16)}</button></div></div>
+   <div class="row acts2"><button class="btn alert" data-act="alert">{ico(I['bell'],16)} <span>Alert me</span></button><button class="btn">{ico(I['dl'],16)} Export creator list</button><button class="ib on" aria-label="Saved">{ico(I['bookmark'],16)}</button><button class="ib" aria-label="More">{ico(I['more'],16)}</button></div></div>
   {kpis}
   <div class="qrow"><span><b>{tot}</b> videos this run</span><span><b>3</b> new this run</span><span><b>19.7M</b> top views</span><span><b>2.4M</b> average views <span class="sample">SAMPLE</span></span><span>first run <b>{"Sep 18" if brand else "Oct 3"}</b></span></div>
  </div>
@@ -400,12 +400,12 @@ document.addEventListener('click',function(e){var b=e.target.closest('[data-act]
  if(b.hasAttribute('data-q')){q.value=b.getAttribute('data-q');location.hash='#expand';document.querySelector('.xt').textContent=b.getAttribute('data-q');return}
  var a=b.getAttribute('data-act');e.preventDefault();
  if(a==='checklist'){var p=$('obpop');p.hidden=!p.hidden;return}
- if(a==='alert'){toast('<span>Alerts are on the Scale plan: an email when this search gets a new breakout.</span><a href="#home">Upgrade</a>',5000);return}
+ if(a==='alert'){var on=!b.classList.contains('on');b.classList.toggle('on',on);b.querySelector('span').textContent=on?'Alerts on':'Alert me';toast(on?'We will email you when this search gets a new breakout.':'Alerts off');return}
  if(a==='share'){toast('Share link copied. It does not use any of your credits.');return}
  if(a==='analyze'){markStep('analyze');toast('Analyzing. Uses 1 breakdown.')}
  if(a==='save'){markStep('save');b.classList.add('on');toast('Saved to Saved videos')}
 });
-document.querySelectorAll('.rhead .ib.on').forEach(function(b){b.addEventListener('click',function(){markStep('savesearch')})});
+document.querySelectorAll('[data-q]').forEach(function(b){b.addEventListener('click',function(){markStep('second')})});
 })();
 '''
 
