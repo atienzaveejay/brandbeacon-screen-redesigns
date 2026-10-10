@@ -52,7 +52,7 @@ def after(page, state, h, title, items, tag="", cap=""):
 def after_img(img, title, items):
     return (f'<figure class="shot"><figcaption><span class="pill after">AFTER</span>{title}'
             f'<a href="{img}" target="_blank" rel="noopener">Open full size</a></figcaption>'
-            f'<div class="withnotes"><div class="static"><img src="{img}" alt="{html.escape(title)}" loading="lazy"></div>'
+            f'<div class="withnotes"><div class="static"><img src="{img}?v={VER}" alt="{html.escape(title)}" loading="lazy"></div>'
             f'{notes(items, "annot flow")}</div></figure>')
 
 def row(n, rid, h2, left, right, ask, extra=""):
