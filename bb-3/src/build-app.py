@@ -91,7 +91,7 @@ def sug(items):
 # ---------- sidebar (Ivan 6 Oct: "Save search, video analysis, and search history ... why hide them behind the library if we can just put them up front?")
 side = f'''<nav class="side" aria-label="Main">
  <a class="logo" href="#home"><span class="logo-mark">{ico('<circle cx="12" cy="12" r="2"/><path d="M8.5 8.5a5 5 0 0 0 0 7"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M5.6 5.6a9 9 0 0 0 0 12.8"/><path d="M18.4 5.6a9 9 0 0 1 0 12.8"/>',18)}</span>Brand Beacon</a>
- <a class="nav on" data-nav="home" href="#home">{ico(I['spark'])}<span id="homelabel">My Feed</span></a>
+ <a class="nav on" data-nav="home" href="#home">{ico(I['spark'])}<span id="homelabel">Home</span></a>
  <div class="navlabel">SAVED SEARCHES</div>
  <a class="nav ss-item" href="#results"><span class="ssav">rh</span>rhode skin<span class="cnt">3 new</span></a>
  <a class="nav ss-item" href="#results"><span class="ssav gl">gl</span>glass skin routine</a>
@@ -120,7 +120,7 @@ pop = f'''<div class="card pop" id="obpop" hidden>
  <div class="row sb"><b class="h3">Get started</b><span class="quiet">4 steps</span></div>
  <ol class="steps">
   <li class="done" data-step="search"><span class="ck">{ico(I['check'],13,2.4)}</span><span><b>Run your first search</b><span class="quiet">rhode skin</span></span></li>
-  <li data-step="analyze"><span class="ck"></span><span><b>Analyze a video</b><span class="quiet">Uses 1 breakdown</span></span></li>
+  <li data-step="analyze"><span class="ck"></span><span><b>Analyze a video</b><span class="quiet">Free plans get one</span></span></li>
   <li data-step="savesearch"><span class="ck"></span><span><b>Save a search</b><span class="quiet">New breakouts every week</span></span></li>
   <li data-step="save"><span class="ck"></span><span><b>Save a video</b><span class="quiet">Keep it for your next brief</span></span></li>
  </ol></div>'''
@@ -173,11 +173,7 @@ rail = f'''<aside class="rail">
 home = f'''<section class="view" id="v-home">
  {searchcard}
  {expand}
- <div id="feed">
-  <div class="secth"><h2 class="h2">Your videos for today</h2><p class="sub">A daily selection from your searches and global discovery.</p></div>
-  <div class="feedgrid"><div class="feedcol">{"".join(feed_card(v) for v in [V[2],V[4],V[1]])}<button class="btn loadm">Load 8 more</button></div>{rail}</div>
- </div>
- <div id="nofeed" hidden>
+ <div id="nofeed">
   <div class="row sb"><h2 class="h2">New since your last visit</h2><a class="lnk" href="#results">See all 3 in rhode skin</a></div>
   <div class="grid3">{"".join(result_card(v,i+1).replace('<span class="rank">'+str(i+1)+'</span>','<span class="rank newb">NEW</span>') for i,v in enumerate(V[2:5]))}</div>
  </div>
@@ -195,9 +191,9 @@ results = f'''<section class="view" id="v-results">
   <div class="kpis">
    <div class="kp"><span class="ti y">{ico(I['bolt'],16)}</span><span class="kl">Breakouts this run</span><b class="kn">55</b><span class="ks">55 of 200 videos scanned broke out</span></div>
    <div class="kp"><span class="ti y">{ico(I['score'],16)}</span><span class="kl">Top Breakout Score</span><b class="kn">8.6K×</b><span class="ks">@cyr1n32 got 8.9M views with 1.6K followers.</span></div>
-   <div class="kp"><span class="ti y">{ico(I['avg'],16)}</span><span class="kl">Average Breakout Score <span class="sample">SAMPLE</span></span><b class="kn">740×</b><span class="ks">Across the 55 breakouts in this run.</span></div>
+   <div class="kp"><span class="ti y">{ico(I['avg'],16)}</span><span class="kl">Median Breakout Score <span class="sample">SAMPLE</span></span><b class="kn">6.1×</b><span class="ks">A typical breakout here. Most land between 3× and 8×.</span></div>
   </div>
-  <div class="qrow"><span><b>200</b> videos this run</span><span><b>3</b> new this run</span><span><b>19.7M</b> top views</span><span><b>2.4M</b> average views <span class="sample">SAMPLE</span></span><span>first run <b>Sep 18</b></span></div>
+  <div class="qrow"><span><b>200</b> videos this run</span><span><b>3</b> new this run</span><span><b>740×</b> average score <span class="sample">SAMPLE</span></span><span><b>19.7M</b> top views</span><span><b>2.4M</b> average views <span class="sample">SAMPLE</span></span><span>first run <b>Sep 18</b></span></div>
  </div>
  <div class="ptabs"><span class="pt on">Videos</span><span class="pt">Insights</span><span class="pt">Analytics</span><span class="pt">When they post</span><span class="pt">More data</span><span class="pt">Hashtags</span></div>
  <div class="row sb"><div><h2 class="h2">Top breakout videos</h2><p class="sub">Ranked by Breakout Score: weighted engagement relative to the creator's follower count.</p></div>
@@ -317,7 +313,7 @@ a{color:inherit;text-decoration:none}i{font-style:normal}button{font-family:inhe
 .statebar a{color:#fff;font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px;background:#2A2723}.statebar a.on{background:#FFC72C;color:#1A1300}
 '''
 
-states = [("home","Home (feed kept)"),("home-nofeed","Home without feed"),("home-typing","Typing"),("expand","Keywords"),
+states = [("home","Home"),("home-typing","Typing"),("expand","Keywords"),
           ("home-running","Search running"),("home-checklist","Checklist"),("results","Results")]
 statebar = '<div class="statebar">' + "".join(f'<a href="#{k}">{t}</a>' for k,t in states) + '</div>'
 
@@ -332,7 +328,7 @@ function markStep(k){var li=document.querySelector('[data-step="'+k+'"]');if(!li
 function route(){var h=(location.hash||'#home').slice(1);var v=h==='results'?'results':'home';
  ['home','results'].forEach(function(x){$('v-'+x).classList.toggle('on',x===v)});
  document.querySelector('[data-nav=home]').classList.toggle('on',v==='home');
- var nofeed=h==='home-nofeed';$('feed').hidden=nofeed;$('nofeed').hidden=!nofeed;$('homelabel').textContent=nofeed?'Home':'My Feed';
+ 
  $('dd').hidden=h!=='home-typing';$('q').value=(h==='home-typing'||h==='expand')?'rhode':'';
  $('xcard').hidden=h!=='expand';document.querySelector('.scard').hidden=h==='expand';
  $('obpop').hidden=h!=='home-checklist';

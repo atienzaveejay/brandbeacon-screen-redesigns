@@ -58,58 +58,56 @@ def after_img(img, title, items):
 def row(n, rid, h2, left, right, ask, extra=""):
     return (f'<section class="row" id="{rid}"><h2><span class="num">{n}</span>{h2}</h2>'
             f'<div class="pair"><div class="col">{left}</div><div class="col stick">{right}</div></div>'
-            f'{extra}<p class="ivan"><b>For Ivan:</b> {ask}</p></section>')
+            f'{extra}<p class="ivan"><b>Our pick:</b> {ask}</p></section>')
 
 S = '<span class="sample">SAMPLE</span>'
 rows = [
  row(1, "one-search", "One search for brands and products",
    before("../img/live-oct11-feed.jpg", "Search, live on 11 Oct", "Brand / Product toggle, then Find breakouts", 260),
-   after("app.html", "home-typing", 1932, "One box, account first", [
-     (.02, '<b>No Brand / Product toggle.</b> One box: Search a brand, product or keyword. <i>Ivan, 6 Oct: "having one search. No picking, you just put the keyword."</i>'),
-     (.07, '<b>Ours:</b> if the term matches a TikTok account, it shows first in the dropdown.'),
-     (.12, 'Find breakouts still opens the keyword step, as on live today (row 2).'),
-     (.16, 'Brands and Products rows under the search, before typing. <i>Ivan, 6 Oct: "suggest brands, suggest products, suggest hashtags, maybe."</i>')]),
-   'when "rhode" matches @rhodeskin, should the results open as the brand page (as live does today), with keyword breakouts mixed in?'),
+   after("app.html", "home-typing", 1053, "One box, account first", [
+     (.06, '<b>No Brand / Product toggle.</b> One box: Search a brand, product or keyword. <i>Ivan, 6 Oct: "having one search. No picking, you just put the keyword."</i>'),
+     (.12, 'If the term matches a TikTok account, it shows first in the dropdown.'),
+     (.18, 'Find breakouts still opens the keyword step, as on live today (row 2).'),
+     (.24, 'Brands and Products rows under the search, before typing. <i>Ivan: "suggest brands, suggest products, suggest hashtags, maybe."</i>')]),
+   'a matching account opens as its brand card (as on live), with the keyword breakouts underneath. One search credit.'),
  row(2, "suggestions", "Smarter keyword suggestions",
    before("../img/live-oct11-expand-panel.jpg", "Keyword step, live on 11 Oct", "rhode still suggests rhode jewelry, earrings and necklace"),
-   after("app.html", "expand", 2117, "Same keyword step, smarter suggestions", [
-     (.01, 'Same panel as live, in place of the search box: Add keywords, Suggest different keywords, Add a keyword, Cancel, Run search.'),
-     (.07, '<b>Keywords read the term</b>, so rhode gets lip tint, peptide lip treatment and glazing milk, not jewelry. <i>Ivan: "takes the current keyword and it reads it and then suggests keywords based on it."</i>'),
-     (.12, '<b>Similar brands</b> row. <i>Ivan: "here\'s a hot sauce keyword, give me all the hot sauce brands."</i>')]),
-   'hashtags in the suggestions too? You said "maybe" on the call; on 30 Sep you said we search keywords only, so they are out of this mock.'),
+   after("app.html", "expand", 1238, "Same keyword step, smarter suggestions", [
+     (.02, 'Same panel as live, in place of the search box: Add keywords, Suggest different keywords, Add a keyword, Cancel, Run search.'),
+     (.13, '<b>Keywords read the term</b>, so rhode gets lip tint, peptide lip treatment and glazing milk, not jewelry. <i>Ivan: "takes the current keyword and it reads it and then suggests keywords based on it."</i>'),
+     (.21, '<b>Similar brands</b> row. <i>Ivan: "here\'s a hot sauce keyword, give me all the hot sauce brands."</i>')]),
+   'no hashtags in the suggestions, since search is keywords only (your 30 Sep note).'),
  row(3, "results-data", "Results page data",
    before("../img/live-oct11-results.jpg", "Results, live on 11 Oct", "Breakouts this refresh, Top Breakout Score, Last refresh", 1000),
-   after("app.html", "results", 2192, "Live results page, new top numbers", [
+   after("app.html", "results", 2194, "Live results page, new top numbers", [
      (.03, 'Header, Export creator list, save, WEEKLY, last run and next refresh, Ready: all as live.'),
-     (.10, '<b>Average Breakout Score</b> replaces the Last refresh box (last and next run are already in the header). <i>Ivan, 6 Oct: "number of breakouts in this run. Average breakout score."</i> The value is a sample.'),
-     (.17, 'Quiet second line: videos this run, new this run, top views, average views, first run. <i>Ivan: "top views, average views, and then top score, average score."</i>'),
-     (.21, 'Tabs, New this run and Breakout Score filters, cards with all four stats, Analyze and save: as live.'),
+     (.095, '<b>Median Breakout Score</b> replaces the Last refresh box (last and next run are already in the header). The value is a sample.'),
+     (.17, 'Quiet second line: videos this run, new this run, <b>average score</b>, top views, average views, first run. <i>Ivan, 6 Oct: "top views, average views, and then top score, average score."</i>'),
+     (.26, 'Tabs, New this run and Breakout Score filters, cards with all four stats, Analyze and save: as live.'),
      (.94, 'Insights, AI summary, Analytics, When they post, More data and Hashtags: unchanged from live.')]),
-   'average Breakout Score, as you said? Our suggestion was median, since one 8.6K× video pulls an average far above a typical breakout (40 of the 55 sit between 3× and 8×).'),
+   'median up top, because one 8.6K× video pulls an average far above a typical breakout (40 of the 55 sit between 3× and 8×). The average you asked for stays on the second line.'),
  row(4, "sidebar", "Left sidebar: saved searches, video analyses, search history",
    before("../img/live-oct11-sidebar.jpg", "Sidebar, live on 11 Oct", "My Feed, Brand searches, Product searches, Library, Breakdowns", natural=252),
-   after("app.html", "home-running", 1932, "Library items up front", [
-     (.02, '<b>Saved searches, Saved videos, Video analyses, Search history</b> up front: the four Library tabs. <i>Ivan, 6 Oct: "why hide them behind the library if we can just put them up front?"</i>'),
-     (.08, 'Brand searches and Product searches become one Saved searches list, since search is now one box.'),
-     (.13, '<b>Ours:</b> a search that is still running shows here with a progress bar, then a toast when it is ready.'),
-     (.86, '<b>Searches added</b> next to Breakdowns (live shows searches only on Library and mobile). <i>Ivan: "searches, breakdowns, etc. in this little bar."</i>')]),
-   'keep a Library page for its filters and manage options, reached from "See all" in each list?'),
+   after("app.html", "home-running", 1053, "Library items up front", [
+     (.06, '<b>Saved searches, Saved videos, Video analyses, Search history</b> up front: the four Library tabs. <i>Ivan, 6 Oct: "why hide them behind the library if we can just put them up front?"</i>'),
+     (.16, 'Brand searches and Product searches become one Saved searches list, since search is now one box.'),
+     (.25, 'A search that is still running shows here with a progress bar, then a toast when it is ready.'),
+     (.76, '<b>Searches added</b> next to Breakdowns (live shows searches only on Library and mobile). <i>Ivan: "searches, breakdowns, etc. in this little bar."</i>')]),
+   'no separate Library page. Each sidebar item opens its own list, with the same filters Library has today.'),
  row(5, "my-feed", "My Feed: keep, or replace with search terms",
    before("../img/live-oct11-feed.jpg", "My Feed, live on 11 Oct", "One column feed with This week, Your searches, Hashtags and Climbing", 900),
-   after("app.html", "home", 1932, "Keep: My Feed as live", [
-     (.02, 'Only the search box changes (rows 1 and 2).'),
-     (.18, 'Feed cards, Load more and the right sidebar stay exactly as live.')])
-   + after("app.html", "home-nofeed", 1053, "Remove: Home without the feed", [
-     (.04, 'Search and suggestions, then one row of 3 new breakouts from saved searches.'),
-     (.30, 'Reads stored results only, so it opens instantly.')], tag="Our pick"),
-   'keep My Feed or remove it? On the call: "I don\'t even know if we should have one. I think we should just have search terms." Both versions are above.'),
+   after("app.html", "home", 1053, "Home without the feed", [
+     (.06, 'My Feed is removed. Home is the search and the suggestions. <i>Ivan, 6 Oct: "I don\'t even know if we should have one. I think we should just have search terms."</i>'),
+     (.26, 'Then one row of 3 new breakouts from saved searches.'),
+     (.40, 'Reads stored results only, so it opens instantly.')]),
+   'remove My Feed. Home is the search, the suggestions and "New since your last visit".'),
  row(6, "onboarding", "Onboarding checklist",
    before(None, "Onboarding", "Not on live: new accounts land on My Feed with no next step."),
-   after("app.html", "home-checklist", 1932, "Get started, from the sidebar", [
-     (.80, 'A <b>1 of 4 done</b> card above the usage meters; click to see the steps. <i>Ivan, 6 Oct: "do your first brand search, do your first analysis, do your first whatever."</i>'),
-     (.84, 'Steps: run a search, analyze a video, save a search, save a video. All four exist on live today.'),
-     (.88, 'It goes away once all four are done.')]),
-   'Free gets 0 video analyses today, so a Free user can\'t finish "Analyze a video". Give Free one analysis, or swap that step out for Free?'),
+   after("app.html", "home-checklist", 1053, "Get started, from the sidebar", [
+     (.62, 'A <b>1 of 4 done</b> card above the usage meters; click to see the steps. <i>Ivan, 6 Oct: "do your first brand search, do your first analysis, do your first whatever."</i>'),
+     (.70, 'Steps: run a search, analyze a video, save a search, save a video. All four exist on live today.'),
+     (.78, 'It goes away once all four are done.')]),
+   'Free gets one video analysis (today it gets 0), so every new account can finish the checklist.'),
  row(7, "first-search", "First search journey: where BB drops people after Run search",
    before("../user-flow/img/bb-building.jpg", "After Run search, live on 22 Sep", "A loading page with nothing to do while the report builds", natural=420),
    after("first-search.html", "a", 1219, "A. Wait and learn", [
@@ -126,7 +124,7 @@ rows = [
    + after("first-search.html", "ready", 900, "Ready, the same for A, B and C", [
      (.08, 'All three keep the search in the sidebar, email when it is ready, and end here.'),
      (.22, 'Thumbnails reuse the rhode skin run; "usually 1 to 2 minutes" is from the 22 Sep test.')]),
-   'A for the first search, B for every search after that? And is the how-to video the one from the UGC Breakouts processing screen, or a BB version?'),
+   'A for the first search, B for every search after that, C once the speed work lands. The how-to video is a BB version, in the same format as the UGC Breakouts one.'),
  row(8, "first-email", "First search complete email",
    before(None, "Results ready email", "B1 Results ready was drafted in the free flow emails, not confirmed live."),
    after_img("shots/first-email.jpg", "Sent once, after the first search", [
@@ -135,7 +133,7 @@ rows = [
      (0, 'One picture (the top video\'s still), one button, signed by Ivan.'),
      (0, 'Replaces B1 Results ready, written for someone who left. Searches-left line dropped.'),
      (0, 'For Lester: search_completed (first one); merge tags first_name, search_term, breakout_count, top_score, top_video_thumb, results_url. 14 and 8.6K× are samples.')]),
-   'did B1 ever go live? If it did, this is a copy change only.'),
+   'send it once, after the first search only. For Lester: if B1 is already live, this is a copy change only.'),
 ]
 
 nav = [("one-search","One search"),("suggestions","Suggestions"),("results-data","Results data"),("sidebar","Sidebar"),
@@ -169,9 +167,9 @@ page = f"""<!doctype html>
 <header class="top"><div class="bar"><span class="logo"><span class="mark">BB</span>BrandBeacon 3.0</span><nav class="toc" aria-label="Rows">{navhtml}</nav></div></header>
 <main>
 <section class="hero"><h1>BrandBeacon 3.0 mockups</h1>
-<p>Left: the live app on 11 Oct. Right: the 3.0 design. Everything matches live except what Ivan asked for on the 6 Oct call, the 8 Oct call and in his 10 Oct Slack notes. Each note quotes him, or says <b>Ours</b> when it is our suggestion.</p>
+<p>Left: the live app on 11 Oct. Right: the 3.0 design. Everything matches live except what Ivan asked for on the 6 Oct call, the 8 Oct call and in his 10 Oct Slack notes. Each note quotes him where he set the direction; where he left it open, the row ends with our pick.</p>
 <p>The designs are clickable. Press <b>Scroll inside</b> on any screen to scroll it like the real app, or open it full size. Numbers come from the real rhode skin run (18 Sep) unless marked {S}.</p>
-<div class="chips"><a class="go" href="app.html" target="_blank" rel="noopener">Open the clickable prototype</a><a href="app.html#home" target="_blank" rel="noopener">Home</a><a href="app.html#home-typing" target="_blank" rel="noopener">Typing</a><a href="app.html#home-running" target="_blank" rel="noopener">Search running</a><a href="app.html#expand" target="_blank" rel="noopener">Keywords</a><a href="app.html#home-checklist" target="_blank" rel="noopener">Checklist</a><a href="app.html#results" target="_blank" rel="noopener">Results</a><a href="app.html#home-nofeed" target="_blank" rel="noopener">Home without feed</a><a href="first-search.html#a" target="_blank" rel="noopener">First search: A, B, C</a></div>
+<div class="chips"><a class="go" href="app.html" target="_blank" rel="noopener">Open the clickable prototype</a><a href="app.html#home" target="_blank" rel="noopener">Home</a><a href="app.html#home-typing" target="_blank" rel="noopener">Typing</a><a href="app.html#home-running" target="_blank" rel="noopener">Search running</a><a href="app.html#expand" target="_blank" rel="noopener">Keywords</a><a href="app.html#home-checklist" target="_blank" rel="noopener">Checklist</a><a href="app.html#results" target="_blank" rel="noopener">Results</a><a href="first-search.html#a" target="_blank" rel="noopener">First search: A, B, C</a></div>
 </section>
 {"".join(rows)}
 </main>
