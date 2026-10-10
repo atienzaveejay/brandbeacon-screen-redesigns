@@ -128,7 +128,7 @@ pop = f'''<div class="card pop" id="obpop" hidden>
 # ---------- one search (Ivan 6 Oct: "my leading candidate is having one search. No picking, you just put the keyword")
 dd = f'''<div class="card dd" id="dd" hidden>
  <div class="ddl">TIKTOK ACCOUNT</div>
- <a class="ddi hi" href="#expand"><span class="ssav">rh</span><span><b>rhode skin</b><i>@rhodeskin</i></span>{ico(I['tiktok'],16)}</a>
+ <a class="ddi hi" href="#expand"><span class="ssav">rh</span><span><b>rhode skin</b><i>@rhodeskin</i></span><span class="tt">{ico(I['tiktok'],16)}</span></a>
  <div class="ddl">KEYWORDS</div>
  <a class="ddi" href="#expand">{ico(I['search'],15)}rhode</a>
  <a class="ddi" href="#expand">{ico(I['search'],15)}rhode lip tint</a>
@@ -258,7 +258,7 @@ a{color:inherit;text-decoration:none}i{font-style:normal}button{font-family:inhe
 .dd{position:absolute;left:0;right:0;top:calc(100% + 8px);padding:8px;z-index:20;box-shadow:0 5px 15px hsla(40,20%,10%,.12)}
 .ddl{font-size:11px;font-weight:800;letter-spacing:.08em;color:#6B675F;padding:10px 12px 6px}
 .ddi{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;font-size:15px}.ddi.hi,.ddi:hover{background:#FAF8F2}
-.ddi i{display:block;font-size:12px;color:#6B675F}.ddi>svg:last-child{margin-left:auto;color:#8C877D}
+.ddi i{display:block;font-size:12px;color:#6B675F}.ddi .tt{margin-left:auto;color:#6B675F}.ddi>svg:first-child{color:#6B675F}
 .xcard{padding:22px 26px;display:flex;flex-direction:column;gap:16px}.xcard hr{border:0;border-top:1px solid #F0EDE6;margin:0}
 .xt{font-size:18px}.chg{font-size:12px;text-decoration:underline;margin-left:6px}.blk{display:block;font-size:12px;color:#6B675F}
 .lnk{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:700;color:#3A3731}
