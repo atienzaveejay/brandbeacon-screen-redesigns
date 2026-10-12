@@ -94,43 +94,18 @@ def sug_tags(pairs):
 def sug(items):
     return "".join(f'<button class="chip" type="button" data-q="{E(t)}"><span class="dot"></span>{E(t)}</button>' for t in items)
 
-# ---------- sidebar (Ivan 6 Oct: "Save search, video analysis, and search history ... why hide them behind the library if we can just put them up front?")
-side = f'''<nav class="side" aria-label="Main">
- <a class="logo" href="#home"><span class="logo-mark">{ico('<circle cx="12" cy="12" r="2"/><path d="M8.5 8.5a5 5 0 0 0 0 7"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M5.6 5.6a9 9 0 0 0 0 12.8"/><path d="M18.4 5.6a9 9 0 0 1 0 12.8"/>',18)}</span>Brand Beacon</a>
- <a class="nav on" data-nav="home" href="#home">{ico(I['spark'])}<span id="homelabel">Home</span></a>
- <a class="nav" data-nav="feed" href="#feed">{ico(I['play'])}My Feed</a>
- <div class="navlabel">SAVED SEARCHES</div>
- <a class="nav ss-item" href="#results"><span class="ssav">rh</span>rhode skin<span class="cnt">3 new</span></a>
- <a class="nav ss-item" href="#results-product"><span class="ssav gl">gl</span>glass skin routine</a>
- <div class="nav run" id="runline" style="display:none"><span class="ssav pl">pl</span><span class="runtxt"><span>peptide lip tint</span><span class="bartrack"><span class="bar prog"></span></span></span></div>
- <div class="navlabel">YOUR WORK</div>
- <a class="nav" href="#home">{ico(I['bookmark'])}Saved videos<span class="num">12</span></a>
- <a class="nav" href="#home">{ico(I['spark'])}Video analyses<span class="num">24</span></a>
- <a class="nav" href="#home">{ico(I['clock'])}Search history<span class="num">25</span></a>
- <div class="sidefoot">
-  <button id="ob" class="obcard" data-act="checklist" aria-expanded="false">
-   <span class="row sb"><b>Get started</b><span class="quiet"><span id="obn">1</span> of 4 done</span></span>
-   <span class="bartrack"><span class="bar" id="obbar" style="width:25%"></span></span>
-  </button>
-  <a class="usage" href="#home">
-   <span class="row sb"><b>Searches</b><span class="quiet"><b class="ink">25</b> of 100 used</span></span>
-   <span class="bartrack"><span class="bar" style="width:25%"></span></span>
-   <span class="row sb mt"><b>Breakdowns</b><span class="quiet"><b class="ink">24</b> of 100 used</span></span>
-   <span class="bartrack"><span class="bar" style="width:24%"></span></span>
-   <span class="quiet sm">Resets Nov 2</span>
-  </a>
-  <div class="row"><div class="me"><span class="av">V</span><span><b>Veejay Atienza</b><i>Growth plan</i></span></div><button class="ib" aria-label="Sign out">{ico(I['out'],16)}</button></div>
- </div>
-</nav>'''
-
-pop = f'''<div class="card pop" id="obpop" hidden>
- <div class="row sb"><b class="h3">Get started</b><span class="quiet">4 steps</span></div>
- <ol class="steps">
-  <li class="done" data-step="search"><span class="ck">{ico(I['check'],13,2.4)}</span><span><b>Run your first search</b><span class="quiet">rhode skin</span></span></li>
-  <li data-step="analyze"><span class="ck"></span><span><b>Analyze a video</b><span class="quiet">Free includes 5</span></span></li>
-  <li data-step="second"><span class="ck"></span><span><b>Search a second brand or product</b><span class="quiet">Free includes 3 searches</span></span></li>
-  <li data-step="save"><span class="ck"></span><span><b>Save a video</b><span class="quiet">Keep it for your next brief</span></span></li>
- </ol></div>'''
+# ---------- sidebar. Ivan 6 Oct: "why hide them behind the library if we can just put them up front?"
+# Ivan 11 Oct Sheet: My Feed under Home, Recent searches (up to 5 + See more), Processing while something runs,
+# "Your work" -> My Library, compact Searches/Breakdowns, keep the white space; Get started steps in the left column.
+import sys; sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from sidebar import sidebar, CSS as SIDE_CSS
+RECENT = [("rh","","rhode skin","#results","3 new"),("pl","pl","peptide lip tint","#results-product",""),
+          ("gl","gl","glass skin routine","#results-product",""),("ra","bl","rare beauty","#results",""),
+          ("ol","gr","olipop","#results-product","")]
+side = (sidebar(recent=RECENT, more="#home", sid="side-main",
+                processing=[("lo","gl","lip oil","Search","run-search"),("ju","bl","@justemma529","Analysis","run-analysis")])
+        + sidebar(recent=[("rh","","rhode skin","#results","")], saved=0, analyses=0, steps={"search"},
+                  searches=(1,3), breakdowns=(0,5), plan="Free plan", reset="", sid="side-new"))
 
 # ---------- one search (Ivan 6 Oct: "my leading candidate is having one search. No picking, you just put the keyword")
 dd = f'''<div class="card dd" id="dd" hidden>
@@ -180,50 +155,25 @@ rail = f'''<aside class="rail">
 </aside>'''
 
 # ---------- Home = search terms (Ivan 6 Oct: "I think we should just have search terms"; 11 Oct Slack: "defaut home to be search terms
-# but have a left bar option of 'my feed'"). Your searches gets three simple options (11 Oct: "it seems kinda bare? - should we add or
-# expand 'searches'? ... but still keep it super simple ... maybe options?").
+# but have a left bar option of 'my feed'"). 11 Oct Sheet: "let's add more to the home page - more than just 'your searches'... not too
+# much ... maybe a select breakout videos?" -> Your searches as a plain list, then one row of four new breakouts (was option C).
 ARROW = ico(I["back"].replace("M19 12H5","M5 12h14").replace("M11 6l-6 6 6 6","M13 6l6 6-6 6"),16)
-TERMS = [dict(ini="rh",c="",n="rhode skin",t="BRAND",d="55 breakouts · top 8.6K× · next refresh Sep 25",nw="3 new",h="#results",
-              top="8.6K×",bk="55",imgs=[0,1,2],alert=True),
-         dict(ini="pl",c="pl",n="peptide lip tint",t="PRODUCT",d="14 breakouts · top 8.6K× · next refresh Oct 17",nw="",h="#results-product",
-              top="8.6K×",bk="14",imgs=[3,4,0],alert=False),
-         dict(ini="gl",c="gl",n="glass skin routine",t="PRODUCT",d="191 videos · next refresh Oct 14",nw="",h="#results-product",
-              top="",bk="0",imgs=[],alert=False)]
-def thumbs(ix, cls="tn"):
-    return "".join(f'<span class="{cls}"><img src="{V[i]["img"]}" alt=""><b>{V[i]["s"]}×</b></span>' for i in ix)
-def opts(x):
-    on = " on" if x["alert"] else ""
-    return (f'<span class="opts"><button class="mini2{on}" data-act="alert-mini" type="button">{ico(I["bell"],13)}<span>{"Alerts on" if x["alert"] else "Alert me"}</span></button>'
-            f'<button class="mini2" type="button" data-act="edit-kw">{ico(I["edit"],13)}Keywords</button>'
-            f'<button class="mini2 ic" type="button" aria-label="More options">{ico(I["more"],13)}</button></span>')
+TERMS = [dict(ini="rh",c="",n="rhode skin",t="BRAND",d="55 breakouts · top 8.6K× · next refresh Sep 25",nw="3 new",h="#results",old=False),
+         dict(ini="pl",c="pl",n="peptide lip tint",t="PRODUCT",d="14 breakouts · top 8.6K× · next refresh Oct 17",nw="",h="#results-product",old=True),
+         dict(ini="gl",c="gl",n="glass skin routine",t="PRODUCT",d="191 videos · next refresh Oct 14",nw="",h="#results-product",old=True)]
 def head(x):
     return f'<span class="row"><b>{E(x["n"])}</b><span class="tag gr">{x["t"]}</span>{"<span class=cnt>"+x["nw"]+"</span>" if x["nw"] else ""}</span>'
-# Option A: same list, each row adds its top 3 breakouts and a few quiet options
-termsA = "".join(f'''<div class="term tA"><a class="tlink" href="{x['h']}"><span class="ssav lg {x['c']}">{x['ini']}</span><span class="tm">{head(x)}<i>{x['d']}</i></span></a>
- <a class="tstrip" href="{x['h']}">{thumbs(x['imgs']) if x['imgs'] else '<span class="quiet">No breakouts yet. Next refresh Oct 14.</span>'}</a>{opts(x)}</div>''' for x in TERMS)
-# Option B: one card per search, two across
-termsB = "".join(f'''<div class="card tB"><a class="row" href="{x['h']}"><span class="ssav lg {x['c']}">{x['ini']}</span><span class="tm">{head(x)}<i>{x['d'].split(' · next')[0]}</i></span></a>
- <a class="tgrid" href="{x['h']}">{thumbs(x['imgs'],"tn big") if x['imgs'] else '<span class="tnone">No breakouts yet</span>'}</a>
- <div class="row sb">{opts(x)}<a class="lnk" href="{x['h']}">Open {ARROW}</a></div></div>''' for x in TERMS)
-termsB += f'<a class="card tB add" href="#home-typing">{ico(I["plus"],22)}<b>Add a search</b><span class="quiet">Free includes 3 searches</span></a>'
-# Option C: the list as before, then the newest breakouts across all your searches
-termsC = "".join(f'<a class="term" href="{x["h"]}"><span class="ssav lg {x["c"]}">{x["ini"]}</span><span class="tm">{head(x)}<i>{x["d"]}</i></span>{ARROW}</a>' for x in TERMS)
+terms = "".join(f'<a class="term{" olduser" if x["old"] else ""}" href="{x["h"]}"><span class="ssav lg {x["c"]}">{x["ini"]}</span><span class="tm">{head(x)}<i>{x["d"]}</i></span>{ARROW}</a>' for x in TERMS)
 newest = "".join(f'''<a class="card nb" href="#results"><span class="thumb"><img src="{V[i]['img']}" alt="">{score(V[i]['s'])}</span><span class="nbb"><b>@{E(V[i]['h'])}</b><i>{w}</i></span></a>'''
-                 for i,w in [(2,"rhode skin · 2 days ago"),(3,"rhode skin · 2 days ago"),(4,"peptide lip tint · 3 days ago"),(0,"rhode skin · 5 days ago")])
+                 for i,w in [(2,"rhode skin · 2 days ago"),(3,"rhode skin · 2 days ago"),(4,"rhode skin · 3 days ago"),(0,"rhode skin · 5 days ago")])
 home = f"""<section class="view" id="v-home">
  {searchcard}
  {expand}
- <div class="hopt" data-opt="a">
+ <div class="hblock">
   <div class="row sb"><h2 class="h2">Your searches</h2><a class="lnk" href="#home">Search history</a></div>
-  <div class="card terms">{termsA}</div>
+  <div class="card terms">{terms}</div>
  </div>
- <div class="hopt" data-opt="b" hidden>
-  <div class="row sb"><h2 class="h2">Your searches</h2><a class="lnk" href="#home">Search history</a></div>
-  <div class="tBgrid">{termsB}</div>
- </div>
- <div class="hopt" data-opt="c" hidden>
-  <div class="row sb"><h2 class="h2">Your searches</h2><a class="lnk" href="#home">Search history</a></div>
-  <div class="card terms">{termsC}</div>
+ <div class="hblock">
   <div class="row sb"><h2 class="h2">New in your searches</h2><a class="lnk" href="#feed">See all in My Feed {ARROW}</a></div>
   <div class="nbgrid">{newest}</div>
  </div>
@@ -236,45 +186,39 @@ feed = f"""<section class="view" id="v-feed">
  <div class="same">Same as live from here: the feed keeps scrolling.</div>
 </section>"""
 
-# ---------- results. Top numbers per Ivan 6 Oct ("number of breakouts in this run. Average breakout score ... top views, average views");
-# Insights moved up under the header ("this should be about the content, this should be moved up here");
-# per-keyword alerts ("having notifications on each other keyword"); product search presented on its own terms
-# ("when you do a product search ... how can we present this better?").
+# ---------- results. Top numbers per Ivan 6 Oct ("number of breakouts in this run. Average breakout score ...");
+# per-keyword alerts ("having notifications on each other keyword"); product search on its own terms.
+# Ivan 11 Oct Sheet: "seems a little crowded - simplify or new layout? this includes the insights" -> one meta line,
+# three quiet numbers with no boxes, the Breakout Score definition as one line, one insight line (the rest under an
+# Insights tab), then the videos. Top and average views move to the Analytics tab.
 def results_view(vid, kind):
     brand = kind == "brand"
     av = '<span class="ssav xl">rh</span>' if brand else '<span class="ssav xl pl">pl</span>'
     name = "rhode skin" if brand else "peptide lip tint"
-    sub = (f'<span class="tag">BRAND</span><span>@rhodeskin</span>{ico(I["edit"],13)}' if brand else
-           '<span class="tag">PRODUCT</span><span class="quiet">peptide lip tint · peptide lip treatment · lip tint</span>')
-    run = "last run Sep 18 · next refresh Sep 25" if brand else "last run Oct 10 · next refresh Oct 17"
+    who = '<span>@rhodeskin</span>' if brand else '<span>peptide lip tint, peptide lip treatment, lip tint</span>'
+    run = "Weekly · last run Sep 18 · next Sep 25" if brand else "Weekly · last run Oct 10 · next Oct 17"
     n, tot = ("55","200") if brand else ("14","200")
     S = '' if brand else ' <span class="sample">SAMPLE</span>'
-    kpis = f"""<div class="kpis">
-   <div class="kp"><span class="ti y">{ico(I['bolt'],16)}</span><span class="kl">Breakouts this run{S}</span><b class="kn">{n}</b><span class="ks">{n} of {tot} videos scanned broke out</span></div>
-   <div class="kp"><span class="ti y">{ico(I['score'],16)}</span><span class="kl">Top Breakout Score</span><b class="kn">8.6K×</b><span class="ks">@cyr1n32 got 8.9M views. Their usual is about 1K.</span></div>
-   <div class="kp"><span class="ti y">{ico(I['avg'],16)}</span><span class="kl">Average Breakout Score <span class="sample">SAMPLE</span></span><b class="kn">740×</b><span class="ks">Across the {n} breakouts in this run.</span></div>
+    nums = f"""<div class="nums3">
+   <div><b class="kn">{n}</b><span class="kl">Breakouts this run{S}</span><span class="ks">of {tot} videos</span></div>
+   <div><b class="kn gold">8.6K×</b><span class="kl">Top Breakout Score</span><span class="ks">@cyr1n32, usually about 1K views</span></div>
+   <div><b class="kn">740×</b><span class="kl">Average Breakout Score <span class="sample">SAMPLE</span></span><span class="ks">across the {n} breakouts</span></div>
   </div>"""
-    brands = "" if brand else f"""<div class="brands"><b class="h3">Brands in these breakouts <span class="sample">SAMPLE</span></b><div class="chipwrap">{"".join(f'<a class="chip" href="#results"><span class="ssav sm {c}">{i}</span>{E(t)} <span class="quiet">{k}</span></a>' for i,c,t,k in [("rh","","rhode skin","9"),("t2","gl","tower 28","2"),("gl","gl","glossier","2"),("la","gl","laneige","1")])}</div></div>"""
-    ins = f"""<div><h2 class="h2">Insights</h2><p class="sub">Counted from this run's top breakouts.</p></div>
- <div class="ins">
-  <div class="card ic"><b class="kn">5 of 5</b><span class="ks">top breakouts come from accounts under 4K followers.</span><span class="dn"><b>Do next:</b> brief small creators. Follower count does not predict a breakout here.</span></div>
-  <div class="card ic"><b class="kn">4 of 5</b><span class="ks">top breakouts run under 15 seconds.</span><span class="dn"><b>Do next:</b> keep the first cut short.</span></div>
- </div>"""
+    if brand:
+        line = f'<div class="insl">{ico(I["spark"],15)}<span><b>5 of 5</b> top breakouts come from accounts under 4K followers. Brief small creators.</span><a class="lnk sm" href="#{vid[2:]}">More insights</a></div>'
+    else:
+        line = f'<div class="insl">{ico(I["spark"],15)}<span>Brands in these breakouts <span class="sample">SAMPLE</span></span><span class="bchips">{"".join(f'<a href="#results"><span class="ssav sm {c}">{i}</span>{E(t)} <span class="quiet">{k}</span></a>' for i,c,t,k in [("rh","","rhode skin","9"),("t2","gl","tower 28","2"),("gl","gl","glossier","2"),("la","gl","laneige","1")])}</span></div>'
     return f"""<section class="view" id="{vid}">
  <a class="goback" href="#home">{ico(I['back'],15)} Go back</a>
  <div class="card rhead">
-  <div class="row sb top"><div class="row">{av}<span class="hn"><span class="row"><b class="h1">{name}</b></span>
-   <span class="row meta">{sub}</span>
-   <span class="row meta"><span class="tag y2">WEEKLY</span><span class="quiet">{run}</span><span class="tag g">● Ready</span></span></span></div>
-   <div class="row acts2"><button class="btn alert" data-act="alert">{ico(I['bell'],16)} <span>Alert me</span></button><button class="btn">{ico(I['dl'],16)} Export creator list</button><button class="ib on" aria-label="Saved">{ico(I['bookmark'],16)}</button><button class="ib" aria-label="More">{ico(I['more'],16)}</button></div></div>
-  {kpis}
-  <div class="qrow"><span><b>{tot}</b> videos this run</span><span><b>3</b> new this run</span><span><b>19.7M</b> top views</span><span><b>2.4M</b> average views <span class="sample">SAMPLE</span></span><span>first run <b>{"Sep 18" if brand else "Oct 3"}</b></span></div>
+  <div class="row sb top"><div class="row">{av}<span class="hn"><b class="h1">{name}</b>
+   <span class="row meta"><span class="tag">{"BRAND" if brand else "PRODUCT"}</span>{who}<span class="quiet">{run}</span></span></span></div>
+   <div class="row acts2"><button class="btn alert" data-act="alert">{ico(I['bell'],16)} <span>Alert me</span></button><button class="btn">{ico(I['dl'],16)} Export creator list</button><button class="ib" aria-label="More: save, edit keywords">{ico(I['more'],16)}</button></div></div>
+  {nums}
+  <p class="def">Breakout Score measures how far a video beat that creator's average video, in views and engagement.</p>
  </div>
- {brands}
- {ins}
- <div class="ptabs"><span class="pt on">Videos</span><span class="pt">Analytics</span><span class="pt">When they post</span><span class="pt">More data</span><span class="pt">Hashtags</span></div>
- <div class="row sb wrap"><div><h2 class="h2">Top breakout videos</h2><p class="sub">Ranked by Breakout Score: how far each video beat that creator's average video.</p></div>
-  <div class="row"><button class="btn sm">New this run (3) {ico(I['down'],14)}</button><button class="btn sm">Breakout Score {ico(I['down'],14)}</button></div></div>
+ {line}
+ <div class="ptabs"><span class="pt on">Videos</span><span class="pt">Insights</span><span class="pt">Analytics</span><span class="pt">When they post</span><span class="pt">More data</span><span class="pt">Hashtags</span><button class="btn sm sortb">Sort: Breakout Score {ico(I['down'],14)}</button></div>
  <div class="grid3">{"".join(result_card(v,i+1) for i,v in enumerate(V))}</div>
  <button class="btn loadm">Load {int(n)-5} more</button>
  <div class="same">Below this, unchanged from live: AI summary, Analytics, When they post, More data and Hashtags they used.</div>
@@ -288,7 +232,7 @@ a{color:inherit;text-decoration:none}i{font-style:normal}button{font-family:inhe
 .side{width:252px;flex-shrink:0;position:sticky;top:0;height:100vh;align-self:flex-start;background:#fff;border-right:1px solid #ECE9E1;display:flex;flex-direction:column;padding:20px 16px;gap:2px;overflow:auto}
 .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;padding:2px 6px 20px}
 .logo-mark{width:32px;height:32px;border-radius:50%;background:#FFC72C;display:flex;align-items:center;justify-content:center;color:#1A1300}
-.nav{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;font-size:15px;font-weight:600;color:#1F1D1A}
+.nav_unused{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;font-size:15px;font-weight:600;color:#1F1D1A}
 .nav:hover{background:#FAF8F2}.nav.on{background:#FFF6D6;color:#6B4B00}
 .navlabel{font-size:11px;font-weight:800;letter-spacing:.08em;color:#6B675F;padding:16px 12px 4px}
 .ssav{width:26px;height:26px;border-radius:8px;background:#FDECEF;color:#9C2F4A;font-weight:900;font-size:11px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
@@ -380,7 +324,6 @@ a{color:inherit;text-decoration:none}i{font-style:normal}button{font-family:inhe
 .qrow{display:flex;flex-wrap:wrap;gap:8px 26px;font-size:13px;color:#6B675F;padding:2px 2px 0}.qrow b{color:#0B0B0B}
 .ptabs{display:flex;gap:6px;border-bottom:1px solid #E6E2D8;padding-bottom:12px}.pt{font-size:14px;font-weight:700;color:#6B675F;padding:7px 14px;border-radius:999px}.pt.on{background:#0B0B0B;color:#fff}
 .same{border:1.5px dashed #DAD6CC;border-radius:16px;padding:22px;text-align:center;color:#6B675F;font-size:14px}
-.pop{position:fixed;left:268px;bottom:150px;width:320px;padding:16px 16px 8px;z-index:30;box-shadow:0 10px 24px hsla(40,20%,10%,.16)}
 .steps{list-style:none;margin:12px 0 0;padding:0}.steps li{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-top:1px solid #F0EDE6}
 .steps li>span:last-child{display:flex;flex-direction:column;gap:2px;font-size:14px}.steps .quiet{font-size:12px}
 .ck{width:22px;height:22px;border-radius:50%;border:1.5px solid #CFCABF;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
@@ -426,13 +369,22 @@ a{color:inherit;text-decoration:none}i{font-style:normal}button{font-family:inhe
  .ptabs{overflow-x:auto;white-space:nowrap}.qrow{gap:6px 16px}
  .tA{grid-template-columns:minmax(0,1fr)}.tstrip{justify-content:flex-start;padding-left:50px}.tBgrid{grid-template-columns:minmax(0,1fr)}.nbgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
  .feedgrid{grid-template-columns:minmax(0,1fr)}.fc{grid-template-columns:minmax(0,1fr);min-height:0}.fc .thumb{aspect-ratio:4/5}
- .pop{left:16px;right:16px;width:auto;bottom:16px}.statebar{display:none}.thumb.tall{aspect-ratio:4/5}
+ .statebar{display:none}.thumb.tall{aspect-ratio:4/5}
 }
 .statebar a{color:#fff;font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px;background:#2A2723}.statebar a.on{background:#FFC72C;color:#1A1300}
+.hblock{display:flex;flex-direction:column;gap:14px;margin-top:6px}
+.nums3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;border-top:1px solid #F0EDE6;padding-top:18px}
+.nums3>div{display:flex;flex-direction:column;gap:2px}.nums3 .kl{order:2}.nums3 .ks{order:3}.gold{color:#6B4B00}
+.def{margin:0;font-size:13px;color:#6B675F}
+.insl{display:flex;align-items:center;gap:10px;font-size:14px;color:#3A3731;padding:0 4px;flex-wrap:wrap}.insl>svg{color:#8A6100;flex-shrink:0}
+.insl .lnk{margin-left:auto;text-decoration:underline;font-size:13px}
+.bchips{display:flex;gap:16px;flex-wrap:wrap}.bchips a{display:inline-flex;align-items:center;gap:6px;font-weight:700}
+.sortb{margin-left:auto}.ptabs{align-items:center}
+.side[hidden]{display:none!important}
 '''
 
-states = [("home","Home A: rows"),("home-b","Home B: cards"),("home-c","Home C: + new videos"),("feed","My Feed"),("home-typing","Typing"),("expand","Keywords"),
-          ("home-running","Search running"),("home-checklist","Checklist"),("results","Brand results"),("results-product","Product results")]
+states = [("home","Home"),("feed","My Feed"),("home-typing","Typing"),("expand","Keywords"),
+          ("home-running","Processing"),("home-checklist","New account"),("results","Brand results"),("results-product","Product results")]
 statebar = '<div class="statebar">' + "".join(f'<a href="#{k}">{t}</a>' for k,t in states) + '</div>'
 
 js = '''
@@ -440,20 +392,17 @@ js = '''
 if(/shot/.test(location.search)){var sb=document.querySelector('.statebar');if(sb)sb.remove();}
 function $(i){return document.getElementById(i)}
 function toast(h,ms){var t=$('toast');t.innerHTML=h;t.classList.add('on');clearTimeout(t._h);t._h=setTimeout(function(){t.classList.remove('on')},ms||3200)}
-function markStep(k){var li=document.querySelector('[data-step="'+k+'"]');if(!li||li.classList.contains('done'))return;li.classList.add('done');
- li.querySelector('.ck').innerHTML='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5 9-10"/></svg>';
- var n=document.querySelectorAll('.steps li.done').length;$('obn').textContent=n;$('obbar').style.width=(n*25)+'%';}
+function markStep(k){var li=document.querySelector('#side-new [data-step="'+k+'"]');if(!li||li.classList.contains('done'))return;li.classList.add('done');li.classList.remove('now');
+ li.querySelector('.s-ck').innerHTML='<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5 9-10"/></svg>';
+ var n=document.querySelectorAll('#side-new .s-steps li.done').length;document.querySelector('#side-new .s-obn').textContent=n;}
 function route(){var h=(location.hash||'#home').slice(1);var v=['results','results-product','feed'].indexOf(h)>-1?h:'home';
  ['home','feed','results','results-product'].forEach(function(x){$('v-'+x).classList.toggle('on',x===v)});
- document.querySelector('[data-nav=home]').classList.toggle('on',v==='home');document.querySelector('[data-nav=feed]').classList.toggle('on',v==='feed');
- var opt=h==='home-b'?'b':(h==='home-c'?'c':(h==='home'?'a':(window._opt||'a')));if(h==='home-b'||h==='home-c'||h==='home')window._opt=opt;
- document.querySelectorAll('.hopt').forEach(function(d){d.hidden=d.dataset.opt!==opt});
- 
+ var nu=h==='home-checklist';$('side-main').hidden=nu;$('side-new').hidden=!nu;document.body.classList.toggle('nu',nu);
+ document.querySelectorAll('[data-nav=home]').forEach(function(a){a.classList.toggle('on',v==='home')});document.querySelectorAll('[data-nav=feed]').forEach(function(a){a.classList.toggle('on',v==='feed')});
  $('dd').hidden=h!=='home-typing';$('q').value=(h==='home-typing'||h==='expand')?'rhode':'';
  $('xcard').hidden=h!=='expand';document.querySelector('.scard').hidden=h==='expand';
- $('obpop').hidden=h!=='home-checklist';
- $('runline').style.display=h==='home-running'?'flex':'none';
- if(h==='home-running')setTimeout(function(){toast('<span>peptide lip tint is ready</span><a href="#results">Open</a>',6000)},400);
+ document.querySelectorAll('[data-proc]').forEach(function(d){d.hidden=h!=='home-running'});
+ if(h==='home-running')setTimeout(function(){toast('<span>lip oil is ready</span><a href="#results">Open</a>',6000)},400);
  document.querySelectorAll('.statebar a').forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+h)});
  window.scrollTo(0,0)}
 addEventListener('hashchange',route);route();
@@ -464,7 +413,6 @@ document.addEventListener('click',function(e){var b=e.target.closest('[data-act]
  if(b.classList.contains('kw')){b.classList.toggle('on');b.querySelector('.cbx').innerHTML=b.classList.contains('on')?'<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5 9-10"/></svg>':'';return}
  if(b.hasAttribute('data-q')){q.value=b.getAttribute('data-q');location.hash='#expand';document.querySelector('.xt').textContent=b.getAttribute('data-q');return}
  var a=b.getAttribute('data-act');e.preventDefault();
- if(a==='checklist'){var p=$('obpop');p.hidden=!p.hidden;return}
  if(a==='alert'){var on=!b.classList.contains('on');b.classList.toggle('on',on);b.querySelector('span').textContent=on?'Alerts on':'Alert me';toast(on?'We will email you when this search gets a new breakout.':'Alerts off');return}
  if(a==='alert-mini'){var on2=!b.classList.contains('on');b.classList.toggle('on',on2);b.querySelector('span').textContent=on2?'Alerts on':'Alert me';toast(on2?'We will email you when this search gets a new breakout.':'Alerts off');return}
  if(a==='edit-kw'){location.hash='#expand';return}
@@ -479,10 +427,9 @@ document.querySelectorAll('[data-q]').forEach(function(b){b.addEventListener('cl
 page = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex, nofollow"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>BrandBeacon 3.0 prototype</title>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<style>{css}</style></head><body>
+<style>{css}{SIDE_CSS}.nu .olduser{{display:none}}@media (max-width:700px){{.s-side{{display:none}}}}</style></head><body>
 {statebar}
 <div class="app">{side}{mtop}<main class="main">{home}{feed}{results}</main></div>
-{pop}
 <div class="toast" id="toast" role="status"></div>
 <script>{js}</script></body></html>'''
 
