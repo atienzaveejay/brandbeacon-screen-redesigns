@@ -102,10 +102,20 @@ from sidebar import sidebar, CSS as SIDE_CSS
 RECENT = [("rh","","rhode skin","#results","3 new"),("pl","pl","peptide lip tint","#results-product",""),
           ("gl","gl","glass skin routine","#results-product",""),("ra","bl","rare beauty","#results",""),
           ("ol","gr","olipop","#results-product","")]
+FREE = dict(saved=0, analyses=0, breakdowns=(0,5), plan="Free plan", reset="")
+READY_RECENT = [("lo","gl","lip oil","#results-product","Ready")] + RECENT[:4]
 side = (sidebar(recent=RECENT, more="#home", sid="side-main",
                 processing=[("lo","gl","lip oil","Search","run-search"),("ju","bl","@justemma529","Analysis","run-analysis")])
-        + sidebar(recent=[("rh","","rhode skin","#results","")], saved=0, analyses=0, steps={"search"},
-                  searches=(1,3), breakdowns=(0,5), plan="Free plan", reset="", sid="side-new"))
+        # Later search B, done: the search leaves Processing and tops Recent searches with a Ready pill.
+        + sidebar(recent=READY_RECENT, more="#home", sid="side-ready")
+        # New Free account after its first search (Get started 1 of 4).
+        + sidebar(recent=[("rh","","rhode skin","#results","")], steps={"search"}, searches=(1,3), sid="side-new", **FREE)
+        # First search A (and C): the search runs, step 1 spins, nothing in Recent yet.
+        + sidebar(active="", processing=[("pl","pl","peptide lip tint","Search","")], steps=set(), running_step="search",
+                  searches=(1,3), sid="side-first", **FREE)
+        # First search ready.
+        + sidebar(active="", recent=[("pl","pl","peptide lip tint","#results-product","Ready")], steps={"search"},
+                  searches=(1,3), sid="side-free-ready", **FREE))
 
 # ---------- one search (Ivan 6 Oct: "my leading candidate is having one search. No picking, you just put the keyword")
 dd = f'''<div class="card dd" id="dd" hidden>
@@ -121,6 +131,7 @@ searchcard = f'''<div class="card scard">
  <form class="sbox-wrap" data-search>
   <div class="sbox">{ico(I['search'],20)}<input id="q" placeholder="Search a brand, product or keyword" autocomplete="off"><button class="btn y pill" type="submit" aria-label="Find breakouts">{ico(I['search'],16)}<span class="bl">Find breakouts</span></button></div>
   {dd}
+  <button class="btn y mfind" type="submit">{ico(I['search'],16)} Find breakouts</button>
  </form>
  <div class="sugg">
   <div class="srow"><span class="slbl">Brands</span><span class="chipwrap">{sug(["rare beauty","e.l.f.","olipop","drunk elephant","crocs"])}</span></div>
@@ -141,7 +152,9 @@ expand = f'''<div class="card xcard" id="xcard" hidden>
  <div class="row end"><a class="btn" href="#home">Cancel</a><a class="btn y" href="#results">Run search {ico('<path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>',16)}</a></div>
 </div>'''
 
-mtop = f'''<header class="mtop"><a class="logo" href="#home"><span class="logo-mark">{ico('<circle cx="12" cy="12" r="2"/><path d="M8.5 8.5a5 5 0 0 0 0 7"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/>',16)}</span>Brand Beacon</a><span class="mpill"><b>25</b> of 100 searches</span><button class="ib" aria-label="Menu">{ico(I['menu'],18)}</button></header>'''
+# Phone (<700px): the sidebar becomes a drawer behind the menu button. The top bar keeps two things visible:
+# what is processing (spinner + count, only while something runs) and searches left. Both open the drawer.
+mtop = f'''<header class="mtop"><a class="logo" href="#home"><span class="logo-mark">{ico('<circle cx="12" cy="12" r="2"/><path d="M8.5 8.5a5 5 0 0 0 0 7"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/>',16)}</span>Brand Beacon</a><button class="mchip mproc" type="button" data-open-menu hidden aria-label="Processing"><span class="spin"></span><b id="mproc-n">2</b></button><button class="mchip" type="button" data-open-menu aria-label="Searches left">{ico(I['search'],13)}<b id="mleft">75</b>&nbsp;left</button><button class="ib mmenu" type="button" data-open-menu aria-label="Menu">{ico(I['menu'],18)}</button></header><div class="scrim" data-close></div>'''
 rail = f'''<aside class="rail">
  <div class="card rp"><div class="row sb"><b class="h3">This week</b><span class="quiet sm">since Sep 18</span></div>
   <div class="two"><div><b class="big">55</b><i>new breakouts</i></div><div><b class="big gold">8.6K×</b><i>top Breakout Score</i></div></div></div>
@@ -166,7 +179,14 @@ def head(x):
 terms = "".join(f'<a class="term{" olduser" if x["old"] else ""}" href="{x["h"]}"><span class="ssav lg {x["c"]}">{x["ini"]}</span><span class="tm">{head(x)}<i>{x["d"]}</i></span>{ARROW}</a>' for x in TERMS)
 newest = "".join(f'''<a class="card nb" href="#results"><span class="thumb"><img src="{V[i]['img']}" alt="">{score(V[i]['s'])}</span><span class="nbb"><b>@{E(V[i]['h'])}</b><i>{w}</i></span></a>'''
                  for i,w in [(2,"rhode skin · 2 days ago"),(3,"rhode skin · 2 days ago"),(4,"rhode skin · 3 days ago"),(0,"rhode skin · 5 days ago")])
+# Later search B (Ivan 8 Oct "put them somewhere else so that they know that it's coming"): Run search lands back on Home
+# with one slim running line; the search also sits under Processing in the sidebar.
+runbar = f'''<div class="upd" id="runbar" hidden><span class="spin"></span><span><b>lip oil is running.</b> About 1 to 2 minutes. We'll tell you here and by email.</span><a class="lnk sm" href="#first-a">See progress</a></div>'''
+# Phone only: Get started lives in the drawer, so new accounts get one line on Home that opens it.
+mgs = f'''<button class="mgs" type="button" data-open-menu><span class="mgs-n">1 of 4</span><span><b>Get started</b><i>Next: analyze a video</i></span>{ARROW}</button>'''
 home = f"""<section class="view" id="v-home">
+ {runbar}
+ {mgs}
  {searchcard}
  {expand}
  <div class="hblock">
@@ -224,6 +244,61 @@ def results_view(vid, kind):
  <div class="same">Below this, unchanged from live: AI summary, Analytics, When they post, More data and Hashtags they used.</div>
 </section>"""
 results = results_view("v-results","brand") + results_view("v-results-product","product")
+
+# ---------- first search (Ivan 11 Oct: "let's go with 'wait and learn'" for the first search; B for later searches;
+# C, results streaming in, only after Lester's speed work). Folded in from first-search.html on 13 Oct.
+CK = ico(I['check'],13,2.4)
+def wait_steps(done, now=None):
+    out = []
+    for i,t in enumerate(["Pulling TikTok videos that mention peptide lip tint","Comparing each one to that creator's usual views","Picking the breakouts"]):
+        if i < done: out.append(f'<li class="done"><span class="ck">{CK}</span><span><b>{t}</b></span></li>')
+        elif i == now: out.append(f'<li class="now"><span class="spin lg"></span><span><b>{t}</b></span></li>')
+        else: out.append(f'<li class="todo"><span class="ck"></span><span><b>{t}</b></span></li>')
+    return f'<ol class="steps wsteps">{"".join(out)}</ol>'
+def plain_card(v):
+    return f"""<article class="card rc">
+ <div class="thumb tall"><img src="{v['img']}" alt=""><span class="dur">{v['dur']}</span>{score(v['s'])}</div>
+ <div class="rcb">
+  <div class="who"><span class="av">{v['h'].strip('_')[0].upper()}</span><span><b>@{E(v['h'])}</b><i>{v['f']} followers</i></span><span class="date">{v['d']}</span></div>
+  <p class="capt clamp">{E(v['cap'])}</p>
+  <div class="st4"><span>{ico(I['eye'],14)} {v['v']}</span><span>{ico(I['heart'],14)} {v['l']}</span><span>{ico(I['msg'],14)} {v['c']}</span><span>{ico(I['send'],14)} {v['sh']}</span></div>
+  <div class="acts"><button class="btn y grow sm" data-act="analyze">{ico(I['spark'],15)} Analyze video</button><button class="ib round sm" data-act="save" aria-label="Save video">{ico(I['bookmark'],15)}</button></div>
+ </div></article>"""
+def skel():
+    return '<article class="card rc"><div class="sk" style="aspect-ratio:9/12"></div><div class="rcb"><div class="sk" style="height:14px;width:60%"></div><div class="sk" style="height:12px"></div><div class="sk" style="height:36px;border-radius:10px"></div></div></article>'
+EMAILME = '<label class="row emailme"><span class="toggle"></span><span>Email me when it\'s ready <span class="quiet">· sam@…</span></span></label>'
+first_a = f"""<section class="view narrow" id="v-first-a">
+ <div class="card wcard">
+  <div class="wh"><h1 class="h1">Finding peptide lip tint breakouts</h1><span class="quiet">Usually 1 to 2 minutes. You can leave this page.</span></div>
+  {wait_steps(1, 1)}
+  {EMAILME}
+ </div>
+ <div class="howto"><div class="thumb vid"><span class="playb"><svg width="22" height="22" viewBox="0 0 24 24" fill="#1A1300"><path d="M8 5v14l11-7z"/></svg></span><span class="dur">1:30</span></div>
+  <div class="howt"><h2 class="h3">How to read your results</h2><span class="quiet">What a Breakout Score means and which video to open first. From Ivan.</span></div></div>
+ <div class="hblock"><h2 class="h2">Breakouts found this week</h2><div class="grid3">{"".join(plain_card(v) for v in V[:3])}</div></div>
+</section>"""
+first_c = f"""<section class="view narrow" id="v-first-c">
+ <div class="card wcard">
+  <h1 class="h1">peptide lip tint</h1>
+  <div class="upd"><span class="spin"></span><span><b>2 breakouts so far.</b> Still checking 140 of 200 videos. New ones appear here as we find them.</span></div>
+  {EMAILME}
+ </div>
+ <div class="hblock"><h2 class="h2">Breakouts</h2><div class="grid3">{plain_card(V[0])}{plain_card(V[1])}{skel()}</div></div>
+</section>"""
+ready = f"""<section class="view narrow" id="v-ready">
+ <div class="card wcard">
+  <div class="wh"><h1 class="h1">Your peptide lip tint breakouts are ready</h1><span class="quiet">Start with the top one. It beat that creator's usual views by the most.</span></div>
+  {wait_steps(3)}
+  <a class="btn y" style="align-self:flex-start" href="#results-product">Open your results</a>
+ </div>
+</section>"""
+# ---------- first search complete email (sent once, first search only). Source: src/email.html.
+import re as _re
+_em = (ROOT / "src" / "email.html").read_text()
+_emcss = _re.search(r"<style>(.*?)</style>", _em, _re.S).group(1)
+_emcss = _re.sub(r"(^|})\s*([^{}]+)\{", lambda m: m.group(1) + ",".join(".em " + x.strip() if x.strip() != "body" else ".em" for x in m.group(2).split(",")) + "{", _emcss)
+_embody = _re.search(r"<body>(.*?)</body>", _em, _re.S).group(1).replace("../../img/", "../img/")
+email = f"""<section class="view" id="v-email"><div class="em">{_embody}</div></section>"""
 
 css = '''
 [hidden]{display:none!important}*{box-sizing:border-box}body{margin:0;font-family:Figtree,'Segoe UI',system-ui,sans-serif;color:#0B0B0B;background:#F5F4F0}
@@ -358,7 +433,7 @@ a{color:inherit;text-decoration:none}i{font-style:normal}button{font-family:inhe
 .nbgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
 .nb{overflow:hidden;display:flex;flex-direction:column}.nb .thumb{aspect-ratio:4/5}.nbb{padding:10px 12px;font-size:13px}.nbb b{display:block}.nbb i{display:block;font-size:12px;color:#6B675F}
 @media (max-width:700px){
- .side{display:none}.app{flex-direction:column}
+ .app{flex-direction:column}
  .mtop{display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:40;background:#fff;border-bottom:1px solid #ECE9E1;padding:10px 16px}
  .mtop .logo{padding:0;font-size:15px;margin-right:auto}.mpill{font-size:12px;color:#6B675F;border:1px solid #ECE9E1;border-radius:999px;padding:4px 10px}.mpill b{color:#0B0B0B}
  .main{padding:16px 16px 48px}.view{gap:16px}
@@ -369,7 +444,7 @@ a{color:inherit;text-decoration:none}i{font-style:normal}button{font-family:inhe
  .ptabs{overflow-x:auto;white-space:nowrap}.qrow{gap:6px 16px}
  .tA{grid-template-columns:minmax(0,1fr)}.tstrip{justify-content:flex-start;padding-left:50px}.tBgrid{grid-template-columns:minmax(0,1fr)}.nbgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
  .feedgrid{grid-template-columns:minmax(0,1fr)}.fc{grid-template-columns:minmax(0,1fr);min-height:0}.fc .thumb{aspect-ratio:4/5}
- .statebar{display:none}.thumb.tall{aspect-ratio:4/5}
+ .statebar{display:none}.thumb.tall{aspect-ratio:4/5}.btn.pill .bl{display:none}
 }
 .statebar a{color:#fff;font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px;background:#2A2723}.statebar a.on{background:#FFC72C;color:#1A1300}
 .hblock{display:flex;flex-direction:column;gap:14px;margin-top:6px}
@@ -383,29 +458,122 @@ a{color:inherit;text-decoration:none}i{font-style:normal}button{font-family:inhe
 .side[hidden]{display:none!important}
 '''
 
-states = [("home","Home"),("feed","My Feed"),("home-typing","Typing"),("expand","Keywords"),
-          ("home-running","Processing"),("home-checklist","New account"),("results","Brand results"),("results-product","Product results")]
-statebar = '<div class="statebar">' + "".join(f'<a href="#{k}">{t}</a>' for k,t in states) + '</div>'
+css += _emcss + '''
+.narrow{max-width:880px;margin:0 auto;width:100%}
+.wcard{padding:28px 32px;display:flex;flex-direction:column;gap:18px}.wh{display:flex;flex-direction:column;gap:6px}
+.wsteps{margin:0}.wsteps li{align-items:center}.wsteps li.now b{color:#0B0B0B}.wsteps li.todo b{color:#8C877D}
+.spin{width:16px;height:16px;border-radius:50%;border:2px solid #F2DE99;border-top-color:#6B4B00;animation:sp .9s linear infinite;flex-shrink:0;display:inline-block}.spin.lg{width:22px;height:22px}
+@keyframes sp{to{transform:rotate(360deg)}}
+.upd{display:flex;align-items:center;gap:10px;font-size:14px;background:#FFFBEB;border:1px solid #F2DE99;border-radius:14px;padding:12px 16px;color:#3A3731}
+.upd .lnk{margin-left:auto;text-decoration:underline;font-size:13px;white-space:nowrap}
+.toggle{width:40px;height:24px;border-radius:12px;background:#0B0B0B;position:relative;flex-shrink:0}
+.toggle:after{content:"";position:absolute;right:3px;top:3px;width:18px;height:18px;border-radius:50%;background:#FFC72C}
+.emailme{gap:10px;font-size:14px}
+.howto{display:flex;gap:20px;align-items:center}
+.thumb.vid{width:300px;aspect-ratio:16/9;border-radius:16px;flex-shrink:0;background:#1F1D1A;display:flex;align-items:center;justify-content:center}
+.playb{width:56px;height:56px;border-radius:50%;background:#FFC72C;display:flex;align-items:center;justify-content:center}
+.howt{display:flex;flex-direction:column;gap:6px}.howt .h3{font-size:18px}
+.sk{background:linear-gradient(90deg,#F1EFE9 0%,#F8F6F1 50%,#F1EFE9 100%);background-size:200% 100%;animation:sh 1.4s ease infinite;border-radius:8px}
+@keyframes sh{to{background-position:-200% 0}}
+.clamp{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.mfind,.mgs,.scrim{display:none}
+.toast.stay{transition:none}
+.emailv .s-side,.emailv .mtop{display:none!important}
+.statebar{align-items:center;gap:6px 4px}.sg{display:inline-flex;align-items:center;gap:4px;padding-right:10px;margin-right:4px;border-right:1px solid #3A3731}.sg:last-child{border-right:0}
+.sg i{color:#A9A398;font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin-right:2px}
+'''
 
-js = '''
+MCSS = '''
+@media (max-width:700px){
+ .s-side{position:fixed;left:0;top:0;bottom:0;height:100%;width:min(304px,86vw);z-index:70;transform:translateX(-104%);transition:transform .25s;box-shadow:8px 0 30px rgba(11,11,11,.18)}
+ .menu-open .s-side{transform:none}
+ .s-close{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:10px;border:1px solid #E3DFD4;background:#fff;color:#3A3731;cursor:pointer}
+ .s-logo{padding-bottom:14px}
+ .scrim{display:block;position:fixed;inset:0;background:rgba(11,11,11,.4);opacity:0;pointer-events:none;transition:opacity .2s;z-index:65}
+ .menu-open .scrim{opacity:1;pointer-events:auto}
+ .mtop{gap:8px}.mtop .ib{width:40px;height:40px}
+ .mchip{all:unset;display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#6B675F;border:1px solid #ECE9E1;border-radius:999px;padding:5px 10px;cursor:pointer;white-space:nowrap}
+ .mchip b{color:#0B0B0B}.mproc{background:#FFFBEB;border-color:#F2DE99;padding:5px 9px}.mproc .spin{width:12px;height:12px}
+ .sbox{padding:6px 14px;box-shadow:none}.sbox .btn.pill{display:none}
+ .mfind{display:flex;width:100%;margin-top:12px;height:48px;border-radius:999px;font-size:15px}
+ .sugg{gap:12px}.srow{gap:6px}.srow .chipwrap{flex-wrap:nowrap;overflow-x:auto;margin:0 -16px;padding:0 16px 2px;scrollbar-width:none;width:calc(100% + 32px)}
+ .srow .chipwrap::-webkit-scrollbar{display:none}.chip{flex-shrink:0}
+ .nu .mgs{all:unset;cursor:pointer;display:flex;align-items:center;gap:12px;background:#FFFBEB;border:1px solid #F2DE99;border-radius:16px;padding:12px 14px;font-size:14px}
+ .mgs>span:nth-child(2){flex-grow:1}.mgs b{display:block}.mgs i{display:block;font-size:12.5px;color:#6B675F}
+ .mgs-n{font-size:11px;font-weight:800;color:#6B4B00;background:#FFE58A;padding:3px 8px;border-radius:999px;white-space:nowrap}
+ .upd{flex-wrap:wrap;align-items:flex-start;font-size:13.5px}.upd>span:nth-child(2){flex:1;min-width:0}.upd .lnk{margin-left:26px}
+ .xcard .row.sb{flex-wrap:wrap;row-gap:8px}.addkw{width:100%}.xcard .row.end .btn{flex:1}
+ .terms{padding:2px 4px}.term{gap:12px;padding:12px 8px}.tm b{font-size:15px}.tm i{font-size:12.5px}
+ .acts2 .btn:not(.alert){display:none}.acts2{gap:8px}.acts2 .btn.alert{flex:1}
+ .nums3{gap:10px;padding-top:14px}.nums3 .kn{font-size:22px}.nums3 .kl{font-size:12px;line-height:1.3}.nums3 .ks{font-size:11.5px;line-height:1.35}
+ .insl{padding:0}.insl .lnk{margin-left:25px}
+ .ptabs{margin:0 -16px;padding:0 16px 12px;scrollbar-width:none}.ptabs::-webkit-scrollbar{display:none}.pt{padding:7px 12px}
+ .sortb{margin-left:8px}
+ .wcard{padding:20px}.h1{font-size:23px;line-height:1.2}
+ .howto{flex-direction:column;align-items:stretch;gap:12px}.thumb.vid{width:100%}
+ .em .frame{width:auto;padding:0}.em .bd{padding:20px}.em .hd{padding:14px 16px}
+ .toast{left:16px;right:16px;bottom:16px;transform:translateY(140px);justify-content:space-between}.toast.on{transform:none}
+ .goback{padding:6px 12px}
+ .mtop .logo{white-space:nowrap}
+ .dd{top:62px}
+ .rhead .top>.row:first-child{align-items:flex-start}.ssav.xl{width:44px;height:44px;border-radius:13px;font-size:15px}
+ .meta{flex-wrap:wrap;row-gap:4px}.meta>span:last-child{flex-basis:100%}
+ .nums3 .ks{display:none}.nums3 .kl{flex-wrap:wrap;gap:4px}.nums3 .sample{font-size:9.5px;padding:1px 5px}
+ .insl>span:first-of-type{flex:1 1 calc(100% - 30px);min-width:0}
+ .grid3 .thumb.tall{aspect-ratio:1/1}
+}
+'''
+
+GROUPS = [("Home",[("home","Home"),("menu","Phone menu")]),
+          ("Search",[("home-typing","Typing"),("expand","Keywords")]),
+          ("First search A",[("first-a","Wait and learn")]),
+          ("Later search B",[("home-running","Running")]),
+          ("Ready",[("ready","First search"),("home-ready","Later search")]),
+          ("Results",[("results","Brand"),("results-product","Product")]),
+          ("My Feed",[("feed","My Feed")]),
+          ("New account",[("home-checklist","Get started")]),
+          ("Email",[("email","First search done")]),
+          ("After speed work",[("first-c","C. Stream in")])]
+statebar = '<div class="statebar">' + "".join(f'<span class="sg"><i>{g}</i>' + "".join(f'<a href="#{k}">{t}</a>' for k,t in items) + '</span>' for g,items in GROUPS) + '</div>'
+
+js = """
 (function(){
 if(/shot/.test(location.search)){var sb=document.querySelector('.statebar');if(sb)sb.remove();}
 function $(i){return document.getElementById(i)}
-function toast(h,ms){var t=$('toast');t.innerHTML=h;t.classList.add('on');clearTimeout(t._h);t._h=setTimeout(function(){t.classList.remove('on')},ms||3200)}
+function toast(h,ms){var t=$('toast');t.innerHTML=h;t.classList.add('on');clearTimeout(t._h);if(ms!==0)t._h=setTimeout(function(){t.classList.remove('on')},ms||3200)}
 function markStep(k){var li=document.querySelector('#side-new [data-step="'+k+'"]');if(!li||li.classList.contains('done'))return;li.classList.add('done');li.classList.remove('now');
  li.querySelector('.s-ck').innerHTML='<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5 9-10"/></svg>';
  var n=document.querySelectorAll('#side-new .s-steps li.done').length;document.querySelector('#side-new .s-obn').textContent=n;}
-function route(){var h=(location.hash||'#home').slice(1);var v=['results','results-product','feed'].indexOf(h)>-1?h:'home';
- ['home','feed','results','results-product'].forEach(function(x){$('v-'+x).classList.toggle('on',x===v)});
- var nu=h==='home-checklist';$('side-main').hidden=nu;$('side-new').hidden=!nu;document.body.classList.toggle('nu',nu);
+var M='side-main',CFG={
+ 'home':{},'home-b':{},'home-c':{},'home-typing':{},'expand':{},
+ 'menu':{proc:2,run:1,menu:1},
+ 'home-running':{proc:2,run:1},
+ 'home-ready':{s:'side-ready',ready:1},
+ 'first-a':{v:'first-a',s:'side-first',free:1,proc:1},
+ 'first-c':{v:'first-c',s:'side-first',free:1,proc:1},
+ 'ready':{v:'ready',s:'side-free-ready',free:1},
+ 'results':{v:'results'},'results-product':{v:'results-product'},'feed':{v:'feed'},
+ 'home-checklist':{s:'side-new',free:1,nu:1},
+ 'email':{v:'email',s:'-',email:1}};
+var VIEWS=['home','feed','results','results-product','first-a','first-c','ready','email'];
+function route(){var h=(location.hash||'#home').slice(1);var c=CFG[h]||{};var v=c.v||'home',sid=c.s||M;
+ VIEWS.forEach(function(x){$('v-'+x).classList.toggle('on',x===v)});
+ document.querySelectorAll('.s-side').forEach(function(n){n.hidden=n.id!==sid});
+ var B=document.body.classList;B.toggle('nu',!!c.nu);B.toggle('emailv',!!c.email);B.toggle('menu-open',!!c.menu);
  document.querySelectorAll('[data-nav=home]').forEach(function(a){a.classList.toggle('on',v==='home')});document.querySelectorAll('[data-nav=feed]').forEach(function(a){a.classList.toggle('on',v==='feed')});
  $('dd').hidden=h!=='home-typing';$('q').value=(h==='home-typing'||h==='expand')?'rhode':'';
  $('xcard').hidden=h!=='expand';document.querySelector('.scard').hidden=h==='expand';
- document.querySelectorAll('[data-proc]').forEach(function(d){d.hidden=h!=='home-running'});
- if(h==='home-running')setTimeout(function(){toast('<span>lip oil is ready</span><a href="#results">Open</a>',6000)},400);
+ $(M).querySelectorAll('[data-proc]').forEach(function(d){d.hidden=!c.run});
+ $('runbar').hidden=!c.run;
+ document.querySelector('.mproc').hidden=!c.proc;$('mproc-n').textContent=c.proc||'';$('mleft').textContent=c.free?'2':'75';
+ var t=$('toast');t.classList.toggle('stay',!!c.ready);
+ if(c.ready)toast('<span>lip oil is ready</span><a href="#results-product">Open</a>',0);else t.classList.remove('on');
  document.querySelectorAll('.statebar a').forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+h)});
  window.scrollTo(0,0)}
 addEventListener('hashchange',route);route();
+document.addEventListener('click',function(e){
+ if(e.target.closest('[data-open-menu]')){document.body.classList.add('menu-open');return}
+ if(e.target.closest('[data-close]')||e.target.closest('.s-side a')){document.body.classList.remove('menu-open')}});
 var q=$('q');q.addEventListener('input',function(){$('dd').hidden=!q.value.trim()});
 document.addEventListener('click',function(e){if(!e.target.closest('.sbox-wrap'))$('dd').hidden=true});
 document.querySelector('[data-search]').addEventListener('submit',function(e){e.preventDefault();location.hash='#expand'});
@@ -414,22 +582,20 @@ document.addEventListener('click',function(e){var b=e.target.closest('[data-act]
  if(b.hasAttribute('data-q')){q.value=b.getAttribute('data-q');location.hash='#expand';document.querySelector('.xt').textContent=b.getAttribute('data-q');return}
  var a=b.getAttribute('data-act');e.preventDefault();
  if(a==='alert'){var on=!b.classList.contains('on');b.classList.toggle('on',on);b.querySelector('span').textContent=on?'Alerts on':'Alert me';toast(on?'We will email you when this search gets a new breakout.':'Alerts off');return}
- if(a==='alert-mini'){var on2=!b.classList.contains('on');b.classList.toggle('on',on2);b.querySelector('span').textContent=on2?'Alerts on':'Alert me';toast(on2?'We will email you when this search gets a new breakout.':'Alerts off');return}
- if(a==='edit-kw'){location.hash='#expand';return}
  if(a==='share'){toast('Share link copied. It does not use any of your credits.');return}
  if(a==='analyze'){markStep('analyze');toast('Analyzing. Uses 1 breakdown.')}
  if(a==='save'){markStep('save');b.classList.add('on');toast('Saved to Saved videos')}
 });
 document.querySelectorAll('[data-q]').forEach(function(b){b.addEventListener('click',function(){markStep('second')})});
 })();
-'''
+"""
 
 page = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex, nofollow"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>BrandBeacon 3.0 prototype</title>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<style>{css}{SIDE_CSS}.nu .olduser{{display:none}}@media (max-width:700px){{.s-side{{display:none}}}}</style></head><body>
+<style>{css}{SIDE_CSS}.nu .olduser{{display:none}}{MCSS}</style></head><body>
 {statebar}
-<div class="app">{side}{mtop}<main class="main">{home}{feed}{results}</main></div>
+<div class="app">{side}{mtop}<main class="main">{home}{feed}{results}{first_a}{first_c}{ready}{email}</main></div>
 <div class="toast" id="toast" role="status"></div>
 <script>{js}</script></body></html>'''
 

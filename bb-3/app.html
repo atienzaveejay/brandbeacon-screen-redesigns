@@ -134,7 +134,7 @@ a{color:inherit;text-decoration:none}i{font-style:normal}button{font-family:inhe
 .nbgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
 .nb{overflow:hidden;display:flex;flex-direction:column}.nb .thumb{aspect-ratio:4/5}.nbb{padding:10px 12px;font-size:13px}.nbb b{display:block}.nbb i{display:block;font-size:12px;color:#6B675F}
 @media (max-width:700px){
- .side{display:none}.app{flex-direction:column}
+ .app{flex-direction:column}
  .mtop{display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:40;background:#fff;border-bottom:1px solid #ECE9E1;padding:10px 16px}
  .mtop .logo{padding:0;font-size:15px;margin-right:auto}.mpill{font-size:12px;color:#6B675F;border:1px solid #ECE9E1;border-radius:999px;padding:4px 10px}.mpill b{color:#0B0B0B}
  .main{padding:16px 16px 48px}.view{gap:16px}
@@ -145,7 +145,7 @@ a{color:inherit;text-decoration:none}i{font-style:normal}button{font-family:inhe
  .ptabs{overflow-x:auto;white-space:nowrap}.qrow{gap:6px 16px}
  .tA{grid-template-columns:minmax(0,1fr)}.tstrip{justify-content:flex-start;padding-left:50px}.tBgrid{grid-template-columns:minmax(0,1fr)}.nbgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
  .feedgrid{grid-template-columns:minmax(0,1fr)}.fc{grid-template-columns:minmax(0,1fr);min-height:0}.fc .thumb{aspect-ratio:4/5}
- .statebar{display:none}.thumb.tall{aspect-ratio:4/5}
+ .statebar{display:none}.thumb.tall{aspect-ratio:4/5}.btn.pill .bl{display:none}
 }
 .statebar a{color:#fff;font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px;background:#2A2723}.statebar a.on{background:#FFC72C;color:#1A1300}
 .hblock{display:flex;flex-direction:column;gap:14px;margin-top:6px}
@@ -157,7 +157,32 @@ a{color:inherit;text-decoration:none}i{font-style:normal}button{font-family:inhe
 .bchips{display:flex;gap:16px;flex-wrap:wrap}.bchips a{display:inline-flex;align-items:center;gap:6px;font-weight:700}
 .sortb{margin-left:auto}.ptabs{align-items:center}
 .side[hidden]{display:none!important}
+.em{margin:0;background:#F5F4F0;font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;color:#1F1D1A}.em .frame{width:640px;margin:0 auto;padding:28px 0}.em .hd{background:#fff;border:1px solid #ECE9E1;border-radius:14px 14px 0 0;padding:16px 22px;font-size:13px;color:#6B675F;line-height:1.6}.em .hd b{color:#0B0B0B}.em .bd{background:#fff;border:1px solid #ECE9E1;border-top:0;border-radius:0 0 14px 14px;padding:26px 30px 30px;font-size:16px;line-height:1.6}.em .bd p{margin:0 0 16px}.em .pic{display:block;width:220px;border-radius:10px;margin:4px 0 18px}.em .btn{display:inline-block;background:#FFC72C;color:#1A1300;font-weight:700;padding:12px 20px;border-radius:10px;text-decoration:none;margin:2px 0 18px}.em .num{font-weight:700;color:#0B0B0B}
 
+.narrow{max-width:880px;margin:0 auto;width:100%}
+.wcard{padding:28px 32px;display:flex;flex-direction:column;gap:18px}.wh{display:flex;flex-direction:column;gap:6px}
+.wsteps{margin:0}.wsteps li{align-items:center}.wsteps li.now b{color:#0B0B0B}.wsteps li.todo b{color:#8C877D}
+.spin{width:16px;height:16px;border-radius:50%;border:2px solid #F2DE99;border-top-color:#6B4B00;animation:sp .9s linear infinite;flex-shrink:0;display:inline-block}.spin.lg{width:22px;height:22px}
+@keyframes sp{to{transform:rotate(360deg)}}
+.upd{display:flex;align-items:center;gap:10px;font-size:14px;background:#FFFBEB;border:1px solid #F2DE99;border-radius:14px;padding:12px 16px;color:#3A3731}
+.upd .lnk{margin-left:auto;text-decoration:underline;font-size:13px;white-space:nowrap}
+.toggle{width:40px;height:24px;border-radius:12px;background:#0B0B0B;position:relative;flex-shrink:0}
+.toggle:after{content:"";position:absolute;right:3px;top:3px;width:18px;height:18px;border-radius:50%;background:#FFC72C}
+.emailme{gap:10px;font-size:14px}
+.howto{display:flex;gap:20px;align-items:center}
+.thumb.vid{width:300px;aspect-ratio:16/9;border-radius:16px;flex-shrink:0;background:#1F1D1A;display:flex;align-items:center;justify-content:center}
+.playb{width:56px;height:56px;border-radius:50%;background:#FFC72C;display:flex;align-items:center;justify-content:center}
+.howt{display:flex;flex-direction:column;gap:6px}.howt .h3{font-size:18px}
+.sk{background:linear-gradient(90deg,#F1EFE9 0%,#F8F6F1 50%,#F1EFE9 100%);background-size:200% 100%;animation:sh 1.4s ease infinite;border-radius:8px}
+@keyframes sh{to{background-position:-200% 0}}
+.clamp{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.mfind,.mgs,.scrim{display:none}
+.toast.stay{transition:none}
+.emailv .s-side,.emailv .mtop{display:none!important}
+.statebar{align-items:center;gap:6px 4px}.sg{display:inline-flex;align-items:center;gap:4px;padding-right:10px;margin-right:4px;border-right:1px solid #3A3731}.sg:last-child{border-right:0}
+.sg i{color:#A9A398;font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin-right:2px}
+
+.s-top{display:flex;align-items:flex-start;justify-content:space-between}.s-close{display:none}
 .s-side{width:252px;flex-shrink:0;position:sticky;top:0;height:100vh;align-self:flex-start;background:#fff;border-right:1px solid #ECE9E1;display:flex;flex-direction:column;padding:20px 16px 16px;gap:2px;overflow:auto;font-family:Figtree,'Segoe UI',system-ui,sans-serif}
 .s-side .row{display:flex;align-items:center;gap:8px}.s-side .sbt{justify-content:space-between}
 .s-logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;padding:2px 6px 20px;color:#0B0B0B;text-decoration:none}
@@ -193,10 +218,49 @@ a{color:inherit;text-decoration:none}i{font-style:normal}button{font-family:inhe
 .s-avm{width:30px;height:30px;border-radius:50%;background:#FFF6D6;color:#6B4B00;display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex-shrink:0}
 .s-who{display:flex;flex-direction:column;flex-grow:1;min-width:0}.s-who i{font-style:normal;font-size:11.5px;color:#6B675F;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .s-ib{width:32px;height:32px;border-radius:10px;border:1px solid #E3DFD4;background:#fff;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;color:#3A3731}
-.nu .olduser{display:none}@media (max-width:700px){.s-side{display:none}}</style></head><body>
-<div class="statebar"><a href="#home">Home</a><a href="#feed">My Feed</a><a href="#home-typing">Typing</a><a href="#expand">Keywords</a><a href="#home-running">Processing</a><a href="#home-checklist">New account</a><a href="#results">Brand results</a><a href="#results-product">Product results</a></div>
+.nu .olduser{display:none}
+@media (max-width:700px){
+ .s-side{position:fixed;left:0;top:0;bottom:0;height:100%;width:min(304px,86vw);z-index:70;transform:translateX(-104%);transition:transform .25s;box-shadow:8px 0 30px rgba(11,11,11,.18)}
+ .menu-open .s-side{transform:none}
+ .s-close{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:10px;border:1px solid #E3DFD4;background:#fff;color:#3A3731;cursor:pointer}
+ .s-logo{padding-bottom:14px}
+ .scrim{display:block;position:fixed;inset:0;background:rgba(11,11,11,.4);opacity:0;pointer-events:none;transition:opacity .2s;z-index:65}
+ .menu-open .scrim{opacity:1;pointer-events:auto}
+ .mtop{gap:8px}.mtop .ib{width:40px;height:40px}
+ .mchip{all:unset;display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#6B675F;border:1px solid #ECE9E1;border-radius:999px;padding:5px 10px;cursor:pointer;white-space:nowrap}
+ .mchip b{color:#0B0B0B}.mproc{background:#FFFBEB;border-color:#F2DE99;padding:5px 9px}.mproc .spin{width:12px;height:12px}
+ .sbox{padding:6px 14px;box-shadow:none}.sbox .btn.pill{display:none}
+ .mfind{display:flex;width:100%;margin-top:12px;height:48px;border-radius:999px;font-size:15px}
+ .sugg{gap:12px}.srow{gap:6px}.srow .chipwrap{flex-wrap:nowrap;overflow-x:auto;margin:0 -16px;padding:0 16px 2px;scrollbar-width:none;width:calc(100% + 32px)}
+ .srow .chipwrap::-webkit-scrollbar{display:none}.chip{flex-shrink:0}
+ .nu .mgs{all:unset;cursor:pointer;display:flex;align-items:center;gap:12px;background:#FFFBEB;border:1px solid #F2DE99;border-radius:16px;padding:12px 14px;font-size:14px}
+ .mgs>span:nth-child(2){flex-grow:1}.mgs b{display:block}.mgs i{display:block;font-size:12.5px;color:#6B675F}
+ .mgs-n{font-size:11px;font-weight:800;color:#6B4B00;background:#FFE58A;padding:3px 8px;border-radius:999px;white-space:nowrap}
+ .upd{flex-wrap:wrap;align-items:flex-start;font-size:13.5px}.upd>span:nth-child(2){flex:1;min-width:0}.upd .lnk{margin-left:26px}
+ .xcard .row.sb{flex-wrap:wrap;row-gap:8px}.addkw{width:100%}.xcard .row.end .btn{flex:1}
+ .terms{padding:2px 4px}.term{gap:12px;padding:12px 8px}.tm b{font-size:15px}.tm i{font-size:12.5px}
+ .acts2 .btn:not(.alert){display:none}.acts2{gap:8px}.acts2 .btn.alert{flex:1}
+ .nums3{gap:10px;padding-top:14px}.nums3 .kn{font-size:22px}.nums3 .kl{font-size:12px;line-height:1.3}.nums3 .ks{font-size:11.5px;line-height:1.35}
+ .insl{padding:0}.insl .lnk{margin-left:25px}
+ .ptabs{margin:0 -16px;padding:0 16px 12px;scrollbar-width:none}.ptabs::-webkit-scrollbar{display:none}.pt{padding:7px 12px}
+ .sortb{margin-left:8px}
+ .wcard{padding:20px}.h1{font-size:23px;line-height:1.2}
+ .howto{flex-direction:column;align-items:stretch;gap:12px}.thumb.vid{width:100%}
+ .em .frame{width:auto;padding:0}.em .bd{padding:20px}.em .hd{padding:14px 16px}
+ .toast{left:16px;right:16px;bottom:16px;transform:translateY(140px);justify-content:space-between}.toast.on{transform:none}
+ .goback{padding:6px 12px}
+ .mtop .logo{white-space:nowrap}
+ .dd{top:62px}
+ .rhead .top>.row:first-child{align-items:flex-start}.ssav.xl{width:44px;height:44px;border-radius:13px;font-size:15px}
+ .meta{flex-wrap:wrap;row-gap:4px}.meta>span:last-child{flex-basis:100%}
+ .nums3 .ks{display:none}.nums3 .kl{flex-wrap:wrap;gap:4px}.nums3 .sample{font-size:9.5px;padding:1px 5px}
+ .insl>span:first-of-type{flex:1 1 calc(100% - 30px);min-width:0}
+ .grid3 .thumb.tall{aspect-ratio:1/1}
+}
+</style></head><body>
+<div class="statebar"><span class="sg"><i>Home</i><a href="#home">Home</a><a href="#menu">Phone menu</a></span><span class="sg"><i>Search</i><a href="#home-typing">Typing</a><a href="#expand">Keywords</a></span><span class="sg"><i>First search A</i><a href="#first-a">Wait and learn</a></span><span class="sg"><i>Later search B</i><a href="#home-running">Running</a></span><span class="sg"><i>Ready</i><a href="#ready">First search</a><a href="#home-ready">Later search</a></span><span class="sg"><i>Results</i><a href="#results">Brand</a><a href="#results-product">Product</a></span><span class="sg"><i>My Feed</i><a href="#feed">My Feed</a></span><span class="sg"><i>New account</i><a href="#home-checklist">Get started</a></span><span class="sg"><i>Email</i><a href="#email">First search done</a></span><span class="sg"><i>After speed work</i><a href="#first-c">C. Stream in</a></span></div>
 <div class="app"><nav class="side s-side" id=side-main aria-label="Main">
-<a class="s-logo" href="#home"><span class="s-mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2"/><path d="M8.5 8.5a5 5 0 0 0 0 7"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M5.6 5.6a9 9 0 0 0 0 12.8"/><path d="M18.4 5.6a9 9 0 0 1 0 12.8"/></svg></span>Brand Beacon</a>
+<div class="s-top"><a class="s-logo" href="#home"><span class="s-mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2"/><path d="M8.5 8.5a5 5 0 0 0 0 7"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M5.6 5.6a9 9 0 0 0 0 12.8"/><path d="M18.4 5.6a9 9 0 0 1 0 12.8"/></svg></span>Brand Beacon</a><button class="s-close" type="button" data-close aria-label="Close menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button></div>
 <a class="s-nav on" data-nav="home" href="#home"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg><span>Home</span></a>
 <a class="s-nav" data-nav="feed" href="#feed"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg><span>My Feed</span></a>
 <div class="s-proc" data-proc>
@@ -220,8 +284,28 @@ a{color:inherit;text-decoration:none}i{font-style:normal}button{font-family:inhe
  <div class="row sbt"><span>Breakdowns</span><span class="s-q"><b>24</b> of 100</span></div><span class="s-track"><span class="s-bar" style="width:24%"></span></span>
 </div>
 <div class="s-me"><span class="s-avm">V</span><span class="s-who"><b>Veejay Atienza</b><i>Growth · resets Nov 2</i></span><button class="s-ib" aria-label="Sign out"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4h4v16h-4"/><path d="M10 8l-4 4 4 4"/><path d="M6 12h10"/></svg></button></div>
+</div></nav><nav class="side s-side" id=side-ready aria-label="Main">
+<div class="s-top"><a class="s-logo" href="#home"><span class="s-mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2"/><path d="M8.5 8.5a5 5 0 0 0 0 7"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M5.6 5.6a9 9 0 0 0 0 12.8"/><path d="M18.4 5.6a9 9 0 0 1 0 12.8"/></svg></span>Brand Beacon</a><button class="s-close" type="button" data-close aria-label="Close menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button></div>
+<a class="s-nav on" data-nav="home" href="#home"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg><span>Home</span></a>
+<a class="s-nav" data-nav="feed" href="#feed"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg><span>My Feed</span></a>
+<div class="s-lbl">RECENT SEARCHES</div>
+<a class="s-it" href="#results-product"><span class="s-av gl">lo</span><span class="s-nm">lip oil</span><span class="s-pill">Ready</span></a>
+<a class="s-it" href="#results"><span class="s-av ">rh</span><span class="s-nm">rhode skin</span><span class="s-pill">3 new</span></a>
+<a class="s-it" href="#results-product"><span class="s-av pl">pl</span><span class="s-nm">peptide lip tint</span></a>
+<a class="s-it" href="#results-product"><span class="s-av gl">gl</span><span class="s-nm">glass skin routine</span></a>
+<a class="s-it" href="#results"><span class="s-av bl">ra</span><span class="s-nm">rare beauty</span></a>
+<a class="s-more" href="#home">See more</a>
+<div class="s-lbl">MY LIBRARY</div>
+<a class="s-it" href="#home"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg><span class="s-nm">Saved videos</span><span class="s-num">12</span></a>
+<a class="s-it" href="#home"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg><span class="s-nm">Video analyses</span><span class="s-num">24</span></a>
+<div class="s-foot">
+<div class="s-use">
+ <div class="row sbt"><span>Searches</span><span class="s-q"><b>25</b> of 100</span></div><span class="s-track"><span class="s-bar" style="width:25%"></span></span>
+ <div class="row sbt"><span>Breakdowns</span><span class="s-q"><b>24</b> of 100</span></div><span class="s-track"><span class="s-bar" style="width:24%"></span></span>
+</div>
+<div class="s-me"><span class="s-avm">V</span><span class="s-who"><b>Veejay Atienza</b><i>Growth · resets Nov 2</i></span><button class="s-ib" aria-label="Sign out"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4h4v16h-4"/><path d="M10 8l-4 4 4 4"/><path d="M6 12h10"/></svg></button></div>
 </div></nav><nav class="side s-side" id=side-new aria-label="Main">
-<a class="s-logo" href="#home"><span class="s-mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2"/><path d="M8.5 8.5a5 5 0 0 0 0 7"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M5.6 5.6a9 9 0 0 0 0 12.8"/><path d="M18.4 5.6a9 9 0 0 1 0 12.8"/></svg></span>Brand Beacon</a>
+<div class="s-top"><a class="s-logo" href="#home"><span class="s-mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2"/><path d="M8.5 8.5a5 5 0 0 0 0 7"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M5.6 5.6a9 9 0 0 0 0 12.8"/><path d="M18.4 5.6a9 9 0 0 1 0 12.8"/></svg></span>Brand Beacon</a><button class="s-close" type="button" data-close aria-label="Close menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button></div>
 <a class="s-nav on" data-nav="home" href="#home"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg><span>Home</span></a>
 <a class="s-nav" data-nav="feed" href="#feed"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg><span>My Feed</span></a>
 <div class="s-lbl">RECENT SEARCHES</div>
@@ -236,7 +320,43 @@ a{color:inherit;text-decoration:none}i{font-style:normal}button{font-family:inhe
  <div class="row sbt"><span>Breakdowns</span><span class="s-q"><b>0</b> of 5</span></div><span class="s-track"><span class="s-bar" style="width:0%"></span></span>
 </div>
 <div class="s-me"><span class="s-avm">V</span><span class="s-who"><b>Veejay Atienza</b><i>Free plan</i></span><button class="s-ib" aria-label="Sign out"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4h4v16h-4"/><path d="M10 8l-4 4 4 4"/><path d="M6 12h10"/></svg></button></div>
-</div></nav><header class="mtop"><a class="logo" href="#home"><span class="logo-mark"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2"/><path d="M8.5 8.5a5 5 0 0 0 0 7"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg></span>Brand Beacon</a><span class="mpill"><b>25</b> of 100 searches</span><button class="ib" aria-label="Menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></svg></button></header><main class="main"><section class="view" id="v-home">
+</div></nav><nav class="side s-side" id=side-first aria-label="Main">
+<div class="s-top"><a class="s-logo" href="#home"><span class="s-mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2"/><path d="M8.5 8.5a5 5 0 0 0 0 7"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M5.6 5.6a9 9 0 0 0 0 12.8"/><path d="M18.4 5.6a9 9 0 0 1 0 12.8"/></svg></span>Brand Beacon</a><button class="s-close" type="button" data-close aria-label="Close menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button></div>
+<a class="s-nav" data-nav="home" href="#home"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg><span>Home</span></a>
+<a class="s-nav" data-nav="feed" href="#feed"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg><span>My Feed</span></a>
+<div class="s-proc" data-proc>
+<div class="s-lbl">PROCESSING</div>
+<div class="s-it s-run"><span class="s-av pl">pl</span><span class="s-rt"><span class="row"><span class="s-nm">peptide lip tint</span><span class="s-kind">Search</span></span><span class="s-track"><span class="s-bar s-prog"></span></span></span></div>
+</div>
+<div class="s-lbl">MY LIBRARY</div>
+<a class="s-it" href="#home"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg><span class="s-nm">Saved videos</span><span class="s-num">0</span></a>
+<a class="s-it" href="#home"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg><span class="s-nm">Video analyses</span><span class="s-num">0</span></a>
+<div class="s-foot">
+<div class="s-ob"><div class="row sbt"><b>Get started</b><span class="s-q"><span class="s-obn">0</span> of 4</span></div><ol class="s-steps"><li class="now" data-step="search"><span class="s-ck s-spin"></span>Run your first search</li><li data-step="analyze"><span class="s-ck"></span>Analyze a video</li><li data-step="save"><span class="s-ck"></span>Save a video</li><li data-step="second"><span class="s-ck"></span>Run a second search</li></ol></div>
+<div class="s-use">
+ <div class="row sbt"><span>Searches</span><span class="s-q"><b>1</b> of 3</span></div><span class="s-track"><span class="s-bar" style="width:33%"></span></span>
+ <div class="row sbt"><span>Breakdowns</span><span class="s-q"><b>0</b> of 5</span></div><span class="s-track"><span class="s-bar" style="width:0%"></span></span>
+</div>
+<div class="s-me"><span class="s-avm">V</span><span class="s-who"><b>Veejay Atienza</b><i>Free plan</i></span><button class="s-ib" aria-label="Sign out"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4h4v16h-4"/><path d="M10 8l-4 4 4 4"/><path d="M6 12h10"/></svg></button></div>
+</div></nav><nav class="side s-side" id=side-free-ready aria-label="Main">
+<div class="s-top"><a class="s-logo" href="#home"><span class="s-mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2"/><path d="M8.5 8.5a5 5 0 0 0 0 7"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M5.6 5.6a9 9 0 0 0 0 12.8"/><path d="M18.4 5.6a9 9 0 0 1 0 12.8"/></svg></span>Brand Beacon</a><button class="s-close" type="button" data-close aria-label="Close menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button></div>
+<a class="s-nav" data-nav="home" href="#home"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg><span>Home</span></a>
+<a class="s-nav" data-nav="feed" href="#feed"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg><span>My Feed</span></a>
+<div class="s-lbl">RECENT SEARCHES</div>
+<a class="s-it" href="#results-product"><span class="s-av pl">pl</span><span class="s-nm">peptide lip tint</span><span class="s-pill">Ready</span></a>
+<div class="s-lbl">MY LIBRARY</div>
+<a class="s-it" href="#home"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg><span class="s-nm">Saved videos</span><span class="s-num">0</span></a>
+<a class="s-it" href="#home"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg><span class="s-nm">Video analyses</span><span class="s-num">0</span></a>
+<div class="s-foot">
+<div class="s-ob"><div class="row sbt"><b>Get started</b><span class="s-q"><span class="s-obn">1</span> of 4</span></div><ol class="s-steps"><li class="done" data-step="search"><span class="s-ck"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></span>Run your first search</li><li data-step="analyze"><span class="s-ck"></span>Analyze a video</li><li data-step="save"><span class="s-ck"></span>Save a video</li><li data-step="second"><span class="s-ck"></span>Run a second search</li></ol></div>
+<div class="s-use">
+ <div class="row sbt"><span>Searches</span><span class="s-q"><b>1</b> of 3</span></div><span class="s-track"><span class="s-bar" style="width:33%"></span></span>
+ <div class="row sbt"><span>Breakdowns</span><span class="s-q"><b>0</b> of 5</span></div><span class="s-track"><span class="s-bar" style="width:0%"></span></span>
+</div>
+<div class="s-me"><span class="s-avm">V</span><span class="s-who"><b>Veejay Atienza</b><i>Free plan</i></span><button class="s-ib" aria-label="Sign out"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4h4v16h-4"/><path d="M10 8l-4 4 4 4"/><path d="M6 12h10"/></svg></button></div>
+</div></nav><header class="mtop"><a class="logo" href="#home"><span class="logo-mark"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2"/><path d="M8.5 8.5a5 5 0 0 0 0 7"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg></span>Brand Beacon</a><button class="mchip mproc" type="button" data-open-menu hidden aria-label="Processing"><span class="spin"></span><b id="mproc-n">2</b></button><button class="mchip" type="button" data-open-menu aria-label="Searches left"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><b id="mleft">75</b>&nbsp;left</button><button class="ib mmenu" type="button" data-open-menu aria-label="Menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></svg></button></header><div class="scrim" data-close></div><main class="main"><section class="view" id="v-home">
+ <div class="upd" id="runbar" hidden><span class="spin"></span><span><b>lip oil is running.</b> About 1 to 2 minutes. We'll tell you here and by email.</span><a class="lnk sm" href="#first-a">See progress</a></div>
+ <button class="mgs" type="button" data-open-menu><span class="mgs-n">1 of 4</span><span><b>Get started</b><i>Next: analyze a video</i></span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></button>
  <div class="card scard">
  <form class="sbox-wrap" data-search>
   <div class="sbox"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="q" placeholder="Search a brand, product or keyword" autocomplete="off"><button class="btn y pill" type="submit" aria-label="Find breakouts"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><span class="bl">Find breakouts</span></button></div>
@@ -248,6 +368,7 @@ a{color:inherit;text-decoration:none}i{font-style:normal}button{font-family:inhe
  <a class="ddi" href="#expand"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>rhode lip tint</a>
  <a class="ddi" href="#expand"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>rhode peptide lip treatment</a>
 </div>
+  <button class="btn y mfind" type="submit"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg> Find breakouts</button>
  </form>
  <div class="sugg">
   <div class="srow"><span class="slbl">Brands</span><span class="chipwrap"><button class="chip" type="button" data-q="rare beauty"><span class="dot"></span>rare beauty</button><button class="chip" type="button" data-q="e.l.f."><span class="dot"></span>e.l.f.</button><button class="chip" type="button" data-q="olipop"><span class="dot"></span>olipop</button><button class="chip" type="button" data-q="drunk elephant"><span class="dot"></span>drunk elephant</button><button class="chip" type="button" data-q="crocs"><span class="dot"></span>crocs</button></span></div>
@@ -413,27 +534,113 @@ a{color:inherit;text-decoration:none}i{font-style:normal}button{font-family:inhe
  </div></article></div>
  <button class="btn loadm">Load 9 more</button>
  <div class="same">Below this, unchanged from live: AI summary, Analytics, When they post, More data and Hashtags they used.</div>
-</section></main></div>
+</section><section class="view narrow" id="v-first-a">
+ <div class="card wcard">
+  <div class="wh"><h1 class="h1">Finding peptide lip tint breakouts</h1><span class="quiet">Usually 1 to 2 minutes. You can leave this page.</span></div>
+  <ol class="steps wsteps"><li class="done"><span class="ck"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></span><span><b>Pulling TikTok videos that mention peptide lip tint</b></span></li><li class="now"><span class="spin lg"></span><span><b>Comparing each one to that creator's usual views</b></span></li><li class="todo"><span class="ck"></span><span><b>Picking the breakouts</b></span></li></ol>
+  <label class="row emailme"><span class="toggle"></span><span>Email me when it's ready <span class="quiet">· sam@…</span></span></label>
+ </div>
+ <div class="howto"><div class="thumb vid"><span class="playb"><svg width="22" height="22" viewBox="0 0 24 24" fill="#1A1300"><path d="M8 5v14l11-7z"/></svg></span><span class="dur">1:30</span></div>
+  <div class="howt"><h2 class="h3">How to read your results</h2><span class="quiet">What a Breakout Score means and which video to open first. From Ivan.</span></div></div>
+ <div class="hblock"><h2 class="h2">Breakouts found this week</h2><div class="grid3"><article class="card rc">
+ <div class="thumb tall"><img src="../img/v1.jpg" alt=""><span class="dur">0:20</span><span class="score"><b>8.6K×</b><span>Breakout<br>Score</span></span></div>
+ <div class="rcb">
+  <div class="who"><span class="av">C</span><span><b>@cyr1n32</b><i>1.6K followers</i></span><span class="date">Apr 24</span></div>
+  <p class="capt clamp">Name me a better marketing brand #rhode #best #aesthetic #haileybieber</p>
+  <div class="st4"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg> 8.9M</span><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg> 1.7M</span><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H8l-4 4z"/></svg> 2.5K</span><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg> 25.5K</span></div>
+  <div class="acts"><button class="btn y grow sm" data-act="analyze"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg> Analyze video</button><button class="ib round sm" data-act="save" aria-label="Save video"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg></button></div>
+ </div></article><article class="card rc">
+ <div class="thumb tall"><img src="../img/v2.jpg" alt=""><span class="dur">0:11</span><span class="score"><b>7.1K×</b><span>Breakout<br>Score</span></span></div>
+ <div class="rcb">
+  <div class="who"><span class="av">E</span><span><b>@_ellapalmer_</b><i>3.8K followers</i></span><span class="date">Oct 31</span></div>
+  <p class="capt clamp">Impaled by rhode @rhode skin @Hailey Bieber #halloween2024 #rhode</p>
+  <div class="st4"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg> 19.7M</span><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg> 2.5M</span><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H8l-4 4z"/></svg> 3.7K</span><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg> 192.3K</span></div>
+  <div class="acts"><button class="btn y grow sm" data-act="analyze"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg> Analyze video</button><button class="ib round sm" data-act="save" aria-label="Save video"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg></button></div>
+ </div></article><article class="card rc">
+ <div class="thumb tall"><img src="../img/v3.jpg" alt=""><span class="dur">0:10</span><span class="score"><b>6.2K×</b><span>Breakout<br>Score</span></span></div>
+ <div class="rcb">
+  <div class="who"><span class="av">E</span><span><b>@em_ireland</b><i>905 followers</i></span><span class="date">Jul 9</span></div>
+  <p class="capt clamp">It&#x27;s SO CUTE!! #rhodehoodie #vancouverhoodie #rhodepopup</p>
+  <div class="st4"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg> 4.8M</span><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg> 456.5K</span><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H8l-4 4z"/></svg> 361</span><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg> 3.9K</span></div>
+  <div class="acts"><button class="btn y grow sm" data-act="analyze"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg> Analyze video</button><button class="ib round sm" data-act="save" aria-label="Save video"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg></button></div>
+ </div></article></div></div>
+</section><section class="view narrow" id="v-first-c">
+ <div class="card wcard">
+  <h1 class="h1">peptide lip tint</h1>
+  <div class="upd"><span class="spin"></span><span><b>2 breakouts so far.</b> Still checking 140 of 200 videos. New ones appear here as we find them.</span></div>
+  <label class="row emailme"><span class="toggle"></span><span>Email me when it's ready <span class="quiet">· sam@…</span></span></label>
+ </div>
+ <div class="hblock"><h2 class="h2">Breakouts</h2><div class="grid3"><article class="card rc">
+ <div class="thumb tall"><img src="../img/v1.jpg" alt=""><span class="dur">0:20</span><span class="score"><b>8.6K×</b><span>Breakout<br>Score</span></span></div>
+ <div class="rcb">
+  <div class="who"><span class="av">C</span><span><b>@cyr1n32</b><i>1.6K followers</i></span><span class="date">Apr 24</span></div>
+  <p class="capt clamp">Name me a better marketing brand #rhode #best #aesthetic #haileybieber</p>
+  <div class="st4"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg> 8.9M</span><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg> 1.7M</span><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H8l-4 4z"/></svg> 2.5K</span><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg> 25.5K</span></div>
+  <div class="acts"><button class="btn y grow sm" data-act="analyze"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg> Analyze video</button><button class="ib round sm" data-act="save" aria-label="Save video"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg></button></div>
+ </div></article><article class="card rc">
+ <div class="thumb tall"><img src="../img/v2.jpg" alt=""><span class="dur">0:11</span><span class="score"><b>7.1K×</b><span>Breakout<br>Score</span></span></div>
+ <div class="rcb">
+  <div class="who"><span class="av">E</span><span><b>@_ellapalmer_</b><i>3.8K followers</i></span><span class="date">Oct 31</span></div>
+  <p class="capt clamp">Impaled by rhode @rhode skin @Hailey Bieber #halloween2024 #rhode</p>
+  <div class="st4"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg> 19.7M</span><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg> 2.5M</span><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H8l-4 4z"/></svg> 3.7K</span><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg> 192.3K</span></div>
+  <div class="acts"><button class="btn y grow sm" data-act="analyze"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg> Analyze video</button><button class="ib round sm" data-act="save" aria-label="Save video"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg></button></div>
+ </div></article><article class="card rc"><div class="sk" style="aspect-ratio:9/12"></div><div class="rcb"><div class="sk" style="height:14px;width:60%"></div><div class="sk" style="height:12px"></div><div class="sk" style="height:36px;border-radius:10px"></div></div></article></div></div>
+</section><section class="view narrow" id="v-ready">
+ <div class="card wcard">
+  <div class="wh"><h1 class="h1">Your peptide lip tint breakouts are ready</h1><span class="quiet">Start with the top one. It beat that creator's usual views by the most.</span></div>
+  <ol class="steps wsteps"><li class="done"><span class="ck"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></span><span><b>Pulling TikTok videos that mention peptide lip tint</b></span></li><li class="done"><span class="ck"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></span><span><b>Comparing each one to that creator's usual views</b></span></li><li class="done"><span class="ck"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></span><span><b>Picking the breakouts</b></span></li></ol>
+  <a class="btn y" style="align-self:flex-start" href="#results-product">Open your results</a>
+ </div>
+</section><section class="view" id="v-email"><div class="em"><div class="frame">
+<div class="hd"><b>Ivan from BrandBeacon</b><br>Subject: <b>Your peptide lip tint breakouts are ready</b><br>Preview: 14 TikTok videos beat their creator's usual views.</div>
+<div class="bd">
+<p>Hi Sam,</p>
+<p>Your search on <b>peptide lip tint</b> finished after you left, so here it is.</p>
+<p>We found <b class="num">14</b> breakouts: TikTok videos that did far better than their creator's usual views. The top one scored <b class="num">8.6K×</b>.</p>
+<p>Start with that one. It's the clearest example of what's working for peptide lip tint right now.</p>
+<img class="pic" src="../img/v1.jpg" alt="">
+<a class="btn">See your breakouts</a>
+<p>Ivan</p>
+</div></div></div></section></main></div>
 <div class="toast" id="toast" role="status"></div>
 <script>
 (function(){
 if(/shot/.test(location.search)){var sb=document.querySelector('.statebar');if(sb)sb.remove();}
 function $(i){return document.getElementById(i)}
-function toast(h,ms){var t=$('toast');t.innerHTML=h;t.classList.add('on');clearTimeout(t._h);t._h=setTimeout(function(){t.classList.remove('on')},ms||3200)}
+function toast(h,ms){var t=$('toast');t.innerHTML=h;t.classList.add('on');clearTimeout(t._h);if(ms!==0)t._h=setTimeout(function(){t.classList.remove('on')},ms||3200)}
 function markStep(k){var li=document.querySelector('#side-new [data-step="'+k+'"]');if(!li||li.classList.contains('done'))return;li.classList.add('done');li.classList.remove('now');
  li.querySelector('.s-ck').innerHTML='<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5 9-10"/></svg>';
  var n=document.querySelectorAll('#side-new .s-steps li.done').length;document.querySelector('#side-new .s-obn').textContent=n;}
-function route(){var h=(location.hash||'#home').slice(1);var v=['results','results-product','feed'].indexOf(h)>-1?h:'home';
- ['home','feed','results','results-product'].forEach(function(x){$('v-'+x).classList.toggle('on',x===v)});
- var nu=h==='home-checklist';$('side-main').hidden=nu;$('side-new').hidden=!nu;document.body.classList.toggle('nu',nu);
+var M='side-main',CFG={
+ 'home':{},'home-b':{},'home-c':{},'home-typing':{},'expand':{},
+ 'menu':{proc:2,run:1,menu:1},
+ 'home-running':{proc:2,run:1},
+ 'home-ready':{s:'side-ready',ready:1},
+ 'first-a':{v:'first-a',s:'side-first',free:1,proc:1},
+ 'first-c':{v:'first-c',s:'side-first',free:1,proc:1},
+ 'ready':{v:'ready',s:'side-free-ready',free:1},
+ 'results':{v:'results'},'results-product':{v:'results-product'},'feed':{v:'feed'},
+ 'home-checklist':{s:'side-new',free:1,nu:1},
+ 'email':{v:'email',s:'-',email:1}};
+var VIEWS=['home','feed','results','results-product','first-a','first-c','ready','email'];
+function route(){var h=(location.hash||'#home').slice(1);var c=CFG[h]||{};var v=c.v||'home',sid=c.s||M;
+ VIEWS.forEach(function(x){$('v-'+x).classList.toggle('on',x===v)});
+ document.querySelectorAll('.s-side').forEach(function(n){n.hidden=n.id!==sid});
+ var B=document.body.classList;B.toggle('nu',!!c.nu);B.toggle('emailv',!!c.email);B.toggle('menu-open',!!c.menu);
  document.querySelectorAll('[data-nav=home]').forEach(function(a){a.classList.toggle('on',v==='home')});document.querySelectorAll('[data-nav=feed]').forEach(function(a){a.classList.toggle('on',v==='feed')});
  $('dd').hidden=h!=='home-typing';$('q').value=(h==='home-typing'||h==='expand')?'rhode':'';
  $('xcard').hidden=h!=='expand';document.querySelector('.scard').hidden=h==='expand';
- document.querySelectorAll('[data-proc]').forEach(function(d){d.hidden=h!=='home-running'});
- if(h==='home-running')setTimeout(function(){toast('<span>lip oil is ready</span><a href="#results">Open</a>',6000)},400);
+ $(M).querySelectorAll('[data-proc]').forEach(function(d){d.hidden=!c.run});
+ $('runbar').hidden=!c.run;
+ document.querySelector('.mproc').hidden=!c.proc;$('mproc-n').textContent=c.proc||'';$('mleft').textContent=c.free?'2':'75';
+ var t=$('toast');t.classList.toggle('stay',!!c.ready);
+ if(c.ready)toast('<span>lip oil is ready</span><a href="#results-product">Open</a>',0);else t.classList.remove('on');
  document.querySelectorAll('.statebar a').forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+h)});
  window.scrollTo(0,0)}
 addEventListener('hashchange',route);route();
+document.addEventListener('click',function(e){
+ if(e.target.closest('[data-open-menu]')){document.body.classList.add('menu-open');return}
+ if(e.target.closest('[data-close]')||e.target.closest('.s-side a')){document.body.classList.remove('menu-open')}});
 var q=$('q');q.addEventListener('input',function(){$('dd').hidden=!q.value.trim()});
 document.addEventListener('click',function(e){if(!e.target.closest('.sbox-wrap'))$('dd').hidden=true});
 document.querySelector('[data-search]').addEventListener('submit',function(e){e.preventDefault();location.hash='#expand'});
@@ -442,8 +649,6 @@ document.addEventListener('click',function(e){var b=e.target.closest('[data-act]
  if(b.hasAttribute('data-q')){q.value=b.getAttribute('data-q');location.hash='#expand';document.querySelector('.xt').textContent=b.getAttribute('data-q');return}
  var a=b.getAttribute('data-act');e.preventDefault();
  if(a==='alert'){var on=!b.classList.contains('on');b.classList.toggle('on',on);b.querySelector('span').textContent=on?'Alerts on':'Alert me';toast(on?'We will email you when this search gets a new breakout.':'Alerts off');return}
- if(a==='alert-mini'){var on2=!b.classList.contains('on');b.classList.toggle('on',on2);b.querySelector('span').textContent=on2?'Alerts on':'Alert me';toast(on2?'We will email you when this search gets a new breakout.':'Alerts off');return}
- if(a==='edit-kw'){location.hash='#expand';return}
  if(a==='share'){toast('Share link copied. It does not use any of your credits.');return}
  if(a==='analyze'){markStep('analyze');toast('Analyzing. Uses 1 breakdown.')}
  if(a==='save'){markStep('save');b.classList.add('on');toast('Saved to Saved videos')}

@@ -19,6 +19,7 @@ SI = {
  "spark": '<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/>',
  "out": '<path d="M15 4h4v16h-4"/><path d="M10 8l-4 4 4 4"/><path d="M6 12h10"/>',
  "check": '<path d="M5 12l5 5 9-10"/>',
+ "x": '<path d="M6 6l12 12"/><path d="M18 6L6 18"/>',
  "logo": '<circle cx="12" cy="12" r="2"/><path d="M8.5 8.5a5 5 0 0 0 0 7"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M5.6 5.6a9 9 0 0 0 0 12.8"/><path d="M18.4 5.6a9 9 0 0 1 0 12.8"/>',
 }
 
@@ -35,7 +36,8 @@ def sidebar(*, active="home", home="#home", feed="#feed", recent=(), more=None, 
         da = f' data-nav="{key}"' if nav_attr else ""
         return f'<a class="s-nav{on}"{da} href="{href}">{ico(SI[icon])}<span>{label}</span></a>'
     out = [f'<nav class="side s-side"{f" id={sid}" if sid else ""} aria-label="Main">',
-           f'<a class="s-logo" href="{home}"><span class="s-mark">{ico(SI["logo"])}</span>Brand Beacon</a>',
+           f'<div class="s-top"><a class="s-logo" href="{home}"><span class="s-mark">{ico(SI["logo"])}</span>Brand Beacon</a>'
+           f'<button class="s-close" type="button" data-close aria-label="Close menu">{ico(SI["x"],18)}</button></div>',
            nav("home", home, "home", "Home"), nav("feed", feed, "feed", "My Feed")]
     if processing:
         out.append('<div class="s-proc" data-proc>')
@@ -79,6 +81,7 @@ def sidebar(*, active="home", home="#home", feed="#feed", recent=(), more=None, 
     return "\n".join(out)
 
 CSS = '''
+.s-top{display:flex;align-items:flex-start;justify-content:space-between}.s-close{display:none}
 .s-side{width:252px;flex-shrink:0;position:sticky;top:0;height:100vh;align-self:flex-start;background:#fff;border-right:1px solid #ECE9E1;display:flex;flex-direction:column;padding:20px 16px 16px;gap:2px;overflow:auto;font-family:Figtree,'Segoe UI',system-ui,sans-serif}
 .s-side .row{display:flex;align-items:center;gap:8px}.s-side .sbt{justify-content:space-between}
 .s-logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;padding:2px 6px 20px;color:#0B0B0B;text-decoration:none}
