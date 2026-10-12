@@ -24,6 +24,7 @@ css += """
 .none b{color:var(--ink);font-size:17px}
 .src{display:inline-block;font-size:10px;font-weight:900;letter-spacing:.06em;color:#4A463F;background:#F1EFE9;padding:1px 6px;border-radius:5px;margin-right:6px;vertical-align:1px;white-space:nowrap}
 .src.new{background:#FFE58A;color:#5A3F00}
+.devline{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px;display:inline-block;margin:0 0 14px!important}
 .foot-notes{margin:10px 0 0;padding-left:20px;max-width:900px;font-size:14px;color:var(--muted)}
 """
 
@@ -133,19 +134,19 @@ rows = [
    'Free includes 3 searches and 5 video analyses (agreed on Slack), so every new account can finish all four steps.'),
  row(7, "first-search", "First search journey: where BB drops people after Run search",
    before("../user-flow/img/bb-building.jpg", "After Run search, live on 22 Sep", "A loading page with nothing to do while the report builds", natural=420),
-   after("first-search.html", "a", 1219, "A. Wait and learn", [
+   after("app.html", "first-a", 1219, "A. Wait and learn", [
      (.08, T("IVAN 11 Oct") + '<b>The first search.</b> <i>"let\'s go with \'wait and learn\'."</i> Three steps say what is happening.'),
      (.26, T("OURS") + '<b>Email me when it is ready</b> is on by default and says they can leave.'),
      (.38, T("OURS") + 'A <b>How to read your results</b> video, so the Breakout Score makes sense when results land.'),
      (.50, T("IVAN 10 Oct") + 'Then breakouts other searches found this week. <i>"see other breakouts."</i>'),
      (.70, T("IVAN 11 Oct") + 'The sidebar shows it under Processing, with Get started open.')], tag="Pick: first search")
-   + after("first-search.html", "b", 900, "B. Back to Home and keep browsing", [
+   + after("app.html", "home-running", 900, "B. Back to Home and keep browsing", [
      (.03, T("IVAN 8 Oct") + 'Run search lands on Home with a slim running bar. <i>"let\'s put them somewhere else so that they know that it\'s coming."</i>'),
      (.28, T("IVAN 11 Oct") + '<b>Every search after the first.</b> By then people know what a breakout is, so they can keep browsing.')], tag="Pick: later searches")
-   + after("first-search.html", "c", 900, "C. Results appear as they are found", [
+   + after("app.html", "first-c", 900, "C. Results appear as they are found", [
      (.08, '<b>2 breakouts so far. Still checking 140 of 200 videos.</b>'),
      (.33, T("DEV") + 'No empty wait. Depends on scoring videos one at a time (Lester).')], tag="Needs Lester")
-   + after("first-search.html", "ready", 900, "Ready, the same for A, B and C", [
+   + after("app.html", "ready", 900, "Ready, the same for A, B and C", [
      (.08, 'All three keep the search in the sidebar, email when it is ready, and end here.'),
      (.22, 'Thumbnails reuse the rhode skin run; "usually 1 to 2 minutes" is from the 22 Sep test.')]),
    'A for the first search, B for every search after it. C replaces both once the speed work lands.'),
@@ -198,9 +199,10 @@ page = f"""<!doctype html>
 <header class="top"><div class="bar"><span class="logo"><span class="mark">BB</span>BrandBeacon 3.0</span><nav class="toc" aria-label="Rows">{navhtml}</nav></div></header>
 <main>
 <section class="hero"><h1>BrandBeacon 3.0 mockups</h1>
+<p class="devline"><a href="dev.html"><b>Dev handoff for Lester</b></a>: every 3.0 change on one page, desktop and mobile, with build notes.</p>
 <p>Left: the live app on 11 Oct. Right: the 3.0 design, updated 13 Oct with Ivan's 11 Oct notes. Everything matches live except what Ivan asked for. Each note is tagged with its source; the 11 Oct changes are in yellow.</p>
 <p>The designs are clickable. Press <b>Scroll inside</b> on any screen to scroll it like the real app, or open it full size. Numbers come from the real rhode skin run (18 Sep) unless marked {S}.</p>
-<div class="chips"><a class="go" href="app.html" target="_blank" rel="noopener">Open the clickable prototype</a><a href="app.html#home" target="_blank" rel="noopener">Home</a><a href="app.html#home-typing" target="_blank" rel="noopener">Typing</a><a href="app.html#home-running" target="_blank" rel="noopener">Processing</a><a href="app.html#expand" target="_blank" rel="noopener">Keywords</a><a href="app.html#home-checklist" target="_blank" rel="noopener">New account</a><a href="app.html#results" target="_blank" rel="noopener">Results</a><a href="first-search.html#a" target="_blank" rel="noopener">First search: A, B, C</a></div>
+<div class="chips"><a class="go" href="app.html" target="_blank" rel="noopener">Open the clickable prototype</a><a href="app.html#home" target="_blank" rel="noopener">Home</a><a href="app.html#home-typing" target="_blank" rel="noopener">Typing</a><a href="app.html#home-running" target="_blank" rel="noopener">Processing</a><a href="app.html#expand" target="_blank" rel="noopener">Keywords</a><a href="app.html#home-checklist" target="_blank" rel="noopener">New account</a><a href="app.html#results" target="_blank" rel="noopener">Results</a><a href="app.html#first-a" target="_blank" rel="noopener">First search: A, B, C</a></div>
 </section>
 {"".join(rows)}
 </main>
