@@ -213,12 +213,12 @@ feed = f"""<section class="view" id="v-feed">
 
 # ---------- results. Top numbers per Ivan 6 Oct ("number of breakouts in this run. Average breakout score ...");
 # per-keyword alerts ("having notifications on each other keyword"); product search on its own terms.
+# Ivan 13 Oct Slack: "i dont think we need the product/brand icon anymore" -> no avatar square next to the name.
 # Ivan 11 Oct Sheet: "seems a little crowded - simplify or new layout? this includes the insights" -> one meta line,
 # three quiet numbers with no boxes, the Breakout Score definition as one line, one insight line (the rest under an
 # Insights tab), then the videos. Top and average views move to the Analytics tab.
 def results_view(vid, kind):
     brand = kind == "brand"
-    av = '<span class="ssav xl">rh</span>' if brand else '<span class="ssav xl pl">pl</span>'
     name = "rhode skin" if brand else "peptide lip tint"
     who = '<span>@rhodeskin</span>' if brand else '<span>peptide lip tint, peptide lip treatment, lip tint</span>'
     run = 'Weekly · <span class="lr">last run Sep 18 · </span>next Sep 25' if brand else 'Weekly · <span class="lr">last run Oct 10 · </span>next Oct 17'
@@ -236,7 +236,7 @@ def results_view(vid, kind):
     return f"""<section class="view" id="{vid}">
  <a class="goback" href="#home">{ico(I['back'],15)} Go back</a>
  <div class="card rhead">
-  <div class="row sb top"><div class="row">{av}<span class="hn"><b class="h1">{name}</b>
+  <div class="row sb top"><div class="row"><span class="hn"><b class="h1">{name}</b>
    <span class="row meta"><span class="tag">{"BRAND" if brand else "PRODUCT"}</span>{who}<span class="quiet">{run}</span></span></span></div>
    <div class="row acts2"><button class="btn alert" data-act="alert">{ico(I['bell'],16)} <span>Alert me</span></button><button class="btn">{ico(I['dl'],16)} Export creator list</button><button class="ib" aria-label="More: save, edit keywords">{ico(I['more'],16)}</button></div></div>
   {nums}
