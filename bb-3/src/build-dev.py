@@ -167,8 +167,8 @@ body.append(group("Results"))
 body.append(screen("results", "Results: brand search",
   "Three stat boxes, a long insights block, tabs and cards.",
   [("results", "d", 1500), ("results", "m", 1300)], [
-  IV13 + "No avatar square next to the name (desktop and phone).",
-  "Header: name, BRAND tag, handle and <i>Weekly · last run · next</i> on one line. Save moves into the more menu with Edit keywords.",
+  IV13 + "No avatar square next to the name and no BRAND / PRODUCT label under it (desktop and phone).",
+  "Header: name, then handle and <i>Weekly · last run · next</i> on one line. Save moves into the more menu with Edit keywords.",
   "<b>Alert me</b> on each search. Growth and Scale: toggles to Alerts on and emails when this search gets a new breakout. Free: upgrade prompt.",
   "Export creator list stays. " + LV,
   "<b>Three numbers, no boxes:</b> Breakouts this run (of N videos), Top Breakout Score (handle, usual views), Average Breakout Score (mean across this run's breakouts). " + SM + "740×.",
@@ -178,7 +178,7 @@ body.append(screen("results", "Results: brand search",
   "Tabs: Videos, Insights, Analytics, When they post, More data, Hashtags. Sort: Breakout Score on the right. New this run becomes a Sort option.",
   "Cards as live, plus a <b>Share</b> button next to Analyze and save. Share copies a link and uses no credits.",
   "Below the cards: AI summary, Analytics, When they post, More data, Hashtags. " + LV,
-  IV + "Phone, less crowded at the top: name on the left, <b>Alert me as a bell icon</b> and the more menu on the right. One meta line: tag, handle, <i>Weekly · next Sep 25</i> (last run drops off).",
+  IV + "Phone, less crowded at the top: name on the left, <b>Alert me as a bell icon</b> and the more menu on the right. One meta line: handle, <i>Weekly · next Sep 25</i> (last run drops off).",
   IV + "Phone numbers use short labels: <b>Breakouts, Top score, Avg score</b>, no sublines. The definition line moves behind an <b>i</b> next to Top score (tap shows it). The insight line is left out on phone; it sits in the Insights tab. Product search keeps Brands in these breakouts as one sideways-scrolling row.",
   O + "Phone: Export goes into the more menu. One card per row, square thumbnails. Tabs scroll sideways.",
   "Data is the real rhode skin run, 18 Sep."]))
@@ -186,7 +186,7 @@ body.append(screen("results", "Results: brand search",
 body.append(screen("results-product", "Results: product search",
   "Same page as a brand search.",
   [("results-product", "d", 1100), ("results-product", "m", 1100)], [
-  "<b>PRODUCT</b> tag. Where a brand shows its handle, a product shows the keywords the search ran.",
+  "No PRODUCT label. Where a brand shows its handle, a product shows the keywords the search ran.",
   "The insight line becomes <b>Brands in these breakouts</b>: each brand with its count of breakouts. Click opens that brand's search. " + SM + "counts.",
   SM + "14 breakouts.",
   "Numbers, tabs, cards and Alert me are the same as a brand search."]))
