@@ -74,8 +74,8 @@ def sidebar(*, active="home", home="#home", feed="#feed", recent=(), more=None, 
         if more:
             out.append(f'<a class="s-more" href="{more}">See more</a>')
     out.append('<div class="s-lbl">MY LIBRARY</div>')
-    out.append(f'<a class="s-it" href="{home}">{ico(SI["bookmark"],16)}<span class="s-nm">Saved videos</span><span class="s-num">{saved}</span></a>')
-    out.append(f'<a class="s-it" href="{home}">{ico(SI["spark"],16)}<span class="s-nm">Video analyses</span><span class="s-num">{analyses}</span></a>')
+    out.append(f'<a class="s-it" data-nav="saved" href="#saved">{ico(SI["bookmark"],16)}<span class="s-nm">Saved videos</span><span class="s-num">{saved}</span></a>')
+    out.append(f'<a class="s-it" data-nav="analyses" href="#analyses">{ico(SI["spark"],16)}<span class="s-nm">Video analyses</span><span class="s-num">{analyses}</span></a>')
     out.append('<div class="s-foot">')
     if steps is not None:
         n = len(steps)
@@ -99,7 +99,7 @@ CSS = '''
 .s-logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;padding:2px 6px 20px;color:#0B0B0B;text-decoration:none}
 .s-mark{width:32px;height:32px;border-radius:50%;background:#FFC72C;display:flex;align-items:center;justify-content:center;color:#1A1300}
 .s-nav{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;font-size:15px;font-weight:600;color:#1F1D1A;text-decoration:none}
-.s-nav:hover,.s-it:hover{background:#FAF8F2}.s-nav.on{background:#FFF6D6;color:#6B4B00}
+.s-nav:hover,.s-it:hover{background:#FAF8F2}.s-nav.on,.s-it.on{background:#FFF6D6;color:#6B4B00}
 .s-lbl{font-size:11px;font-weight:800;letter-spacing:.08em;color:#6B675F;padding:22px 12px 6px}
 .s-it{display:flex;align-items:center;gap:10px;padding:6px 12px;border-radius:10px;font-size:14px;font-weight:600;color:#1F1D1A;text-decoration:none;min-width:0}
 .s-it>svg{color:#6B675F;flex-shrink:0}

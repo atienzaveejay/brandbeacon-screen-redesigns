@@ -191,12 +191,60 @@ body.append(screen("results-product", "Results: product search",
   SM + "14 breakouts.",
   "Numbers, tabs, cards and Alert me are the same as a brand search."]))
 
+body.append(screen("tabs", "Results tabs: Insights, Analytics, When they post, More data, Hashtags",
+  "The same blocks sit one under another below the videos. The tabs jump down the page.",
+  [("results-insights", "d", 1300), ("results-insights", "m", 1300)], [
+  "Each tab now <b>swaps the panel under the tab bar</b> instead of scrolling. Videos is the default. Header, numbers and insight line stay put.",
+  "<b>Insights:</b> AI summary card, then the three insight cards with their <i>Do next</i> line. " + LV + SM + "AI summary text. <i>More insights</i> next to the insight line opens this tab.",
+  "<b>Analytics:</b> Top views and Average views first (moved from the header), then the Views / Engagement / Breakouts chart. " + LV + SM + "average views.",
+  "<b>When they post:</b> day-by-hour heatmap and the Best time to post line. " + LV,
+  "<b>More data:</b> Breakouts per week and Score distribution. " + LV,
+  "<b>Hashtags:</b> Hashtags they used, with bars and counts. " + LV,
+  "Sort only shows on Videos.",
+  O + "Phone: the tab bar scrolls sideways. Insight and More data cards stack. The heatmap scrolls sideways inside its card.",
+  "Product searches get the same tabs. Their panels in the prototype reuse the rhode data."]))
+
+body.append(screen("tab-states", "Results: the other tabs",
+  "",
+  [("results-analytics", "d", 1150), ("results-when", "m", 1300)], [
+  "Desktop shows Analytics, phone shows When they post. More data and Hashtags are in the prototype state bar (Result tabs).",
+  "Content and data are the same as the live sections."]))
+
+body.append(screen("menus", "Results: more menu and Sort",
+  "Save sits in the header. Sort is a plain select.",
+  [("results-menu", "d", 520), ("results-menu", "m", 700)], [
+  "The Sort list is the <i>Sort</i> state in the prototype (Result tabs).",
+  "<b>… menu:</b> Save search, Edit keywords, Delete search (red). Phone adds Export creator list here.",
+  "Edit keywords opens the same keyword step as a new search, filled in. " + O,
+  "Delete asks to confirm first. " + O,
+  "<b>Sort:</b> Breakout Score (default), New this run, Most views, Newest. The button shows the current choice."]))
+
 body.append(screen("feed", "My Feed",
   "The landing page.",
   [("feed", "d", 1100), ("feed", "m", 1300)], [
   "Page unchanged. " + LV,
   "Reached from the left bar under Home. No longer the landing page.",
   "Phone: one column, with This week, Your searches, Hashtags and Climbing below the feed. " + LV]))
+
+body.append(group("Search history and My Library"))
+body.append(screen("history", "Search history",
+  "Library page, Search History tab.",
+  [("history", "d", 900), ("history", "m", 1300)], [
+  "Opened from <i>Search history</i> on Home and <i>See more</i> under Recent searches.",
+  "Every search the account has run, newest first. Row: name, Brand or Product, handle or keywords, breakouts, last run, next refresh. Tap opens its results.",
+  "Right side: <b>N new</b> pill when a run added breakouts, bell when alerts are on, <b>Running</b> with a spinner while it runs.",
+  "Find a search box, All / Brands / Products, and Newest / Most breakouts. 20 rows, then Load more.",
+  O + "Layout and filters. " + SM + "all rows except rhode skin and glass skin routine."]))
+
+body.append(screen("library", "My Library: Saved videos and Video analyses",
+  "Library page tabs: Saved videos and Analysis History.",
+  [("saved", "d", 900), ("analyses", "m", 1300)], [
+  "Desktop shows Saved videos, phone shows Video analyses.",
+  "Both open from MY LIBRARY in the left bar, which highlights the open page.",
+  "<b>Saved videos:</b> the same cards as Results, bookmark filled (tap to unsave). Chips filter by search, with counts. " + SM + "counts.",
+  "<b>Video analyses:</b> newest first. Thumbnail, handle, which search it came from, date, Breakout Score. <b>Ready</b> plus Open analysis, or <b>Analyzing</b> with a spinner.",
+  "Open analysis goes to the analysis page. " + LV,
+  O + "Phone: one column; status and Open analysis sit under the text."]))
 
 body.append(group("New accounts"))
 body.append(screen("get-started", "Get started and Free limits",
@@ -267,6 +315,10 @@ CHECK = [
  ("results", "Alert me per search (Growth and Scale, Free sees upgrade)"),
  ("results", "Share button on result cards"),
  ("results-product", "Product results: keywords line, Brands in these breakouts"),
+ ("tabs", "Results tabs swap panels: Insights, Analytics, When they post, More data, Hashtags"),
+ ("menus", "Results more menu and Sort options"),
+ ("history", "Search history page (Home link and See more)"),
+ ("library", "Saved videos and Video analyses pages"),
  ("feed", "My Feed moves to the left bar, page unchanged"),
  ("get-started", "Get started, 4 steps in the left column"),
  ("get-started", "Free plan: 3 searches and 5 video analyses"),

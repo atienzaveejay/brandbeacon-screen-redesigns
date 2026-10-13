@@ -104,10 +104,10 @@ RECENT = [("rh","","rhode skin","#results","3 new"),("pl","pl","peptide lip tint
           ("ol","gr","olipop","#results-product","")]
 FREE = dict(saved=0, analyses=0, breakdowns=(0,5), plan="Free plan", reset="")
 READY_RECENT = [("lo","gl","lip oil","#results-product","Ready")] + RECENT[:4]
-side = (sidebar(recent=RECENT, more="#home", sid="side-main",
+side = (sidebar(recent=RECENT, more="#history", sid="side-main",
                 processing=[("lo","gl","lip oil","Search","run-search"),("ju","bl","@justemma529","Analysis","run-analysis")])
         # Later search B, done: the search leaves Processing and tops Recent searches with a Ready pill.
-        + sidebar(recent=READY_RECENT, more="#home", sid="side-ready")
+        + sidebar(recent=READY_RECENT, more="#history", sid="side-ready")
         # New Free account after its first search (Get started 1 of 4).
         + sidebar(recent=[("rh","","rhode skin","#results","")], steps={"search"}, searches=(1,3), sid="side-new", **FREE)
         # First search A (and C): the search runs, step 1 spins, nothing in Recent yet.
@@ -195,7 +195,7 @@ home = f"""<section class="view" id="v-home">
  {searchcard}
  {expand}
  <div class="hblock">
-  <div class="row sb"><h2 class="h2">Your searches</h2><a class="lnk" href="#home">Search history</a></div>
+  <div class="row sb"><h2 class="h2">Your searches</h2><a class="lnk" href="#history">Search history</a></div>
   <div class="card terms">{terms}</div>
  </div>
  <div class="hblock">
@@ -209,6 +209,86 @@ feed = f"""<section class="view" id="v-feed">
  <div><h2 class="h2">My Feed</h2><p class="sub">Breakouts from your searches, plus some from across BrandBeacon.</p></div>
  <div class="feedgrid"><div class="feedcol">{"".join(feed_card(v) for v in V[:3])}</div>{rail}</div>
  <div class="same">Same as live from here: the feed keeps scrolling.</div>
+</section>"""
+
+# ---------- Results tabs (Lester, 14 Oct Slack: "some tabs that are missing in the ... brand results page. Can we have
+# designs for these as well?"). Each tab is its own panel now instead of a section further down the page. The content
+# is the 30 Sep readout design (screens/dashboard.html, real rhode skin Sep 18 data), which matches live, plus the two
+# things 3.0 moved: the full insight set (Insights) and top / average views (Analytics).
+TABS = [("videos","Videos"),("insights","Insights"),("analytics","Analytics"),("when","When they post"),("more","More data"),("hashtags","Hashtags")]
+_dash = (ROOT.parent / "screens" / "dashboard.html").read_text()
+def _section(sid):
+    a = _dash.find(f'<section id="{sid}"'); i = a + 8; depth = 1
+    while depth:
+        o = _dash.find("<section", i); c = _dash.find("</section>", i)
+        if o != -1 and o < c: depth += 1; i = o + 8
+        else: depth -= 1; i = c + 10
+    return _dash[a:i].replace(f'<section id="{sid}" style="scroll-margin-top:72px;', '<section style="', 1)
+_tip = _dash[_dash.find('<div id="tip"'):_dash.find('</div>', _dash.find('<div id="tip"')) + 6]
+_tipjs = [m for m in __import__("re").findall(r"<script>(.*?)</script>", _dash, __import__("re").S) if "getElementById('tip')" in m][0]
+AI_SUM = f"""<div class="card aisum"><div class="row sb"><b class="row" style="gap:8px">{ico(I['spark'],16)} AI summary <span class="sample">SAMPLE</span></b><span class="quiet sm">Sep 18 run</span></div>
+ <ul><li>Breakouts that tag <b>@rhode and Hailey Bieber</b> lead this run: 4 of the top 5.</li><li>Short wins: <b>5 of the top 8</b> run under 10 seconds, one beat and one line of text.</li><li>Small accounts carry it. All top 8 come from creators <b>under 4K followers</b>.</li></ul></div>"""
+VIEWS_ROW = f"""<div class="card vrow"><div><b class="kn">{V[1]['v']}</b><span class="kl">Top views</span><span class="ks">@{E(V[1]['h'])}, {V[1]['d']}</span></div>
+ <div><b class="kn">2.4M</b><span class="kl">Average views <span class="sample">SAMPLE</span></span><span class="ks">across the breakouts</span></div>
+ </div>"""
+def tab_panels(brand):
+    note = "" if brand else '<p class="tabnote"><span class="sample">SAMPLE</span> Same tabs as a brand search. These panels show the rhode skin run as stand-in data.</p>'
+    P = {"insights": AI_SUM + _section("insights"), "analytics": VIEWS_ROW + _section("analytics"),
+         "when": _section("when"), "more": _section("more"), "hashtags": _section("hashtags")}
+    return "".join(f'<div class="tabp" data-p="{k}" hidden>{note}{P[k]}</div>' for k in P)
+SORTS = ["Breakout Score","New this run","Most views","Newest"]
+SORTPOP = '<div class="pop" data-popv="sort" hidden>' + "".join(f'<button type="button" class="popi{" on" if i==0 else ""}" data-sort="{t}">{t}</button>' for i,t in enumerate(SORTS)) + '</div>'
+MOREPOP = (f'<div class="pop right" data-popv="more" hidden><button type="button" class="popi">{ico(I["bookmark"],15)} Save search</button>'
+           f'<button type="button" class="popi">{ico(I["edit"],15)} Edit keywords</button><button type="button" class="popi phone-only">{ico(I["dl"],15)} Export creator list</button>'
+           f'<button type="button" class="popi danger">{ico(I["out"],15)} Delete search</button></div>')
+
+# ---------- Search history (Lester, 14 Oct: the Home "Search history" link). Also the sidebar's See more.
+# Every search the account has run, newest first. Rows open that search's results.
+HIST = [("lo","","lip oil","Product","lip oil, lip oil gloss","running","",""),
+        ("rh","","rhode skin","Brand","@rhodeskin","55 breakouts · ran Sep 18 · next Sep 25","3 new","on"),
+        ("pl","pl","peptide lip tint","Product","peptide lip tint, lip tint","14 breakouts · ran Oct 10 · next Oct 17","",""),
+        ("gl","gl","glass skin routine","Product","glass skin routine","191 videos · ran Oct 7 · next Oct 14","",""),
+        ("ra","gl","rare beauty","Brand","@rarebeauty","22 breakouts · ran Oct 6 · next Oct 13","","on"),
+        ("ol","gr","olipop","Brand","@drinkolipop","9 breakouts · ran Oct 2 · next Oct 9","",""),
+        ("el","gl","e.l.f.","Brand","@elfyeah","31 breakouts · ran Sep 29 · next Oct 6","",""),
+        ("t2","gl","tower 28","Brand","@tower28beauty","6 breakouts · ran Sep 24 · next Oct 1","","")]
+def hist_row(x):
+    ini,c,n,t,who,meta,nw,al = x
+    href = "#results" if n=="rhode skin" else "#results-product"
+    if meta == "running":
+        right = '<span class="hrun"><span class="spin"></span>Running</span>'
+        meta = "started 2 min ago"
+    else:
+        right = (f'<span class="cnt">{nw}</span>' if nw else "") + (f'<span class="hal on" title="Alerts on">{ico(I["bell"],15)}</span>' if al else "")
+    return (f'<a class="hrow2" href="{href}"><span class="ssav lg {c}">{ini}</span><span class="tm"><b>{E(n)}</b><i>{t} · {E(who)} · {meta}</i></span>'
+            f'<span class="hr-r">{right}{ARROW}</span></a>')
+history = f"""<section class="view" id="v-history">
+ <a class="goback" href="#home">{ico(I['back'],15)} Go back</a>
+ <div class="row sb wrap"><div><h1 class="h1">Search history</h1><p class="sub">Every search you have run, newest first. Each one refreshes weekly.</p></div></div>
+ <div class="row wrap fl"><label class="hsearch">{ico(I['search'],16)}<input placeholder="Find a search"></label>
+  <span class="seg"><button class="on" type="button">All</button><button type="button">Brands</button><button type="button">Products</button></span>
+  <span class="seg"><button class="on" type="button">Newest</button><button type="button">Most breakouts</button></span></div>
+ <div class="card terms hist">{"".join(hist_row(x) for x in HIST)}</div>
+ <p class="quiet center">Showing 8 of 23 <span class="sample">SAMPLE</span> · <a class="lnk" href="#history">Load more</a></p>
+</section>"""
+
+# ---------- My Library pages (sidebar Saved videos / Video analyses). Live keeps these in Library tabs.
+saved = f"""<section class="view" id="v-saved">
+ <div><h1 class="h1">Saved videos</h1><p class="sub">Videos you saved from any search. Save one with the bookmark on a card.</p></div>
+ <div class="row wrap fl"><span class="seg"><button class="on" type="button">All 12</button><button type="button">rhode skin 9</button><button type="button">peptide lip tint 3</button></span>
+  <span class="quiet sm">Counts are <span class="sample">SAMPLE</span></span></div>
+ <div class="grid3">{"".join(result_card(v,i+1).replace('class="ib round sm" data-act="save"','class="ib round sm on" data-act="save"').replace('<span class="rank">'+str(i+1)+'</span>','') for i,v in enumerate(V[:3]))}</div>
+</section>"""
+AN = [(V[3],"rhode skin","Ready","Today"),(V[0],"rhode skin","Ready","Sep 19"),(V[2],"rhode skin","Ready","Sep 18"),(V[4],"peptide lip tint","Analyzing","")]
+def an_row(v, src, st, d):
+    stt = ('<span class="hrun"><span class="spin"></span>Analyzing</span>' if st=="Analyzing" else '<span class="rdy">Ready</span>')
+    btn = '' if st=="Analyzing" else f'<span class="btn sm">Open analysis</span>'
+    return (f'<div class="anrow"><span class="anth"><img src="{v["img"]}" alt=""></span><span class="tm"><b>@{E(v["h"])}</b>'
+            f'<i>From {src}{" · analyzed " + d if d else ""} · Breakout Score {v["s"]}×</i></span><span class="hr-r">{stt}{btn}</span></div>')
+analyses = f"""<section class="view" id="v-analyses">
+ <div><h1 class="h1">Video analyses</h1><p class="sub">Every video you analyzed: why it broke out, the hook, and what to brief. Opening one uses no credits.</p></div>
+ <div class="card terms anlist">{"".join(an_row(*x) for x in AN)}</div>
+ <div class="same">Open analysis goes to the analysis page, unchanged from live.</div>
 </section>"""
 
 # ---------- results. Top numbers per Ivan 6 Oct ("number of breakouts in this run. Average breakout score ...");
@@ -231,7 +311,7 @@ def results_view(vid, kind):
    <div><b class="kn">740×</b><span class="kl"><span class="dl">Average Breakout Score</span><span class="phl">Avg score</span> <span class="sample">SAMPLE</span></span><span class="ks">across the {n} breakouts</span></div>
   </div>"""
     if brand:
-        line = f'<div class="insl brandins">{ico(I["spark"],15)}<span><b>5 of 5</b> top breakouts come from accounts under 4K followers. Brief small creators.</span><a class="lnk sm" href="#{vid[2:]}">More insights</a></div>'
+        line = f'<div class="insl brandins">{ico(I["spark"],15)}<span><b>5 of 5</b> top breakouts come from accounts under 4K followers. Brief small creators.</span><a class="lnk sm" href="#" data-tab="insights">More insights</a></div>'
     else:
         line = f'<div class="insl">{ico(I["spark"],15)}<span class="bil">Brands in these breakouts <span class="sample">SAMPLE</span></span><span class="bchips">{"".join(f'<a href="#results"><span class="ssav sm {c}">{i}</span>{E(t)} <span class="quiet">{k}</span></a>' for i,c,t,k in [("rh","","rhode skin","9"),("t2","gl","tower 28","2"),("gl","gl","glossier","2"),("la","gl","laneige","1")])}</span></div>'
     return f"""<section class="view" id="{vid}">
@@ -239,17 +319,18 @@ def results_view(vid, kind):
  <div class="card rhead">
   <div class="row sb top"><div class="row"><span class="hn"><b class="h1">{name}</b>
    <span class="row meta">{who}<span class="quiet">{run}</span></span></span></div>
-   <div class="row acts2"><button class="btn alert" data-act="alert">{ico(I['bell'],16)} <span>Alert me</span></button><button class="btn">{ico(I['dl'],16)} Export creator list</button><button class="ib" aria-label="More: save, edit keywords">{ico(I['more'],16)}</button></div></div>
+   <div class="row acts2"><button class="btn alert" data-act="alert">{ico(I['bell'],16)} <span>Alert me</span></button><button class="btn">{ico(I['dl'],16)} Export creator list</button><div class="popw"><button class="ib" type="button" data-pop="more" aria-label="More: save, edit keywords">{ico(I['more'],16)}</button>{MOREPOP}</div></div></div>
   {nums}
   <p class="def">Breakout Score measures how far a video beat that creator's average video, in views and engagement.</p>
  </div>
  {line}
- <div class="ptabs"><span class="pt on">Videos</span><span class="pt">Insights</span><span class="pt">Analytics</span><span class="pt">When they post</span><span class="pt">More data</span><span class="pt">Hashtags</span><button class="btn sm sortb">Sort: Breakout Score {ico(I['down'],14)}</button></div>
- <div class="grid3">{"".join(result_card(v,i+1) for i,v in enumerate(V))}</div>
- <button class="btn loadm">Load {int(n)-5} more</button>
- <div class="same">Below this, unchanged from live: AI summary, Analytics, When they post, More data and Hashtags they used.</div>
+ <div class="ptabs">{"".join(f'<button class="pt{" on" if k=="videos" else ""}" type="button" data-tab="{k}">{t}</button>' for k,t in TABS)}<div class="sortw"><button class="btn sm sortb" type="button" data-pop="sort">Sort: <span class="sortv">Breakout Score</span> {ico(I['down'],14)}</button>{SORTPOP}</div></div>
+ <div class="tabp" data-p="videos"><div class="grid3">{"".join(result_card(v,i+1) for i,v in enumerate(V))}</div>
+ <button class="btn loadm">Load {int(n)-5} more</button></div>
+ {tab_panels(brand)}
 </section>"""
 results = results_view("v-results","brand") + results_view("v-results-product","product")
+
 
 # ---------- first search (Ivan 11 Oct: "let's go with 'wait and learn'" for the first search; B for later searches;
 # C, results streaming in, only after Lester's speed work). Folded in from first-search.html on 13 Oct.
@@ -337,7 +418,7 @@ a{color:inherit;text-decoration:none}i{font-style:normal}button{font-family:inhe
 .card{background:#fff;border:1px solid #ECE9E1;border-radius:22px}
 .h1{font-size:28px;font-weight:800;margin:0}.h2{font-size:19px;font-weight:800;margin:0;display:flex;align-items:center;gap:10px}
 .h2:before{content:"";width:4px;height:18px;border-radius:2px;background:#FFC72C}.h3{font-size:15px;font-weight:800;margin:0}
-.sub{font-size:14px;color:#5E5A52;margin:4px 0 0 14px}
+.sub{font-size:14px;color:#5E5A52;margin:4px 0 0 14px}.h1+.sub{margin-left:0}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 18px;border-radius:12px;font-weight:700;font-size:14px;border:1px solid #E3DFD4;background:#fff;color:#0B0B0B;cursor:pointer}
 .btn.y{background:#FFC72C;border-color:#FFC72C;color:#1A1300}.btn.sm{height:36px;padding:0 12px;font-size:13px;border-radius:10px}
 .btn.pill{border-radius:999px;height:52px;padding:0 24px;font-size:15px}.btn.grow{flex-grow:1;border-radius:999px}
@@ -462,6 +543,25 @@ a{color:inherit;text-decoration:none}i{font-style:normal}button{font-family:inhe
 .bchips{display:flex;gap:16px;flex-wrap:wrap}.bchips a{display:inline-flex;align-items:center;gap:6px;font-weight:700}
 .sortb{margin-left:auto}.ptabs{align-items:center}
 .side[hidden]{display:none!important}
+.pt{all:unset;cursor:pointer;font-size:14px;font-weight:700;color:#6B675F;padding:7px 14px;border-radius:999px}.pt.on{background:#0B0B0B;color:#fff}.pt:hover:not(.on){background:#EFECE4}
+.tabp{display:flex;flex-direction:column;gap:22px}.tabp[hidden]{display:none}.tabnote{margin:0;font-size:13px;color:#6B675F}
+.sortw,.popw{position:relative}.sortw{margin-left:auto}
+.pop{position:absolute;top:calc(100% + 6px);left:0;z-index:30;background:#fff;border:1px solid #E6E2D8;border-radius:14px;box-shadow:0 12px 30px rgba(11,11,11,.12);padding:6px;min-width:200px;display:flex;flex-direction:column}
+.pop.right,.sortw .pop{left:auto;right:0}.pop[hidden]{display:none}
+.popi{all:unset;cursor:pointer;display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:9px;font-size:14px;font-weight:600;color:#1F1D1A}.popi:hover{background:#FAF8F2}.popi.on{background:#FFF6D6;color:#6B4B00}
+.popi.danger{color:#A3261F}.popi>svg{color:#8C877D}.popi.danger>svg{color:#A3261F}.phone-only{display:none}
+.aisum{padding:18px 22px;display:flex;flex-direction:column;gap:10px}.aisum ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:14px;color:#3A3731}.aisum b.row>svg{color:#8A6100}
+.vrow{padding:18px 22px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.vrow>div{display:flex;flex-direction:column;gap:2px}
+.wrap{flex-wrap:wrap}.fl{gap:10px}.center{text-align:center;margin:0}
+.hsearch{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #E3DFD4;border-radius:999px;padding:0 14px;height:40px;flex:1 1 260px;color:#8C877D}.hsearch input{all:unset;flex:1;font-size:14px;color:#0B0B0B}
+.seg{display:inline-flex;background:#fff;border:1px solid #E3DFD4;border-radius:999px;padding:3px}.seg button{all:unset;cursor:pointer;font-size:13px;font-weight:700;color:#6B675F;padding:6px 12px;border-radius:999px;white-space:nowrap}.seg button.on{background:#0B0B0B;color:#fff}
+.hrow2,.anrow{display:flex;align-items:center;gap:14px;padding:14px 18px;border-bottom:1px solid #F0EDE6}.hist>:last-child,.anlist>:last-child{border-bottom:0}.hrow2:hover{background:#FCFBF8}
+.hrow2 .tm,.anrow .tm{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0}.tm i{font-size:13px;color:#6B675F;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hr-r{display:flex;align-items:center;gap:10px;flex-shrink:0;color:#8C877D}.hr-r .cnt{margin-left:0}
+.hal{display:inline-flex;color:#6B4B00}.hrun{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;color:#6B4B00}.hrun .spin{width:13px;height:13px}
+.rdy{font-size:12px;font-weight:800;color:#16603A;background:#E8F4EC;padding:3px 9px;border-radius:999px}
+.anth{width:52px;height:64px;border-radius:10px;overflow:hidden;flex-shrink:0;background:#1F1D1A}.anth img{width:100%;height:100%;object-fit:cover}
+.ib.on{background:#FFF6D6;border-color:#F2DE99;color:#6B4B00}
 '''
 
 css += _emcss + '''
@@ -541,6 +641,11 @@ MCSS = '''
  .nums3 .ks{display:none}.nums3 .kl{flex-wrap:wrap;gap:4px}.nums3 .sample{font-size:9.5px;padding:1px 5px}
  .insl>span:first-of-type{flex:1 1 calc(100% - 30px);min-width:0}
  .grid3 .thumb.tall{aspect-ratio:1/1}
+ .phone-only{display:flex}.sortw{margin-left:8px}.tabp section [style*="repeat(3,minmax(0,1fr))"],.tabp section [style*="1fr 1fr"]{grid-template-columns:minmax(0,1fr)!important}
+ .tabp section [style*="44px repeat(24"]{min-width:640px}
+ .tabp section{min-width:0}.tabp .card{overflow-x:auto}.vrow{grid-template-columns:minmax(0,1fr)}
+ .hrow2,.anrow{padding:12px;gap:10px;flex-wrap:wrap}.hrow2 .tm i,.anrow .tm i{white-space:normal}.anrow .hr-r{width:100%;justify-content:space-between;padding-left:62px}
+ .hsearch{flex-basis:100%}.seg{overflow-x:auto;max-width:100%}
  /* Ivan 12 Oct: "search results page - very crowded at the top". Name with icon buttons on one row, one meta line,
     three short-label numbers; the definition moves behind an i button, the insight line into the Insights tab. */
  .goback{border:0;background:none;padding:0;font-size:14px}
@@ -560,6 +665,8 @@ GROUPS = [("Home",[("home","Home"),("menu","Phone menu")]),
           ("Later search B",[("home-running","Running")]),
           ("Ready",[("ready","First search"),("home-ready","Later search")]),
           ("Results",[("results","Brand"),("results-product","Product")]),
+          ("Result tabs",[("results-insights","Insights"),("results-analytics","Analytics"),("results-when","When"),("results-more","More data"),("results-hashtags","Hashtags"),("results-menu","… menu"),("results-sort","Sort")]),
+          ("Library",[("history","Search history"),("saved","Saved videos"),("analyses","Video analyses")]),
           ("My Feed",[("feed","My Feed")]),
           ("New account",[("home-checklist","Get started"),("menu-new","Phone menu"),("menu-new-open","Menu, opened")]),
           ("Email",[("email","First search done")]),
@@ -585,16 +692,21 @@ var M='side-main',CFG={
  'first-c':{v:'first-c',s:'side-first',free:1,proc:1},
  'ready':{v:'ready',s:'side-free-ready',free:1},
  'results':{v:'results'},'results-product':{v:'results-product'},'feed':{v:'feed'},
+ 'history':{v:'history'},'saved':{v:'saved'},'analyses':{v:'analyses'},
+ 'results-insights':{v:'results',tab:'insights'},'results-analytics':{v:'results',tab:'analytics'},'results-when':{v:'results',tab:'when'},
+ 'results-more':{v:'results',tab:'more'},'results-hashtags':{v:'results',tab:'hashtags'},'results-menu':{v:'results',pop:'more'},'results-sort':{v:'results',pop:'sort'},
  'home-checklist':{s:'side-new',free:1,nu:1},
  'menu-new':{s:'side-new',free:1,nu:1,menu:1},'menu-new-open':{s:'side-new',free:1,nu:1,menu:1,nx:1},
  'email':{v:'email',s:'-',email:1}};
-var VIEWS=['home','feed','results','results-product','first-a','first-c','ready','email'];
+var VIEWS=['home','feed','history','saved','analyses','results','results-product','first-a','first-c','ready','email'];
 function route(){var h=(location.hash||'#home').slice(1);var c=CFG[h]||{};var v=c.v||'home',sid=c.s||M;
  VIEWS.forEach(function(x){$('v-'+x).classList.toggle('on',x===v)});
  document.querySelectorAll('.s-side').forEach(function(n){n.hidden=n.id!==sid});
  var B=document.body.classList;B.toggle('nu',!!c.nu);B.toggle('emailv',!!c.email);B.toggle('menu-open',!!c.menu);
  document.querySelectorAll('.s-nx').forEach(function(n){n.classList.toggle('open',!!c.nx);n.querySelector('[data-nx]').setAttribute('aria-expanded',!!c.nx)});
- document.querySelectorAll('[data-nav=home]').forEach(function(a){a.classList.toggle('on',v==='home')});document.querySelectorAll('[data-nav=feed]').forEach(function(a){a.classList.toggle('on',v==='feed')});
+ document.querySelectorAll('[data-nav]').forEach(function(a){a.classList.toggle('on',a.getAttribute('data-nav')===v)});
+ document.querySelectorAll('.view').forEach(function(w){setTab(w,'videos')});if(c.tab)setTab($('v-'+v),c.tab);
+ closePops();if(c.pop){var pp=$('v-'+v).querySelector('[data-popv="'+c.pop+'"]');if(pp)pp.hidden=false}
  $('dd').hidden=h!=='home-typing';$('q').value=(h==='home-typing'||h==='expand')?'rhode':'';
  $('xcard').hidden=h!=='expand';document.querySelector('.scard').hidden=h==='expand';
  $(M).querySelectorAll('[data-proc]').forEach(function(d){d.hidden=!c.run});
@@ -604,6 +716,13 @@ function route(){var h=(location.hash||'#home').slice(1);var c=CFG[h]||{};var v=
  if(c.ready)toast('<span>lip oil is ready</span><a href="#results-product">Open</a>',0);else t.classList.remove('on');
  document.querySelectorAll('.statebar a').forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+h)});
  window.scrollTo(0,0)}
+function setTab(w,t){if(!w.querySelector('.tabp'))return;w.querySelectorAll('.tabp').forEach(function(p){p.hidden=p.getAttribute('data-p')!==t});
+ w.querySelectorAll('.pt').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-tab')===t)});var sw=w.querySelector('.sortw');if(sw)sw.style.visibility=t==='videos'?'':'hidden'}
+function closePops(){document.querySelectorAll('.pop').forEach(function(p){p.hidden=true})}
+document.addEventListener('click',function(e){var t=e.target.closest('[data-tab]');if(t){e.preventDefault();setTab(t.closest('.view'),t.getAttribute('data-tab'));return}
+ var pb=e.target.closest('[data-pop]');if(pb){var pp=pb.parentNode.querySelector('[data-popv]');var was=pp.hidden;closePops();pp.hidden=!was;return}
+ var so=e.target.closest('[data-sort]');if(so){var w=so.closest('.sortw');w.querySelector('.sortv').textContent=so.getAttribute('data-sort');w.querySelectorAll('.popi').forEach(function(x){x.classList.toggle('on',x===so)});closePops();return}
+ if(!e.target.closest('.pop'))closePops()});
 addEventListener('hashchange',route);route();
 document.addEventListener('click',function(e){
  if(e.target.closest('[data-open-menu]')){document.body.classList.add('menu-open');return}
@@ -630,8 +749,8 @@ page = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>{css}{SIDE_CSS}.nu .olduser{{display:none}}{MCSS}</style></head><body>
 {statebar}
-<div class="app">{side}{mtop}<main class="main">{home}{feed}{results}{first_a}{first_c}{ready}{email}</main></div>
-<div class="toast" id="toast" role="status"></div>
+<div class="app">{side}{mtop}<main class="main">{home}{feed}{history}{saved}{analyses}{results}{first_a}{first_c}{ready}{email}</main></div>
+<div class="toast" id="toast" role="status"></div>{_tip}<script>{_tipjs}</script>
 <script>{js}</script></body></html>'''
 
 (ROOT / "app.html").write_text(page)
