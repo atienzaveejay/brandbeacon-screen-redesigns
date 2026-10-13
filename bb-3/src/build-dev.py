@@ -196,10 +196,11 @@ body.append(screen("tabs", "Results tabs: Insights, Analytics, When they post, M
   [("results-insights", "d", 1300), ("results-insights", "m", 1300)], [
   "Each tab now <b>swaps the panel under the tab bar</b> instead of scrolling. Videos is the default. Header, numbers and insight line stay put.",
   "<b>Insights:</b> AI summary card, then the three insight cards with their <i>Do next</i> line. " + LV + SM + "AI summary text. <i>More insights</i> next to the insight line opens this tab.",
-  "<b>Analytics:</b> Top views and Average views first (moved from the header), then the Views / Engagement / Breakouts chart. " + LV + SM + "average views.",
+  "<b>Analytics:</b> Top views and Average views first (moved from the header), then the chart. Views / Engagement / Breakouts switch the chart and the headline number (1.2M views, 10.8% engagement, breakouts). " + LV + SM + "average views.",
   "<b>When they post:</b> day-by-hour heatmap and the Best time to post line. " + LV,
   "<b>More data:</b> Breakouts per week and Score distribution. " + LV,
-  "<b>Hashtags:</b> Hashtags they used, with bars and counts. " + LV,
+  "<b>Hashtags:</b> Hashtags they used, with bars and counts. Top 6 first; <i>Show all hashtags</i> opens the rest. " + LV + SM + "counts past the first 6.",
+  "<b>Load N more</b> under the videos adds the next cards and counts down. " + LV,
   "Sort only shows on Videos. Phone: Sort sits on its own line under the tabs, and the open tab scrolls into view.",
   O + "Phone: the tab bar scrolls sideways. Insight and More data cards stack. The heatmap scrolls sideways inside its card.",
   "Product searches get the same tabs. Their panels in the prototype reuse the rhode data."]))
@@ -214,9 +215,11 @@ body.append(screen("menus", "Results: more menu and Sort",
   "Save sits in the header. Sort is a plain select.",
   [("results-menu", "d", 520), ("results-menu", "m", 700)], [
   "The Sort list is the <i>Sort</i> state in the prototype (Result tabs).",
-  "<b>… menu:</b> Save search, Edit keywords, Delete search (red). Phone adds Export creator list here.",
+  "<b>… menu:</b> Saved to Your searches (toggle), Edit keywords, Delete search (red). Phone adds Export creator list here.",
+  O + "<b>Saved</b> = the search sits in Your searches on Home and refreshes weekly. Unsave keeps it in Search history without the refresh. Toast confirms either way.",
   "Edit keywords opens the same keyword step as a new search, filled in. " + O,
-  "Delete asks to confirm first. " + O,
+  "Delete opens a confirm (see Delete search below). " + O,
+  "<b>Export creator list</b> opens the creator export designed in the screen redesigns round (screens/creator-export.html).",
   "<b>Sort:</b> Breakout Score (default), New this run, Most views, Newest. The button shows the current choice."]))
 
 body.append(screen("feed", "My Feed",
@@ -231,8 +234,11 @@ body.append(screen("history", "Search history",
   "Library page, Search History tab.",
   [("history", "d", 900), ("history", "m", 1300)], [
   "Opened from <i>Search history</i> on Home and <i>See more</i> under Recent searches.",
-  "Every search the account has run, newest first. Row: name, Brand or Product, handle or keywords, breakouts, last run, next refresh. Tap opens its results.",
-  "Right side: <b>N new</b> pill when a run added breakouts, bell when alerts are on, <b>Running</b> with a spinner while it runs.",
+  "Every search the account has run, newest first. Row: name, Brand or Product, handle or keywords, breakouts, last run, and next refresh for saved searches. Tap opens its results.",
+  "Right side: <b>N new</b> pill when a run added breakouts, bell when alerts are on, filled bookmark when saved, <b>Running</b> with a spinner while it runs.",
+  O + "A search that did not finish says <b>Didn't finish</b> with <b>Try again</b>. A retry does not use a search.",
+  "A search with 0 breakouts opens the No breakouts screen.",
+  "Find a search filters by name as you type; no match shows <i>No searches match</i>.",
   "Find a search box, All / Brands / Products, and Newest / Most breakouts. 20 rows, then Load more.",
   O + "Layout and filters. " + SM + "all rows except rhode skin and glass skin routine."]))
 
@@ -241,10 +247,42 @@ body.append(screen("library", "My Library: Saved videos and Video analyses",
   [("saved", "d", 900), ("analyses", "m", 1300)], [
   "Desktop shows Saved videos, phone shows Video analyses.",
   "Both open from MY LIBRARY in the left bar, which highlights the open page.",
-  "<b>Saved videos:</b> the same cards as Results, bookmark filled (tap to unsave). Chips filter by search, with counts. " + SM + "counts.",
+  "<b>Saved videos:</b> the same cards as Results, with a <i>From {search}</i> line and the bookmark filled (tap to unsave). Chips filter by search.",
   "<b>Video analyses:</b> newest first. Thumbnail, handle, which search it came from, date, Breakout Score. <b>Ready</b> plus Open analysis, or <b>Analyzing</b> with a spinner.",
   "Open analysis goes to the analysis page. " + LV,
+  "Feed's Your searches <i>Manage</i> link and the left bar's <i>See more</i> both open Search history. Sign out goes to the logged-out home page (the sales page mock).",
   O + "Phone: one column; status and Open analysis sit under the text."]))
+
+body.append(group("Empty and edge states"))
+body.append(screen("empty", "Empty Library pages",
+  "Library tabs show an empty table.",
+  [("saved-empty", "d", 700), ("analyses-empty", "m", 760)], [
+  "Desktop shows Saved videos, phone shows Video analyses, both for a new Free account.",
+  O + "<b>No saved videos yet:</b> one line on how to save, then <i>Open {their latest search}</i>.",
+  O + "<b>No video analyses yet:</b> what an analysis gives, <i>Free includes 5</i>, then <i>Find a video to analyze</i> (opens their latest search).",
+  "Search history is never empty: the account's first search lands there."]))
+
+body.append(screen("no-breakouts", "No breakouts",
+  "Not shown on the live screens we have.",
+  [("results-none", "d", 760), ("results-none", "m", 1000)], [
+  O + "Same header, numbers show <b>0 breakouts of 200 videos</b>. No tabs, since there is nothing to break down.",
+  "Message: <i>None of the 200 videos beat their creator's usual views by 3× or more.</i> 3× is the breakout line used in More data.",
+  O + "Next steps: Edit keywords, <i>Tell me when one appears</i> (turns on Alert me), and three broader searches to tap.",
+  O + "Footnote: it did not use a breakdown and still counts as 1 search. " + SM + "matte lip oil."]))
+
+body.append(screen("delete", "Delete search",
+  "",
+  [("results-delete", "d", 620), ("results-delete", "m", 700)], [
+  O + "Opened from Delete search in the … menu. <i>Delete rhode skin?</i> Results, alerts and the weekly refresh stop; saved videos and analyses from it stay.",
+  "Cancel (or a tap outside) closes it. Delete search goes to Search history with a <i>rhode skin deleted</i> toast."]))
+
+body.append(screen("paywall", "Free limits: searches and video analyses",
+  "Free is 1 search and 0 analyses on live.",
+  [("paywall-search", "d", 620), ("paywall-analysis", "m", 760)], [
+  "Free = 3 searches and 5 video analyses. The 4th search or 6th analysis opens this instead of running.",
+  "Desktop shows the search limit (top bar reads 0 left, Searches 3 of 3). Phone shows the analysis limit (Breakdowns 5 of 5).",
+  O + "One plan card: Growth, $99 a month, 100 searches, 100 video analyses, alerts. <i>Upgrade to Growth</i> opens pricing; <i>Not now</i> closes it.",
+  "Nothing is lost: searches, saved videos and analyses stay where they are."]))
 
 body.append(group("New accounts"))
 body.append(screen("get-started", "Get started and Free limits",
@@ -319,6 +357,11 @@ CHECK = [
  ("menus", "Results more menu and Sort options"),
  ("history", "Search history page (Home link and See more)"),
  ("library", "Saved videos and Video analyses pages"),
+ ("menus", "Saved toggle, Delete confirm, Export opens creator export"),
+ ("empty", "Empty Saved videos and Video analyses"),
+ ("no-breakouts", "No breakouts screen"),
+ ("history", "Failed search: Didn't finish, Try again"),
+ ("paywall", "Free paywall for the 4th search and 6th analysis"),
  ("feed", "My Feed moves to the left bar, page unchanged"),
  ("get-started", "Get started, 4 steps in the left column"),
  ("get-started", "Free plan: 3 searches and 5 video analyses"),

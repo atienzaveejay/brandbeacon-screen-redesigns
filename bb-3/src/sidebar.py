@@ -88,7 +88,7 @@ def sidebar(*, active="home", home="#home", feed="#feed", recent=(), more=None, 
  <div class="row sbt"><span>Breakdowns</span><span class="s-q"><b>{bu}</b> of {bt}</span></div><span class="s-track"><span class="s-bar" style="width:{max(round(100*bu/bt),0)}%"></span></span>
 </div>''')
     out.append(f'<div class="s-me"><span class="s-avm">V</span><span class="s-who"><b>Veejay Atienza</b><i>{plan}{" · " + reset if reset else ""}</i></span>'
-               f'<button class="s-ib" aria-label="Sign out">{ico(SI["out"],16)}</button></div>')
+               f'<a class="s-ib" href="../sales-page/" aria-label="Sign out" title="Sign out (goes to the logged-out home page)">{ico(SI["out"],16)}</a></div>')
     out.append('</div></nav>')
     return "\n".join(out)
 
