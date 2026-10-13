@@ -98,7 +98,7 @@ def sug(items):
 # Ivan 11 Oct Sheet: My Feed under Home, Recent searches (up to 5 + See more), Processing while something runs,
 # "Your work" -> My Library, compact Searches/Breakdowns, keep the white space; Get started steps in the left column.
 import sys; sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
-from sidebar import sidebar, CSS as SIDE_CSS
+from sidebar import sidebar, CSS as SIDE_CSS, STEPS, ico as sico, SI
 RECENT = [("rh","","rhode skin","#results","3 new"),("pl","pl","peptide lip tint","#results-product",""),
           ("gl","gl","glass skin routine","#results-product",""),("ra","bl","rare beauty","#results",""),
           ("ol","gr","olipop","#results-product","")]
@@ -182,8 +182,13 @@ newest = "".join(f'''<a class="card nb" href="#results"><span class="thumb"><img
 # Later search B (Ivan 8 Oct "put them somewhere else so that they know that it's coming"): Run search lands back on Home
 # with one slim running line; the search also sits under Processing in the sidebar.
 runbar = f'''<div class="upd" id="runbar" hidden><span class="spin"></span><span><b>lip oil is running.</b> About 1 to 2 minutes. We'll tell you here and by email.</span><a class="lnk sm" href="#first-a">See progress</a></div>'''
-# Phone only: Get started lives in the drawer, so new accounts get one line on Home that opens it.
-mgs = f'''<button class="mgs" type="button" data-open-menu><span class="mgs-n">1 of 4</span><span><b>Get started</b><i>Next: analyze a video</i></span>{ARROW}</button>'''
+# Phone only (Ivan 12 Oct Sheet: "doesnt have 'the onboarding 4'"): new accounts see the 4 Get started steps as a card
+# at the top of Home. The drawer leaves them out on phone, which also gives the menu more room.
+def _mstep(k, t, done):
+    ck = sico(SI["check"], 10, 3) if done else ""
+    return f'<li class="{"done" if done else ""}" data-step="{k}"><span class="s-ck">{ck}</span>{t}</li>'
+mgs = (f'<div class="mgs"><div class="row sb"><b>Get started</b><span class="mgs-n"><span class="s-obn">1</span> of 4</span></div>'
+       f'<ol class="s-steps">{"".join(_mstep(k, t, k == "search") for k, t in STEPS)}</ol></div>')
 home = f"""<section class="view" id="v-home">
  {runbar}
  {mgs}
@@ -216,18 +221,18 @@ def results_view(vid, kind):
     av = '<span class="ssav xl">rh</span>' if brand else '<span class="ssav xl pl">pl</span>'
     name = "rhode skin" if brand else "peptide lip tint"
     who = '<span>@rhodeskin</span>' if brand else '<span>peptide lip tint, peptide lip treatment, lip tint</span>'
-    run = "Weekly · last run Sep 18 · next Sep 25" if brand else "Weekly · last run Oct 10 · next Oct 17"
+    run = 'Weekly · <span class="lr">last run Sep 18 · </span>next Sep 25' if brand else 'Weekly · <span class="lr">last run Oct 10 · </span>next Oct 17'
     n, tot = ("55","200") if brand else ("14","200")
     S = '' if brand else ' <span class="sample">SAMPLE</span>'
     nums = f"""<div class="nums3">
-   <div><b class="kn">{n}</b><span class="kl">Breakouts this run{S}</span><span class="ks">of {tot} videos</span></div>
-   <div><b class="kn gold">8.6K×</b><span class="kl">Top Breakout Score</span><span class="ks">@cyr1n32, usually about 1K views</span></div>
-   <div><b class="kn">740×</b><span class="kl">Average Breakout Score <span class="sample">SAMPLE</span></span><span class="ks">across the {n} breakouts</span></div>
+   <div><b class="kn">{n}</b><span class="kl"><span class="dl">Breakouts this run</span><span class="phl">Breakouts</span>{S}</span><span class="ks">of {tot} videos</span></div>
+   <div><b class="kn gold">8.6K×</b><span class="kl"><span class="dl">Top Breakout Score</span><span class="phl">Top score</span><button class="kinfo" data-act="def" aria-label="What is a Breakout Score?">i</button></span><span class="ks">@cyr1n32, usually about 1K views</span></div>
+   <div><b class="kn">740×</b><span class="kl"><span class="dl">Average Breakout Score</span><span class="phl">Avg score</span> <span class="sample">SAMPLE</span></span><span class="ks">across the {n} breakouts</span></div>
   </div>"""
     if brand:
-        line = f'<div class="insl">{ico(I["spark"],15)}<span><b>5 of 5</b> top breakouts come from accounts under 4K followers. Brief small creators.</span><a class="lnk sm" href="#{vid[2:]}">More insights</a></div>'
+        line = f'<div class="insl brandins">{ico(I["spark"],15)}<span><b>5 of 5</b> top breakouts come from accounts under 4K followers. Brief small creators.</span><a class="lnk sm" href="#{vid[2:]}">More insights</a></div>'
     else:
-        line = f'<div class="insl">{ico(I["spark"],15)}<span>Brands in these breakouts <span class="sample">SAMPLE</span></span><span class="bchips">{"".join(f'<a href="#results"><span class="ssav sm {c}">{i}</span>{E(t)} <span class="quiet">{k}</span></a>' for i,c,t,k in [("rh","","rhode skin","9"),("t2","gl","tower 28","2"),("gl","gl","glossier","2"),("la","gl","laneige","1")])}</span></div>'
+        line = f'<div class="insl">{ico(I["spark"],15)}<span class="bil">Brands in these breakouts <span class="sample">SAMPLE</span></span><span class="bchips">{"".join(f'<a href="#results"><span class="ssav sm {c}">{i}</span>{E(t)} <span class="quiet">{k}</span></a>' for i,c,t,k in [("rh","","rhode skin","9"),("t2","gl","tower 28","2"),("gl","gl","glossier","2"),("la","gl","laneige","1")])}</span></div>'
     return f"""<section class="view" id="{vid}">
  <a class="goback" href="#home">{ico(I['back'],15)} Go back</a>
  <div class="card rhead">
@@ -476,7 +481,7 @@ css += _emcss + '''
 .sk{background:linear-gradient(90deg,#F1EFE9 0%,#F8F6F1 50%,#F1EFE9 100%);background-size:200% 100%;animation:sh 1.4s ease infinite;border-radius:8px}
 @keyframes sh{to{background-position:-200% 0}}
 .clamp{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.mfind,.mgs,.scrim{display:none}
+.mfind,.mgs,.scrim{display:none}.phl,.kinfo{display:none}
 .toast.stay{transition:none}
 .emailv .s-side,.emailv .mtop{display:none!important}
 .statebar{align-items:center;gap:6px 4px}.sg{display:inline-flex;align-items:center;gap:4px;padding-right:10px;margin-right:4px;border-right:1px solid #3A3731}.sg:last-child{border-right:0}
@@ -485,7 +490,15 @@ css += _emcss + '''
 
 MCSS = '''
 @media (max-width:700px){
- .s-side{position:fixed;left:0;top:0;bottom:0;height:100%;width:min(304px,86vw);z-index:70;transform:translateX(-104%);transition:transform .25s;box-shadow:8px 0 30px rgba(11,11,11,.18)}
+ /* Ivan 12 Oct: the menu button is on the right, so the drawer comes in from the right. */
+ .s-side{position:fixed;right:0;left:auto;top:0;bottom:0;height:100%;width:min(304px,86vw);z-index:70;transform:translateX(104%);transition:transform .25s;box-shadow:-8px 0 30px rgba(11,11,11,.18);border-right:0;border-left:1px solid #ECE9E1;padding-bottom:0;overflow-y:auto;overscroll-behavior:contain}
+ /* Ivan 12 Oct: "menu can get a little tight? need to have scroll options?" The lists scroll; usage and account stay pinned. */
+ .s-side{visibility:hidden;transition:transform .25s,visibility 0s .25s}.menu-open .s-side{visibility:visible;transition:transform .25s}
+ .menu-open{overflow:hidden}
+ .s-logo{font-size:16px}.s-lbl{padding-top:16px}.s-nav{padding:9px 12px}
+ .s-foot{position:sticky;bottom:0;background:#fff;margin-top:auto;padding:12px 0 14px;gap:10px;border-top:1px solid #F0EDE6;box-shadow:0 -10px 14px -10px rgba(11,11,11,.12)}
+ .s-me{border-top:0;padding-top:0}
+ .s-side .s-ob{display:none}
  .menu-open .s-side{transform:none}
  .s-close{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:10px;border:1px solid #E3DFD4;background:#fff;color:#3A3731;cursor:pointer}
  .s-logo{padding-bottom:14px}
@@ -498,8 +511,8 @@ MCSS = '''
  .mfind{display:flex;width:100%;margin-top:12px;height:48px;border-radius:999px;font-size:15px}
  .sugg{gap:12px}.srow{gap:6px}.srow .chipwrap{flex-wrap:nowrap;overflow-x:auto;margin:0 -16px;padding:0 16px 2px;scrollbar-width:none;width:calc(100% + 32px)}
  .srow .chipwrap::-webkit-scrollbar{display:none}.chip{flex-shrink:0}
- .nu .mgs{all:unset;cursor:pointer;display:flex;align-items:center;gap:12px;background:#FFFBEB;border:1px solid #F2DE99;border-radius:16px;padding:12px 14px;font-size:14px}
- .mgs>span:nth-child(2){flex-grow:1}.mgs b{display:block}.mgs i{display:block;font-size:12.5px;color:#6B675F}
+ .nu .mgs{display:block;background:#FFFBEB;border:1px solid #F2DE99;border-radius:16px;padding:14px 16px 10px;font-size:15px}
+ .mgs .s-steps li{font-size:14px;padding:6px 0}.mgs .s-ck{width:18px;height:18px}
  .mgs-n{font-size:11px;font-weight:800;color:#6B4B00;background:#FFE58A;padding:3px 8px;border-radius:999px;white-space:nowrap}
  .upd{flex-wrap:wrap;align-items:flex-start;font-size:13.5px}.upd>span:nth-child(2){flex:1;min-width:0}.upd .lnk{margin-left:26px}
  .xcard .row.sb{flex-wrap:wrap;row-gap:8px}.addkw{width:100%}.xcard .row.end .btn{flex:1}
@@ -521,6 +534,16 @@ MCSS = '''
  .nums3 .ks{display:none}.nums3 .kl{flex-wrap:wrap;gap:4px}.nums3 .sample{font-size:9.5px;padding:1px 5px}
  .insl>span:first-of-type{flex:1 1 calc(100% - 30px);min-width:0}
  .grid3 .thumb.tall{aspect-ratio:1/1}
+ /* Ivan 12 Oct: "search results page - very crowded at the top". Name with icon buttons on one row, one meta line,
+    three short-label numbers; the definition moves behind an i button, the insight line into the Insights tab. */
+ .goback{border:0;background:none;padding:0;font-size:14px}
+ .rhead{gap:14px}.rhead .top{flex-direction:row;align-items:flex-start;gap:10px}.rhead .ssav.xl{display:none}
+ .rhead .h1{font-size:22px}.acts2{flex-wrap:nowrap;flex-shrink:0}.acts2 .btn.alert{flex:0 0 auto;width:40px;height:40px;padding:0;justify-content:center}.acts2 .btn.alert span{display:none}.acts2 .ib{width:40px;height:40px}
+ .lr{display:none}.meta{font-size:13px}.meta>span:last-child{flex-basis:auto}
+ .dl,.def,.brandins{display:none}.phl{display:inline}
+ .nums3{padding-top:12px}.nums3 .kl{flex-wrap:nowrap;white-space:nowrap}
+ .kinfo{all:unset;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;border:1.5px solid #A9A398;color:#6B675F;font-size:10px;font-weight:800;font-style:italic;flex-shrink:0}
+ .bil{display:none}.insl:not(.brandins){flex-wrap:nowrap}.bchips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;flex:1 1 auto;min-width:0}.bchips::-webkit-scrollbar{display:none}.bchips a{white-space:nowrap}
 }
 '''
 
@@ -541,9 +564,9 @@ js = """
 if(/shot/.test(location.search)){var sb=document.querySelector('.statebar');if(sb)sb.remove();}
 function $(i){return document.getElementById(i)}
 function toast(h,ms){var t=$('toast');t.innerHTML=h;t.classList.add('on');clearTimeout(t._h);if(ms!==0)t._h=setTimeout(function(){t.classList.remove('on')},ms||3200)}
-function markStep(k){var li=document.querySelector('#side-new [data-step="'+k+'"]');if(!li||li.classList.contains('done'))return;li.classList.add('done');li.classList.remove('now');
+function markStep(k){['#side-new','.mgs'].forEach(function(r){var box=document.querySelector(r);if(!box)return;var li=box.querySelector('[data-step="'+k+'"]');if(!li||li.classList.contains('done'))return;li.classList.add('done');li.classList.remove('now');
  li.querySelector('.s-ck').innerHTML='<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5 9-10"/></svg>';
- var n=document.querySelectorAll('#side-new .s-steps li.done').length;document.querySelector('#side-new .s-obn').textContent=n;}
+ box.querySelector('.s-obn').textContent=box.querySelectorAll('.s-steps li.done').length;})}
 var M='side-main',CFG={
  'home':{},'home-b':{},'home-c':{},'home-typing':{},'expand':{},
  'menu':{proc:2,run:1,menu:1},
@@ -582,6 +605,7 @@ document.addEventListener('click',function(e){var b=e.target.closest('[data-act]
  if(b.hasAttribute('data-q')){q.value=b.getAttribute('data-q');location.hash='#expand';document.querySelector('.xt').textContent=b.getAttribute('data-q');return}
  var a=b.getAttribute('data-act');e.preventDefault();
  if(a==='alert'){var on=!b.classList.contains('on');b.classList.toggle('on',on);b.querySelector('span').textContent=on?'Alerts on':'Alert me';toast(on?'We will email you when this search gets a new breakout.':'Alerts off');return}
+ if(a==='def'){toast('Breakout Score measures how far a video beat that creator\\'s average video, in views and engagement.',5000);return}
  if(a==='share'){toast('Share link copied. It does not use any of your credits.');return}
  if(a==='analyze'){markStep('analyze');toast('Analyzing. Uses 1 breakdown.')}
  if(a==='save'){markStep('save');b.classList.add('on');toast('Saved to Saved videos')}

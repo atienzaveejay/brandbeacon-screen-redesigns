@@ -50,6 +50,7 @@ css += """
 O = '<span class="t o">OURS</span>'
 SM = '<span class="t s">SAMPLE</span>'
 LV = '<span class="t l">AS LIVE</span>'
+IV = '<span class="t s" style="background:#FFF3B0;color:#6B4B00">IVAN 12 OCT</span>'
 
 def frame(state, kind, h=None):
     w, hh = (1440, h or 900) if kind == "d" else (390, h or 844)
@@ -175,7 +176,9 @@ body.append(screen("results", "Results: brand search",
   "Tabs: Videos, Insights, Analytics, When they post, More data, Hashtags. Sort: Breakout Score on the right. New this run becomes a Sort option.",
   "Cards as live, plus a <b>Share</b> button next to Analyze and save. Share copies a link and uses no credits.",
   "Below the cards: AI summary, Analytics, When they post, More data, Hashtags. " + LV,
-  O + "Phone: Export goes into the more menu. Numbers stay in one row without sublines. One card per row, square thumbnails. Tabs scroll sideways.",
+  IV + "Phone, less crowded at the top: no avatar. Name on the left, <b>Alert me as a bell icon</b> and the more menu on the right. One meta line: tag, handle, <i>Weekly · next Sep 25</i> (last run drops off).",
+  IV + "Phone numbers use short labels: <b>Breakouts, Top score, Avg score</b>, no sublines. The definition line moves behind an <b>i</b> next to Top score (tap shows it). The insight line is left out on phone; it sits in the Insights tab. Product search keeps Brands in these breakouts as one sideways-scrolling row.",
+  O + "Phone: Export goes into the more menu. One card per row, square thumbnails. Tabs scroll sideways.",
   "Data is the real rhode skin run, 18 Sep."]))
 
 body.append(screen("results-product", "Results: product search",
@@ -202,7 +205,7 @@ body.append(screen("get-started", "Get started and Free limits",
   "The block goes away once all 4 are done. Paid accounts never see it.",
   "<b>Free = 3 searches and 5 video analyses</b> (live: 1 and 0). Usage lines read 1 of 3 and 0 of 5. Paywall on the 4th search or the 6th analysis.",
   "Home shows only the account's own searches.",
-  O + "Phone: one line on Home, <i>Get started 1 of 4, Next: analyze a video</i>. Tap opens the drawer with the steps."]))
+  IV + "Phone: the 4 steps sit as a card at the top of Home, with the same ticks and count as the left column. The drawer leaves them out on phone."]))
 
 email_spec = """<div class="spec"><h4>Email spec</h4><ul>
 <li>Trigger: the account's first <code>search_completed</code>. Once per account.</li>
@@ -223,9 +226,11 @@ body.append(screen("mobile", "Phone rules",
   "Logo and menu button on top. The menu holds the searches meter. Brand / Product toggle, then the feed.",
   [("menu", "m"), ("home-running", "m")], [
   "Below 700px the sidebar becomes a drawer. Menu button top right, " + LV + "Close with the × or a tap outside.",
+  IV + "The drawer slides in <b>from the right</b>, the side the menu button is on.",
+  IV + "The drawer scrolls on its own (the page behind it stays still). Searches, Breakdowns and the account stay pinned at the bottom with a soft line above, so Processing, Recent searches and My Library always have room.",
   O + "Top bar: logo, then a <b>processing chip</b> (spinner and job count, only while something runs), then <b>searches left</b>, then the menu. Both chips open the drawer.",
   O + "Searches left = plan total minus used (Growth 75, Free 2 in the mock).",
-  "Drawer contents match the desktop sidebar: Processing, Recent searches, My Library, Get started, usage, account.",
+  "Drawer contents match the desktop sidebar: Processing, Recent searches, My Library, usage, account. Get started shows on Home instead (see Get started).",
   O + "Suggestion rows scroll sideways. Results cards are one per row. Toasts run full width at the bottom.",
   "Keep everything else from the live phone layout."]))
 
