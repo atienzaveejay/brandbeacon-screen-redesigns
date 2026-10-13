@@ -51,6 +51,7 @@ O = '<span class="t o">OURS</span>'
 SM = '<span class="t s">SAMPLE</span>'
 LV = '<span class="t l">AS LIVE</span>'
 IV = '<span class="t s" style="background:#FFF3B0;color:#6B4B00">IVAN 12 OCT</span>'
+IV13 = IV.replace("12 OCT", "13 OCT")
 
 def frame(state, kind, h=None):
     w, hh = (1440, h or 900) if kind == "d" else (390, h or 844)
@@ -207,6 +208,14 @@ body.append(screen("get-started", "Get started and Free limits",
   "Home shows only the account's own searches.",
   IV + "Phone: the 4 steps sit as a card at the top of Home, with the same ticks and count as the left column. The drawer leaves them out on phone."]))
 
+body.append(screen("menu-next", "Phone menu: What to try next",
+  "No onboarding on phone.",
+  [("menu-new", "m"), ("menu-new-open", "m")], [
+  IV13 + "New accounts get one line in the phone menu, under My Feed: <b>What to try next</b>, the next step under it (<i>Analyze a video</i>), an <i>N of 4</i> pill and a chevron.",
+  IV13 + "Tap opens the 4 steps in place, with the same ticks as the Home card. Tap again to close.",
+  "The next step and the count update as steps tick. When all 4 are done the line goes away, same as the Home card. Paid accounts never see it.",
+  "Phone only. Desktop keeps Get started in the left column."]))
+
 email_spec = """<div class="spec"><h4>Email spec</h4><ul>
 <li>Trigger: the account's first <code>search_completed</code>. Once per account.</li>
 <li>Skip if they already opened the results, or turned off Email me when it's ready.</li>
@@ -262,6 +271,10 @@ CHECK = [
  ("get-started", "Free plan: 3 searches and 5 video analyses"),
  ("email", "First search complete email, sent once"),
  ("mobile", "Phone: drawer, top bar chips, all screens at 390"),
+ ("mobile", "Phone: drawer from the right, scrolls, usage pinned"),
+ ("get-started", "Phone: Get started card on Home"),
+ ("menu-next", "Phone menu: What to try next line, opens the 4 steps"),
+ ("results", "Phone: calmer results top (icon Alert me, short labels, i for definition)"),
 ]
 check = ('<section class="check" id="checklist"><h2>Every change</h2><ol>' +
          "".join(f'<li><span class="k">{i}</span><input type="checkbox" data-k="{i}" aria-label="Done"><a href="#{a}">{html.escape(t)}</a></li>'

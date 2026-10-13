@@ -20,6 +20,7 @@ SI = {
  "out": '<path d="M15 4h4v16h-4"/><path d="M10 8l-4 4 4 4"/><path d="M6 12h10"/>',
  "check": '<path d="M5 12l5 5 9-10"/>',
  "x": '<path d="M6 6l12 12"/><path d="M18 6L6 18"/>',
+ "down": '<path d="M6 9l6 6 6-6"/>',
  "logo": '<circle cx="12" cy="12" r="2"/><path d="M8.5 8.5a5 5 0 0 0 0 7"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M5.6 5.6a9 9 0 0 0 0 12.8"/><path d="M18.4 5.6a9 9 0 0 1 0 12.8"/>',
 }
 
@@ -39,6 +40,24 @@ def sidebar(*, active="home", home="#home", feed="#feed", recent=(), more=None, 
            f'<div class="s-top"><a class="s-logo" href="{home}"><span class="s-mark">{ico(SI["logo"])}</span>Brand Beacon</a>'
            f'<button class="s-close" type="button" data-close aria-label="Close menu">{ico(SI["x"],18)}</button></div>',
            nav("home", home, "home", "Home"), nav("feed", feed, "feed", "My Feed")]
+    def step_lis():
+        lis = []
+        for k, t in STEPS:
+            if k in steps:
+                lis.append(f'<li class="done" data-step="{k}"><span class="s-ck">{ico(SI["check"],10,3)}</span>{t}</li>')
+            elif k == running_step:
+                lis.append(f'<li class="now" data-step="{k}"><span class="s-ck s-spin"></span>{t}</li>')
+            else:
+                lis.append(f'<li data-step="{k}"><span class="s-ck"></span>{t}</li>')
+        return "".join(lis)
+    if steps is not None:
+        # Phone only (Ivan, 13 Oct Slack): the drawer has no room for all 4 steps, so one line teases the next one
+        # ("not onboarding, a diff word ... something that makes them want to click"); a tap opens the 4 steps in place.
+        nxt = next((t for k, t in STEPS if k not in steps), "")
+        out.append(f'<div class="s-nx"><button class="s-nxb" type="button" data-nx aria-expanded="false">'
+                   f'<span class="s-nxt"><b>What to try next</b><i class="s-nxs">{nxt}</i></span>'
+                   f'<span class="s-pill"><span class="s-obn">{len(steps)}</span> of 4</span>{ico(SI["down"],16)}</button>'
+                   f'<ol class="s-steps s-nxl">{step_lis()}</ol></div>')
     if processing:
         out.append('<div class="s-proc" data-proc>')
         out.append('<div class="s-lbl">PROCESSING</div>')
@@ -60,14 +79,7 @@ def sidebar(*, active="home", home="#home", feed="#feed", recent=(), more=None, 
     out.append('<div class="s-foot">')
     if steps is not None:
         n = len(steps)
-        lis = []
-        for k, t in STEPS:
-            if k in steps:
-                lis.append(f'<li class="done" data-step="{k}"><span class="s-ck">{ico(SI["check"],10,3)}</span>{t}</li>')
-            elif k == running_step:
-                lis.append(f'<li class="now" data-step="{k}"><span class="s-ck s-spin"></span>{t}</li>')
-            else:
-                lis.append(f'<li data-step="{k}"><span class="s-ck"></span>{t}</li>')
+        lis = [step_lis()]
         out.append(f'<div class="s-ob"><div class="row sbt"><b>Get started</b><span class="s-q"><span class="s-obn">{n}</span> of 4</span></div>'
                    f'<ol class="s-steps">{"".join(lis)}</ol></div>')
     su, st = searches; bu, bt = breakdowns
@@ -116,5 +128,6 @@ CSS = '''
 .s-me{display:flex;align-items:center;gap:10px;border-top:1px solid #F0EDE6;padding:12px 0 0 12px;font-size:13px}
 .s-avm{width:30px;height:30px;border-radius:50%;background:#FFF6D6;color:#6B4B00;display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex-shrink:0}
 .s-who{display:flex;flex-direction:column;flex-grow:1;min-width:0}.s-who i{font-style:normal;font-size:11.5px;color:#6B675F;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.s-nx{display:none}
 .s-ib{width:32px;height:32px;border-radius:10px;border:1px solid #E3DFD4;background:#fff;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;color:#3A3731}
 '''

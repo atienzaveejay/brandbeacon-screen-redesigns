@@ -217,6 +217,7 @@ a{color:inherit;text-decoration:none}i{font-style:normal}button{font-family:inhe
 .s-me{display:flex;align-items:center;gap:10px;border-top:1px solid #F0EDE6;padding:12px 0 0 12px;font-size:13px}
 .s-avm{width:30px;height:30px;border-radius:50%;background:#FFF6D6;color:#6B4B00;display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex-shrink:0}
 .s-who{display:flex;flex-direction:column;flex-grow:1;min-width:0}.s-who i{font-style:normal;font-size:11.5px;color:#6B675F;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.s-nx{display:none}
 .s-ib{width:32px;height:32px;border-radius:10px;border:1px solid #E3DFD4;background:#fff;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;color:#3A3731}
 .nu .olduser{display:none}
 @media (max-width:700px){
@@ -229,6 +230,12 @@ a{color:inherit;text-decoration:none}i{font-style:normal}button{font-family:inhe
  .s-foot{position:sticky;bottom:0;background:#fff;margin-top:auto;padding:12px 0 14px;gap:10px;border-top:1px solid #F0EDE6;box-shadow:0 -10px 14px -10px rgba(11,11,11,.12)}
  .s-me{border-top:0;padding-top:0}
  .s-side .s-ob{display:none}
+ .s-nx{display:block;margin:10px 0 2px;border:1px solid #F2DE99;background:#FFFBEB;border-radius:12px}
+ .s-nxb{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:10px;width:100%;padding:10px 12px;font-size:14px}
+ .s-nxt{display:flex;flex-direction:column;flex:1;min-width:0}.s-nxt b{color:#0B0B0B}.s-nxs{font-style:normal;font-size:12.5px;color:#6B675F}
+ .s-nxb>svg{color:#6B4B00;transition:transform .2s;flex-shrink:0}.s-nx.open .s-nxb>svg{transform:rotate(180deg)}
+ .s-nxl{display:none;margin:0;padding:0 12px 8px}.s-nx.open .s-nxl{display:block}
+ .s-nx .s-pill{margin-left:0}
  .menu-open .s-side{transform:none}
  .s-close{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:10px;border:1px solid #E3DFD4;background:#fff;color:#3A3731;cursor:pointer}
  .s-logo{padding-bottom:14px}
@@ -276,7 +283,7 @@ a{color:inherit;text-decoration:none}i{font-style:normal}button{font-family:inhe
  .bil{display:none}.insl:not(.brandins){flex-wrap:nowrap}.bchips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;flex:1 1 auto;min-width:0}.bchips::-webkit-scrollbar{display:none}.bchips a{white-space:nowrap}
 }
 </style></head><body>
-<div class="statebar"><span class="sg"><i>Home</i><a href="#home">Home</a><a href="#menu">Phone menu</a></span><span class="sg"><i>Search</i><a href="#home-typing">Typing</a><a href="#expand">Keywords</a></span><span class="sg"><i>First search A</i><a href="#first-a">Wait and learn</a></span><span class="sg"><i>Later search B</i><a href="#home-running">Running</a></span><span class="sg"><i>Ready</i><a href="#ready">First search</a><a href="#home-ready">Later search</a></span><span class="sg"><i>Results</i><a href="#results">Brand</a><a href="#results-product">Product</a></span><span class="sg"><i>My Feed</i><a href="#feed">My Feed</a></span><span class="sg"><i>New account</i><a href="#home-checklist">Get started</a></span><span class="sg"><i>Email</i><a href="#email">First search done</a></span><span class="sg"><i>After speed work</i><a href="#first-c">C. Stream in</a></span></div>
+<div class="statebar"><span class="sg"><i>Home</i><a href="#home">Home</a><a href="#menu">Phone menu</a></span><span class="sg"><i>Search</i><a href="#home-typing">Typing</a><a href="#expand">Keywords</a></span><span class="sg"><i>First search A</i><a href="#first-a">Wait and learn</a></span><span class="sg"><i>Later search B</i><a href="#home-running">Running</a></span><span class="sg"><i>Ready</i><a href="#ready">First search</a><a href="#home-ready">Later search</a></span><span class="sg"><i>Results</i><a href="#results">Brand</a><a href="#results-product">Product</a></span><span class="sg"><i>My Feed</i><a href="#feed">My Feed</a></span><span class="sg"><i>New account</i><a href="#home-checklist">Get started</a><a href="#menu-new">Phone menu</a><a href="#menu-new-open">Menu, opened</a></span><span class="sg"><i>Email</i><a href="#email">First search done</a></span><span class="sg"><i>After speed work</i><a href="#first-c">C. Stream in</a></span></div>
 <div class="app"><nav class="side s-side" id=side-main aria-label="Main">
 <div class="s-top"><a class="s-logo" href="#home"><span class="s-mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2"/><path d="M8.5 8.5a5 5 0 0 0 0 7"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M5.6 5.6a9 9 0 0 0 0 12.8"/><path d="M18.4 5.6a9 9 0 0 1 0 12.8"/></svg></span>Brand Beacon</a><button class="s-close" type="button" data-close aria-label="Close menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button></div>
 <a class="s-nav on" data-nav="home" href="#home"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg><span>Home</span></a>
@@ -326,6 +333,7 @@ a{color:inherit;text-decoration:none}i{font-style:normal}button{font-family:inhe
 <div class="s-top"><a class="s-logo" href="#home"><span class="s-mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2"/><path d="M8.5 8.5a5 5 0 0 0 0 7"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M5.6 5.6a9 9 0 0 0 0 12.8"/><path d="M18.4 5.6a9 9 0 0 1 0 12.8"/></svg></span>Brand Beacon</a><button class="s-close" type="button" data-close aria-label="Close menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button></div>
 <a class="s-nav on" data-nav="home" href="#home"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg><span>Home</span></a>
 <a class="s-nav" data-nav="feed" href="#feed"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg><span>My Feed</span></a>
+<div class="s-nx"><button class="s-nxb" type="button" data-nx aria-expanded="false"><span class="s-nxt"><b>What to try next</b><i class="s-nxs">Analyze a video</i></span><span class="s-pill"><span class="s-obn">1</span> of 4</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><ol class="s-steps s-nxl"><li class="done" data-step="search"><span class="s-ck"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></span>Run your first search</li><li data-step="analyze"><span class="s-ck"></span>Analyze a video</li><li data-step="save"><span class="s-ck"></span>Save a video</li><li data-step="second"><span class="s-ck"></span>Run a second search</li></ol></div>
 <div class="s-lbl">RECENT SEARCHES</div>
 <a class="s-it" href="#results"><span class="s-av ">rh</span><span class="s-nm">rhode skin</span></a>
 <div class="s-lbl">MY LIBRARY</div>
@@ -342,6 +350,7 @@ a{color:inherit;text-decoration:none}i{font-style:normal}button{font-family:inhe
 <div class="s-top"><a class="s-logo" href="#home"><span class="s-mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2"/><path d="M8.5 8.5a5 5 0 0 0 0 7"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M5.6 5.6a9 9 0 0 0 0 12.8"/><path d="M18.4 5.6a9 9 0 0 1 0 12.8"/></svg></span>Brand Beacon</a><button class="s-close" type="button" data-close aria-label="Close menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button></div>
 <a class="s-nav" data-nav="home" href="#home"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg><span>Home</span></a>
 <a class="s-nav" data-nav="feed" href="#feed"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg><span>My Feed</span></a>
+<div class="s-nx"><button class="s-nxb" type="button" data-nx aria-expanded="false"><span class="s-nxt"><b>What to try next</b><i class="s-nxs">Run your first search</i></span><span class="s-pill"><span class="s-obn">0</span> of 4</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><ol class="s-steps s-nxl"><li class="now" data-step="search"><span class="s-ck s-spin"></span>Run your first search</li><li data-step="analyze"><span class="s-ck"></span>Analyze a video</li><li data-step="save"><span class="s-ck"></span>Save a video</li><li data-step="second"><span class="s-ck"></span>Run a second search</li></ol></div>
 <div class="s-proc" data-proc>
 <div class="s-lbl">PROCESSING</div>
 <div class="s-it s-run"><span class="s-av pl">pl</span><span class="s-rt"><span class="row"><span class="s-nm">peptide lip tint</span><span class="s-kind">Search</span></span><span class="s-track"><span class="s-bar s-prog"></span></span></span></div>
@@ -360,6 +369,7 @@ a{color:inherit;text-decoration:none}i{font-style:normal}button{font-family:inhe
 <div class="s-top"><a class="s-logo" href="#home"><span class="s-mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2"/><path d="M8.5 8.5a5 5 0 0 0 0 7"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M5.6 5.6a9 9 0 0 0 0 12.8"/><path d="M18.4 5.6a9 9 0 0 1 0 12.8"/></svg></span>Brand Beacon</a><button class="s-close" type="button" data-close aria-label="Close menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button></div>
 <a class="s-nav" data-nav="home" href="#home"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg><span>Home</span></a>
 <a class="s-nav" data-nav="feed" href="#feed"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg><span>My Feed</span></a>
+<div class="s-nx"><button class="s-nxb" type="button" data-nx aria-expanded="false"><span class="s-nxt"><b>What to try next</b><i class="s-nxs">Analyze a video</i></span><span class="s-pill"><span class="s-obn">1</span> of 4</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><ol class="s-steps s-nxl"><li class="done" data-step="search"><span class="s-ck"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></span>Run your first search</li><li data-step="analyze"><span class="s-ck"></span>Analyze a video</li><li data-step="save"><span class="s-ck"></span>Save a video</li><li data-step="second"><span class="s-ck"></span>Run a second search</li></ol></div>
 <div class="s-lbl">RECENT SEARCHES</div>
 <a class="s-it" href="#results-product"><span class="s-av pl">pl</span><span class="s-nm">peptide lip tint</span><span class="s-pill">Ready</span></a>
 <div class="s-lbl">MY LIBRARY</div>
@@ -626,9 +636,11 @@ a{color:inherit;text-decoration:none}i{font-style:normal}button{font-family:inhe
 if(/shot/.test(location.search)){var sb=document.querySelector('.statebar');if(sb)sb.remove();}
 function $(i){return document.getElementById(i)}
 function toast(h,ms){var t=$('toast');t.innerHTML=h;t.classList.add('on');clearTimeout(t._h);if(ms!==0)t._h=setTimeout(function(){t.classList.remove('on')},ms||3200)}
-function markStep(k){['#side-new','.mgs'].forEach(function(r){var box=document.querySelector(r);if(!box)return;var li=box.querySelector('[data-step="'+k+'"]');if(!li||li.classList.contains('done'))return;li.classList.add('done');li.classList.remove('now');
- li.querySelector('.s-ck').innerHTML='<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5 9-10"/></svg>';
- box.querySelector('.s-obn').textContent=box.querySelectorAll('.s-steps li.done').length;})}
+function markStep(k){document.querySelectorAll('li[data-step="'+k+'"]').forEach(function(li){if(li.classList.contains('done'))return;li.classList.add('done');li.classList.remove('now');
+ li.querySelector('.s-ck').innerHTML='<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5 9-10"/></svg>';});
+ document.querySelectorAll('.s-steps').forEach(function(ol){var box=ol.closest('.s-nx,.s-ob,.mgs');if(!box)return;var c=box.querySelector('.s-obn');if(c)c.textContent=ol.querySelectorAll('li.done').length;
+  var s=box.querySelector('.s-nxs');if(s){var nx=ol.querySelector('li:not(.done)');s.textContent=nx?nx.textContent:'All done'}})}
+document.addEventListener('click',function(e){var b=e.target.closest('[data-nx]');if(!b)return;var o=b.parentNode.classList.toggle('open');b.setAttribute('aria-expanded',o)});
 var M='side-main',CFG={
  'home':{},'home-b':{},'home-c':{},'home-typing':{},'expand':{},
  'menu':{proc:2,run:1,menu:1},
@@ -639,12 +651,14 @@ var M='side-main',CFG={
  'ready':{v:'ready',s:'side-free-ready',free:1},
  'results':{v:'results'},'results-product':{v:'results-product'},'feed':{v:'feed'},
  'home-checklist':{s:'side-new',free:1,nu:1},
+ 'menu-new':{s:'side-new',free:1,nu:1,menu:1},'menu-new-open':{s:'side-new',free:1,nu:1,menu:1,nx:1},
  'email':{v:'email',s:'-',email:1}};
 var VIEWS=['home','feed','results','results-product','first-a','first-c','ready','email'];
 function route(){var h=(location.hash||'#home').slice(1);var c=CFG[h]||{};var v=c.v||'home',sid=c.s||M;
  VIEWS.forEach(function(x){$('v-'+x).classList.toggle('on',x===v)});
  document.querySelectorAll('.s-side').forEach(function(n){n.hidden=n.id!==sid});
  var B=document.body.classList;B.toggle('nu',!!c.nu);B.toggle('emailv',!!c.email);B.toggle('menu-open',!!c.menu);
+ document.querySelectorAll('.s-nx').forEach(function(n){n.classList.toggle('open',!!c.nx);n.querySelector('[data-nx]').setAttribute('aria-expanded',!!c.nx)});
  document.querySelectorAll('[data-nav=home]').forEach(function(a){a.classList.toggle('on',v==='home')});document.querySelectorAll('[data-nav=feed]').forEach(function(a){a.classList.toggle('on',v==='feed')});
  $('dd').hidden=h!=='home-typing';$('q').value=(h==='home-typing'||h==='expand')?'rhode':'';
  $('xcard').hidden=h!=='expand';document.querySelector('.scard').hidden=h==='expand';
