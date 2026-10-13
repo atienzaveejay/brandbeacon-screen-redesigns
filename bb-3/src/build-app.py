@@ -324,7 +324,7 @@ def results_view(vid, kind):
   <p class="def">Breakout Score measures how far a video beat that creator's average video, in views and engagement.</p>
  </div>
  {line}
- <div class="ptabs">{"".join(f'<button class="pt{" on" if k=="videos" else ""}" type="button" data-tab="{k}">{t}</button>' for k,t in TABS)}<div class="sortw"><button class="btn sm sortb" type="button" data-pop="sort">Sort: <span class="sortv">Breakout Score</span> {ico(I['down'],14)}</button>{SORTPOP}</div></div>
+ <div class="tabbar"><div class="ptabs">{"".join(f'<button class="pt{" on" if k=="videos" else ""}" type="button" data-tab="{k}">{t}</button>' for k,t in TABS)}</div><div class="sortw"><button class="btn sm sortb" type="button" data-pop="sort">Sort: <span class="sortv">Breakout Score</span> {ico(I['down'],14)}</button>{SORTPOP}</div></div>
  <div class="tabp" data-p="videos"><div class="grid3">{"".join(result_card(v,i+1) for i,v in enumerate(V))}</div>
  <button class="btn loadm">Load {int(n)-5} more</button></div>
  {tab_panels(brand)}
@@ -544,6 +544,7 @@ a{color:inherit;text-decoration:none}i{font-style:normal}button{font-family:inhe
 .sortb{margin-left:auto}.ptabs{align-items:center}
 .side[hidden]{display:none!important}
 .pt{all:unset;cursor:pointer;font-size:14px;font-weight:700;color:#6B675F;padding:7px 14px;border-radius:999px}.pt.on{background:#0B0B0B;color:#fff}.pt:hover:not(.on){background:#EFECE4}
+.tabbar{display:flex;align-items:center;gap:10px;border-bottom:1px solid #E6E2D8;padding-bottom:12px}.tabbar .ptabs{border-bottom:0;padding-bottom:0;flex:1;min-width:0}
 .tabp{display:flex;flex-direction:column;gap:22px}.tabp[hidden]{display:none}.tabnote{margin:0;font-size:13px;color:#6B675F}
 .sortw,.popw{position:relative}.sortw{margin-left:auto}
 .pop{position:absolute;top:calc(100% + 6px);left:0;z-index:30;background:#fff;border:1px solid #E6E2D8;border-radius:14px;box-shadow:0 12px 30px rgba(11,11,11,.12);padding:6px;min-width:200px;display:flex;flex-direction:column}
@@ -641,7 +642,8 @@ MCSS = '''
  .nums3 .ks{display:none}.nums3 .kl{flex-wrap:wrap;gap:4px}.nums3 .sample{font-size:9.5px;padding:1px 5px}
  .insl>span:first-of-type{flex:1 1 calc(100% - 30px);min-width:0}
  .grid3 .thumb.tall{aspect-ratio:1/1}
- .phone-only{display:flex}.sortw{margin-left:8px}.tabp section [style*="repeat(3,minmax(0,1fr))"],.tabp section [style*="1fr 1fr"]{grid-template-columns:minmax(0,1fr)!important}
+ .phone-only{display:flex}
+ .tabbar{flex-wrap:wrap;padding-bottom:0;border-bottom:0}.tabbar .ptabs{flex-basis:100%;border-bottom:1px solid #E6E2D8;padding-bottom:12px}.sortw{margin-left:auto}.tabp section [style*="repeat(3,minmax(0,1fr))"],.tabp section [style*="1fr 1fr"]{grid-template-columns:minmax(0,1fr)!important}
  .tabp section [style*="44px repeat(24"]{min-width:640px}
  .tabp section{min-width:0}.tabp .card{overflow-x:auto}.vrow{grid-template-columns:minmax(0,1fr)}
  .hrow2,.anrow{padding:12px;gap:10px;flex-wrap:wrap}.hrow2 .tm i,.anrow .tm i{white-space:normal}.anrow .hr-r{width:100%;justify-content:space-between;padding-left:62px}
@@ -717,7 +719,7 @@ function route(){var h=(location.hash||'#home').slice(1);var c=CFG[h]||{};var v=
  document.querySelectorAll('.statebar a').forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+h)});
  window.scrollTo(0,0)}
 function setTab(w,t){if(!w.querySelector('.tabp'))return;w.querySelectorAll('.tabp').forEach(function(p){p.hidden=p.getAttribute('data-p')!==t});
- w.querySelectorAll('.pt').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-tab')===t)});var sw=w.querySelector('.sortw');if(sw)sw.style.visibility=t==='videos'?'':'hidden'}
+ w.querySelectorAll('.pt').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-tab')===t);if(b.getAttribute('data-tab')===t){var bar=b.parentNode;bar.scrollLeft=Math.max(0,b.offsetLeft-bar.offsetLeft-16)}});var sw=w.querySelector('.sortw');if(sw)sw.style.display=t==='videos'?'':'none'}
 function closePops(){document.querySelectorAll('.pop').forEach(function(p){p.hidden=true})}
 document.addEventListener('click',function(e){var t=e.target.closest('[data-tab]');if(t){e.preventDefault();setTab(t.closest('.view'),t.getAttribute('data-tab'));return}
  var pb=e.target.closest('[data-pop]');if(pb){var pp=pb.parentNode.querySelector('[data-popv]');var was=pp.hidden;closePops();pp.hidden=!was;return}

@@ -200,7 +200,7 @@ body.append(screen("tabs", "Results tabs: Insights, Analytics, When they post, M
   "<b>When they post:</b> day-by-hour heatmap and the Best time to post line. " + LV,
   "<b>More data:</b> Breakouts per week and Score distribution. " + LV,
   "<b>Hashtags:</b> Hashtags they used, with bars and counts. " + LV,
-  "Sort only shows on Videos.",
+  "Sort only shows on Videos. Phone: Sort sits on its own line under the tabs, and the open tab scrolls into view.",
   O + "Phone: the tab bar scrolls sideways. Insight and More data cards stack. The heatmap scrolls sideways inside its card.",
   "Product searches get the same tabs. Their panels in the prototype reuse the rhode data."]))
 
