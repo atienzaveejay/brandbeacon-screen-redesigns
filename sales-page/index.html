@@ -58,6 +58,33 @@ h1 mark{white-space:nowrap;background:linear-gradient(transparent 64%,var(--y) 6
 .inp input::placeholder{color:#a8a397}
 .micro{font-size:14px;color:var(--ink2);margin-top:14px}
 .micro b{color:var(--ink);font-weight:700}
+/* First step (Ivan, 15 Oct): sign in first, or search first with a clearer sign-in step */
+.signin{max-width:440px;margin:44px auto 0}
+.gbtn{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;background:var(--ink);color:#fff;font-weight:700;font-size:18px;border-radius:16px;padding:17px 24px;box-shadow:0 14px 34px rgba(20,15,0,.16);transition:transform .15s}
+.gbtn:hover{transform:translateY(-1px)}
+.gbtn .g{width:28px;height:28px;background:#fff;border-radius:50%;display:grid;place-items:center}
+.alt{margin-top:14px;font-size:14.5px;color:var(--ink2)}
+.alt button{font:inherit;font-weight:700;color:var(--ink);text-decoration:underline;text-underline-offset:3px;background:none;border:0;cursor:pointer;padding:0}
+.erow{display:none;gap:10px;margin-top:12px}
+.erow.on{display:flex}
+.erow input{flex:1;min-width:0;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;font:inherit;font-size:16px;background:#fff;outline:0}
+.erow input:focus{border-color:var(--y)}
+body[data-first="signin"] #search{display:none}
+body[data-first="search"] #signin{display:none}
+.gate{position:fixed;inset:0;background:rgba(20,15,0,.55);display:none;align-items:center;justify-content:center;z-index:90;padding:20px}
+.gate.on{display:flex}
+.gbox{position:relative;width:min(460px,100%);background:#fff;border-radius:22px;padding:30px 26px 24px;text-align:center;box-shadow:0 30px 80px rgba(20,15,0,.35)}
+.gbox .x{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:50%;border:0;background:var(--off);font-size:18px;cursor:pointer}
+.gbox .pill{display:inline-block;background:var(--ysoft);color:var(--brown);font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;border-radius:99px;padding:6px 12px}
+.gbox h3{font-size:24px;line-height:1.2;margin:12px 0 6px}
+.gbox .gs{color:var(--ink2);font-size:15px;margin:0 0 16px}
+.peek{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 18px}
+.peek span{position:relative;aspect-ratio:9/13;border-radius:12px;overflow:hidden;background:var(--off)}
+.peek img{width:100%;height:100%;object-fit:cover;display:block}
+.peek b{position:absolute;left:6px;bottom:6px;background:rgba(20,15,0,.72);color:#fff;font-size:11px;font-weight:700;border-radius:8px;padding:3px 7px}
+.gbox .micro{margin-top:12px}
+.gbox .note{top:auto;bottom:-10px;right:-280px;max-width:250px}
+@media (max-width:720px){.gbox .note{display:none!important}.gbtn{font-size:16px}}
 
 /* hero media */
 .media{max-width:960px;margin:84px auto 0;position:relative}
@@ -423,11 +450,30 @@ body.notes .vbelow{display:block}
 </head>
 <body>
 
+
+<!-- Search first: the sign-in step after Run your free search (replaces the jump to Google) -->
+<div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gateT">
+  <div class="gbox">
+    <button class="x" type="button" aria-label="Close">×</button>
+    <span class="pill">Your search is ready to run</span>
+    <h3 id="gateT">“<span id="gq">rhode skin</span>”</h3>
+    <p class="gs">Sign in to run it. Your first 3 searches and 5 video analyses are free.</p>
+    <div class="peek"><span><img src="img/v1.jpg" alt=""><b>Breakout</b></span><span><img src="img/v3.jpg" alt=""><b>Breakout</b></span><span><img src="img/v4.jpg" alt=""><b>Breakout</b></span></div>
+    <a class="gbtn" href="../bb-3/app.html#first-a"><span class="g"><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.6 5.4 2.7 13.3l7.9 6.1C12.5 13.6 17.8 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9h12.4c-.5 2.9-2.2 5.3-4.6 6.9l7.4 5.7c4.3-4 6.9-9.9 6.9-17z"/><path fill="#FBBC05" d="M10.6 28.6c-.5-1.4-.8-3-.8-4.6s.3-3.2.8-4.6l-7.9-6.1C1 16.6 0 20.2 0 24s1 7.4 2.7 10.7l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.4-5.7c-2.1 1.4-4.8 2.3-8.5 2.3-6.2 0-11.5-4.1-13.4-9.9l-7.9 6.1C6.6 42.6 14.6 48 24 48z"/></svg></span>Continue with Google</a>
+    <p class="alt">or <button type="button" class="useEmail">use your email</button></p>
+    <form class="erow" onsubmit="location.href='../bb-3/app.html#first-a';return false"><input type="email" placeholder="you@yourbrand.com" aria-label="Your email"><button class="btn" type="submit">Continue</button></form>
+    <p class="micro">No credit card. Your search starts as soon as you're in.</p>
+    <div class="note"><b>F</b> Search first, with a clearer sign-in step: it says what is waiting and offers email, instead of jumping straight to Google. Dev: the preview only uses breakouts already indexed for that brand, so nothing runs before sign-in. If the brand isn't indexed yet, show the search terms instead.</div>
+  </div>
+</div>
+
 <!-- Mock controls: not part of the page design -->
 <div class="mockbar" role="group" aria-label="Mock controls">
   <span class="tagm">MOCK CONTROLS</span>
   <span class="lbl">Hero</span>
   <span class="seg" id="mediaSeg"><button data-m="video" class="on">Demo video</button><button data-m="app">Clickable app</button></span>
+  <span class="lbl">First step</span>
+  <span class="seg" id="firstSeg"><button data-f="signin" class="on">Sign in first</button><button data-f="search">Search first</button></span>
   <span class="seg" id="noteSeg"><button data-n="0" class="on">Notes off</button><button data-n="1">Notes on</button></span>
 </div>
 
@@ -455,6 +501,14 @@ body.notes .vbelow{display:block}
       </div>
       <p class="micro"><b>3 free searches</b> · no credit card</p>
     </form>
+
+    <div class="signin" id="signin">
+      <div class="note" style="top:-6px;left:-290px;right:auto"><b>F</b> Sign in first (Ivan, 15 Oct): the ask comes before anyone types, so no one meets Google after doing the work. Email is a second way in; the live site only offers Google. Compare with Search first using the control at the bottom.</div>
+      <a class="gbtn" href="../bb-3/app.html#home-checklist"><span class="g"><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.6 5.4 2.7 13.3l7.9 6.1C12.5 13.6 17.8 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9h12.4c-.5 2.9-2.2 5.3-4.6 6.9l7.4 5.7c4.3-4 6.9-9.9 6.9-17z"/><path fill="#FBBC05" d="M10.6 28.6c-.5-1.4-.8-3-.8-4.6s.3-3.2.8-4.6l-7.9-6.1C1 16.6 0 20.2 0 24s1 7.4 2.7 10.7l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.4-5.7c-2.1 1.4-4.8 2.3-8.5 2.3-6.2 0-11.5-4.1-13.4-9.9l-7.9 6.1C6.6 42.6 14.6 48 24 48z"/></svg></span>Continue with Google</a>
+      <p class="alt">or <button type="button" class="useEmail">use your email</button></p>
+      <form class="erow" onsubmit="location.href='../bb-3/app.html#home-checklist';return false"><input type="email" placeholder="you@yourbrand.com" aria-label="Your email"><button class="btn" type="submit">Continue</button></form>
+      <p class="micro"><b>3 free searches and 5 video analyses</b> · no credit card</p>
+    </div>
 
     <div class="media" id="media" data-show="video">
       <div class="note" style="top:-14px;right:-8px"><b>3</b> Hero media: compare the two with the control at the bottom.</div>
@@ -648,6 +702,7 @@ body.notes .vbelow{display:block}
   <p class="lead">Still stuck? Chat with Beacon, our AI support assistant.</p>
   <div class="faq">
     <details open><summary>What does a free search show me?</summary><p>The TikToks about your brand or product that broke out, ranked by Breakout Score, with views, likes and each creator's followers. A breakdown of why each video worked comes with Growth and Scale.</p></details>
+    <details><summary>Why do I sign in before searching?</summary><p>Every search pulls fresh TikToks and runs our analysis, so we ask for an email before the first one. It keeps free searches free for everyone.</p></details>
     <details><summary>What counts as one search?</summary><p>One brand or one product. Add as many related keywords as you like and it still counts as one search.</p></details>
     <details><summary>Why focus on breakouts?</summary><p>4 million views from a creator who usually gets 4 million is normal. 4 million views from a creator who usually gets 4 thousand means the video itself did something right. Those are breakouts, and they're the ones worth learning from.</p></details>
     <details><summary>Is the free search a trial?</summary><p>No. You get 3 free searches, no credit card needed. The 8-day free trial of Growth or Scale is separate, and that one does need a card.</p></details>
@@ -742,10 +797,21 @@ $('#video').onclick=()=>$('#video').classList.toggle('on');
 
 // every CTA goes to the hero search box
 document.addEventListener('click',e=>{const a=e.target.closest('a.js-cta[href="#search"]');if(!a)return;e.preventDefault();
+  if(document.body.dataset.first==='signin'){$('#signin').scrollIntoView({behavior:'smooth',block:'center'});return}
   $('#search').scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>$('#heroInput').focus({preventScroll:true}),450)});
 // hero search hands off to the clickable model
-$('#heroGo').onclick=()=>{const q=$('#heroInput').value.trim();setMedia('app');go('s1');
-  $('#media').scrollIntoView({behavior:'smooth',block:'start'});};
+// Search first: Run your free search opens the sign-in step instead of jumping to Google
+$('#heroGo').onclick=()=>{$('#gq').textContent=$('#heroInput').value.trim()||'rhode skin';$('#gate').classList.add('on')};
+$('#gate').addEventListener('click',e=>{if(e.target.id==='gate'||e.target.closest('.x'))$('#gate').classList.remove('on')});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')$('#gate').classList.remove('on')});
+document.addEventListener('click',e=>{const b=e.target.closest('.useEmail');if(!b)return;const r=b.closest('.signin,.gbox').querySelector('.erow');r.classList.add('on');r.querySelector('input').focus()});
+// First step control
+function setFirst(f){document.body.dataset.first=f;document.querySelectorAll('#firstSeg button').forEach(b=>b.classList.toggle('on',b.dataset.f===f));
+  document.querySelectorAll('a.js-cta').forEach(a=>{if(!a.dataset.l0)a.dataset.l0=a.innerHTML;a.innerHTML=f==='signin'?'Start free <span class="arr">→</span>':a.dataset.l0});
+  try{localStorage.setItem('bbFirst',f)}catch(e){}}
+$('#firstSeg').onclick=e=>{const b=e.target.closest('button');if(b)setFirst(b.dataset.f)};
+let f0=qs.get('first');if(!f0){try{f0=localStorage.getItem('bbFirst')}catch(e){}}
+setFirst(f0==='search'?'search':'signin');
 
 addEventListener('scroll',()=>$('#nav').classList.toggle('scrolled',scrollY>8),{passive:true});
 // count up the brand number when it scrolls into view
