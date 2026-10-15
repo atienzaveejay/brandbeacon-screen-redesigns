@@ -463,6 +463,7 @@ body.notes .vbelow{display:block}
 .lc-who{display:flex;gap:9px;align-items:center}
 .lc-av{width:30px;height:30px;border-radius:50%;object-fit:cover;background:#f2dcc8;flex:0 0 auto}
 .lc-who b{display:block;font-size:13.5px;font-weight:800}
+.lc-who>span:nth-child(2){min-width:0}.lc-who b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .lc-who small{display:block;font-size:11.5px;color:var(--ink3)}
 .lc-dt{margin-left:auto;align-self:flex-start;font-size:11.5px;color:var(--ink3);white-space:nowrap}
 .lc-cp{font-size:12.5px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
@@ -482,6 +483,7 @@ body.notes .vbelow{display:block}
 /* live video analysis */
 .an{display:grid;grid-template-columns:240px 1fr;gap:20px;padding:18px 20px 24px;align-items:start}
 .an-side{display:flex;flex-direction:column;gap:8px}
+.an-side .lc-dt{display:none}
 .an-ok{height:38px;border:1px solid var(--line);background:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;gap:7px;font-weight:700;font-size:13.5px}
 .an-ok svg{color:#2e8b57}
 .an-sh{height:40px;background:var(--ink);color:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;gap:8px;font-weight:600;font-size:13.5px}
@@ -510,6 +512,40 @@ body.notes .vbelow{display:block}
 .an-fade{position:relative;max-height:300px;overflow:hidden}
 .an-fade:after{content:"";position:absolute;left:0;right:0;bottom:0;height:46px;background:linear-gradient(rgba(255,255,255,0),#fff)}
 .an-gate{text-align:center;padding:26px 18px}
+/* analysis: processing (live: Analyzing video... on the card, Analyzing… in the panel) */
+@keyframes spin{to{transform:rotate(360deg)}}
+.ring{width:14px;height:14px;flex:0 0 auto;border-radius:50%;border:2px solid rgba(154,107,0,.3);border-top-color:#9a6b00;animation:spin .8s linear infinite}
+.lc-btn.busy{background:#fff8e6;color:#9a6b00;pointer-events:none}
+.an-run{height:38px;background:#fff8e6;color:#9a6b00;border-radius:12px;display:flex;align-items:center;justify-content:center;gap:8px;font-weight:700;font-size:13.5px}
+.an-proc{border:1px solid #ddd6ca;background:#fffdf9;border-radius:14px;padding:16px 18px}
+.an-proc b{display:block;font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8c6b10}
+.an-proc p{margin-top:6px;font-size:13.5px;line-height:1.55;color:#696257}
+.an-tabs.off{opacity:.55;pointer-events:none}
+.an-in{animation:fade .35s ease both}
+/* analysis: full structure as in the live app */
+.an-it .n.bad{background:#fdece4;color:#c2410c}
+.an-it .n.go{background:#e9f5ee;color:#1f7a4d}
+.an-foot{font-size:12px;font-style:italic;color:var(--ink3);margin-top:12px}
+.an-tr{display:flex;gap:10px;align-items:baseline;margin-top:10px;font-size:13px}
+.an-tr span{color:var(--ink3);font-variant-numeric:tabular-nums}
+.an-tr mark{background:var(--ysoft);border-radius:6px;padding:3px 7px;color:var(--ink)}
+.an-hook{align-items:flex-start}
+.an-hook .ht{position:relative;flex:0 0 auto}
+.an-hook .ht small{position:absolute;left:4px;bottom:4px;font-size:9.5px;font-weight:700;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.6)}
+.an-pat{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.an-pat span{font-size:11.5px;font-weight:700;color:var(--ink2);border:1px solid var(--line);background:#f6f5f1;border-radius:7px;padding:3px 8px}
+.an-pat span:first-child{background:var(--ysoft);border-color:#f2dc95;color:var(--brown)}
+.an-bar{display:flex;height:6px;border-radius:9px;overflow:hidden;margin:12px 0 4px}
+.an-bar i{display:block}
+.an-bt{display:grid;grid-template-columns:44px 1fr;gap:10px;padding:10px 0;border-bottom:1px dashed var(--line);font-size:13px}
+.an-bt:last-child{border-bottom:0}
+.an-bt span{font-weight:800;color:#9a6b00;font-variant-numeric:tabular-nums}
+.an-bt h5{font-size:13.5px;font-weight:700}
+.an-bt p{color:var(--ink2);line-height:1.45;margin-top:2px}
+.an-rw{align-items:flex-start;background:#f6f5f1}
+.an-rw small{display:block;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin-bottom:3px}
+.an-rw button{flex:0 0 auto;border:1px solid var(--line);background:#fff;border-radius:8px;padding:4px 9px;color:var(--ink2)}
+.an-box.cream{background:#fffcf2}
 .an-gate h4{display:block;font-size:18px}
 .an-gate p{font-size:14px;color:var(--ink2);margin:6px auto 16px;max-width:320px;line-height:1.5}
 .an-gate .gbtn{max-width:300px;margin:0 auto;font-size:15px;padding:13px 18px}
@@ -611,7 +647,7 @@ body.notes .vbelow{display:block}
     </div>
 
     <div class="media" id="media" data-show="video">
-      <div class="note" style="top:-14px;right:-8px"><b>3</b> Hero media: compare the two with the control at the bottom. Clickable app (Ivan, 14 Oct): no keyword step, a one-second search, cards and analysis as in the live app, and 24 of the 75 breakouts behind Load more.</div>
+      <div class="note" style="top:-14px;right:-8px"><b>3</b> Hero media: compare the two with the control at the bottom. Clickable app (Ivan, 14 Oct): no keyword step, a one-second search, cards as in the live app, and 24 of the 108 breakouts behind Load more. Ivan, 15 Oct: the demo is now a real nike search led by @natali.gogaladze (7.2M views, 1.7K followers, 5.1K×): Nike product photos with one line of text over a trending sound, 8 seconds. Analyze video on it plays the live processing state for about 3 seconds, then opens its full saved analysis: Why it worked, What could be improved, What you should do next, and the Hook tab.</div>
 
       <!-- Option A: demo video -->
       <div data-pane="video">
@@ -634,28 +670,28 @@ body.notes .vbelow{display:block}
               <div class="apphead"><span class="brand"><img src="img/logo.svg" width="24" height="24" alt="">Brand Beacon</span><span class="crumb">Try it here</span></div>
               <div class="s1">
                 <h3>What should we search?</h3>
-                <p class="hint">A brand or a product. This demo runs a real rhode skin search.</p>
+                <p class="hint">A brand or a product. This demo runs a real nike search.</p>
                 <div class="inp">
-                  <input id="appInput" value="rhode skin" aria-label="Search">
+                  <input id="appInput" value="nike" aria-label="Search">
                   <button class="btn" id="appGo">Find breakouts <span class="arr">→</span></button>
                 </div>
               </div>
             </div>
 
             <div class="scr" id="s2">
-              <div class="apphead"><span class="brand"><img src="img/logo.svg" width="24" height="24" alt="">Brand Beacon</span><span class="crumb">rhode skin</span></div>
+              <div class="apphead"><span class="brand"><img src="img/logo.svg" width="24" height="24" alt="">Brand Beacon</span><span class="crumb">nike</span></div>
               <div class="s2"><div>
-                <h3>Finding breakouts for rhode skin</h3>
+                <h3>Finding breakouts for nike</h3>
                 <div class="bar"><i id="barFill"></i></div>
                 <div class="step" id="stepTxt">Pulling TikToks</div>
               </div></div>
             </div>
 
             <div class="scr" id="s3">
-              <div class="apphead"><button class="back" data-go="s1">← New search</button><span class="crumb">rhode skin</span></div>
+              <div class="apphead"><button class="back" data-go="s1">← New search</button><span class="crumb">nike</span></div>
               <div class="s3">
                 <div class="rhead">
-                  <div><h3>rhode skin</h3><p><b>75 breakouts</b> from 290 TikToks · ranked by Breakout Score</p></div>
+                  <div><h3>nike</h3><p><b>108 breakouts</b> from 346 TikToks · ranked by Breakout Score</p></div>
                   <span class="sort">Breakout Score ▾</span>
                 </div>
                 <div class="lgrid" id="grid"></div>
@@ -664,7 +700,7 @@ body.notes .vbelow{display:block}
             </div>
 
             <div class="scr" id="s4">
-              <div class="apphead"><button class="back" data-go="s3">← All breakouts</button><span class="crumb">rhode skin</span></div>
+              <div class="apphead"><button class="back" data-go="s3">← All breakouts</button><span class="crumb">nike</span></div>
               <div id="ro"></div>
             </div>
 
@@ -798,14 +834,110 @@ body.notes .vbelow{display:block}
 
 <div class="vmodal" id="vmodal" role="dialog" aria-label="TikTok video"><div class="box"><button class="x" aria-label="Close">×</button><div id="vframe" style="height:100%"></div></div></div>
 <script>
-// Real results from brandbeacon.io: the rhode skin, Dr. Scholl's and CurrentBody searches (captured 15 Oct 2026)
-const LIVE=[{"id":"7432015571165744417","s":"rhode skin","h":"@_ellapalmer_","f":"3.8K followers","score":"7.1K×","dur":"0:11","date":"Oct 31, 2024","cap":"🩸Impaled by rhode 🔪🔪🩸🔪🩸 @rhode skin @Hailey Bieber #halloween2024 #rhode #rhodelipcase #diycostume","v":"20M","l":"2.5M","c":"3.7K","sh":"192K"},{"id":"7682552825804524814","s":"rhode skin","h":"@mmoiiraaa","f":"866 followers","score":"6.4K×","dur":"0:10","date":"Sep 6","cap":"just found this out rn ngl @rhode skin #rhodephonecase #haileybieber #fyp #relatable","v":"6.1M","l":"204K","c":"345","sh":"3.7K"},{"id":"7660633484918033682","s":"rhode skin","h":"@em_ireland","f":"905 followers","score":"6.2K×","dur":"0:10","date":"Jul 9","cap":"It’s SO CUTE!! 🤎💛 #rhodehoodie #vancouverhoodie #rhodepopup #rhodehoodiesizing #limitededition @rhode skin @Hailey Bieber","v":"4.8M","l":"457K","c":"361","sh":"3.9K"},{"id":"7649935410587553055","s":"rhode skin","h":"@justemma529","f":"900 followers","score":"6K×","dur":"0:07","date":"Jun 11","cap":"the queen saved my skin thank u🫰🏻@rhode skin @Hailey Bieber #rhode #rhodeskincare #skincare","v":"4.1M","l":"632K","c":"659","sh":"5.3K"},{"id":"7605834277904796948","s":"rhode skin","h":"@jordannsagee","f":"772 followers","score":"4.2K×","dur":"0:09","date":"Feb 12","cap":"hailey bieber at george street mecca sydney!! @Hailey Bieber @rhode skin","v":"3.1M","l":"377K","c":"2.1K","sh":"11K"},{"id":"7611161983743839495","s":"rhode skin","h":"@laurenestephanny_","f":"893 followers","score":"3.6K×","dur":"0:05","date":"Feb 26","cap":"jk #fyp #viralvideo #rhode #funny #xyzbca @Hailey Bieber @rhode skin","v":"2.5M","l":"374K","c":"2.2K","sh":"39K"},{"id":"7692057826658635022","s":"rhode skin","h":"@kora.scot","f":"1K followers","score":"2.5K×","dur":"0:07","date":"Oct 2","cap":"Please why did you have to go and sell to elf…😞 #rhodeskin #inflation","v":"2.5M","l":"145K","c":"343","sh":"2.4K"},{"id":"7649209492667698445","s":"rhode skin","h":"@bricourtneyy","f":"1.2K followers","score":"1.8K×","dur":"0:08","date":"Jun 9","cap":"If he fumbles this im disowning him im literally nauseous about it #rhodesummercollection #rhodeskin #rhode #haileybieber @rhode skin #greenscreen","v":"1.7M","l":"206K","c":"676","sh":"2.4K"},{"id":"7675437551536196886","s":"rhode skin","h":"@elizaveta_beauty_","f":"3.2K followers","score":"1.8K×","dur":"0:05","date":"Aug 18","cap":"Just being honest 😂 @rhode skin #rhode#skincare#beauty#sephora#girly","v":"3.7M","l":"672K","c":"557","sh":"107K"},{"id":"7629686756895411478","s":"rhode skin","h":"@caseyjaywalsh","f":"931 followers","score":"1.2K×","dur":"0:05","date":"Apr 17","cap":"put the wrong lid on my blush and ruined it:( @rhode skin #justinbieber #haileybieber #coachella #rhode","v":"1M","l":"56K","c":"192","sh":"878"},{"id":"7694297306266455326","s":"rhode skin","h":"@kairahyang11","f":"1.8K followers","score":"1.2K×","dur":"0:10","date":"Oct 8","cap":"Best believe I’m grabbing a set!! @rhode skin #rhodeskin #rhode #haileybieber #holidaysets","v":"2.8M","l":"408K","c":"697","sh":"89K"},{"id":"7672213649234185493","s":"rhode skin","h":"@bellawoj","f":"2.3K followers","score":"1.1K×","dur":"0:08","date":"Aug 10","cap":"current rating of all my Rhode lippies!! @rhode skin 🤍#rhodeliptint #rhodereview","v":"1.9M","l":"183K","c":"328","sh":"5.9K"},{"id":"7610133460639894805","s":"rhode skin","h":"@sleeepyygirl","f":"1.1K followers","score":"1.1K×","dur":"0:19","date":"Feb 23","cap":"current obsession🤍 #rhode #haileybieber #skincare #moodboard @rhode skin @Hailey Bieber","v":"1M","l":"39K","c":"206","sh":"1K"},{"id":"7679232197068442902","s":"rhode skin","h":"@the.ericaedit","f":"1.1K followers","score":"1K×","dur":"0:06","date":"Aug 28","cap":"Cheers @rhode skin £32 pounds for acne #fyp #rhode #acne #rhodeskin","v":"1M","l":"28K","c":"102","sh":"2.1K"},{"id":"7665807781416406304","s":"rhode skin","h":"@aline.ldn","f":"2.3K followers","score":"992×","dur":"0:07","date":"Jul 23","cap":"Finally being able to shop rhode @sephora as a European >>> ; #losangeles #haileybieber #rhode #rhodeskin #rhodesianridgeback","v":"1.6M","l":"216K","c":"324","sh":"14K"},{"id":"7631725078824193310","s":"rhode skin","h":"@arimirmontazeri","f":"8.1K followers","score":"944×","dur":"0:10","date":"Apr 22","cap":"that’ll do it @Hailey Bieber @rhode skin #lipgloss #fyp #funny","v":"5.6M","l":"665K","c":"608","sh":"5K"},{"id":"7652702029457984790","s":"rhode skin","h":"@leahcandid","f":"1.4K followers","score":"942×","dur":"0:05","date":"Jun 18","cap":"@rhode skin that glazing milk looks so good I wanna drink it @Sephora UK pls restock #rhode #rhodeskin #sephora","v":"1M","l":"102K","c":"281","sh":"3.4K"},{"id":"7675310313461271830","s":"rhode skin","h":"@tamusss86","f":"2.7K followers","score":"905×","dur":"0:10","date":"Aug 18","cap":"I'm so exiteddd! #foryou #rhode #viral@rhode skin @Sephora Czech Republic","v":"1.6M","l":"283K","c":"1.3K","sh":"21K"},{"id":"7586369034757754134","s":"rhode skin","h":"@jyo_witha_thi_","f":"5.7K followers","score":"849×","dur":"0:11","date":"Dec 21, 2025","cap":"Omggggg!!! I’ve been waiting for this moment foreverrrr!!!! It’s such a cuteeee lil addition 😍🩷✨ @rhode skin @Hailey Bieber . . . #rhode #lippeptide #iphone17promax #fyp #foryoupage","v":"4.4M","l":"146K","c":"286","sh":"14K"},{"id":"7676940843554508052","s":"rhode skin","h":"@.haileyex","f":"4K followers","score":"822×","dur":"0:15","date":"Aug 22","cap":"They really have a talent for turning the most random things into trends. 😭✨ @Kylie Jenner @Kylie Cosmetics @Hailey Bieber @rhode skin #kyliejenner #haileybieber #beautytrends #viraltrends #rhode","v":"2.4M","l":"279K","c":"668","sh":"7K"},{"id":"7646864865889488141","s":"rhode skin","h":"@ceciliamicole","f":"2.5K followers","score":"784×","dur":"0:18","date":"Jun 2","cap":"effortlessly pretty is what i was trying to say i think #rhode #rhodebronzer #newrhode #rhodeskin #haileybieber","v":"1.4M","l":"170K","c":"1.6K","sh":"3.1K"},{"id":"7688771496407239958","s":"rhode skin","h":"@amberatelier","f":"3.1K followers","score":"539×","dur":"0:05","date":"Sep 23","cap":"Well, at least it looks pretty, right? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠#rhodeskin⁠ ⁠#cartok⁠ ⁠#relatable⁠ ⁠#funny⁠ ⁠#rhode @rhode skin","v":"1.5M","l":"59K","c":"164","sh":"159"},{"id":"7668300461455248672","s":"rhode skin","h":"@carolinafulgencio_","f":"9.6K followers","score":"501×","dur":"0:05","date":"Jul 30","cap":"trust issues, beach edition @rhode skin @Hailey Bieber #rhode #rhodeskin #beach #vilamoura #fyp","v":"4.1M","l":"252K","c":"129","sh":"760"},{"id":"7673427962720472342","s":"rhode skin","h":"@bunnyshuhui","f":"6.5K followers","score":"444×","dur":"0:11","date":"Aug 13","cap":"@rhode skin pocket blush sleepy girl @Rare Beauty liquid blush encourage @Saie dew blush lady @Makeup By Mario soft pop blush stick dusty rose Not a paid partnership #blush #rhode #makeup #blushreview #rarebeauty","v":"3M","l":"105K","c":"196","sh":"3.1K"},{"id":"7667704326613159182","s":"Dr. Scholl's","h":"@makaylasargent13","f":"7.5K followers","score":"358×","dur":"0:21","date":"Jul 28","cap":"they also come in wide calf !!! #drsbacktocampus #DrSchollsNewArrivals #fallfashion #fallboots #drscholls","v":"2.6M","l":"29K","c":"88","sh":"1.4K"},{"id":"7570361891399142670","s":"CurrentBody","h":"@by_swetha","f":"890 followers","score":"93×","dur":"0:10","date":"Nov 8, 2025","cap":"@currentbody Led series 1 face mask is on sale for $150 at Sam's club. They have several other devices on sale too. This is the best deal for led mask. highly recommend getting it #ledfacemask #currentbody #bestdeal","v":"89K","l":"1.2K","c":"30","sh":"436"}];
-// Live analysis of the top rhode skin breakout (@_ellapalmer_), word for word from the capture
-const WHY=[
- ['Immediate Visual Shock',"The video opens with a striking visual that matches the hook's promise, grabbing attention instantly and encouraging continued viewing."],
- ['Celebrity Association','Mentioning @Hailey Bieber and @rhode skin connects the content to recognizable figures, boosting credibility and shareability.'],
- ['Seasonal Relevance','The Halloween theme aligns with current seasonal interests, increasing the likelihood of shares and']
-];
+// Real results from brandbeacon.io: the rhode skin, nike, Dr. Scholl's and CurrentBody searches (captured 15 Oct 2026)
+const LIVE=[{"id":"7432015571165744417","s":"rhode skin","h":"@_ellapalmer_","f":"3.8K followers","score":"7.1K×","dur":"0:11","date":"Oct 31, 2024","cap":"🩸Impaled by rhode 🔪🔪🩸🔪🩸 @rhode skin @Hailey Bieber #halloween2024 #rhode #rhodelipcase #diycostume","v":"20M","l":"2.5M","c":"3.7K","sh":"192K"},{"id":"7682552825804524814","s":"rhode skin","h":"@mmoiiraaa","f":"866 followers","score":"6.4K×","dur":"0:10","date":"Sep 6","cap":"just found this out rn ngl @rhode skin #rhodephonecase #haileybieber #fyp #relatable","v":"6.1M","l":"204K","c":"345","sh":"3.7K"},{"id":"7660633484918033682","s":"rhode skin","h":"@em_ireland","f":"905 followers","score":"6.2K×","dur":"0:10","date":"Jul 9","cap":"It’s SO CUTE!! 🤎💛 #rhodehoodie #vancouverhoodie #rhodepopup #rhodehoodiesizing #limitededition @rhode skin @Hailey Bieber","v":"4.8M","l":"457K","c":"361","sh":"3.9K"},{"id":"7649935410587553055","s":"rhode skin","h":"@justemma529","f":"900 followers","score":"6K×","dur":"0:07","date":"Jun 11","cap":"the queen saved my skin thank u🫰🏻@rhode skin @Hailey Bieber #rhode #rhodeskincare #skincare","v":"4.1M","l":"632K","c":"659","sh":"5.3K"},{"id":"7605834277904796948","s":"rhode skin","h":"@jordannsagee","f":"772 followers","score":"4.2K×","dur":"0:09","date":"Feb 12","cap":"hailey bieber at george street mecca sydney!! @Hailey Bieber @rhode skin","v":"3.1M","l":"377K","c":"2.1K","sh":"11K"},{"id":"7611161983743839495","s":"rhode skin","h":"@laurenestephanny_","f":"893 followers","score":"3.6K×","dur":"0:05","date":"Feb 26","cap":"jk #fyp #viralvideo #rhode #funny #xyzbca @Hailey Bieber @rhode skin","v":"2.5M","l":"374K","c":"2.2K","sh":"39K"},{"id":"7692057826658635022","s":"rhode skin","h":"@kora.scot","f":"1K followers","score":"2.5K×","dur":"0:07","date":"Oct 2","cap":"Please why did you have to go and sell to elf…😞 #rhodeskin #inflation","v":"2.5M","l":"145K","c":"343","sh":"2.4K"},{"id":"7649209492667698445","s":"rhode skin","h":"@bricourtneyy","f":"1.2K followers","score":"1.8K×","dur":"0:08","date":"Jun 9","cap":"If he fumbles this im disowning him im literally nauseous about it #rhodesummercollection #rhodeskin #rhode #haileybieber @rhode skin #greenscreen","v":"1.7M","l":"206K","c":"676","sh":"2.4K"},{"id":"7675437551536196886","s":"rhode skin","h":"@elizaveta_beauty_","f":"3.2K followers","score":"1.8K×","dur":"0:05","date":"Aug 18","cap":"Just being honest 😂 @rhode skin #rhode#skincare#beauty#sephora#girly","v":"3.7M","l":"672K","c":"557","sh":"107K"},{"id":"7629686756895411478","s":"rhode skin","h":"@caseyjaywalsh","f":"931 followers","score":"1.2K×","dur":"0:05","date":"Apr 17","cap":"put the wrong lid on my blush and ruined it:( @rhode skin #justinbieber #haileybieber #coachella #rhode","v":"1M","l":"56K","c":"192","sh":"878"},{"id":"7694297306266455326","s":"rhode skin","h":"@kairahyang11","f":"1.8K followers","score":"1.2K×","dur":"0:10","date":"Oct 8","cap":"Best believe I’m grabbing a set!! @rhode skin #rhodeskin #rhode #haileybieber #holidaysets","v":"2.8M","l":"408K","c":"697","sh":"89K"},{"id":"7672213649234185493","s":"rhode skin","h":"@bellawoj","f":"2.3K followers","score":"1.1K×","dur":"0:08","date":"Aug 10","cap":"current rating of all my Rhode lippies!! @rhode skin 🤍#rhodeliptint #rhodereview","v":"1.9M","l":"183K","c":"328","sh":"5.9K"},{"id":"7610133460639894805","s":"rhode skin","h":"@sleeepyygirl","f":"1.1K followers","score":"1.1K×","dur":"0:19","date":"Feb 23","cap":"current obsession🤍 #rhode #haileybieber #skincare #moodboard @rhode skin @Hailey Bieber","v":"1M","l":"39K","c":"206","sh":"1K"},{"id":"7679232197068442902","s":"rhode skin","h":"@the.ericaedit","f":"1.1K followers","score":"1K×","dur":"0:06","date":"Aug 28","cap":"Cheers @rhode skin £32 pounds for acne #fyp #rhode #acne #rhodeskin","v":"1M","l":"28K","c":"102","sh":"2.1K"},{"id":"7665807781416406304","s":"rhode skin","h":"@aline.ldn","f":"2.3K followers","score":"992×","dur":"0:07","date":"Jul 23","cap":"Finally being able to shop rhode @sephora as a European >>> ; #losangeles #haileybieber #rhode #rhodeskin #rhodesianridgeback","v":"1.6M","l":"216K","c":"324","sh":"14K"},{"id":"7631725078824193310","s":"rhode skin","h":"@arimirmontazeri","f":"8.1K followers","score":"944×","dur":"0:10","date":"Apr 22","cap":"that’ll do it @Hailey Bieber @rhode skin #lipgloss #fyp #funny","v":"5.6M","l":"665K","c":"608","sh":"5K"},{"id":"7652702029457984790","s":"rhode skin","h":"@leahcandid","f":"1.4K followers","score":"942×","dur":"0:05","date":"Jun 18","cap":"@rhode skin that glazing milk looks so good I wanna drink it @Sephora UK pls restock #rhode #rhodeskin #sephora","v":"1M","l":"102K","c":"281","sh":"3.4K"},{"id":"7675310313461271830","s":"rhode skin","h":"@tamusss86","f":"2.7K followers","score":"905×","dur":"0:10","date":"Aug 18","cap":"I'm so exiteddd! #foryou #rhode #viral@rhode skin @Sephora Czech Republic","v":"1.6M","l":"283K","c":"1.3K","sh":"21K"},{"id":"7586369034757754134","s":"rhode skin","h":"@jyo_witha_thi_","f":"5.7K followers","score":"849×","dur":"0:11","date":"Dec 21, 2025","cap":"Omggggg!!! I’ve been waiting for this moment foreverrrr!!!! It’s such a cuteeee lil addition 😍🩷✨ @rhode skin @Hailey Bieber . . . #rhode #lippeptide #iphone17promax #fyp #foryoupage","v":"4.4M","l":"146K","c":"286","sh":"14K"},{"id":"7676940843554508052","s":"rhode skin","h":"@.haileyex","f":"4K followers","score":"822×","dur":"0:15","date":"Aug 22","cap":"They really have a talent for turning the most random things into trends. 😭✨ @Kylie Jenner @Kylie Cosmetics @Hailey Bieber @rhode skin #kyliejenner #haileybieber #beautytrends #viraltrends #rhode","v":"2.4M","l":"279K","c":"668","sh":"7K"},{"id":"7646864865889488141","s":"rhode skin","h":"@ceciliamicole","f":"2.5K followers","score":"784×","dur":"0:18","date":"Jun 2","cap":"effortlessly pretty is what i was trying to say i think #rhode #rhodebronzer #newrhode #rhodeskin #haileybieber","v":"1.4M","l":"170K","c":"1.6K","sh":"3.1K"},{"id":"7688771496407239958","s":"rhode skin","h":"@amberatelier","f":"3.1K followers","score":"539×","dur":"0:05","date":"Sep 23","cap":"Well, at least it looks pretty, right? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠#rhodeskin⁠ ⁠#cartok⁠ ⁠#relatable⁠ ⁠#funny⁠ ⁠#rhode @rhode skin","v":"1.5M","l":"59K","c":"164","sh":"159"},{"id":"7668300461455248672","s":"rhode skin","h":"@carolinafulgencio_","f":"9.6K followers","score":"501×","dur":"0:05","date":"Jul 30","cap":"trust issues, beach edition @rhode skin @Hailey Bieber #rhode #rhodeskin #beach #vilamoura #fyp","v":"4.1M","l":"252K","c":"129","sh":"760"},{"id":"7673427962720472342","s":"rhode skin","h":"@bunnyshuhui","f":"6.5K followers","score":"444×","dur":"0:11","date":"Aug 13","cap":"@rhode skin pocket blush sleepy girl @Rare Beauty liquid blush encourage @Saie dew blush lady @Makeup By Mario soft pop blush stick dusty rose Not a paid partnership #blush #rhode #makeup #blushreview #rarebeauty","v":"3M","l":"105K","c":"196","sh":"3.1K"},{"id":"7667704326613159182","s":"Dr. Scholl's","h":"@makaylasargent13","f":"7.5K followers","score":"358×","dur":"0:21","date":"Jul 28","cap":"they also come in wide calf !!! #drsbacktocampus #DrSchollsNewArrivals #fallfashion #fallboots #drscholls","v":"2.6M","l":"29K","c":"88","sh":"1.4K"},{"id":"7570361891399142670","s":"CurrentBody","h":"@by_swetha","f":"890 followers","score":"93×","dur":"0:10","date":"Nov 8, 2025","cap":"@currentbody Led series 1 face mask is on sale for $150 at Sam's club. They have several other devices on sale too. This is the best deal for led mask. highly recommend getting it #ledfacemask #currentbody #bestdeal","v":"89K","l":"1.2K","c":"30","sh":"436"},{"id":"7573697125595303186","s":"nike","h":"@natali.gogaladze","f":"1.7K followers","score":"5.1K×","dur":"0:08","date":"Nov 17, 2025","cap":"nike #nike #nata #brand #fyp #foryoupage","v":"7.2M","l":"317K","c":"44K","sh":"5.7K"},{"id":"7673863358721920278","s":"nike","h":"@arthurs_51","f":"500 followers","score":"5.1K×","dur":"0:08","date":"Aug 14","cap":"#nike why so many p-6000 #blowthisup #AS11 #fyp","v":"4.9M","l":"58K","c":"1.7K","sh":"7.4K"},{"id":"7658843442696523039","s":"nike","h":"@smoothsailing3500","f":"5.8K followers","score":"2.3K×","dur":"0:35","date":"Jul 5","cap":"Nike look what we have here!😂😂😂#nike #shoes #funny #viral","v":"13M","l":"251K","c":"19K","sh":"210K"},{"id":"7686663477691305229","s":"nike","h":"@rylanroskom","f":"1K followers","score":"2.2K×","dur":"0:09","date":"Sep 18","cap":"I js want Nike calms#tiktok#nikeslides#rylanroskom#viral#fyp","v":"2M","l":"67K","c":"1.1K","sh":"564"},{"id":"7631200726949170464","s":"nike","h":"@f4nn1.2","f":"533 followers","score":"1.9K×","dur":"0:15","date":"Apr 21","cap":"Neue SCHUHEE😮‍💨❤️#nike#shoes#pretty#new#binverliebtt","v":"1.6M","l":"119K","c":"646","sh":"4K"},{"id":"7405514783098686763","s":"nike","h":"@nike69753","f":"2.6K followers","score":"1.9K×","dur":"1:10","date":"Aug 21, 2024","cap":"Japanese beauty eating bread challenge","v":"7.3M","l":"67K","c":"2.3K","sh":"13K"},{"id":"7630200374590278925","s":"nike","h":"@midowash","f":"1.8K followers","score":"1.9K×","dur":"0:12","date":"Apr 18","cap":"fr #nike #socks #fyp #xybzca #dirty","v":"2.4M","l":"268K","c":"1.7K","sh":"26K"},{"id":"7693631783031590157","s":"nike","h":"@brenda.19","f":"2.2K followers","score":"1.4K×","dur":"0:08","date":"Oct 6","cap":"Nike v5 rnr ✨😍 #nike #fallshoes #fyp #fallvibes🍂  #obssessed","v":"2.4M","l":"266K","c":"926","sh":"69K"},{"id":"7611811174178491661","s":"nike","h":"@jimbo_golfs747","f":"1.9K followers","score":"1.3K×","dur":"0:07","date":"Feb 28","cap":"Nike Logo Golf Swing #relatablegolfcontent #golftiktok #golfswing #nikegolf #golffyp","v":"1.8M","l":"230K","c":"759","sh":"3.5K"},{"id":"7617183904096619798","s":"nike","h":"@trendy.shoes94","f":"665 followers","score":"962×","dur":"0:09","date":"Mar 14","cap":"new#nike  mind 001🤍#luxurylifestyle #comfortable #slipper","v":"917K","l":"15K","c":"96","sh":"4.5K"},{"id":"7473242554805439790","s":"nike","h":"@not.mj101","f":"1.6K followers","score":"905×","dur":"0:25","date":"Feb 19, 2025","cap":"Yo😭 #help #special #sus #edit #football #nike #nikepro","v":"1.4M","l":"1.9K","c":"215","sh":"39"},{"id":"7614678667116989710","s":"nike","h":"@ty_thep","f":"9.2K followers","score":"837×","dur":"0:14","date":"Mar 8","cap":"Send me a new ball @Nike #nikemind","v":"7M","l":"229K","c":"2.8K","sh":"15K"},{"id":"7596400167058820383","s":"nike","h":"@lena_janelle","f":"832 followers","score":"824×","dur":"0:06","date":"Jan 17","cap":"Proof the Nike Mind 001 runs SUPER small. This is my “true size,” and look how tight it fits. I sized up two sizes and they fit perfectly.","v":"805K","l":"5.7K","c":"290","sh":"1.3K"},{"id":"7623415231636573461","s":"nike","h":"@melll.y_","f":"928 followers","score":"824×","dur":"0:08","date":"Mar 31","cap":"got ma bby 🩶🖤 #nike #nikep6000","v":"768K","l":"18K","c":"171","sh":"1.9K"},{"id":"7656409075881741601","s":"nike","h":"@kjkwlfme","f":"18K followers","score":"819×","dur":"0:17","date":"Jun 28","cap":"Tn shoes.#fyp #nike #tn #sneakers #streewear","v":"13M","l":"601K","c":"1.7K","sh":"30K"},{"id":"7398115879881411847","s":"nike","h":"@nedofunny","f":"33K followers","score":"725×","dur":"0:14","date":"Aug 1, 2024","cap":"Nike pro🙄 #nikepro #популярное #popular #ехалядомойсработы #мемвстилеприкол","v":"23M","l":"476K","c":"2.6K","sh":"159K"},{"id":"7667238103827959070","s":"nike","h":"@elite.overload","f":"2.1K followers","score":"556×","dur":"0:08","date":"Jul 27","cap":"Why does Nike do this 😭😭 #fyp #nikeelite #basketballbag #nikevarsityelite #nikebag","v":"907K","l":"78K","c":"716","sh":"3.6K"},{"id":"7658353099689512224","s":"nike","h":"@user_intrv48","f":"1.8K followers","score":"537×","dur":"0:07","date":"Jul 3","cap":"Nike>adidas#nike #niketechfleece","v":"778K","l":"68K","c":"553","sh":"3K"},{"id":"7634692256556961037","s":"nike","h":"@cat.mcgavic","f":"13K followers","score":"454×","dur":"0:08","date":"Apr 30","cap":"i’ve BEEN waiting  #nikepro #nike #fyp @Nike","v":"4.5M","l":"512K","c":"1.7K","sh":"8.5K"},{"id":"7629388865228393748","s":"nike","h":"@discoverafricanbrands","f":"2.9K followers","score":"434×","dur":"0:09","date":"Apr 16","cap":"Grace Ladoja 🇳🇬 just made history by becoming the first African woman to design a shoe with Nike! ✨ | #nike #nigeriatiktok #nigeriatiktok🇳🇬🇳🇬🇳🇬 #shoes #sneakers @grace ladoja","v":"878K","l":"126K","c":"1.7K","sh":"2.9K"},{"id":"7600786880652823816","s":"nike","h":"@msma644","f":"15K followers","score":"412×","dur":"0:27","date":"Jan 29","cap":"Nike Air Pressure shoes are considered rare. 👟✨#foryoupageofficiall #virallll #grow #nike","v":"5.7M","l":"87K","c":"1.7K","sh":"4.7K"},{"id":"7696300872187251998","s":"nike","h":"@alejandra_martinez209","f":"2.3K followers","score":"403×","dur":"0:15","date":"Oct 13","cap":"Finally got them🐆 Nike V5 RNR#fall #sneakerhead #fyp @Nike","v":"722K","l":"63K","c":"190","sh":"18K"},{"id":"7684281681888513302","s":"nike","h":"@marjozoa0mk","f":"12K followers","score":"401×","dur":"0:14","date":"Sep 11","cap":"Nike mind 001🩵🩵🩵#fyp #senakers #virle #nikemind001 #nike","v":"4.1M","l":"204K","c":"703","sh":"12K"},{"id":"7666716715971104030","s":"nike","h":"@lovvveval","f":"4.5K followers","score":"387×","dur":"0:11","date":"Jul 26","cap":"@DICK'S Sporting Goods @Nike #nikeproshorts #LoveVal #nike #fyp","v":"1.2M","l":"174K","c":"558","sh":"13K"}];
+// Saved analysis of the top nike breakout (@natali.gogaladze), word for word from the live app
+const AN={
+"why": [
+[
+"Brand Signal",
+"The explicit mention of 'nike' and related hashtags draws in viewers searching for or interested in this brand, boosting initial engagement."
+],
+[
+"Trend-Driven Sound",
+"The slowed version of 'Meet Her At The Love Parade' aligns with TikTok sound trends, increasing shareability and watch time."
+],
+[
+"Short Duration",
+"An 8-second length encourages full views and repeat watches, maximizing retention and engagement metrics."
+],
+[
+"Hashtag Amplification",
+"The cluster of hashtags broadens reach across multiple trending topics, increasing the chance of viral spread."
+]
+],
+"drags": [
+[
+"Lack of Visual Hook",
+"The transcript and metadata do not indicate a strong visual or narrative hook, which may limit deeper emotional engagement."
+],
+[
+"Hashtag Reliance",
+"Heavy dependence on hashtags and sound trends may reduce uniqueness, making it harder to replicate viral success without similar conditions."
+]
+],
+"next": [
+[
+"Lead with a Recognizable Brand or Trend",
+"Start your video or caption by mentioning a popular brand or trending topic relevant to your audience to immediately capture attention and signal content relevance."
+],
+[
+"Use a Cluster of Related Hashtags",
+"Include multiple related hashtags that broaden your content’s discoverability across different but connected interest areas, increasing the chance of viral spread."
+],
+[
+"Align Content Rhythm with a Trendy Sound",
+"Choose a popular or trending audio track, preferably one with a distinctive rhythm or slowed tempo, to create a hypnotic flow that encourages viewers to watch repeatedly."
+],
+[
+"Keep It Short and Repeatable",
+"Produce concise videos (around 8 seconds) that are easy to consume and rewatch, maximizing retention and engagement metrics."
+]
+],
+"hook": "nike #nike #nata #brand #fyp #foryoupage",
+"pat": [
+"Hashtag cluster",
+"Brand name lead",
+"Trend sound aligned",
+"Short text format"
+],
+"stop": [
+[
+"Trend Association",
+"Using the popular brand hashtag 'nike' immediately attracts viewers interested in that brand or trending content."
+],
+[
+"Hashtag Clustering",
+"Multiple related hashtags increase discoverability and signal content relevance across several popular categories."
+],
+[
+"Brevity and Rhythm",
+"The concise, rhythmic repetition of hashtags matches the slowed music, creating a hypnotic effect that hooks viewers quickly."
+]
+],
+"beats": [
+[
+"0:00",
+"Brand mention",
+"The word 'nike' is the first element, immediately signaling the video's topic."
+],
+[
+"0:01",
+"Hashtag repetition",
+"Repeating '#nike' reinforces the brand focus and hooks viewers searching for this tag."
+],
+[
+"0:02",
+"Hashtag expansion",
+"Additional hashtags '#nata', '#brand', '#fyp', and '#foryoupage' broaden the video's reach and relevance."
+]
+],
+"swipe": [
+[
+"Avoids brand fatigue",
+"Check out this fresh take on #nike vibes #nata #brand #fyp"
+],
+[
+"More curiosity",
+"Why is everyone talking about #nike right now? #nata #brand #foryoupage"
+],
+[
+"Less hashtag clutter",
+"Nike style, but with a twist #nata #brand #fyp"
+]
+],
+"tr": "nike #nike #nata #brand #fyp #foryoupage"
+};
 const $=s=>document.querySelector(s);
 const esc=t=>t.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const capH=t=>esc(t).replace(/([#@][\w.À-ɏ]+)/g,'<em>$1</em>');
@@ -844,23 +976,49 @@ function run(){
 }
 $('#appGo').onclick=run;$('#appInput').addEventListener('keydown',e=>{if(e.key==='Enter')run()});
 
-// results grid: 12 cards, Load more shows 12 more
-const RH=LIVE.filter(v=>v.s==='rhode skin');let shown=0;
-function more(n){const end=Math.min(shown+n,RH.length);$('#grid').insertAdjacentHTML('beforeend',RH.slice(shown,end).map((v,k)=>card(v,{i:shown+k,rank:shown+k+1,done:shown+k===0})).join(''));shown=end;
-  if(shown>=RH.length)$('#more').innerHTML=`Showing ${shown} of 75 breakouts.<a class="mbtn y js-go" href="#search">See them all free →</a>`}
+// results grid: 12 cards, Load more shows 12 more (the nike search; RH stays for the wall)
+const RH=LIVE.filter(v=>v.s==='rhode skin'),NK=LIVE.filter(v=>v.s==='nike');let shown=0,anDone=false,anBusy=false;
+function more(n){const end=Math.min(shown+n,NK.length);$('#grid').insertAdjacentHTML('beforeend',NK.slice(shown,end).map((v,k)=>card(v,{i:shown+k,rank:shown+k+1,done:shown+k===0&&anDone})).join(''));shown=end;
+  if(shown>=NK.length)$('#more').innerHTML=`Showing ${shown} of 108 breakouts.<a class="mbtn y js-go" href="#search">See them all free →</a>`}
 more(12);$('#loadMore').onclick=()=>more(12);
-$('#grid').addEventListener('click',e=>{const c=e.target.closest('.lc');if(!c||e.target.closest('.lc-bm'))return;openRO(+c.dataset.i)});
+$('#grid').addEventListener('click',e=>{const c=e.target.closest('.lc');if(!c||e.target.closest('.lc-bm'))return;e.preventDefault();e.stopPropagation();const i=+c.dataset.i;
+  if(i===0&&!anDone)analyze();else openRO(i)},true);
 
-function openRO(i){
-  const v=RH[i];const list=(a,pad)=>a.map((d,k)=>`<div class="an-it"><span class="n">${pad?String(k+1).padStart(2,'0'):k+1}</span><div><h5>${d[0]}</h5><p>${esc(d[1])}</p></div></div>`).join('');
-  const side=`<div class="an-side">${card(v,{rank:i+1,noAct:true})}${i===0?`<div class="an-ok">${IC.ok} Analysis ready</div><div class="an-sh">${IC.sh} Share with your team and creators</div>`:''}</div>`;
-  const right=i===0?`<div><p class="an-q">“${capH(v.cap)}”</p>
-    <div class="an-ban"><span>ⓘ</span><span><b>${v.score} Breakout Score:</b> how far this video beat ${esc(v.h)}'s average video.</span></div>
-    <div class="an-box an-fade"><h4>Why it worked <small>4 drivers</small></h4>${list(WHY,1)}</div></div>`
-   :`<div class="an-box an-gate"><h4>Analyze this video</h4><p>See why ${esc(v.h)}'s video broke out and what to do next for your brand. Free includes 5 video analyses.</p>
+// Analyze video on card 1: the card button spins, the analysis opens in its processing state, then fills in
+function analyze(){if(anBusy)return;anBusy=true;
+  const b=$('#grid .lc[data-i="0"] .lc-btn');if(b){b.classList.add('busy');b.innerHTML='<span class="ring"></span>Analyzing video...'}
+  setTimeout(()=>{openRO(0,1);setTimeout(()=>{anDone=true;anBusy=false;
+    if(b){b.classList.remove('busy');b.classList.add('dark');b.innerHTML=`${IC.ok} View analysis →`}
+    if($('#s4').classList.contains('on'))openRO(0)},2200)},600)}
+
+function openRO(i,running){
+  const v=NK[i],n2=k=>String(k+1).padStart(2,'0');
+  const list=(a,num,cls)=>a.map((d,k)=>`<div class="an-it"><span class="n${cls?' '+cls:''}">${num(k)}</span><div><h5>${esc(d[0])}</h5><p>${esc(d[1])}</p></div></div>`).join('');
+  const one=k=>k+1;
+  const pill=i!==0?'':running?`<div class="an-run"><span class="ring"></span>Analyzing…</div>`:`<div class="an-ok">${IC.ok} Analysis ready</div>`;
+  const side=`<div class="an-side">${card(v,{rank:i+1,noAct:true})}${pill}${i===0?`<div class="an-sh">${IC.sh} Share with your team and creators</div>`:''}</div>`;
+  const head=`<p class="an-q">“${capH(v.cap)}”</p>
+    <div class="an-ban"><span>ⓘ</span><span><b>${v.score} Breakout Score:</b> how far this video beat ${esc(v.h)}'s average video.</span></div>`;
+  let right;
+  if(i!==0)right=`<div class="an-box an-gate"><h4>Analyze this video</h4><p>See why ${esc(v.h)}'s video broke out and what to do next for your brand. Free includes 5 video analyses.</p>
       <a class="gbtn" href="../bb-3/app.html#home-checklist"><span class="g">${$('#signin .gbtn .g').innerHTML}</span>Sign in free to analyze</a></div>`;
+  else if(running)right=`<div>${head}<div class="an-tabs off"><button class="on">Why it worked</button><button>Hook</button></div>
+    <div class="an-proc"><b>Processing</b><p>We are preparing the transcript, shared diagnostics, and creator-facing guidance.</p></div></div>`;
+  else right=`<div class="an-in">${head}
+    <div class="an-tabs" id="roTabs"><button class="on" data-t="why">Why it worked</button><button data-t="hook">Hook</button></div>
+    <div id="tWhy"><div class="an-box"><h4>Why it worked <small>${AN.why.length} drivers</small></h4>${list(AN.why,n2)}</div>
+      <div class="an-box"><h4>What could be improved <small>${AN.drags.length} drags</small></h4>${list(AN.drags,one,'bad')}</div>
+      <div class="an-box cream"><h4>What you should do next <small>${AN.next.length} actions</small></h4>${list(AN.next,n2,'go')}<p class="an-foot">From this video’s transcript and metrics.</p></div>
+      <div class="an-box"><h4>Transcript <small>${v.dur}</small></h4><div class="an-tr"><span>0:00</span><mark>${esc(AN.tr)}</mark></div></div></div>
+    <div id="tHook" style="display:none"><div class="an-box an-hook"><span class="ht"><img src="${img(v,'t')}" alt=""><small>0:00</small></span><div><b>“${esc(AN.hook)}”</b><div class="an-pat">${AN.pat.map(p=>`<span>${esc(p)}</span>`).join('')}</div></div></div>
+      <button class="an-copy" type="button" data-copy="${esc(AN.hook)}">⧉ Copy hook for a brief</button>
+      <div class="an-box"><h4>Why it stops the scroll <small>${AN.stop.length} reasons</small></h4>${list(AN.stop,one)}</div>
+      <div class="an-box"><h4>How the first three seconds are built</h4><div class="an-bar"><i style="flex:3;background:#9a6b00"></i><i style="flex:4;background:#e0b44a"></i><i style="flex:3;background:#f0d89a"></i></div>${AN.beats.map(b=>`<div class="an-bt"><span>${b[0]}</span><div><h5>${esc(b[1])}</h5><p>${esc(b[2])}</p></div></div>`).join('')}</div>
+      <div class="an-box cream"><h4>Swipe this hook <small>${AN.swipe.length} rewrites</small></h4>${AN.swipe.map(s=>`<div class="an-rw"><span><small>${esc(s[0])}</small>${esc(s[1])}</span><button type="button" data-copy="${esc(s[1])}">Copy</button></div>`).join('')}<p class="an-foot">Structure lifted from this video’s opening.</p></div></div></div>`;
   $('#ro').innerHTML=`<div class="an">${side}${right}</div>`;
-  go('s4');
+  const tabs=$('#roTabs');if(tabs)tabs.onclick=e=>{const b=e.target.closest('button');if(!b)return;tabs.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));
+    $('#tWhy').style.display=b.dataset.t==='why'?'':'none';$('#tHook').style.display=b.dataset.t==='hook'?'':'none'};
+  if(!$('#s4').classList.contains('on'))go('s4');
 }
 document.addEventListener('click',e=>{const b=e.target.closest('[data-copy]');if(!b)return;try{navigator.clipboard.writeText(b.dataset.copy)}catch(x){}const t=b.textContent;b.textContent='Copied';setTimeout(()=>b.textContent=t,1200)});
 
