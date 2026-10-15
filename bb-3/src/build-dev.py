@@ -52,14 +52,20 @@ SM = '<span class="t s">SAMPLE</span>'
 LV = '<span class="t l">AS LIVE</span>'
 IV = '<span class="t s" style="background:#FFF3B0;color:#6B4B00">IVAN 12 OCT</span>'
 IV13 = IV.replace("12 OCT", "13 OCT")
+IV15 = IV.replace("12 OCT", "15 OCT")
 
 def frame(state, kind, h=None):
     w, hh = (1440, h or 900) if kind == "d" else (390, h or 844)
     cls = "fr" if kind == "d" else "fr ph"
     lab = "DESKTOP" if kind == "d" else "PHONE, 390"
-    return (f'<figure class="fig {kind}"><figcaption>{lab}<a href="app.html#{state}" target="_blank" rel="noopener">Open</a></figcaption>'
-            f'<div class="{cls}" data-w="{w}" data-h="{hh}"><iframe src="app.html?shot&v={VER}#{state}" width="{w}" height="{hh}" '
-            f'loading="lazy" title="{state} {lab.lower()}"></iframe></div></figure>')
+    # a state starting with "../" is another page (the logged-out home mock), not an app.html state
+    if state.startswith("../"):
+        page, src = state, state + ("&" if "?" in state else "?") + f"shot&v={VER}"
+    else:
+        page, src = f"app.html#{state}", f"app.html?shot&v={VER}#{state}"
+    return (f'<figure class="fig {kind}"><figcaption>{lab}<a href="{page}" target="_blank" rel="noopener">Open</a></figcaption>'
+            f'<div class="{cls}" data-w="{w}" data-h="{hh}"><iframe src="{src}" width="{w}" height="{hh}" '
+            f'loading="lazy" title="{lab.lower()}"></iframe></div></figure>')
 
 def notes(items):
     return '<ol class="bn">' + "".join(f"<li>{t}</li>" for t in items) + "</ol>"
@@ -70,8 +76,9 @@ def screen(sid, title, live, frames, items, extra=""):
     figs = "".join(frame(*f) for f in frames)
     m2 = " m2" if all(f[1] == "m" for f in frames) else ""
     first = frames[0][0]
+    first = first if first.startswith("../") else f"app.html#{first}"
     return (f'<section class="scr" id="{sid}"><h3><span class="num">{N[0]}</span>{title}'
-            f'<a href="app.html#{first}" target="_blank" rel="noopener">Open in prototype</a></h3>'
+            f'<a href="{first}" target="_blank" rel="noopener">Open in prototype</a></h3>'
             f'<p class="live"><b>Live today:</b> {live}</p>'
             f'<div class="trio{m2}">{figs}{notes(items)}</div>{extra}</section>')
 
@@ -285,6 +292,22 @@ body.append(screen("paywall", "Free limits: searches and video analyses",
   "Nothing is lost: searches, saved videos and analyses stay where they are."]))
 
 body.append(group("New accounts"))
+SIGNIN = "../sales-page/index.html?first=signin&media=video"
+body.append(screen("signin-first", "Sign in first, Google first",
+  "Brand, then keywords, then <i>Run my free search</i> jumps straight to Google sign-in with no warning. No email option on that path. The hero says 1 free search.",
+  [(SIGNIN, "d"), (SIGNIN, "m")], [
+  IV15 + "Approved for this week: sign in comes <b>before</b> any search. The logged-out home asks for an account first, and nothing is pulled or processed until the account exists.",
+  "Hero, under the headline: <b>Continue with Google</b> as the primary button (dark, full width of the block), then <i>or use your email</i> as a text link, then <i>3 free searches and 5 video analyses · no credit card</i>. No search box on the logged-out page.",
+  "<b>Google:</b> the live OAuth flow. A new account lands on Home with Get started (step 1, Run your first search). A returning account lands on Home.",
+  "<b>Email, the fallback:</b> the link opens an email field and Continue in place. New email creates the account on the existing /register backend; a known email goes to sign in. Same landing as Google. Magic link or password: Lester's call.",
+  "Add the line <i>By continuing, you agree to our Terms and Privacy Policy</i> under both, and a Forgot password link on the email sign-in (Live Site Fixes 5 and 12).",
+  "Every CTA on the page reads <b>Start free</b> and scrolls to this block: the top bar button, each section button, the Free plan card and the closing band. Sign in in the top bar opens the same block (on phones too, Live Site Fixes 6).",
+  "Free = 3 searches and 5 video analyses, no card. Replace every <i>1 free search</i> on the logged-out pages.",
+  "The search box, suggestions and keyword step move behind sign-in: they are the 3.0 Home search card.",
+  "Tracking, so we can compare it with Search first later: <code>landing_view</code>, <code>start_clicked</code> (which button), <code>signup_completed</code> (google or email), <code>first_search_started</code>.",
+  "Search first, the other option in the mock (First step control at the bottom), is not in this release. It comes back as the B side of an A/B test once the tracking is in.",
+  O + "Phone: the Google button and the email field run full width."]))
+
 body.append(screen("get-started", "Get started and Free limits",
   "New accounts land on My Feed with no next step. Free is 1 search and 0 video analyses.",
   [("home-checklist", "d"), ("home-checklist", "m")], [
@@ -371,6 +394,7 @@ CHECK = [
  ("get-started", "Phone: Get started card on Home"),
  ("menu-next", "Phone menu: What to try next line, opens the 4 steps"),
  ("results", "Phone: calmer results top (icon Alert me, short labels, i for definition)"),
+ ("signin-first", "Sign in first, Google first: email fallback, asked before any search"),
 ]
 check = ('<section class="check" id="checklist"><h2>Every change</h2><ol>' +
          "".join(f'<li><span class="k">{i}</span><input type="checkbox" data-k="{i}" aria-label="Done"><a href="#{a}">{html.escape(t)}</a></li>'
@@ -400,8 +424,7 @@ page = f"""<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>BrandBeacon 3.0 dev handoff</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../fonts/fonts.css">
 <style>{css}</style>
 </head>
 <body>

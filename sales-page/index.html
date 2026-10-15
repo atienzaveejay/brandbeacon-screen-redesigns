@@ -5,8 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
 <title>Brand Beacon Home Mock</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../fonts/fonts.css">
 <style>
 :root{
   --y:#ffc629;--yd:#efae00;--ysoft:#fff6d6;--ink:#140f00;--ink2:#5e5a52;--ink3:#8a857a;
@@ -413,10 +412,10 @@ body.notes .vbelow{display:block}
 .chart.anim.in .bars i.hot:after{opacity:1;transition-delay:.9s}
 .chart.anim.in .bars i.hot{animation:hotglow 1.2s ease-in-out 1s 1}
 @keyframes hotglow{50%{box-shadow:0 0 0 6px rgba(255,198,41,.28)}}
-.cards.anim .card{opacity:0;transform:translateY(26px);transition:opacity .5s,transform .65s cubic-bezier(.2,.8,.2,1)}
-.cards.anim.in .card{opacity:1;transform:none}
-.cards.anim.in .card:nth-child(2){transition-delay:.14s}
-.cards.anim.in .card:nth-child(3){transition-delay:.28s}
+.cards.anim .lc{opacity:0;transform:translateY(26px);transition:opacity .5s,transform .65s cubic-bezier(.2,.8,.2,1)}
+.cards.anim.in .lc{opacity:1;transform:none}
+.cards.anim.in .lc:nth-child(2){transition-delay:.14s}
+.cards.anim.in .lc:nth-child(3){transition-delay:.28s}
 .card .score b{font-variant-numeric:tabular-nums}
 
 .mqt{text-align:center;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);font-size:11.5px;font-weight:700}
@@ -446,6 +445,105 @@ body.notes .vbelow{display:block}
 .stp .kw .chip{font-size:11.5px;padding:3px 9px;gap:5px}
 .stp .kw .chip:before{width:10px;height:10px}
 .stp .kw .q{font-size:12px;color:var(--ink3);font-weight:700;margin-bottom:6px;text-align:left}
+
+/* live app card (as on brandbeacon.io results) */
+.lgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.lc{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;text-align:left}
+.lc-th{position:relative;aspect-ratio:9/12;background:#1b1813;overflow:hidden;cursor:pointer}
+.lc-th img{width:100%;height:100%;object-fit:cover}
+.lc-rk,.lc-du{position:absolute;top:10px;background:rgba(20,15,0,.7);color:#fff;font-size:11px;font-weight:700;border-radius:7px;height:22px;min-width:22px;padding:0 7px;display:grid;place-items:center}
+.lc-rk{left:10px}.lc-du{right:10px}
+.lc-sq{position:absolute;left:10px;top:10px;display:inline-flex;align-items:center;gap:6px;background:#fff;border-radius:999px;font-size:11.5px;font-weight:700;padding:4px 10px 4px 8px}
+.lc-sq:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--y)}
+.lc-bs{position:absolute;left:10px;bottom:10px;display:inline-flex;align-items:center;gap:8px;background:#fff;border-radius:999px;padding:5px 13px 5px 11px;box-shadow:0 4px 14px rgba(0,0,0,.18)}
+.lc-bs b{font-size:18px;font-weight:900;letter-spacing:-.01em;color:#3a2a00;font-variant-numeric:tabular-nums}
+.lc-bs b i{font-style:normal;color:var(--brown);font-size:.8em;margin-left:1px}
+.lc-bs span{font-size:10px;line-height:1.1;font-weight:700}
+.lc-bd{padding:12px 13px 13px;display:flex;flex-direction:column;gap:9px;flex:1}
+.lc-who{display:flex;gap:9px;align-items:center}
+.lc-av{width:30px;height:30px;border-radius:50%;object-fit:cover;background:#f2dcc8;flex:0 0 auto}
+.lc-who b{display:block;font-size:13.5px;font-weight:800}
+.lc-who small{display:block;font-size:11.5px;color:var(--ink3)}
+.lc-dt{margin-left:auto;align-self:flex-start;font-size:11.5px;color:var(--ink3);white-space:nowrap}
+.lc-cp{font-size:12.5px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.lc-cp em{font-style:normal;color:var(--brown);font-weight:600}
+.lc-st{display:flex;justify-content:space-between;gap:6px;font-size:12px;font-weight:600;color:var(--ink2);border-top:1px solid var(--line);padding-top:9px;margin-top:auto}
+.lc-st span{display:inline-flex;align-items:center;gap:4px}
+.lc-st svg{width:13px;height:13px;flex:0 0 auto}
+.lc-act{display:flex;gap:8px}
+.lc-btn{flex:1;height:36px;border-radius:999px;background:var(--y);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;gap:6px;color:var(--ink)}
+.lc-btn.dark{background:var(--ink);color:#fff}
+.lc-bm{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;flex:0 0 auto}
+.s3 .rhead p b{color:var(--ink)}
+.more{text-align:center;padding:18px 0 6px;font-size:13.5px;color:var(--ink2)}
+.mbtn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 16px;font-size:13px;font-weight:700}
+.more .mbtn.y{background:var(--y);border-color:var(--y);margin-left:8px}
+
+/* live video analysis */
+.an{display:grid;grid-template-columns:240px 1fr;gap:20px;padding:18px 20px 24px;align-items:start}
+.an-side{display:flex;flex-direction:column;gap:8px}
+.an-ok{height:38px;border:1px solid var(--line);background:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;gap:7px;font-weight:700;font-size:13.5px}
+.an-ok svg{color:#2e8b57}
+.an-sh{height:40px;background:var(--ink);color:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;gap:8px;font-weight:600;font-size:13.5px}
+.an-q{font-size:15.5px;font-weight:800;line-height:1.4}
+.an-q em{font-style:normal;color:var(--brown)}
+.an-ban{display:flex;gap:9px;background:var(--ysoft);border:1px solid #f2dc95;border-radius:12px;padding:10px 13px;font-size:13px;line-height:1.45;color:#5a4300;margin-top:12px}
+.an-ban b{color:#3a2a00}
+.an-tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;border:1px solid var(--line);background:#fff;border-radius:12px;padding:4px;margin:12px 0}
+.an-tabs button{height:34px;border-radius:9px;font-size:13.5px;color:var(--ink2)}
+.an-tabs button.on{background:var(--ysoft);color:var(--brown);font-weight:600}
+.an-box{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:10px}
+.an-box.cream{background:#fffaf0}
+.an-box h4{font-size:14.5px;font-weight:800;display:flex;align-items:baseline;gap:8px}
+.an-box h4 small{font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.08em;color:var(--ink3);font-weight:700;text-transform:uppercase}
+.an-it{display:flex;gap:10px;margin-top:11px}
+.an-it .n{flex:0 0 auto;min-width:22px;height:19px;border-radius:5px;background:var(--ysoft);color:var(--brown);font-size:11px;font-weight:800;display:grid;place-items:center;padding:0 4px}
+.an-it h5{font-size:13.5px;font-weight:700}
+.an-it p{font-size:13px;color:var(--ink2);line-height:1.45;margin-top:2px}
+.an-mt{font-size:13px;color:var(--ink3);margin-top:6px}
+.an-hook{display:flex;gap:12px;align-items:center}
+.an-hook img{width:50px;height:80px;border-radius:7px;object-fit:cover}
+.an-hook b{font-size:15px}
+.an-copy{width:100%;height:36px;border:1px solid var(--line);background:#fff;border-radius:10px;font-size:13.5px;font-weight:600;margin-bottom:10px}
+.an-rw{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 12px;margin-top:10px;font-size:13.5px}
+.an-rw button{font-size:12px;font-weight:700;color:var(--brown)}
+.an-gate{text-align:center;padding:26px 18px}
+.an-gate h4{display:block;font-size:18px}
+.an-gate p{font-size:14px;color:var(--ink2);margin:6px auto 16px;max-width:320px;line-height:1.5}
+.an-gate .gbtn{max-width:300px;margin:0 auto;font-size:15px;padding:13px 18px}
+
+/* wall of breakouts */
+.cards.lgrid{gap:24px;margin-top:56px}
+.cards .lc{border-radius:20px;box-shadow:var(--shadow)}
+.cards .lc-th{aspect-ratio:4/4.4}
+.wall{margin-top:40px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.wrow{display:flex;gap:10px;width:max-content;margin-bottom:10px;animation:lmove 60s linear infinite}
+.wrow.b{animation-direction:reverse}
+.wall:hover .wrow{animation-play-state:paused}
+.wt{position:relative;flex:0 0 auto;width:96px;height:150px;border-radius:12px;overflow:hidden;background:#222}
+.wt img{width:100%;height:100%;object-fit:cover}
+.wt b{position:absolute;left:6px;bottom:6px;background:#fff;border-radius:999px;font-size:11px;font-weight:900;padding:2px 7px;color:#3a2a00}
+@media (prefers-reduced-motion: reduce){.wrow{animation:none}.wall{overflow-x:auto}}
+.stack{align-items:center}
+.stack .cnt{display:grid;place-items:center;min-width:44px;height:28px;border-radius:999px;background:var(--ink);color:#fff;font-size:12.5px;font-weight:800;padding:0 10px;margin-left:2px}
+.stack img{width:44px;height:66px}
+.mini-an{width:100%;align-self:stretch;display:flex;flex-direction:column;justify-content:center;gap:6px;text-align:left}
+.mini-an p{font-size:12px;display:flex;gap:6px;align-items:baseline}
+.mini-an small{font-family:'Space Mono',monospace;font-size:9.5px;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em}
+.mini-an i{display:block;height:7px;border-radius:9px;background:#e9e5d8}
+@media (max-width:1000px){.cards.lgrid{grid-template-columns:1fr;max-width:420px;margin-left:auto;margin-right:auto}}
+@media (max-width:720px){
+  .lgrid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .lc-bd{padding:10px}.lc-st{font-size:11px}.lc-st span:nth-child(3){display:none}
+  .lc-who .lc-av{width:26px;height:26px}.lc-dt{display:none}
+  .an{grid-template-columns:1fr;padding:14px}
+  .an-side .lc-th{aspect-ratio:16/9}
+  .an-sh{display:none}
+  .lc-bm{display:none}
+  .lc-btn{font-size:12.5px;white-space:nowrap;height:34px}
+  .lc-btn svg{display:none}
+  .cards.lgrid{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
@@ -511,7 +609,7 @@ body.notes .vbelow{display:block}
     </div>
 
     <div class="media" id="media" data-show="video">
-      <div class="note" style="top:-14px;right:-8px"><b>3</b> Hero media: compare the two with the control at the bottom.</div>
+      <div class="note" style="top:-14px;right:-8px"><b>3</b> Hero media: compare the two with the control at the bottom. Clickable app (Ivan, 14 Oct): no keyword step, a one-second search, cards and analysis as in the live app, and 24 of the 75 breakouts behind Load more.</div>
 
       <!-- Option A: demo video -->
       <div data-pane="video">
@@ -539,14 +637,6 @@ body.notes .vbelow{display:block}
                   <input id="appInput" value="rhode skin" aria-label="Search">
                   <button class="btn" id="appGo">Find breakouts <span class="arr">→</span></button>
                 </div>
-                <div class="kw">
-                  <div class="lbl">Keywords people pair with it on TikTok</div>
-                  <div class="chips" id="chips">
-                    <span class="chip sel">rhode skin</span><span class="chip sel">rhode</span><span class="chip sel">rhode beauty</span><span class="chip sel">tula skincare</span>
-                    <span class="chip">skincare</span><span class="chip">rhode skin review</span><span class="chip">rhode skin unboxing</span><span class="chip">rhode skin serum</span>
-                  </div>
-                  <div class="count" id="kwCount">4 selected · all in one search</div>
-                </div>
               </div>
             </div>
 
@@ -555,7 +645,7 @@ body.notes .vbelow{display:block}
               <div class="s2"><div>
                 <h3>Finding breakouts for rhode skin</h3>
                 <div class="bar"><i id="barFill"></i></div>
-                <div class="step" id="stepTxt">Pulling TikToks for 4 keywords</div>
+                <div class="step" id="stepTxt">Pulling TikToks</div>
               </div></div>
             </div>
 
@@ -563,17 +653,17 @@ body.notes .vbelow{display:block}
               <div class="apphead"><button class="back" data-go="s1">← New search</button><span class="crumb">rhode skin</span></div>
               <div class="s3">
                 <div class="rhead">
-                  <div><h3>Top breakouts for rhode skin</h3><p>200 videos checked · ranked by Breakout Score</p></div>
-                  <span class="sort">Sort: Breakout Score</span>
+                  <div><h3>rhode skin</h3><p><b>75 breakouts</b> from 290 TikToks · ranked by Breakout Score</p></div>
+                  <span class="sort">Breakout Score ▾</span>
                 </div>
-                <div class="grid4" id="grid"></div>
-                <p class="appnote">Tap a video to open it.</p>
+                <div class="lgrid" id="grid"></div>
+                <div class="more" id="more"><button class="mbtn" id="loadMore" type="button">+ Load 12 more</button></div>
               </div>
             </div>
 
             <div class="scr" id="s4">
               <div class="apphead"><button class="back" data-go="s3">← All breakouts</button><span class="crumb">rhode skin</span></div>
-              <div class="s4" id="ro"></div>
+              <div id="ro"></div>
             </div>
 
           </div>
@@ -591,7 +681,7 @@ body.notes .vbelow{display:block}
 </div>
 
 <section class="grey rel" id="proof"><div class="wrap">
-  <div class="note"><b>1</b> Real breakouts from three live searches replace the six testimonials. <b>4</b> One Breakout Score definition everywhere: against the creator's average video (Ivan, 9 Oct). Videos play here instead of linking out.</div>
+  <div class="note"><b>1</b> Real breakouts from three live searches replace the six testimonials. Cards now match the live app card, and 24 real breakouts from one search scroll below them (Ivan, 14 Oct). <b>4</b> One Breakout Score definition everywhere: against the creator's average video (Ivan, 9 Oct). Videos play here instead of linking out.</div>
   <div class="proof-top">
     <div class="explain">
       <h2>A Breakout outperforms the creator's average video</h2>
@@ -608,41 +698,20 @@ body.notes .vbelow{display:block}
     </div>
   </div>
 
-  <div class="cards">
-    <article class="card">
-      <div class="th" data-vid="7660633484918033682"><button class="playbtn" aria-label="Play video"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#140f00"/></svg></button><img src="img/v3.jpg" alt="TikTok frame: rhode Vancouver hoodie hanging beside a lit rhode sign"><span class="tag">SEARCH: RHODE SKIN</span><span class="score"><b>6.2K×</b><span>Breakout<br>Score</span></span></div>
-      <div class="cb">
-        <div class="who"><b>@em_ireland</b><span>905 followers</span></div>
-        <div class="nums"><div>4.8M<small>views</small></div><div>457K<small>likes</small></div><div>3.9K<small>shares</small></div></div>
-      </div>
-    </article>
-    <article class="card">
-      <div class="th" data-vid="7667704326613159182"><button class="playbtn" aria-label="Play video"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#140f00"/></svg></button><img src="img/v5.jpg" alt="TikTok frame: creator zipping up a brown wide calf boot on a porch"><span class="tag">SEARCH: DR. SCHOLL'S</span><span class="score"><b>318×</b><span>Breakout<br>Score</span></span></div>
-      <div class="cb">
-        <div class="who"><b>@makaylasargent13</b><span>7.5K followers</span></div>
-        <div class="nums"><div>2.3M<small>views</small></div><div>28.7K<small>likes</small></div><div>1.4K<small>shares</small></div></div>
-      </div>
-    </article>
-    <article class="card">
-      <div class="th" data-vid="7570361891399142670"><button class="playbtn" aria-label="Play video"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#140f00"/></svg></button><img src="img/v6.jpg" alt="TikTok frame: CurrentBody LED face masks on sale in a store display"><span class="tag">SEARCH: CURRENTBODY</span><span class="score"><b>93×</b><span>Breakout<br>Score</span></span></div>
-      <div class="cb">
-        <div class="who"><b>@by_swetha</b><span>890 followers</span></div>
-        <div class="nums"><div>89K<small>views</small></div><div>1.2K<small>likes</small></div><div>435<small>shares</small></div></div>
-      </div>
-    </article>
-  </div>
-  <p class="srcline">Real results from live Brand Beacon searches.</p>
+  <div class="cards lgrid" id="proofCards"></div>
+  <div class="wall" id="wall" aria-label="Breakouts from one rhode skin search"></div>
+  <p class="srcline"><b>One rhode skin search found 75 breakouts in 290 TikToks.</b> Here are 24 of them.</p>
   <div class="after"><a class="btn lg js-cta" href="#search">Run your free search <span class="arr">→</span></a></div>
 </div></section>
 
 <section class="rel" id="how"><div class="wrap c">
-  <div class="note"><b>4</b> Step 3 uses the same Breakout Score line. One search box, no brand or product toggle.</div>
+  <div class="note"><b>4</b> The three steps from Ivan's 14 Oct note: type a brand, get the breakouts, learn how to make your own.</div>
   <p class="eyebrow">How it works</p>
   <h2>One search in, Viral Breakouts out</h2>
   <div class="steps">
-    <div class="stp"><span class="num">01</span><h3>Type a brand or product</h3><p>Yours, a competitor's, or something you sell.</p><div class="vis"><div class="mini-inp">rhode skin</div></div></div>
-    <div class="stp"><span class="num">02</span><h3>Keep the keywords that fit</h3><p>We suggest the terms people already pair with it on TikTok.</p><div class="vis"><div class="kw"><p class="q">Keywords for rhode skin</p><div class="chips"><span class="chip sel">rhode beauty</span><span class="chip sel">rhode skin review</span><span class="chip">rhode skin unboxing</span></div></div></div></div>
-    <div class="stp"><span class="num">03</span><h3>See the breakouts</h3><p>Ranked by Breakout Score: how far each video beat that creator's average.</p><div class="vis"><div class="stack"><img src="img/v1.jpg" alt=""><img src="img/v3.jpg" alt=""><img src="img/v4.jpg" alt=""><img src="img/v2.jpg" alt=""></div></div></div>
+    <div class="stp"><span class="num">01</span><h3>Type a brand</h3><p>Yours, a competitor's, or a product you sell.</p><div class="vis"><div class="mini-inp">rhode skin</div></div></div>
+    <div class="stp"><span class="num">02</span><h3>Get hundreds of videos, ranked</h3><p>The breakouts come first. One rhode skin search found 75 in 290 TikToks.</p><div class="vis"><div class="stack"><img src="img/live/7632366172746386721-t.jpg" alt=""><img src="img/live/7432015571165744417-t.jpg" alt=""><img src="img/live/7682552825804524814-t.jpg" alt=""><img src="img/live/7660633484918033682-t.jpg" alt=""><img src="img/live/7649935410587553055-t.jpg" alt=""><span class="cnt">+70</span></div></div></div>
+    <div class="stp"><span class="num">03</span><h3>Learn to make your own</h3><p>Each analysis shows why a breakout worked and what to do next for your brand.</p><div class="vis"><div class="mini-an"><p><b>Why it worked</b><small>4 drivers</small></p><i style="width:92%"></i><i style="width:74%"></i><p><b>What you should do next</b></p><i style="width:84%"></i></div></div></div>
   </div>
   <div class="after"><a class="btn lg js-cta" href="#search">Run your free search <span class="arr">→</span></a></div>
 </div></section>
@@ -674,7 +743,7 @@ body.notes .vbelow{display:block}
     <div class="plan">
       <h4>Free</h4><p class="t">See your top breakouts.</p>
       <div class="price">$0</div><p class="ann">No credit card</p>
-      <div class="feat"><div>3 searches</div><div>Viral Breakouts ranked by Breakout Score</div><div>Unlimited video bookmarks</div><div class="off">5 video analyses</div></div>
+      <div class="feat"><div>3 searches</div><div>5 video analyses</div><div>Viral Breakouts ranked by Breakout Score</div><div>Unlimited video bookmarks</div></div>
       <a class="btn js-cta" href="#search">Run your free search <span class="arr">→</span></a>
     </div>
     <div class="plan pop">
@@ -701,14 +770,14 @@ body.notes .vbelow{display:block}
   <h2>Questions? Answers.</h2>
   <p class="lead">Still stuck? Chat with Beacon, our AI support assistant.</p>
   <div class="faq">
-    <details open><summary>What does a free search show me?</summary><p>The TikToks about your brand or product that broke out, ranked by Breakout Score, with views, likes and each creator's followers. A breakdown of why each video worked comes with Growth and Scale.</p></details>
+    <details open><summary>What does a free search show me?</summary><p>The TikToks about your brand or product that broke out, ranked by Breakout Score, with views, likes and each creator's followers. Free also includes 5 video analyses, which show why a video worked and what to do next.</p></details>
     <details><summary>Why do I sign in before searching?</summary><p>Every search pulls fresh TikToks and runs our analysis, so we ask for an email before the first one. It keeps free searches free for everyone.</p></details>
     <details><summary>What counts as one search?</summary><p>One brand or one product. Add as many related keywords as you like and it still counts as one search.</p></details>
     <details><summary>Why focus on breakouts?</summary><p>4 million views from a creator who usually gets 4 million is normal. 4 million views from a creator who usually gets 4 thousand means the video itself did something right. Those are breakouts, and they're the ones worth learning from.</p></details>
     <details><summary>Is the free search a trial?</summary><p>No. You get 3 free searches, no credit card needed. The 8-day free trial of Growth or Scale is separate, and that one does need a card.</p></details>
     <details><summary>What happens after the 8-day trial?</summary><p>If you don't cancel before the 8 days are up, we charge your card for the plan you picked, monthly or yearly.</p></details>
     <details><summary>How do I cancel my trial?</summary><p>Go to Settings, then Subscription, and cancel before the trial ends. You won't be charged.</p></details>
-    <details><summary>Is the data real-time?</summary><p>New TikToks show up within hours of being posted, and Breakout Scores keep updating as videos get more views.</p></details>
+    <details><summary>Is the data real-time?</summary><p>Each search pulls the latest TikToks when it runs, and saved searches refresh every week.</p></details>
   </div>
 </div></section>
 
@@ -727,61 +796,98 @@ body.notes .vbelow{display:block}
 
 <div class="vmodal" id="vmodal" role="dialog" aria-label="TikTok video"><div class="box"><button class="x" aria-label="Close">×</button><div id="vframe" style="height:100%"></div></div></div>
 <script>
-// Real results from a rhode skin search on brandbeacon.io, last run Oct 9 2026 (Ivan's account).
-const VIDS=[
- {img:'img/v1.jpg',h:'@cyr1n32',f:'1.7K followers',score:'8.6K×',exact:'8,637×',views:'8.9M',likes:'1.7M',com:'2.5K',sh:'25K',date:'Apr 25',cap:'Name me a better marketing brand #rhode #best #aesthetic #haileybieber @Hailey Bieber @rhode skin',analysis:true},
- {img:'img/v2.jpg',h:'@_ellapalmer_',f:'3.8K followers',score:'7.1K×',views:'20M',likes:'2.5M',com:'3.7K',sh:'192K',date:'Nov 1',cap:'Impaled by rhode @rhode skin @Hailey Bieber #halloween2024'},
- {img:'img/v3.jpg',h:'@em_ireland',f:'905 followers',score:'6.2K×',views:'4.8M',likes:'457K',com:'361',sh:'3.9K',date:'Jul 10',cap:"It's SO CUTE!! #rhodehoodie #vancouverhoodie #rhodepopup"},
- {img:'img/v4.jpg',h:'@justemma529',f:'891 followers',score:'5.9K×',views:'4.0M',likes:'627K',com:'657',sh:'5.2K',date:'Jun 11',cap:'the queen saved my skin thank u @rhode skin @Hailey Bieber #rhode #rhodeskincare'}
-];
+// Real results from brandbeacon.io: the rhode skin, Dr. Scholl's and CurrentBody searches (captured 15 Oct 2026)
+const LIVE=[{"id":"7632366172746386721","s":"rhode skin","h":"@cyr1n32","f":"1.6K followers","score":"8.6K×","dur":"0:20","date":"Apr 24","cap":"Name me a better marketing brand #rhode #best #aesthetic #haileybieber @Hailey Bieber @rhode skin","v":"8.9M","l":"1.7M","c":"2.5K","sh":"25K"},{"id":"7432015571165744417","s":"rhode skin","h":"@_ellapalmer_","f":"3.8K followers","score":"7.1K×","dur":"0:11","date":"Oct 31, 2024","cap":"🩸Impaled by rhode 🔪🔪🩸🔪🩸 @rhode skin @Hailey Bieber #halloween2024 #rhode #rhodelipcase #diycostume","v":"20M","l":"2.5M","c":"3.7K","sh":"192K"},{"id":"7682552825804524814","s":"rhode skin","h":"@mmoiiraaa","f":"866 followers","score":"6.4K×","dur":"0:10","date":"Sep 6","cap":"just found this out rn ngl @rhode skin #rhodephonecase #haileybieber #fyp #relatable","v":"6.1M","l":"204K","c":"345","sh":"3.7K"},{"id":"7660633484918033682","s":"rhode skin","h":"@em_ireland","f":"905 followers","score":"6.2K×","dur":"0:10","date":"Jul 9","cap":"It’s SO CUTE!! 🤎💛 #rhodehoodie #vancouverhoodie #rhodepopup #rhodehoodiesizing #limitededition @rhode skin @Hailey Bieber","v":"4.8M","l":"457K","c":"361","sh":"3.9K"},{"id":"7649935410587553055","s":"rhode skin","h":"@justemma529","f":"900 followers","score":"6K×","dur":"0:07","date":"Jun 11","cap":"the queen saved my skin thank u🫰🏻@rhode skin @Hailey Bieber #rhode #rhodeskincare #skincare","v":"4.1M","l":"632K","c":"659","sh":"5.3K"},{"id":"7605834277904796948","s":"rhode skin","h":"@jordannsagee","f":"772 followers","score":"4.2K×","dur":"0:09","date":"Feb 12","cap":"hailey bieber at george street mecca sydney!! @Hailey Bieber @rhode skin","v":"3.1M","l":"377K","c":"2.1K","sh":"11K"},{"id":"7611161983743839495","s":"rhode skin","h":"@laurenestephanny_","f":"893 followers","score":"3.6K×","dur":"0:05","date":"Feb 26","cap":"jk #fyp #viralvideo #rhode #funny #xyzbca @Hailey Bieber @rhode skin","v":"2.5M","l":"374K","c":"2.2K","sh":"39K"},{"id":"7692057826658635022","s":"rhode skin","h":"@kora.scot","f":"1K followers","score":"2.5K×","dur":"0:07","date":"Oct 2","cap":"Please why did you have to go and sell to elf…😞 #rhodeskin #inflation","v":"2.5M","l":"145K","c":"343","sh":"2.4K"},{"id":"7649209492667698445","s":"rhode skin","h":"@bricourtneyy","f":"1.2K followers","score":"1.8K×","dur":"0:08","date":"Jun 9","cap":"If he fumbles this im disowning him im literally nauseous about it #rhodesummercollection #rhodeskin #rhode #haileybieber @rhode skin #greenscreen","v":"1.7M","l":"206K","c":"676","sh":"2.4K"},{"id":"7675437551536196886","s":"rhode skin","h":"@elizaveta_beauty_","f":"3.2K followers","score":"1.8K×","dur":"0:05","date":"Aug 18","cap":"Just being honest 😂 @rhode skin #rhode#skincare#beauty#sephora#girly","v":"3.7M","l":"672K","c":"557","sh":"107K"},{"id":"7629686756895411478","s":"rhode skin","h":"@caseyjaywalsh","f":"931 followers","score":"1.2K×","dur":"0:05","date":"Apr 17","cap":"put the wrong lid on my blush and ruined it:( @rhode skin #justinbieber #haileybieber #coachella #rhode","v":"1M","l":"56K","c":"192","sh":"878"},{"id":"7694297306266455326","s":"rhode skin","h":"@kairahyang11","f":"1.8K followers","score":"1.2K×","dur":"0:10","date":"Oct 8","cap":"Best believe I’m grabbing a set!! @rhode skin #rhodeskin #rhode #haileybieber #holidaysets","v":"2.8M","l":"408K","c":"697","sh":"89K"},{"id":"7672213649234185493","s":"rhode skin","h":"@bellawoj","f":"2.3K followers","score":"1.1K×","dur":"0:08","date":"Aug 10","cap":"current rating of all my Rhode lippies!! @rhode skin 🤍#rhodeliptint #rhodereview","v":"1.9M","l":"183K","c":"328","sh":"5.9K"},{"id":"7610133460639894805","s":"rhode skin","h":"@sleeepyygirl","f":"1.1K followers","score":"1.1K×","dur":"0:19","date":"Feb 23","cap":"current obsession🤍 #rhode #haileybieber #skincare #moodboard @rhode skin @Hailey Bieber","v":"1M","l":"39K","c":"206","sh":"1K"},{"id":"7679232197068442902","s":"rhode skin","h":"@the.ericaedit","f":"1.1K followers","score":"1K×","dur":"0:06","date":"Aug 28","cap":"Cheers @rhode skin £32 pounds for acne #fyp #rhode #acne #rhodeskin","v":"1M","l":"28K","c":"102","sh":"2.1K"},{"id":"7665807781416406304","s":"rhode skin","h":"@aline.ldn","f":"2.3K followers","score":"992×","dur":"0:07","date":"Jul 23","cap":"Finally being able to shop rhode @sephora as a European >>> ; #losangeles #haileybieber #rhode #rhodeskin #rhodesianridgeback","v":"1.6M","l":"216K","c":"324","sh":"14K"},{"id":"7631725078824193310","s":"rhode skin","h":"@arimirmontazeri","f":"8.1K followers","score":"944×","dur":"0:10","date":"Apr 22","cap":"that’ll do it @Hailey Bieber @rhode skin #lipgloss #fyp #funny","v":"5.6M","l":"665K","c":"608","sh":"5K"},{"id":"7652702029457984790","s":"rhode skin","h":"@leahcandid","f":"1.4K followers","score":"942×","dur":"0:05","date":"Jun 18","cap":"@rhode skin that glazing milk looks so good I wanna drink it @Sephora UK pls restock #rhode #rhodeskin #sephora","v":"1M","l":"102K","c":"281","sh":"3.4K"},{"id":"7675310313461271830","s":"rhode skin","h":"@tamusss86","f":"2.7K followers","score":"905×","dur":"0:10","date":"Aug 18","cap":"I'm so exiteddd! #foryou #rhode #viral@rhode skin @Sephora Czech Republic","v":"1.6M","l":"283K","c":"1.3K","sh":"21K"},{"id":"7586369034757754134","s":"rhode skin","h":"@jyo_witha_thi_","f":"5.7K followers","score":"849×","dur":"0:11","date":"Dec 21, 2025","cap":"Omggggg!!! I’ve been waiting for this moment foreverrrr!!!! It’s such a cuteeee lil addition 😍🩷✨ @rhode skin @Hailey Bieber . . . #rhode #lippeptide #iphone17promax #fyp #foryoupage","v":"4.4M","l":"146K","c":"286","sh":"14K"},{"id":"7676940843554508052","s":"rhode skin","h":"@.haileyex","f":"4K followers","score":"822×","dur":"0:15","date":"Aug 22","cap":"They really have a talent for turning the most random things into trends. 😭✨ @Kylie Jenner @Kylie Cosmetics @Hailey Bieber @rhode skin #kyliejenner #haileybieber #beautytrends #viraltrends #rhode","v":"2.4M","l":"279K","c":"668","sh":"7K"},{"id":"7646864865889488141","s":"rhode skin","h":"@ceciliamicole","f":"2.5K followers","score":"784×","dur":"0:18","date":"Jun 2","cap":"effortlessly pretty is what i was trying to say i think #rhode #rhodebronzer #newrhode #rhodeskin #haileybieber","v":"1.4M","l":"170K","c":"1.6K","sh":"3.1K"},{"id":"7688771496407239958","s":"rhode skin","h":"@amberatelier","f":"3.1K followers","score":"539×","dur":"0:05","date":"Sep 23","cap":"Well, at least it looks pretty, right? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠#rhodeskin⁠ ⁠#cartok⁠ ⁠#relatable⁠ ⁠#funny⁠ ⁠#rhode @rhode skin","v":"1.5M","l":"59K","c":"164","sh":"159"},{"id":"7668300461455248672","s":"rhode skin","h":"@carolinafulgencio_","f":"9.6K followers","score":"501×","dur":"0:05","date":"Jul 30","cap":"trust issues, beach edition @rhode skin @Hailey Bieber #rhode #rhodeskin #beach #vilamoura #fyp","v":"4.1M","l":"252K","c":"129","sh":"760"},{"id":"7667704326613159182","s":"Dr. Scholl's","h":"@makaylasargent13","f":"7.5K followers","score":"358×","dur":"0:21","date":"Jul 28","cap":"they also come in wide calf !!! #drsbacktocampus #DrSchollsNewArrivals #fallfashion #fallboots #drscholls","v":"2.6M","l":"29K","c":"88","sh":"1.4K"},{"id":"7570361891399142670","s":"CurrentBody","h":"@by_swetha","f":"890 followers","score":"93×","dur":"0:10","date":"Nov 8, 2025","cap":"@currentbody Led series 1 face mask is on sale for $150 at Sam's club. They have several other devices on sale too. This is the best deal for led mask. highly recommend getting it #ledfacemask #currentbody #bestdeal","v":"89K","l":"1.2K","c":"30","sh":"436"}];
+// Live analysis of the top rhode skin breakout (@cyr1n32)
 const WHY=[
- ['Engagement challenge','Opens with a direct challenge to name a better brand, which pulls comments and shares.'],
- ['Trend hashtags','Uses #rhode and #haileybieber, which carry reach with people already interested.'],
- ['Celebrity association','Tagging Hailey Bieber and rhode skin borrows their fan base and credibility.'],
- ['Short, confident delivery','One punchy line holds attention and invites a quick reply.']
+ ['Engagement Challenge','The video opens with a direct challenge that invites viewers to participate by naming a better brand, boosting comments and shares.'],
+ ['Trend-Driven Hashtags','Using popular and relevant hashtags like #rhode and #haileybieber increases the video’s reach and discoverability among interested audiences.'],
+ ['Celebrity Association','Tagging Hailey Bieber and Rhode Skin leverages their fanbase and credibility to enhance trust and interest in the content.'],
+ ['Concise and Confident Delivery','The short, punchy line delivers a strong statement that holds attention and encourages viewers to engage quickly.']
 ];
 const NEXT=[
  ['Open with a direct challenge','Start with a bold claim or question that viewers want to answer in the comments.'],
  ['Use relevant hashtags and mentions','Tag the brand and the names its fans already follow.']
 ];
+const STOP=[
+ ['Countable Promise','It challenges viewers to think of a better example, triggering curiosity and engagement.'],
+ ['Direct Address','Speaking directly to the audience creates a personal connection and compels attention.'],
+ ['Open Loop','The question sets up an unresolved challenge that encourages viewers to watch or comment to respond.']
+];
+const SWIPE=['Can you name a marketing brand better than this?'];
 const $=s=>document.querySelector(s);
+const esc=t=>t.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const capH=t=>esc(t).replace(/([#@][\w.À-ɏ]+)/g,'<em>$1</em>');
+const IC={
+ v:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>',
+ l:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/></svg>',
+ c:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
+ s:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v13M7 8l5-5 5 5M5 14v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/></svg>',
+ bm:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>',
+ sp:'<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 6.6L21 11l-6.8 2.4L12 20l-2.2-6.6L3 11l6.8-2.4z"/></svg>',
+ ok:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12l5 5L20 7"/></svg>',
+ sh:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v13M7 8l5-5 5 5M5 14v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/></svg>'
+};
+const img=(v,k)=>`img/live/${v.id}-${k}.jpg`;
+const bs=v=>`<span class="lc-bs"><b>${v.score.replace('×','')}<i>×</i></b><span>Breakout<br>Score</span></span>`;
+// one card, built like the live results card
+function card(v,o){o=o||{};
+  return `<article class="lc"${o.i!=null?` data-i="${o.i}"`:''}>
+  <div class="lc-th th"${o.play?` data-vid="${v.id}"`:''}>${o.play?'<button class="playbtn" aria-label="Play video"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#140f00"/></svg></button>':''}<img src="${img(v,'t')}" alt="" loading="lazy">${o.chip?`<span class="lc-sq">${esc(v.s)}</span>`:`<span class="lc-rk">${o.rank}</span>`}${v.dur?`<span class="lc-du">${v.dur}</span>`:''}${bs(v)}</div>
+  <div class="lc-bd">
+    <div class="lc-who"><img class="lc-av" src="${img(v,'a')}" alt=""><span><b>${esc(v.h)}</b><small>${v.f}</small></span><span class="lc-dt">${v.date}</span></div>
+    <p class="lc-cp">${capH(v.cap)}</p>
+    <div class="lc-st"><span>${IC.v}${v.v}</span><span>${IC.l}${v.l}</span><span>${IC.c}${v.c}</span><span>${IC.s}${v.sh}</span></div>
+    ${o.noAct?'':`<div class="lc-act">${o.done?`<button class="lc-btn dark" data-a="${o.i}">${IC.ok} View analysis →</button>`:`<button class="lc-btn${o.cta?' js-go':''}" data-a="${o.i}">${IC.sp} Analyze video</button>`}<button class="lc-bm" aria-label="Save">${IC.bm}</button></div>`}
+  </div></article>`}
 function go(id){document.querySelectorAll('.scr').forEach(s=>s.classList.toggle('on',s.id===id));$('#screen').scrollTop=0}
 document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go));
 
-// keywords
-$('#chips').addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;c.classList.toggle('sel');
-  const n=document.querySelectorAll('#chips .chip.sel').length;$('#kwCount').textContent=n+' selected · all in one search'});
-
-// run search
+// run search: one quick bar, then results
 function run(){
-  go('s2');const fill=$('#barFill'),txt=$('#stepTxt');const n=document.querySelectorAll('#chips .chip.sel').length||1;
-  const steps=['Pulling TikToks for '+n+' keyword'+(n>1?'s':''),"Comparing each video to its creator's average",'Ranking by Breakout Score'];
-  let t=0;fill.style.transition='none';fill.style.width='0';requestAnimationFrame(()=>{fill.style.transition='width 2.1s ease';fill.style.width='100%'});
-  txt.textContent=steps[0];setTimeout(()=>txt.textContent=steps[1],700);setTimeout(()=>txt.textContent=steps[2],1400);
-  setTimeout(()=>go('s3'),2250);
+  go('s2');const fill=$('#barFill'),txt=$('#stepTxt');
+  const steps=['Pulling TikToks',"Comparing each video to its creator's average",'Ranking by Breakout Score'];
+  fill.style.transition='none';fill.style.width='0';requestAnimationFrame(()=>requestAnimationFrame(()=>{fill.style.transition='width .9s ease';fill.style.width='100%'}));
+  txt.textContent=steps[0];setTimeout(()=>txt.textContent=steps[1],300);setTimeout(()=>txt.textContent=steps[2],600);
+  setTimeout(()=>go('s3'),1000);
 }
 $('#appGo').onclick=run;$('#appInput').addEventListener('keydown',e=>{if(e.key==='Enter')run()});
 
-// results grid
-$('#grid').innerHTML=VIDS.map((v,i)=>`<div class="vc" data-i="${i}"><div class="th"><img src="${v.img}" alt=""><span class="rank">${i+1}</span><span class="score"><b>${v.score}</b><span>Breakout<br>Score</span></span></div>
- <div class="meta"><div class="h">${v.h}</div><div class="f">${v.f}</div><div class="st"><span>▶ ${v.views}</span><span>♥ ${v.likes}</span></div><span class="open">Open video →</span></div></div>`).join('');
-$('#grid').addEventListener('click',e=>{const c=e.target.closest('.vc');if(c)openRO(+c.dataset.i)});
+// results grid: 12 cards, Load more shows 12 more
+const RH=LIVE.filter(v=>v.s==='rhode skin');let shown=0;
+function more(n){const end=Math.min(shown+n,RH.length);$('#grid').insertAdjacentHTML('beforeend',RH.slice(shown,end).map((v,k)=>card(v,{i:shown+k,rank:shown+k+1,done:shown+k===0})).join(''));shown=end;
+  if(shown>=RH.length)$('#more').innerHTML=`Showing ${shown} of 75 breakouts.<a class="mbtn y js-go" href="#search">See them all free →</a>`}
+more(12);$('#loadMore').onclick=()=>more(12);
+$('#grid').addEventListener('click',e=>{const c=e.target.closest('.lc');if(!c||e.target.closest('.lc-bm'))return;openRO(+c.dataset.i)});
 
 function openRO(i){
-  const v=VIDS[i];
-  const list=a=>a.map((d,k)=>`<div class="drv"><span class="n">0${k+1}</span><div><h5>${d[0]}</h5><p>${d[1]}</p></div></div>`).join('');
-  const analysis=v.analysis?`<div class="tabs" id="roTabs"><button class="on" data-t="why">Why it worked</button><button data-t="next">What to do next</button></div>
-     <div id="tWhy">${list(WHY)}</div><div id="tNext" style="display:none">${list(NEXT)}</div>`
-   :`<div class="lock"><span><b>Why it worked</b> and what to do next. Video analysis is on Growth and Scale.</span><a class="btn js-cta" href="#pricing" style="padding:9px 14px;font-size:13.5px">See plans</a></div>`;
-  $('#ro').innerHTML=`<div class="ro">
-    <div class="side"><div class="th"><img src="${v.img}" alt=""></div><div class="h">${v.h}</div><div class="f">${v.f} · posted ${v.date}</div>
-      <div class="st"><span>▶ ${v.views}</span><span>♥ ${v.likes}</span><span>💬 ${v.com}</span><span>↗ ${v.sh}</span></div></div>
-    <div><div class="panel"><div class="big"><b>${v.exact||v.score}</b><span>Breakout Score: how far it beat ${v.h}'s average</span></div><p class="cap">“${v.cap}”</p>${analysis}</div></div>
-  </div>`;
+  const v=RH[i];const list=(a,pad)=>a.map((d,k)=>`<div class="an-it"><span class="n">${pad?String(k+1).padStart(2,'0'):k+1}</span><div><h5>${d[0]}</h5><p>${esc(d[1])}</p></div></div>`).join('');
+  const side=`<div class="an-side">${card(v,{rank:i+1,noAct:true})}${i===0?`<div class="an-ok">${IC.ok} Analysis ready</div><div class="an-sh">${IC.sh} Share with your team and creators</div>`:''}</div>`;
+  const right=i===0?`<div><p class="an-q">“${capH(v.cap)}”</p>
+    <div class="an-ban"><span>ⓘ</span><span><b>${v.score} Breakout Score:</b> how far this video beat ${esc(v.h)}'s average video.</span></div>
+    <div class="an-tabs" id="roTabs"><button class="on" data-t="why">Why it went viral</button><button data-t="hook">Hook</button></div>
+    <div id="tWhy"><div class="an-box"><h4>Why it worked <small>${WHY.length} drivers</small></h4>${list(WHY,1)}</div>
+      <div class="an-box"><h4>What could be improved</h4><p class="an-mt">Nothing measurable held this video back.</p></div>
+      <div class="an-box cream"><h4>What you should do next</h4>${list(NEXT,1)}</div></div>
+    <div id="tHook" style="display:none"><div class="an-box an-hook"><img src="${img(v,'t')}" alt=""><b>“Name me a better marketing brand”</b></div>
+      <button class="an-copy" type="button" data-copy="Name me a better marketing brand">⧉ Copy hook for a brief</button>
+      <div class="an-box"><h4>Why it stops the scroll <small>${STOP.length} reasons</small></h4>${list(STOP,0)}</div>
+      <div class="an-box cream"><h4>Swipe this hook</h4>${SWIPE.map(t=>`<div class="an-rw"><span>${esc(t)}</span><button type="button" data-copy="${esc(t)}">Copy</button></div>`).join('')}</div></div></div>`
+   :`<div class="an-box an-gate"><h4>Analyze this video</h4><p>See why ${esc(v.h)}'s video broke out and what to do next for your brand. Free includes 5 video analyses.</p>
+      <a class="gbtn" href="../bb-3/app.html#home-checklist"><span class="g">${$('#signin .gbtn .g').innerHTML}</span>Sign in free to analyze</a></div>`;
+  $('#ro').innerHTML=`<div class="an">${side}${right}</div>`;
   const tabs=$('#roTabs');if(tabs)tabs.onclick=e=>{const b=e.target.closest('button');if(!b)return;tabs.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));
-    $('#tWhy').style.display=b.dataset.t==='why'?'':'none';$('#tNext').style.display=b.dataset.t==='next'?'':'none'};
+    $('#tWhy').style.display=b.dataset.t==='why'?'':'none';$('#tHook').style.display=b.dataset.t==='hook'?'':'none'};
   go('s4');
 }
+document.addEventListener('click',e=>{const b=e.target.closest('[data-copy]');if(!b)return;try{navigator.clipboard.writeText(b.dataset.copy)}catch(x){}const t=b.textContent;b.textContent='Copied';setTimeout(()=>b.textContent=t,1200)});
+
+// proof cards (live card) and the wall of breakouts
+(()=>{const pick=['7660633484918033682','7667704326613159182','7570361891399142670'].map(id=>LIVE.find(v=>v.id===id));
+  $('#proofCards').innerHTML=pick.map(v=>card(v,{chip:1,play:1,cta:1})).join('');
+  const t=v=>`<span class="wt"><img src="${img(v,'t')}" alt=""><b>${v.score}</b></span>`;
+  const r1=RH.slice(0,12).map(t).join(''),r2=RH.slice(12,24).map(t).join('');
+  $('#wall').innerHTML=`<div class="wrow">${r1}${r1.replace(/<span class="wt">/g,'<span class="wt" aria-hidden="true">')}</div><div class="wrow b">${r2}${r2.replace(/<span class="wt">/g,'<span class="wt" aria-hidden="true">')}</div>`})();
 
 // mock controls
 function setMedia(m){$('#media').dataset.show=m;document.querySelectorAll('#mediaSeg button').forEach(b=>b.classList.toggle('on',b.dataset.m===m));try{localStorage.setItem('bbMedia',m)}catch(e){}}
@@ -796,7 +902,7 @@ setMedia(m0==='app'?'app':'video');setNotes(qs.get('notes')==='1'?'1':'0');
 $('#video').onclick=()=>$('#video').classList.toggle('on');
 
 // every CTA goes to the hero search box
-document.addEventListener('click',e=>{const a=e.target.closest('a.js-cta[href="#search"]');if(!a)return;e.preventDefault();
+document.addEventListener('click',e=>{const a=e.target.closest('a.js-cta[href="#search"], .js-go');if(!a)return;e.preventDefault();
   if(document.body.dataset.first==='signin'){$('#signin').scrollIntoView({behavior:'smooth',block:'center'});return}
   $('#search').scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>$('#heroInput').focus({preventScroll:true}),450)});
 // hero search hands off to the clickable model
@@ -812,6 +918,7 @@ function setFirst(f){document.body.dataset.first=f;document.querySelectorAll('#f
 $('#firstSeg').onclick=e=>{const b=e.target.closest('button');if(b)setFirst(b.dataset.f)};
 let f0=qs.get('first');if(!f0){try{f0=localStorage.getItem('bbFirst')}catch(e){}}
 setFirst(f0==='search'?'search':'signin');
+if(qs.has('shot'))document.querySelector('.mockbar').style.display='none';
 
 addEventListener('scroll',()=>$('#nav').classList.toggle('scrolled',scrollY>8),{passive:true});
 // count up the brand number when it scrolls into view
@@ -844,10 +951,10 @@ const onView=(el,fn,th=.35)=>{const io=new IntersectionObserver(es=>{if(es.some(
   ch.classList.add('anim');onView(ch,()=>ch.classList.add('in'),.5)})();
 // proof cards slide up, each Breakout Score counts up
 (()=>{const cs=$('#proof .cards');if(!cs||calm)return;cs.classList.add('anim');
-  const bs=[...cs.querySelectorAll('.score b')].map(b=>{const m=b.textContent.match(/^([\d.]+)(K?)(×)$/);return m&&{b,to:+m[1],d:m[1].includes('.')?1:0,suf:m[2]+m[3]}}).filter(Boolean);
-  bs.forEach(x=>x.b.textContent=(0).toFixed(x.d)+x.suf);
+  const bs=[...cs.querySelectorAll('.lc-bs b')].map(b=>{const m=b.firstChild.nodeValue.match(/^([\d.]+)(K?)$/);return m&&{b:b.firstChild,to:+m[1],d:m[1].includes('.')?1:0,suf:m[2]}}).filter(Boolean);
+  bs.forEach(x=>x.b.nodeValue=(0).toFixed(x.d)+x.suf);
   onView(cs,()=>{cs.classList.add('in');bs.forEach((x,i)=>setTimeout(()=>{const t0=performance.now(),dur=1300;
-    const tick=t=>{const k=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-k,3);x.b.textContent=(x.to*e).toFixed(x.d)+x.suf;if(k<1)requestAnimationFrame(tick)};requestAnimationFrame(tick)},250+i*140))},.3)})();
+    const tick=t=>{const k=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-k,3);x.b.nodeValue=(x.to*e).toFixed(x.d)+x.suf;if(k<1)requestAnimationFrame(tick)};requestAnimationFrame(tick)},250+i*140))},.3)})();
 // hero placeholder types example searches until the visitor clicks in
 (()=>{const inp=$('#heroInput');if(!inp||calm)return;const base=inp.placeholder,ex=['rhode skin',"Dr. Scholl's",'LED face mask','your competitor'];
   let stop=false;inp.addEventListener('focus',()=>{stop=true;inp.placeholder=base});
@@ -859,7 +966,7 @@ const onView=(el,fn,th=.35)=>{const io=new IntersectionObserver(es=>{if(es.some(
 // proof cards play the TikTok in place
 (()=>{const m=$('#vmodal'),f=$('#vframe');if(!m)return;
   const close=()=>{m.classList.remove('on');f.innerHTML=''};
-  document.querySelectorAll('#proof .th[data-vid], #proof .vprev[data-vid]').forEach(th=>th.addEventListener('click',()=>{const id=th.dataset.vid;if(!id)return;
+  document.querySelectorAll('#proof .lc-th[data-vid], #proof .vprev[data-vid]').forEach(th=>th.addEventListener('click',()=>{const id=th.dataset.vid;if(!id)return;
     f.innerHTML=`<iframe src="https://www.tiktok.com/player/v1/${id}?autoplay=1&rel=0&description=1" allow="autoplay; fullscreen; encrypted-media" allowfullscreen title="TikTok video"></iframe>`;m.classList.add('on')}));
   m.addEventListener('click',e=>{if(e.target===m||e.target.closest('.x'))close()});
   addEventListener('keydown',e=>{if(e.key==='Escape')close()})})();
