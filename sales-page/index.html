@@ -300,7 +300,33 @@ h2{font-size:44px;line-height:1.08;font-weight:800;letter-spacing:-.02em;margin-
 .feat .off{color:#a8a397}
 .feat .off:before{content:"";width:10px}
 .plan .btn{margin-top:22px;width:100%}
+.bill{display:inline-flex;border:1px solid var(--line);border-radius:10px;padding:3px;margin-top:28px;background:#fff}
+.bill button{padding:8px 18px;border-radius:7px;font-weight:700;font-size:14.5px;color:var(--ink2)}
+.bill button.on{background:var(--ink);color:#fff}
+.bill + .pr{margin-top:32px}
+
 .disc{font-size:12.5px;color:var(--ink3);margin-top:10px;line-height:1.45}
+
+
+/* reviews */
+.revs{background:var(--ysoft);border-top:1px solid #f3e3a8;border-bottom:1px solid #f3e3a8;padding:88px 0}
+.rv-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px}
+.rv-head h2{margin:0}
+.rv-nav{display:flex;gap:8px}
+.rv-nav button{width:40px;height:40px;border:1px solid #e6d189;border-radius:8px;background:#fff;font-size:17px;font-weight:700}
+.rv-nav button:hover{border-color:var(--ink)}
+.rv-row{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;margin-top:36px;padding-bottom:6px;scrollbar-width:none}
+.rv-row::-webkit-scrollbar{display:none}
+.rv{flex:0 0 352px;scroll-snap-align:start;background:#fff;border:1px solid #efe2b4;border-radius:12px;padding:24px;display:flex;flex-direction:column}
+.rv-st{display:flex;gap:2px}
+.rv-st svg{width:15px;height:15px;fill:var(--yd)}
+.rv blockquote{font-size:16px;line-height:1.55;color:var(--ink2);margin-top:14px;flex:1}
+.rv blockquote b{color:var(--ink);font-weight:700}
+.rv figcaption{display:flex;align-items:center;gap:12px;margin-top:20px;padding-top:16px;border-top:1px solid var(--line)}
+.rv-av{width:38px;height:38px;border-radius:50%;background:var(--ink);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:0 0 38px}
+.rv figcaption b{display:block;font-size:15px}
+.rv figcaption small{display:block;font-size:13px;color:var(--ink3);margin-top:1px}
+@media (max-width:720px){.revs{padding:60px 0}.rv-nav{display:none}.rv{flex-basis:84%}.rv-row{margin-top:24px}}
 
 /* faq */
 .faq{max-width:760px;margin:44px auto 0;text-align:left}
@@ -607,7 +633,7 @@ body.notes .vbelow{display:block}
 <div class="mockbar" role="group" aria-label="Mock controls">
   <span class="tagm">MOCK CONTROLS</span>
   <span class="lbl">Hero</span>
-  <span class="seg" id="mediaSeg"><button data-m="video" class="on">Demo video</button><button data-m="app">Clickable app</button></span>
+  <span class="seg" id="mediaSeg"><button data-m="app" class="on">Clickable app</button><button data-m="video">Demo video</button></span>
   <span class="lbl">First step</span>
   <span class="seg" id="firstSeg"><button data-f="signin" class="on">Sign in first</button><button data-f="search">Search first</button></span>
   <span class="seg" id="noteSeg"><button data-n="0" class="on">Notes off</button><button data-n="1">Notes on</button></span>
@@ -646,8 +672,8 @@ body.notes .vbelow{display:block}
       <p class="micro"><b>3 free searches and 5 video analyses</b> · no credit card</p>
     </div>
 
-    <div class="media" id="media" data-show="video">
-      <div class="note" style="top:-14px;right:-8px"><b>3</b> Hero media: compare the two with the control at the bottom. Clickable app (Ivan, 14 Oct): no keyword step, a one-second search, cards as in the live app, and 24 of the 108 breakouts behind Load more. Ivan, 15 Oct: the demo is now a real nike search led by @natali.gogaladze (7.2M views, 1.7K followers, 5.1K×): Nike product photos with one line of text over a trending sound, 8 seconds. Analyze video on it plays the live processing state for about 3 seconds, then opens its full saved analysis: Why it worked, What could be improved, What you should do next, and the Hook tab.</div>
+    <div class="media" id="media" data-show="app">
+      <div class="note" style="top:-14px;right:-8px"><b>3</b> Hero media: the clickable app is now the default (Ivan, 17 Oct huddle: "I like the clickable app the best"). The demo video stays one tap away in the mock controls. Clickable app (Ivan, 14 Oct): no keyword step, a one-second search, cards as in the live app, and 24 of the 108 breakouts behind Load more. Ivan, 15 Oct: the demo is now a real nike search led by @natali.gogaladze (7.2M views, 1.7K followers, 5.1K×): Nike product photos with one line of text over a trending sound, 8 seconds. Analyze video on it plays the live processing state for about 3 seconds, then opens its full saved analysis: Why it worked, What could be improved, What you should do next, and the Hook tab.</div>
 
       <!-- Option A: demo video -->
       <div data-pane="video">
@@ -719,7 +745,7 @@ body.notes .vbelow{display:block}
 </div>
 
 <section class="grey rel" id="proof"><div class="wrap">
-  <div class="note"><b>1</b> Real breakouts from three live searches replace the six testimonials. Cards now match the live app card, and 24 real breakouts from one search scroll below them (Ivan, 14 Oct). <b>4</b> One Breakout Score definition everywhere: against the creator's average video (Ivan, 9 Oct). Videos play here instead of linking out.</div>
+  <div class="note"><b>1</b> Slot for the 3 breakouts Ivan shared on Slack with Maia (16 Oct Sheet note), waiting on their links and live numbers. Until then these three stay. Real breakouts from three live searches replace the six testimonials. Cards now match the live app card, and 24 real breakouts from one search scroll below them (Ivan, 14 Oct). <b>4</b> One Breakout Score definition everywhere: against the creator's average video (Ivan, 9 Oct). Videos play here instead of linking out.</div>
   <div class="proof-top">
     <div class="explain">
       <h2>A Breakout outperforms the creator's average video</h2>
@@ -754,6 +780,13 @@ body.notes .vbelow{display:block}
   <div class="after"><a class="btn lg js-cta" href="#search">Run your free search <span class="arr">→</span></a></div>
 </div></section>
 
+<!-- PLACEHOLDER REVIEWS: names, roles and quotes are made up to show the layout (Ivan, 17 Oct huddle). Swap for real customer quotes before launch. -->
+<section class="revs rel" id="reviews"><div class="wrap">
+  <div class="note"><b>R</b> PLACEHOLDER: five made-up reviews so the page has social proof (Ivan, 17 Oct huddle: "five people... make something up... to make it look real"). Names, roles and quotes are not real; swap them for real customer quotes before launch. Yellow review row like formatfinder (Ivan, 14 Oct). Quotes carry no numbers, so no Breakout figures are invented.</div>
+  <div class="rv-head"><h2>What brand teams are saying</h2><div class="rv-nav"><button type="button" data-d="-1" aria-label="Previous reviews">←</button><button type="button" data-d="1" aria-label="More reviews">→</button></div></div>
+  <div class="rv-row" id="rvRow" tabindex="0" aria-label="Reviews"><figure class="rv"><span class="rv-st" aria-label="5 out of 5 stars"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg></span><blockquote>We used to screenshot competitor TikToks into a Slack channel and argue about why they worked. Now <b>every content meeting starts with our breakouts</b>, and the analysis is already there.</blockquote><figcaption><span class="rv-av" aria-hidden="true">MO</span><span><b>Megan Ortiz</b><small>Social lead, clean beauty brand</small></span></figcaption></figure><figure class="rv"><span class="rv-st" aria-label="5 out of 5 stars"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg></span><blockquote>I'm a team of one. Brand Beacon showed me <b>which creator videos about us beat their usual numbers</b>. Those are the creators I reach out to first now.</blockquote><figcaption><span class="rv-av" aria-hidden="true">JR</span><span><b>Jordan Reese</b><small>Founder, cold brew coffee brand</small></span></figcaption></figure><figure class="rv"><span class="rv-st" aria-label="5 out of 5 stars"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg></span><blockquote>Our listings get hundreds of creator videos and sorting by views never told us much. <b>Breakout Score points straight at the ones worth remaking.</b></blockquote><figcaption><span class="rv-av" aria-hidden="true">PN</span><span><b>Priya Natarajan</b><small>TikTok Shop manager, home goods</small></span></figcaption></figure><figure class="rv"><span class="rv-st" aria-label="5 out of 5 stars"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg></span><blockquote>The part that sold me is what you should do next. <b>My editors get a brief instead of a spreadsheet.</b></blockquote><figcaption><span class="rv-av" aria-hidden="true">TB</span><span><b>Tyler Brooks</b><small>Head of growth, activewear</small></span></figcaption></figure><figure class="rv"><span class="rv-st" aria-label="5 out of 5 stars"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg></span><blockquote>We run TikTok for six brands. With the weekly refresh, <b>nobody spends Monday morning scrolling</b> to find what took off over the weekend.</blockquote><figcaption><span class="rv-av" aria-hidden="true">DW</span><span><b>Dana Whitfield</b><small>Account director, TikTok agency</small></span></figcaption></figure></div>
+</div></section>
+
 <section class="grey rel" id="who"><div class="wrap c">
   <div class="note"><b>7</b> Built for and not built for, based on StarbornAI's version.</div>
   <p class="eyebrow">Who it's for</p>
@@ -773,10 +806,11 @@ body.notes .vbelow{display:block}
 </div></section>
 
 <section class="rel" id="pricing"><div class="wrap c">
-  <div class="note"><b>6</b> Free lists what it includes. Annual price sits under monthly. Second trial strip removed. 3 free searches and 5 video analyses is Ivan's plan (agreed on Slack); the live site still says 1 search and 0 analyses, so this ships with that change.</div>
+  <div class="note"><b>6</b> Yearly is the default and shows the monthly equivalent (yearly / 12), like formatfinder and UGC Breakouts (Ivan, 14 Oct note and 17 Oct huddle). Monthly shows the higher $99 / $199. Plan prices unchanged. Free lists what it includes. Second trial strip removed. 3 free searches and 5 video analyses is Ivan's plan (agreed on Slack); the live site still says 1 search and 0 analyses, so this ships with that change.</div>
   <p class="eyebrow">Pricing</p>
   <h2>Start with 3 free searches</h2>
   <p class="lead">No card for the free searches. Growth and Scale start with 8 days free.</p>
+  <div class="bill" id="bill" role="group" aria-label="Billing period"><button type="button" data-b="m">Monthly</button><button type="button" data-b="y" class="on">Yearly</button></div>
   <div class="pr">
     <div class="plan">
       <h4>Free</h4><p class="t">See your top breakouts.</p>
@@ -787,14 +821,14 @@ body.notes .vbelow{display:block}
     <div class="plan pop">
       <span class="badge">MOST POPULAR</span>
       <h4>Growth</h4><p class="t">For a single brand.</p>
-      <div class="price">$99<small>/mo</small></div><p class="ann">or $990/yr, two months free</p>
+      <div class="price" data-m="99" data-y="990">$82.50<small>/mo</small></div><p class="ann">Billed $990 yearly. Save $198</p>
       <div class="feat"><div>100 searches</div><div>100 video analyses</div><div>Weekly refresh</div><div>Virality alerts</div><div>Unlimited bookmarks</div></div>
       <a class="btn ghost" href="#pricing">Try free for 8 days</a>
       <p class="disc">Card required. Your plan starts when the trial ends unless you cancel first.</p>
     </div>
     <div class="plan">
       <h4>Scale</h4><p class="t">For brand and agency teams.</p>
-      <div class="price">$199<small>/mo</small></div><p class="ann">or $1,899/yr</p>
+      <div class="price" data-m="199" data-y="1899">$158.25<small>/mo</small></div><p class="ann">Billed $1,899 yearly. Save $489</p>
       <div class="feat"><div>Unlimited searches</div><div>Unlimited video analyses</div><div>Weekly refresh</div><div>Virality alerts</div><div>Unlimited bookmarks</div></div>
       <a class="btn ghost" href="#pricing">Try free for 8 days</a>
       <p class="disc">Card required. Your plan starts when the trial ends unless you cancel first.</p>
@@ -1023,20 +1057,26 @@ function openRO(i,running){
 document.addEventListener('click',e=>{const b=e.target.closest('[data-copy]');if(!b)return;try{navigator.clipboard.writeText(b.dataset.copy)}catch(x){}const t=b.textContent;b.textContent='Copied';setTimeout(()=>b.textContent=t,1200)});
 
 // proof cards (live card) and the wall of breakouts
-(()=>{const pick=['7660633484918033682','7667704326613159182','7570361891399142670'].map(id=>LIVE.find(v=>v.id===id));
+// Ivan's 3 breakouts (16 Oct Sheet note, row 11: "put the 3 breakouts i shared in slack (with maia)").
+// SLOT: fill each entry from a real BrandBeacon run, never invented. Needs: id (TikTok video id from the URL),
+// s (search term chip), h (@handle), f ("1.7K followers"), score ("5.1K×"), dur, date, cap (caption),
+// v/l/c/sh (views, likes, comments, shares), plus img/live/<id>-t.jpg (thumbnail) and img/live/<id>-a.jpg (avatar).
+// While any entry is null, the three current rhode/nike picks stay.
+const IVAN3=[null,null,null];
+(()=>{const pick=IVAN3.every(Boolean)?IVAN3:['7660633484918033682','7667704326613159182','7570361891399142670'].map(id=>LIVE.find(v=>v.id===id));
   $('#proofCards').innerHTML=pick.map(v=>card(v,{chip:1,play:1,cta:1})).join('');
   const t=v=>`<span class="wt"><img src="${img(v,'t')}" alt=""><b>${v.score}</b></span>`;
   const r1=RH.slice(0,12).map(t).join(''),r2=RH.slice(12,24).map(t).join('');
   $('#wall').innerHTML=`<div class="wrow">${r1}${r1.replace(/<span class="wt">/g,'<span class="wt" aria-hidden="true">')}</div><div class="wrow b">${r2}${r2.replace(/<span class="wt">/g,'<span class="wt" aria-hidden="true">')}</div>`})();
 
 // mock controls
-function setMedia(m){$('#media').dataset.show=m;document.querySelectorAll('#mediaSeg button').forEach(b=>b.classList.toggle('on',b.dataset.m===m));try{localStorage.setItem('bbMedia',m)}catch(e){}}
+function setMedia(m){$('#media').dataset.show=m;document.querySelectorAll('#mediaSeg button').forEach(b=>b.classList.toggle('on',b.dataset.m===m));try{localStorage.setItem('bbMedia2',m)}catch(e){}}
 function setNotes(n){document.body.classList.toggle('notes',n==='1');document.querySelectorAll('#noteSeg button').forEach(b=>b.classList.toggle('on',b.dataset.n===n))}
 $('#mediaSeg').onclick=e=>{const b=e.target.closest('button');if(b)setMedia(b.dataset.m)};
 $('#noteSeg').onclick=e=>{const b=e.target.closest('button');if(b)setNotes(b.dataset.n)};
 const qs=new URLSearchParams(location.search);
-let m0=qs.get('media');if(!m0){try{m0=localStorage.getItem('bbMedia')}catch(e){}}
-setMedia(m0==='app'?'app':'video');setNotes(qs.get('notes')==='1'?'1':'0');
+let m0=qs.get('media');if(!m0){try{m0=localStorage.getItem('bbMedia2')}catch(e){}}
+setMedia(m0==='video'?'video':'app');setNotes(qs.get('notes')==='1'?'1':'0');
 
 // demo video placeholder
 $('#video').onclick=()=>$('#video').classList.toggle('on');
@@ -1110,6 +1150,16 @@ const onView=(el,fn,th=.35)=>{const io=new IntersectionObserver(es=>{if(es.some(
     f.innerHTML=`<iframe src="https://www.tiktok.com/player/v1/${id}?autoplay=1&rel=0&description=1" allow="autoplay; fullscreen; encrypted-media" allowfullscreen title="TikTok video"></iframe>`;m.classList.add('on')}));
   m.addEventListener('click',e=>{if(e.target===m||e.target.closest('.x'))close()});
   addEventListener('keydown',e=>{if(e.key==='Escape')close()})})();
+
+// billing toggle: yearly default, price shown per month
+(()=>{const money=n=>'$'+(Number.isInteger(n)?n.toLocaleString('en-US'):n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}));
+function setBill(b){document.querySelectorAll('#bill button').forEach(x=>x.classList.toggle('on',x.dataset.b===b));
+  document.querySelectorAll('.price[data-m]').forEach(el=>{const m=+el.dataset.m,y=+el.dataset.y,ann=el.nextElementSibling;
+    if(b==='y'){el.innerHTML=money(Math.round(y/12*100)/100)+'<small>/mo</small>';ann.textContent='Billed '+money(y)+' yearly. Save '+money(m*12-y)}
+    else{el.innerHTML=money(m)+'<small>/mo</small>';ann.textContent='Billed monthly'}})}
+const bill=document.getElementById('bill');if(bill){bill.onclick=e=>{const x=e.target.closest('button');if(x)setBill(x.dataset.b)};setBill('y')}})();
+// reviews row arrows
+(()=>{const row=document.getElementById('rvRow');if(!row)return;document.querySelectorAll('.rv-nav button').forEach(b=>b.onclick=()=>{const c=row.querySelector('.rv');row.scrollBy({left:(+b.dataset.d)*(c?c.offsetWidth+18:360),behavior:'smooth'})})})();
 </script>
 </body>
 </html>
