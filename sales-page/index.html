@@ -86,7 +86,14 @@ body[data-first="search"] #signin{display:none}
 @media (max-width:720px){.gbox .note{display:none!important}.gbtn{font-size:16px}}
 
 /* hero media */
-.media{max-width:960px;margin:84px auto 0;position:relative}
+.media{max-width:960px;margin:56px auto 0;position:relative}
+.tryhint{margin:0 auto 16px;max-width:560px;font-size:15.5px;color:var(--ink2);text-align:center;line-height:1.45}
+.tryhint b{color:var(--ink)}
+.tryhint .ar{display:inline-block;font-weight:800;color:var(--ink);animation:tryb 1.6s ease-in-out infinite}
+@keyframes tryb{50%{transform:translateY(3px)}}
+@media (prefers-reduced-motion:reduce){.tryhint .ar{animation:none}}
+.livetag{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--ink2);white-space:nowrap}
+.livetag i{width:7px;height:7px;border-radius:50%;background:#1DB954}
 .media [data-pane]{display:none}
 .media[data-show=video] [data-pane=video],.media[data-show=app] [data-pane=app]{display:block}
 
@@ -673,7 +680,7 @@ body.notes .vbelow{display:block}
     </div>
 
     <div class="media" id="media" data-show="app">
-      <div class="note" style="top:-14px;right:-8px"><b>3</b> Hero media: the clickable app is now the default (Ivan, 17 Oct huddle: "I like the clickable app the best"). The demo video stays one tap away in the mock controls. Clickable app (Ivan, 14 Oct): no keyword step, a one-second search, cards as in the live app, and 24 of the 108 breakouts behind Load more. Ivan, 15 Oct: the demo is now a real nike search led by @natali.gogaladze (7.2M views, 1.7K followers, 5.1K×): Nike product photos with one line of text over a trending sound, 8 seconds. Analyze video on it plays the live processing state for about 3 seconds, then opens its full saved analysis: Why it worked, What could be improved, What you should do next, and the Hook tab.</div>
+      <div class="note" style="top:-14px;right:-8px"><b>3</b> Ivan, 20 Oct: a line under Continue with Google now tells people the app below is clickable, and the window says Live demo. Hero media: the clickable app is now the default (Ivan, 17 Oct huddle: "I like the clickable app the best"). The demo video stays one tap away in the mock controls. Clickable app (Ivan, 14 Oct): no keyword step, a one-second search, cards as in the live app, and 24 of the 108 breakouts behind Load more. Ivan, 15 Oct: the demo is now a real nike search led by @natali.gogaladze (7.2M views, 1.7K followers, 5.1K×): Nike product photos with one line of text over a trending sound, 8 seconds. Analyze video on it plays the live processing state for about 3 seconds, then opens its full saved analysis: Why it worked, What could be improved, What you should do next, and the Hook tab.</div>
 
       <!-- Option A: demo video -->
       <div data-pane="video">
@@ -688,8 +695,9 @@ body.notes .vbelow{display:block}
 
       <!-- Option B: clickable app model -->
       <div data-pane="app">
+        <p class="tryhint"><span class="ar" aria-hidden="true">↓</span> <b>Try it below.</b> This is a working copy of Brand Beacon: run the search, open a breakout, tap Analyze video.</p>
         <div class="device">
-          <div class="chrome"><span class="dots"><i></i><i></i><i></i></span><span class="url">🔒 brandbeacon.io/search</span><span class="spacer"></span></div>
+          <div class="chrome"><span class="dots"><i></i><i></i><i></i></span><span class="url">🔒 brandbeacon.io/search</span><span class="spacer"></span><span class="livetag"><i></i>Live demo · clickable</span></div>
           <div class="screen" id="screen">
 
             <div class="scr on" id="s1">
@@ -806,7 +814,7 @@ body.notes .vbelow{display:block}
 </div></section>
 
 <section class="rel" id="pricing"><div class="wrap c">
-  <div class="note"><b>6</b> Yearly is the default and shows the monthly equivalent (yearly / 12), like formatfinder and UGC Breakouts (Ivan, 14 Oct note and 17 Oct huddle). Monthly shows the higher $99 / $199. Plan prices unchanged. Free lists what it includes. Second trial strip removed. 3 free searches and 5 video analyses is Ivan's plan (agreed on Slack); the live site still says 1 search and 0 analyses, so this ships with that change.</div>
+  <div class="note"><b>6</b> Yearly is the default and shows the monthly equivalent (yearly / 12), like formatfinder and UGC Breakouts (Ivan, 14 Oct note and 17 Oct huddle). Yearly is $79.99 / $155.99 a month, billed annually (Ivan, 20 Oct). Monthly shows the higher $99 / $199. Free lists what it includes. Second trial strip removed. 3 free searches and 5 video analyses is Ivan's plan (agreed on Slack); the live site still says 1 search and 0 analyses, so this ships with that change.</div>
   <p class="eyebrow">Pricing</p>
   <h2>Start with 3 free searches</h2>
   <p class="lead">No card for the free searches. Growth and Scale start with 8 days free.</p>
@@ -821,14 +829,14 @@ body.notes .vbelow{display:block}
     <div class="plan pop">
       <span class="badge">MOST POPULAR</span>
       <h4>Growth</h4><p class="t">For a single brand.</p>
-      <div class="price" data-m="99" data-y="990">$82.50<small>/mo</small></div><p class="ann">Billed $990 yearly. Save $198</p>
+      <div class="price" data-m="99" data-y="959.88">$79.99<small>/mo</small></div><p class="ann">Billed $959.88 yearly. Save $228.12</p>
       <div class="feat"><div>100 searches</div><div>100 video analyses</div><div>Weekly refresh</div><div>Virality alerts</div><div>Unlimited bookmarks</div></div>
       <a class="btn ghost" href="#pricing">Try free for 8 days</a>
       <p class="disc">Card required. Your plan starts when the trial ends unless you cancel first.</p>
     </div>
     <div class="plan">
       <h4>Scale</h4><p class="t">For brand and agency teams.</p>
-      <div class="price" data-m="199" data-y="1899">$158.25<small>/mo</small></div><p class="ann">Billed $1,899 yearly. Save $489</p>
+      <div class="price" data-m="199" data-y="1871.88">$155.99<small>/mo</small></div><p class="ann">Billed $1,871.88 yearly. Save $516.12</p>
       <div class="feat"><div>Unlimited searches</div><div>Unlimited video analyses</div><div>Weekly refresh</div><div>Virality alerts</div><div>Unlimited bookmarks</div></div>
       <a class="btn ghost" href="#pricing">Try free for 8 days</a>
       <p class="disc">Card required. Your plan starts when the trial ends unless you cancel first.</p>
