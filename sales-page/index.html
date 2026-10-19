@@ -745,7 +745,7 @@ body.notes .vbelow{display:block}
 </div>
 
 <section class="grey rel" id="proof"><div class="wrap">
-  <div class="note"><b>1</b> Slot for the 3 breakouts Ivan shared on Slack with Maia (16 Oct Sheet note), waiting on their links and live numbers. Until then these three stay. Real breakouts from three live searches replace the six testimonials. Cards now match the live app card, and 24 real breakouts from one search scroll below them (Ivan, 14 Oct). <b>4</b> One Breakout Score definition everywhere: against the creator's average video (Ivan, 9 Oct). Videos play here instead of linking out.</div>
+  <div class="note"><b>1</b> The 3 breakouts Ivan picked with Maia on Slack (16 Oct Sheet note): @tintdberry.1 (shoes), @abigailthecreator2 (medicube collagen mask) and @fuelingwithfrankie (protein). Numbers are from their BrandBeacon share pages. Those pages show no search term, so the cards have no chip, and their Breakout Scores (6×, 3.8×, 2×) are on the share page scale, not the K× scale of the results cards. Real breakouts from three live searches replace the six testimonials. Cards now match the live app card, and 24 real breakouts from one search scroll below them (Ivan, 14 Oct). <b>4</b> One Breakout Score definition everywhere: against the creator's average video (Ivan, 9 Oct). Videos play here instead of linking out.</div>
   <div class="proof-top">
     <div class="explain">
       <h2>A Breakout outperforms the creator's average video</h2>
@@ -990,7 +990,7 @@ const bs=v=>`<span class="lc-bs"><b>${v.score.replace('×','')}<i>×</i></b><spa
 // one card, built like the live results card
 function card(v,o){o=o||{};
   return `<article class="lc"${o.i!=null?` data-i="${o.i}"`:''}>
-  <div class="lc-th th"${o.play?` data-vid="${v.id}"`:''}>${o.play?'<button class="playbtn" aria-label="Play video"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#140f00"/></svg></button>':''}<img src="${img(v,'t')}" alt="" loading="lazy">${o.chip?`<span class="lc-sq">${esc(v.s)}</span>`:`<span class="lc-rk">${o.rank}</span>`}${v.dur?`<span class="lc-du">${v.dur}</span>`:''}${bs(v)}</div>
+  <div class="lc-th th"${o.play?` data-vid="${v.id}"`:''}>${o.play?'<button class="playbtn" aria-label="Play video"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#140f00"/></svg></button>':''}<img src="${img(v,'t')}" alt="" loading="lazy">${o.chip?(v.s?`<span class="lc-sq">${esc(v.s)}</span>`:''):`<span class="lc-rk">${o.rank}</span>`}${v.dur?`<span class="lc-du">${v.dur}</span>`:''}${bs(v)}</div>
   <div class="lc-bd">
     <div class="lc-who"><img class="lc-av" src="${img(v,'a')}" alt=""><span><b>${esc(v.h)}</b><small>${v.f}</small></span><span class="lc-dt">${v.date}</span></div>
     <p class="lc-cp">${capH(v.cap)}</p>
@@ -1062,7 +1062,10 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-copy]');if
 // s (search term chip), h (@handle), f ("1.7K followers"), score ("5.1K×"), dur, date, cap (caption),
 // v/l/c/sh (views, likes, comments, shares), plus img/live/<id>-t.jpg (thumbnail) and img/live/<id>-a.jpg (avatar).
 // While any entry is null, the three current rhode/nike picks stay.
-const IVAN3=[null,null,null];
+// Filled 19 Oct from the public BrandBeacon share pages Ivan picked (brandbeacon.io/b/tintdberry1/foh9748cth,
+// /b/abigailthecreator2/k3c7h57w7f, /b/fuelingwithfrankie/omkpjwj0wb). Numbers as those pages show them. The share page has no
+// search term, so s is empty and the card shows no chip. Its Breakout Score is a different scale from the results-page K× scores.
+const IVAN3=[{"id": "7678461315504950550", "s": "", "h": "@tintdberry.1", "f": "849 followers", "score": "6×", "dur": "0:40", "date": "Aug 27", "cap": "Don’t mind the backround sound, I couldn’t remove it for some reason 🥹 #viral #shoes #fashion #trend #fyp", "v": "1.5M", "l": "200K", "c": "306", "sh": "4.6K"}, {"id": "7661982315731602710", "s": "", "h": "@abigailthecreator2", "f": "7.7K followers", "score": "3.8×", "dur": "0:20", "date": "Jul 13", "cap": "How many hours does it actually take for this @medicube global PDRN Collagen Mask to turn transparent? Let’s find out 👀            #medicube #collagenmask #pdrncollagenmask", "v": "965K", "l": "31K", "c": "465", "sh": "1.4K"}, {"id": "7616468860237139214", "s": "", "h": "@fuelingwithfrankie", "f": "539 followers", "score": "2×", "dur": "0:13", "date": "Mar 13", "cap": "do you think protein wants to be in all these things?? #protein #highprotein #proteinicecream #proteinsnacks #nutrition", "v": "727K", "l": "125K", "c": "1.4K", "sh": "16K"}];
 (()=>{const pick=IVAN3.every(Boolean)?IVAN3:['7660633484918033682','7667704326613159182','7570361891399142670'].map(id=>LIVE.find(v=>v.id===id));
   $('#proofCards').innerHTML=pick.map(v=>card(v,{chip:1,play:1,cta:1})).join('');
   const t=v=>`<span class="wt"><img src="${img(v,'t')}" alt=""><b>${v.score}</b></span>`;
