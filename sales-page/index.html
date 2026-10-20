@@ -87,11 +87,16 @@ body[data-first="search"] #signin{display:none}
 
 /* hero media */
 .media{max-width:960px;margin:56px auto 0;position:relative}
-.tryhint{margin:0 auto 16px;max-width:560px;font-size:15.5px;color:var(--ink2);text-align:center;line-height:1.45}
-.tryhint b{color:var(--ink)}
-.tryhint .ar{display:inline-block;font-weight:800;color:var(--ink);animation:tryb 1.6s ease-in-out infinite}
-@keyframes tryb{50%{transform:translateY(3px)}}
-@media (prefers-reduced-motion:reduce){.tryhint .ar{animation:none}}
+.forline{margin:0 auto 18px;max-width:640px;font-size:15.5px;color:var(--ink2);text-align:center;line-height:1.45}
+.forline b{color:var(--ink)}
+/* demo frame: point at Find breakouts until it's pressed */
+.s1 .presshint{margin-top:12px;text-align:right;padding-right:34px;font-size:14px;font-weight:700;color:var(--ink)}
+.s1 .presshint .ar{display:inline-block;margin-right:6px;animation:pressb 1s ease-in-out infinite}
+@keyframes pressb{50%{transform:translateY(-4px)}}
+#appGo.pulse{animation:pressring 1.4s ease-out infinite}
+@keyframes pressring{0%{box-shadow:0 0 0 0 rgba(255,196,0,.75)}100%{box-shadow:0 0 0 14px rgba(255,196,0,0)}}
+.s1.pressed .presshint{visibility:hidden}
+@media (prefers-reduced-motion:reduce){.s1 .presshint .ar,#appGo.pulse{animation:none}}
 .livetag{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--ink2);white-space:nowrap}
 .livetag i{width:7px;height:7px;border-radius:50%;background:#1DB954}
 .media [data-pane]{display:none}
@@ -256,11 +261,14 @@ h2{font-size:44px;line-height:1.08;font-weight:800;letter-spacing:-.02em;margin-
 
 /* how */
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px;text-align:left}
-.stp{border:1px solid var(--line);border-radius:var(--r);padding:26px;background:#fff}
+.stp{border:1px solid var(--line);border-radius:var(--r);padding:26px;background:#fff;display:flex;flex-direction:column}
 .stp .num{font-family:'Space Mono',monospace;font-weight:700;color:var(--brown);font-size:13px}
 .stp h3{font-size:21px;margin-top:10px;font-weight:800}
-.stp p{font-size:15.5px;color:var(--ink2);margin-top:6px;line-height:1.5}
-.stp .vis{margin-top:20px;height:104px;border-radius:14px;background:var(--off);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;overflow:hidden}
+.stp p{font-size:15.5px;color:var(--ink2);margin-top:6px;line-height:1.5;margin-bottom:20px}
+.mini-row{display:flex;gap:8px;width:100%;align-items:center}
+.mini-row .mini-inp{flex:1;width:auto}
+.mini-go{height:42px;display:flex;align-items:center;padding:0 14px;border-radius:10px;background:var(--y);font-weight:800;font-size:13.5px;white-space:nowrap}
+.stp .vis{margin-top:auto;height:104px;border-radius:14px;background:var(--off);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;overflow:hidden}
 .mini-inp{width:100%;height:42px;background:#fff;border:1.5px solid var(--line);border-radius:10px;display:flex;align-items:center;padding:0 12px;font-weight:600;font-size:15px}
 .mini-inp:after{content:"";width:2px;height:18px;background:var(--ink);margin-left:2px;animation:blink 1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
@@ -680,7 +688,7 @@ body.notes .vbelow{display:block}
     </div>
 
     <div class="media" id="media" data-show="app">
-      <div class="note" style="top:-14px;right:-8px"><b>3</b> Ivan, 20 Oct: a line under Continue with Google now tells people the app below is clickable, and the window says Live demo. Hero media: the clickable app is now the default (Ivan, 17 Oct huddle: "I like the clickable app the best"). The demo video stays one tap away in the mock controls. Clickable app (Ivan, 14 Oct): no keyword step, a one-second search, cards as in the live app, and 24 of the 108 breakouts behind Load more. Ivan, 15 Oct: the demo is now a real nike search led by @natali.gogaladze (7.2M views, 1.7K followers, 5.1K×): Nike product photos with one line of text over a trending sound, 8 seconds. Analyze video on it plays the live processing state for about 3 seconds, then opens its full saved analysis: Why it worked, What could be improved, What you should do next, and the Hook tab.</div>
+      <div class="note" style="top:-14px;right:-8px"><b>3</b> Ivan, 20 Oct (second round): "Try it below" is gone. A blinking arrow and a pulsing ring on Find breakouts tell people to press it, and stop once they do. Who it's for now sits above the fold, in one line over the demo. Load more is gone from the results: all 24 breakouts show. <b>Dev:</b> the videos and analyses in this demo frame are ready to play as built: they are saved results, so nothing runs live and no sign-in is needed. Hero media: the clickable app is now the default (Ivan, 17 Oct huddle: "I like the clickable app the best"). The demo video stays one tap away in the mock controls. Clickable app (Ivan, 14 Oct): no keyword step, a one-second search, cards as in the live app, and 24 of the 108 breakouts behind Load more. Ivan, 15 Oct: the demo is now a real nike search led by @natali.gogaladze (7.2M views, 1.7K followers, 5.1K×): Nike product photos with one line of text over a trending sound, 8 seconds. Analyze video on it plays the live processing state for about 3 seconds, then opens its full saved analysis: Why it worked, What could be improved, What you should do next, and the Hook tab.</div>
 
       <!-- Option A: demo video -->
       <div data-pane="video">
@@ -695,7 +703,7 @@ body.notes .vbelow{display:block}
 
       <!-- Option B: clickable app model -->
       <div data-pane="app">
-        <p class="tryhint"><span class="ar" aria-hidden="true">↓</span> <b>Try it below.</b> This is a working copy of Brand Beacon: run the search, open a breakout, tap Analyze video.</p>
+        <p class="forline"><b>Built for</b> brand and social teams, TikTok Shop sellers and agencies running TikTok.</p>
         <div class="device">
           <div class="chrome"><span class="dots"><i></i><i></i><i></i></span><span class="url">🔒 brandbeacon.io/search</span><span class="spacer"></span><span class="livetag"><i></i>Live demo · clickable</span></div>
           <div class="screen" id="screen">
@@ -707,8 +715,9 @@ body.notes .vbelow{display:block}
                 <p class="hint">A brand or a product. This demo runs a real nike search.</p>
                 <div class="inp">
                   <input id="appInput" value="nike" aria-label="Search">
-                  <button class="btn" id="appGo">Find breakouts <span class="arr">→</span></button>
+                  <button class="btn pulse" id="appGo">Find breakouts <span class="arr">→</span></button>
                 </div>
+                <p class="presshint"><span class="ar" aria-hidden="true">↑</span>Press Find breakouts</p>
               </div>
             </div>
 
@@ -729,7 +738,6 @@ body.notes .vbelow{display:block}
                   <span class="sort">Breakout Score ▾</span>
                 </div>
                 <div class="lgrid" id="grid"></div>
-                <div class="more" id="more"><button class="mbtn" id="loadMore" type="button">+ Load 12 more</button></div>
               </div>
             </div>
 
@@ -777,13 +785,13 @@ body.notes .vbelow{display:block}
 </div></section>
 
 <section class="rel" id="how"><div class="wrap c">
-  <div class="note"><b>4</b> The three steps from Ivan's 14 Oct note: type a brand, get the breakouts, learn how to make your own.</div>
+  <div class="note"><b>4</b> The three steps from Ivan's 14 Oct note: type a brand, get the breakouts, learn how to make your own. Ivan, 20 Oct: the cards looked off balance, so the copy is now the same length in each and the three previews line up at the bottom.</div>
   <p class="eyebrow">How it works</p>
   <h2>One search in, Viral Breakouts out</h2>
   <div class="steps">
-    <div class="stp"><span class="num">01</span><h3>Type a brand</h3><p>Yours, a competitor's, or a product you sell.</p><div class="vis"><div class="mini-inp">rhode skin</div></div></div>
-    <div class="stp"><span class="num">02</span><h3>Get hundreds of videos, ranked</h3><p>The breakouts come first. One rhode skin search found 75 in 290 TikToks.</p><div class="vis"><div class="stack"><img src="img/live/7432015571165744417-t.jpg" alt=""><img src="img/live/7682552825804524814-t.jpg" alt=""><img src="img/live/7660633484918033682-t.jpg" alt=""><img src="img/live/7649935410587553055-t.jpg" alt=""><img src="img/live/7605834277904796948-t.jpg" alt=""><span class="cnt">+70</span></div></div></div>
-    <div class="stp"><span class="num">03</span><h3>Learn to make your own</h3><p>Each analysis shows why a breakout worked and what to do next for your brand.</p><div class="vis"><div class="mini-an"><p><b>Why it worked</b><small>4 drivers</small></p><i style="width:92%"></i><i style="width:74%"></i><p><b>What you should do next</b></p><i style="width:84%"></i></div></div></div>
+    <div class="stp"><span class="num">01</span><h3>Type a brand</h3><p>Yours, a competitor's, or a product you sell.</p><div class="vis"><div class="mini-row"><div class="mini-inp">rhode skin</div><span class="mini-go">Find breakouts →</span></div></div></div>
+    <div class="stp"><span class="num">02</span><h3>Get the breakouts, ranked</h3><p>One rhode skin search found 75 breakouts in 290 TikToks.</p><div class="vis"><div class="stack"><img src="img/live/7432015571165744417-t.jpg" alt=""><img src="img/live/7682552825804524814-t.jpg" alt=""><img src="img/live/7660633484918033682-t.jpg" alt=""><img src="img/live/7649935410587553055-t.jpg" alt=""><img src="img/live/7605834277904796948-t.jpg" alt=""><span class="cnt">+70</span></div></div></div>
+    <div class="stp"><span class="num">03</span><h3>Learn to make your own</h3><p>See why each breakout worked and what to do next.</p><div class="vis"><div class="mini-an"><p><b>Why it worked</b><small>4 drivers</small></p><i style="width:92%"></i><i style="width:74%"></i><p><b>What you should do next</b></p><i style="width:84%"></i></div></div></div>
   </div>
   <div class="after"><a class="btn lg js-cta" href="#search">Run your free search <span class="arr">→</span></a></div>
 </div></section>
@@ -1010,7 +1018,7 @@ document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go)
 
 // run search: one quick bar, then results
 function run(){
-  go('s2');const fill=$('#barFill'),txt=$('#stepTxt');
+  $('.s1').classList.add('pressed');$('#appGo').classList.remove('pulse');go('s2');const fill=$('#barFill'),txt=$('#stepTxt');
   const steps=['Pulling TikToks',"Comparing each video to its creator's average",'Ranking by Breakout Score'];
   fill.style.transition='none';fill.style.width='0';requestAnimationFrame(()=>requestAnimationFrame(()=>{fill.style.transition='width .9s ease';fill.style.width='100%'}));
   txt.textContent=steps[0];setTimeout(()=>txt.textContent=steps[1],300);setTimeout(()=>txt.textContent=steps[2],600);
@@ -1018,11 +1026,10 @@ function run(){
 }
 $('#appGo').onclick=run;$('#appInput').addEventListener('keydown',e=>{if(e.key==='Enter')run()});
 
-// results grid: 12 cards, Load more shows 12 more (the nike search; RH stays for the wall)
+// results grid: all 24 cards of the nike search, no Load more (Ivan, 20 Oct; RH stays for the wall)
 const RH=LIVE.filter(v=>v.s==='rhode skin'),NK=LIVE.filter(v=>v.s==='nike');let shown=0,anDone=false,anBusy=false;
-function more(n){const end=Math.min(shown+n,NK.length);$('#grid').insertAdjacentHTML('beforeend',NK.slice(shown,end).map((v,k)=>card(v,{i:shown+k,rank:shown+k+1,done:shown+k===0&&anDone})).join(''));shown=end;
-  if(shown>=NK.length)$('#more').innerHTML=`Showing ${shown} of 108 breakouts.<a class="mbtn y js-go" href="#search">See them all free →</a>`}
-more(12);$('#loadMore').onclick=()=>more(12);
+function more(n){const end=Math.min(shown+n,NK.length);$('#grid').insertAdjacentHTML('beforeend',NK.slice(shown,end).map((v,k)=>card(v,{i:shown+k,rank:shown+k+1,done:shown+k===0&&anDone})).join(''));shown=end}
+more(NK.length);
 $('#grid').addEventListener('click',e=>{const c=e.target.closest('.lc');if(!c||e.target.closest('.lc-bm'))return;e.preventDefault();e.stopPropagation();const i=+c.dataset.i;
   if(i===0&&!anDone)analyze();else openRO(i)},true);
 
