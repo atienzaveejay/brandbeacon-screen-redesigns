@@ -592,7 +592,7 @@ body.notes .vbelow{display:block}
 .an-gate .gbtn{max-width:300px;margin:0 auto;font-size:15px;padding:13px 18px}
 
 /* wall of breakouts */
-.cards.lgrid{gap:24px;margin-top:56px}
+.cards.lgrid{gap:24px;margin-top:96px}
 .cards .lc{border-radius:20px;box-shadow:var(--shadow)}
 .cards .lc-th{aspect-ratio:4/4.4}
 .wall{margin-top:40px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
@@ -688,7 +688,7 @@ body.notes .vbelow{display:block}
     </div>
 
     <div class="media" id="media" data-show="app">
-      <div class="note" style="top:-14px;right:-8px"><b>3</b> Ivan, 20 Oct (second round): "Try it below" is gone. A blinking arrow and a pulsing ring on Find breakouts tell people to press it, and stop once they do. Who it's for now sits above the fold, in one line over the demo. Load more is gone from the results: all 24 breakouts show. <b>Dev:</b> the videos and analyses in this demo frame are ready to play as built: they are saved results, so nothing runs live and no sign-in is needed. Hero media: the clickable app is now the default (Ivan, 17 Oct huddle: "I like the clickable app the best"). The demo video stays one tap away in the mock controls. Clickable app (Ivan, 14 Oct): no keyword step, a one-second search, cards as in the live app, and 24 of the 108 breakouts behind Load more. Ivan, 15 Oct: the demo is now a real nike search led by @natali.gogaladze (7.2M views, 1.7K followers, 5.1K×): Nike product photos with one line of text over a trending sound, 8 seconds. Analyze video on it plays the live processing state for about 3 seconds, then opens its full saved analysis: Why it worked, What could be improved, What you should do next, and the Hook tab.</div>
+      <div class="note" style="top:-14px;right:-8px"><b>3</b> Ivan, 20 Oct (second round): "Try it below" is gone. A blinking arrow and a pulsing ring on Find breakouts tell people to press it, and stop once they do. Who it's for now sits above the fold, in one line over the demo. Load more is gone: the results stop at 12. There is no Analyze video step: every card says View analysis. <b>Dev:</b> the videos and analyses in this demo frame are ready to play and view: saved results, nothing runs live. The mock only has the first video's analysis (the others show a sign-in card), so pre-run the analysis for all 12 demo videos before launch. Hero media: the clickable app is now the default (Ivan, 17 Oct huddle: "I like the clickable app the best"). The demo video stays one tap away in the mock controls. Clickable app (Ivan, 14 Oct): no keyword step, a one-second search, cards as in the live app, and 24 of the 108 breakouts behind Load more. Ivan, 15 Oct: the demo is now a real nike search led by @natali.gogaladze (7.2M views, 1.7K followers, 5.1K×): Nike product photos with one line of text over a trending sound, 8 seconds. Its View analysis opens the full saved analysis: Why it worked, What could be improved, What you should do next, and the Hook tab.</div>
 
       <!-- Option A: demo video -->
       <div data-pane="video">
@@ -761,7 +761,7 @@ body.notes .vbelow{display:block}
 </div>
 
 <section class="grey rel" id="proof"><div class="wrap">
-  <div class="note"><b>1</b> The 3 breakouts Ivan picked with Maia on Slack (16 Oct Sheet note): @tintdberry.1 (shoes), @abigailthecreator2 (medicube collagen mask) and @fuelingwithfrankie (protein). Numbers are from their BrandBeacon share pages. Those pages show no search term, so the cards have no chip, and their Breakout Scores (6×, 3.8×, 2×) are on the share page scale, not the K× scale of the results cards. Real breakouts from three live searches replace the six testimonials. Cards now match the live app card, and 24 real breakouts from one search scroll below them (Ivan, 14 Oct). <b>4</b> One Breakout Score definition everywhere: against the creator's average video (Ivan, 9 Oct). Videos play here instead of linking out.</div>
+  <div class="note"><b>1</b> More space above these cards so the Breakout explainer reads as its own block (Ivan, 20 Oct). The 3 breakouts Ivan picked with Maia on Slack (16 Oct Sheet note): @tintdberry.1 (shoes), @abigailthecreator2 (medicube collagen mask) and @fuelingwithfrankie (protein). Numbers are from their BrandBeacon share pages. Those pages show no search term, so the cards have no chip, and their Breakout Scores (6×, 3.8×, 2×) are on the share page scale, not the K× scale of the results cards. Real breakouts from three live searches replace the six testimonials. Cards now match the live app card, and 24 real breakouts from one search scroll below them (Ivan, 14 Oct). <b>4</b> One Breakout Score definition everywhere: against the creator's average video (Ivan, 9 Oct). Videos play here instead of linking out.</div>
   <div class="proof-top">
     <div class="explain">
       <h2>A Breakout outperforms the creator's average video</h2>
@@ -822,11 +822,11 @@ body.notes .vbelow{display:block}
 </div></section>
 
 <section class="rel" id="pricing"><div class="wrap c">
-  <div class="note"><b>6</b> Yearly is the default and shows the monthly equivalent (yearly / 12), like formatfinder and UGC Breakouts (Ivan, 14 Oct note and 17 Oct huddle). Yearly is $79.99 / $155.99 a month, billed annually (Ivan, 20 Oct). Monthly shows the higher $99 / $199. Free lists what it includes. Second trial strip removed. 3 free searches and 5 video analyses is Ivan's plan (agreed on Slack); the live site still says 1 search and 0 analyses, so this ships with that change.</div>
+  <div class="note"><b>6</b> Annual is the default and shows the monthly equivalent (annual / 12), like formatfinder and UGC Breakouts (Ivan, 14 Oct note and 17 Oct huddle). Annual is $79.99 / $159.99 a month, billed annually (Ivan, 20 Oct: Scale from $155.99 to $159.99, "Yearly" renamed "Annual", Virality alerts taken off both plans). Monthly shows the higher $99 / $199. Free lists what it includes. Second trial strip removed. 3 free searches and 5 video analyses is Ivan's plan (agreed on Slack); the live site still says 1 search and 0 analyses, so this ships with that change.</div>
   <p class="eyebrow">Pricing</p>
   <h2>Start with 3 free searches</h2>
   <p class="lead">No card for the free searches. Growth and Scale start with 8 days free.</p>
-  <div class="bill" id="bill" role="group" aria-label="Billing period"><button type="button" data-b="m">Monthly</button><button type="button" data-b="y" class="on">Yearly</button></div>
+  <div class="bill" id="bill" role="group" aria-label="Billing period"><button type="button" data-b="m">Monthly</button><button type="button" data-b="y" class="on">Annual</button></div>
   <div class="pr">
     <div class="plan">
       <h4>Free</h4><p class="t">See your top breakouts.</p>
@@ -837,15 +837,15 @@ body.notes .vbelow{display:block}
     <div class="plan pop">
       <span class="badge">MOST POPULAR</span>
       <h4>Growth</h4><p class="t">For a single brand.</p>
-      <div class="price" data-m="99" data-y="959.88">$79.99<small>/mo</small></div><p class="ann">Billed $959.88 yearly. Save $228.12</p>
-      <div class="feat"><div>100 searches</div><div>100 video analyses</div><div>Weekly refresh</div><div>Virality alerts</div><div>Unlimited bookmarks</div></div>
+      <div class="price" data-m="99" data-y="959.88">$79.99<small>/mo</small></div><p class="ann">Billed $959.88 annually. Save $228.12</p>
+      <div class="feat"><div>100 searches</div><div>100 video analyses</div><div>Weekly refresh</div><div>Unlimited bookmarks</div></div>
       <a class="btn ghost" href="#pricing">Try free for 8 days</a>
       <p class="disc">Card required. Your plan starts when the trial ends unless you cancel first.</p>
     </div>
     <div class="plan">
       <h4>Scale</h4><p class="t">For brand and agency teams.</p>
-      <div class="price" data-m="199" data-y="1871.88">$155.99<small>/mo</small></div><p class="ann">Billed $1,871.88 yearly. Save $516.12</p>
-      <div class="feat"><div>Unlimited searches</div><div>Unlimited video analyses</div><div>Weekly refresh</div><div>Virality alerts</div><div>Unlimited bookmarks</div></div>
+      <div class="price" data-m="199" data-y="1919.88">$159.99<small>/mo</small></div><p class="ann">Billed $1,919.88 annually. Save $468.12</p>
+      <div class="feat"><div>Unlimited searches</div><div>Unlimited video analyses</div><div>Weekly refresh</div><div>Unlimited bookmarks</div></div>
       <a class="btn ghost" href="#pricing">Try free for 8 days</a>
       <p class="disc">Card required. Your plan starts when the trial ends unless you cancel first.</p>
     </div>
@@ -863,7 +863,7 @@ body.notes .vbelow{display:block}
     <details><summary>What counts as one search?</summary><p>One brand or one product. Add as many related keywords as you like and it still counts as one search.</p></details>
     <details><summary>Why focus on breakouts?</summary><p>4 million views from a creator who usually gets 4 million is normal. 4 million views from a creator who usually gets 4 thousand means the video itself did something right. Those are breakouts, and they're the ones worth learning from.</p></details>
     <details><summary>Is the free search a trial?</summary><p>No. You get 3 free searches, no credit card needed. The 8-day free trial of Growth or Scale is separate, and that one does need a card.</p></details>
-    <details><summary>What happens after the 8-day trial?</summary><p>If you don't cancel before the 8 days are up, we charge your card for the plan you picked, monthly or yearly.</p></details>
+    <details><summary>What happens after the 8-day trial?</summary><p>If you don't cancel before the 8 days are up, we charge your card for the plan you picked, monthly or annual.</p></details>
     <details><summary>How do I cancel my trial?</summary><p>Go to Settings, then Subscription, and cancel before the trial ends. You won't be charged.</p></details>
     <details><summary>Is the data real-time?</summary><p>Each search pulls the latest TikToks when it runs, and saved searches refresh every week.</p></details>
   </div>
@@ -1026,12 +1026,12 @@ function run(){
 }
 $('#appGo').onclick=run;$('#appInput').addEventListener('keydown',e=>{if(e.key==='Enter')run()});
 
-// results grid: all 24 cards of the nike search, no Load more (Ivan, 20 Oct; RH stays for the wall)
-const RH=LIVE.filter(v=>v.s==='rhode skin'),NK=LIVE.filter(v=>v.s==='nike');let shown=0,anDone=false,anBusy=false;
-function more(n){const end=Math.min(shown+n,NK.length);$('#grid').insertAdjacentHTML('beforeend',NK.slice(shown,end).map((v,k)=>card(v,{i:shown+k,rank:shown+k+1,done:shown+k===0&&anDone})).join(''));shown=end}
-more(NK.length);
+// results grid: 12 cards of the nike search, no Load more, analyses already done (Ivan, 20 Oct; RH stays for the wall)
+const RH=LIVE.filter(v=>v.s==='rhode skin'),NK=LIVE.filter(v=>v.s==='nike');let shown=0,anDone=true,anBusy=false;
+function more(n){const end=Math.min(shown+n,NK.length);$('#grid').insertAdjacentHTML('beforeend',NK.slice(shown,end).map((v,k)=>card(v,{i:shown+k,rank:shown+k+1,done:true})).join(''));shown=end}
+more(12);
 $('#grid').addEventListener('click',e=>{const c=e.target.closest('.lc');if(!c||e.target.closest('.lc-bm'))return;e.preventDefault();e.stopPropagation();const i=+c.dataset.i;
-  if(i===0&&!anDone)analyze();else openRO(i)},true);
+  openRO(i)},true);
 
 // Analyze video on card 1: the card button spins, the analysis opens in its processing state, then fills in
 function analyze(){if(anBusy)return;anBusy=true;
@@ -1049,8 +1049,8 @@ function openRO(i,running){
   const head=`<p class="an-q">“${capH(v.cap)}”</p>
     <div class="an-ban"><span>ⓘ</span><span><b>${v.score} Breakout Score:</b> how far this video beat ${esc(v.h)}'s average video.</span></div>`;
   let right;
-  if(i!==0)right=`<div class="an-box an-gate"><h4>Analyze this video</h4><p>See why ${esc(v.h)}'s video broke out and what to do next for your brand. Free includes 5 video analyses.</p>
-      <a class="gbtn" href="../bb-3/app.html#home-checklist"><span class="g">${$('#signin .gbtn .g').innerHTML}</span>Sign in free to analyze</a></div>`;
+  if(i!==0)right=`<div class="an-box an-gate"><h4>This analysis is ready</h4><p>See why ${esc(v.h)}'s video broke out and what to do next for your brand. Free includes 5 video analyses.</p>
+      <a class="gbtn" href="../bb-3/app.html#home-checklist"><span class="g">${$('#signin .gbtn .g').innerHTML}</span>Sign in free to view it</a></div>`;
   else if(running)right=`<div>${head}<div class="an-tabs off"><button class="on">Why it worked</button><button>Hook</button></div>
     <div class="an-proc"><b>Processing</b><p>We are preparing the transcript, shared diagnostics, and creator-facing guidance.</p></div></div>`;
   else right=`<div class="an-in">${head}
@@ -1169,11 +1169,11 @@ const onView=(el,fn,th=.35)=>{const io=new IntersectionObserver(es=>{if(es.some(
   m.addEventListener('click',e=>{if(e.target===m||e.target.closest('.x'))close()});
   addEventListener('keydown',e=>{if(e.key==='Escape')close()})})();
 
-// billing toggle: yearly default, price shown per month
+// billing toggle: annual default, price shown per month
 (()=>{const money=n=>'$'+(Number.isInteger(n)?n.toLocaleString('en-US'):n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}));
 function setBill(b){document.querySelectorAll('#bill button').forEach(x=>x.classList.toggle('on',x.dataset.b===b));
   document.querySelectorAll('.price[data-m]').forEach(el=>{const m=+el.dataset.m,y=+el.dataset.y,ann=el.nextElementSibling;
-    if(b==='y'){el.innerHTML=money(Math.round(y/12*100)/100)+'<small>/mo</small>';ann.textContent='Billed '+money(y)+' yearly. Save '+money(m*12-y)}
+    if(b==='y'){el.innerHTML=money(Math.round(y/12*100)/100)+'<small>/mo</small>';ann.textContent='Billed '+money(y)+' annually. Save '+money(m*12-y)}
     else{el.innerHTML=money(m)+'<small>/mo</small>';ann.textContent='Billed monthly'}})}
 const bill=document.getElementById('bill');if(bill){bill.onclick=e=>{const x=e.target.closest('button');if(x)setBill(x.dataset.b)};setBill('y')}})();
 // reviews row arrows
