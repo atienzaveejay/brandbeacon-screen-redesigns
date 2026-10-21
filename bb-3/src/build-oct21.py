@@ -29,18 +29,20 @@ def side(active, sid):
 # Cards 1 to 8: the real rhode skin run (Sep 18). 1 to 5 from the live cards, 6 to 8 from the breakout creators list
 # (followers, score, views). Cards 9 to 12 reuse images and are SAMPLE, only there to show 12 then More adds 4.
 CARDS = [dict(v, sample=False) for v in V] + [
-    dict(img="../img/v6.jpg", h="laurenestephanny_", f="893", d="May 2", dur="0:12", s="3.6K", v="2.5M", e="12.4%",
+    dict(img="../img/v6.jpg", h="laurenestephanny_", f="893", d="May 2", dur="0:12", s="3.6K", v="2.5M", e="16.6%", l="374K", c="2.2K", sh="39K",
          cap="ok rhode actually did it this time #rhode #lipcombo", sample=True),
-    dict(img="../img/v7.jpg", h="bricourtneyy", f="1.2K", d="Mar 18", dur="0:15", s="1.9K", v="1.7M", e="10.9%",
+    dict(img="../img/v7.jpg", h="bricourtneyy", f="1.2K", d="Mar 18", dur="0:15", s="1.9K", v="1.7M", e="12.3%", l="206K", c="676", sh="2.4K",
          cap="peptide lip tint in every shade, which one is yours #rhode", sample=True),
-    dict(img="../img/v8.jpg", h="elizaveta_beauty_", f="3.1K", d="Aug 27", dur="0:18", s="1.8K", v="3.5M", e="9.2%",
+    dict(img="../img/v8.jpg", h="elizaveta_beauty_", f="3.1K", d="Aug 27", dur="0:18", s="1.8K", v="3.5M", e="21.1%", l="672K", c="557", sh="107K",
          cap="glazed skin in 3 steps #rhodeskin #glazeddonutskin", sample=True),
 ]
 for i, (img, h, f, d, s, v, e) in enumerate([
         ("v3", "glowwithnia", "2.4K", "Sep 2", "1.6K", "1.1M", "8.7%"), ("v5", "skinbymaddie", "1.9K", "Aug 14", "1.4K", "960K", "11.2%"),
         ("v1", "thegoldenhourgirl", "3.7K", "Jul 30", "1.2K", "1.3M", "7.9%"), ("v4", "rae.reviews", "2.2K", "Jun 21", "1.1K", "870K", "9.8%")]):
     CARDS.append(dict(img=f"../img/{img}.jpg", h=h, f=f, d=d, dur="0:1" + str(i + 2), s=s, v=v, e=e, cap="SAMPLE card to fill the first 12", sample=True))
-CARDS[6]["sample_note"] = CARDS[7]["sample_note"] = CARDS[5]["sample_note"] = "engagement, likes, comments, shares, date and caption"
+# Cards 6 to 8: likes, comments, shares are real (same creators in the sales page's rhode skin data, sales-page/index.html LIVE);
+# engagement = (likes + comments + shares) / views from that same data. Date and caption are still SAMPLE.
+CARDS[6]["sample_note"] = CARDS[7]["sample_note"] = CARDS[5]["sample_note"] = "date and caption"
 for c in CARDS[8:]:
     c["sample_note"] = "whole card"
 
@@ -64,7 +66,7 @@ FILT = {
 }
 
 def counts(c):
-    # Item 26 (Ivan, 21 Oct): likes, comments and shares stay on the card. Real for cards 1 to 5; SAMPLE split of the engagement for the rest.
+    # Item 26 (Ivan, 21 Oct): likes, comments and shares stay on the card. Real for cards 1 to 8; cards 9 to 12 are whole SAMPLE cards, so theirs are a SAMPLE split of their engagement.
     if "l" not in c:
         tot = num(c["v"]) * num(c["e"]) / 100
         c["l"], c["c"], c["sh"] = kfmt(tot * .9), kfmt(tot * .01), kfmt(tot * .09)
@@ -157,14 +159,19 @@ DRIVERS = [("Clear Essential Item Promise", "The video opens with a direct state
            ("Creator Authenticity", "The creator’s confident and relatable delivery builds trust, encouraging viewers to watch fully and engage with the content.")]
 DRAGS = [("Potential Payoff Delay", "If the video delays revealing the product or its benefits too long, some viewers might drop off before the payoff."),
          ("Niche Appeal", "The focus on shapewear and a specific brand might limit appeal to viewers outside the target demographic, reducing repeat virality.")]
-NEXT = [("Make a Clear Essential Promise", "Start your video by stating a specific, relatable item or benefit that your target audience ‘needs’ or ‘can’t live without,’ to instantly hook viewers with a compelling reason to watch."),
-        ("Use Inclusive and Casual Language", "Address your audience directly with inclusive terms like ‘everyone,’ ‘every girl,’ or ‘every guy’ and keep the tone conversational and friendly to lower resistance and increase relatability."),
+NEXT = [("Make a Clear Essential Promise", "Start your video by stating a specific, relatable item or benefit that your target audience 'needs' or 'can’t live without,' to instantly hook viewers with a compelling reason to watch."),
+        ("Use Inclusive and Casual Language", "Address your audience directly with inclusive terms like 'everyone,' 'every girl,' or 'every guy' and keep the tone conversational and friendly to lower resistance and increase relatability."),
         ("Leverage Trend-Relevant Hashtags", "Incorporate popular and relevant hashtags related to your product category or community to boost discoverability and tap into existing trends.")]
-WHY_HOOK = [("Countable promise", "One specific item every viewer can picture."), ("Inclusive language", "“Every girl” makes it feel personal."),
-            ("Casual tone", "“Okay” and the emoji lower the guard.")]
-BEATS = [("0:00", "Setup", "“Okay” sets a casual, chatty tone."), ("0:01", "Named subject", "“every girl” calls out the viewer."),
-         ("0:02", "Promise", "“needs this in her closet” creates curiosity.")]
-REWR = ["Here's the one closet item every girl can't live without", "You won't believe what every girl needs in her closet", "This is the must have piece every girl's talking about"]
+# Hook, word for word from the live Hook tab of the same share page (shots/oct21/live-analysis-share-hook-1440.jpg).
+HOOK_TAGS = ["Countable promise", "Inclusive language", "Casual tone", "Spoken by 0:00"]
+WHY_HOOK = [("Countable Promise", "It promises a specific, essential item that every viewer can relate to, triggering curiosity and a desire to learn more."),
+            ("Inclusive Language", 'Using "every girl" makes the message feel personal and universally relevant, increasing viewer identification.'),
+            ("Casual Tone", 'Starting with "Okay" and the emoji creates a friendly, approachable vibe that lowers resistance and invites attention.')]
+BEATS = [("0:00", "Setup", '"Okay" sets a casual, conversational tone that feels approachable.'),
+         ("0:01", "Named Subject", '"every girl" directly addresses the target audience, making it personal.'),
+         ("0:02", "Countable Promise", '"needs this in her closet" promises a specific essential item, creating curiosity.')]
+REWR = [("Too generic", "Here’s the one closet item every girl can’t live without"), ("Skepticism", "You won’t believe what every girl needs in her closet"),
+        ("Overused phrase", "This is the must-have piece every girl’s talking about")]
 def li(items, cls=""):
     return "".join(f'<li><span class="an-n{cls}">{i+1:02d}</span><span><b>{E(t)}</b><span>{E(d)}</span></span></li>' for i, (t, d) in enumerate(items))
 analysis = f"""<div class="modal" id="m-analysis" hidden><div class="mscrim" data-x></div>
@@ -183,15 +190,16 @@ analysis = f"""<div class="modal" id="m-analysis" hidden><div class="mscrim" dat
   </aside>
   <div class="anbody">
    <h2 class="anq">“{E(AX['q'])}” <span class="tagc">{AX['tags']}</span></h2>
-   <section class="ansec"><h3 class="h2">Why it worked</h3><ol class="anl">{li(DRIVERS)}</ol></section>
+   <section class="ansec"><h3 class="h2">Why it worked <span class="ancnt">{len(DRIVERS)} drivers</span></h3><ol class="anl">{li(DRIVERS)}</ol></section>
    <section class="ansec"><h3 class="h2">Hook</h3>
-    <div class="hookq"><span class="quiet">0:00</span><b>“{E(AX['q'])}”</b><button class="btn sm" type="button" data-act="toast" data-msg="Hook copied for a brief.">Copy hook</button></div>
-    <h4 class="h4">Why it stops the scroll</h4><ol class="anl sm">{li(WHY_HOOK)}</ol>
-    <h4 class="h4">The first three seconds</h4><div class="beats">{"".join(f'<div><span class="quiet">{t}</span><b>{E(a)}</b><span>{E(b)}</span></div>' for t,a,b in BEATS)}</div>
-    <h4 class="h4">Swipe this hook <span class="sample ivan">IVAN TO CONFIRM</span></h4><div class="rewr">{"".join(f'<div><span>{E(r)}</span><button class="lnk sm" type="button" data-act="toast" data-msg="Copied.">Copy</button></div>' for r in REWR)}</div>
+    <div class="hookq"><span class="quiet">0:00</span><span class="hookt"><b>“{E(AX['q'])}”</b><span class="hooktags">{"".join(f'<span>{E(t)}</span>' for t in HOOK_TAGS)}</span></span></div>
+    <button class="btn sm hookcopy" type="button" data-act="toast" data-msg="Hook copied for a brief.">Copy hook for a brief</button>
+    <h4 class="h4">Why it stops the scroll <span class="ancnt">{len(WHY_HOOK)} reasons</span></h4><ol class="anl sm">{li(WHY_HOOK)}</ol>
+    <h4 class="h4">How the first three seconds are built</h4><div class="beats">{"".join(f'<div><span class="quiet">{t}</span><b>{E(a)}</b><span>{E(b)}</span></div>' for t,a,b in BEATS)}</div>
+    <h4 class="h4">Swipe this hook <span class="ancnt">{len(REWR)} rewrites</span></h4><div class="rewr">{"".join(f'<div><span><small class="rwl">{E(l)}</small>{E(r)}</span><button class="lnk sm" type="button" data-act="toast" data-msg="Copied.">Copy</button></div>' for l, r in REWR)}</div><p class="quiet anfoot">Structure lifted from this video’s opening.</p>
    </section>
-   <section class="ansec"><h3 class="h2">What could be improved</h3><ol class="anl">{li(DRAGS, " bad")}</ol></section>
-   <section class="ansec ancream"><h3 class="h2">What you should do next</h3><ol class="anl">{li(NEXT, " go")}</ol><p class="quiet anfoot">From this video’s transcript and metrics.</p></section>
+   <section class="ansec"><h3 class="h2">What could be improved <span class="ancnt">{len(DRAGS)} drags</span></h3><ol class="anl">{li(DRAGS, " bad")}</ol></section>
+   <section class="ansec ancream"><h3 class="h2">What you should do next <span class="ancnt">{len(NEXT)} actions</span></h3><ol class="anl">{li(NEXT, " go")}</ol><p class="quiet anfoot">From this video’s transcript and metrics.</p></section>
    <section class="ansec"><h3 class="h2">Transcript <span class="quiet">{AX['dur']}</span></h3><p class="quiet">No transcript was captured for this video.</p></section>
    <div class="ancta"><b>Share with your team and creators</b><span class="quiet">Does not use any of your credits.</span><button class="btn y sm" type="button" data-act="toast" data-msg="Opens the share view in this panel (live flow, unchanged).">{ico(I['share'],15)} Share</button></div>
   </div>
@@ -280,6 +288,9 @@ CSS2 = '''
 .anl li>span:last-child{display:flex;flex-direction:column;gap:2px}.anl li>span:last-child>span{color:#5E5A52}
 .an-n{font-size:12px;font-weight:800;color:#6B4B00;background:#FFF6D6;border-radius:6px;padding:2px 6px;height:fit-content;font-variant-numeric:tabular-nums}
 .anl.sm li{font-size:13.5px}
+.ancnt{font-family:inherit;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#8A857A;margin-left:6px}
+.hookt{flex:1;display:flex;flex-direction:column;gap:8px}.hooktags{display:flex;flex-wrap:wrap;gap:6px}.hooktags span{font-size:12px;font-weight:700;color:#5E5A52;background:#fff;border:1px solid #ECE9E1;border-radius:6px;padding:3px 8px}.hooktags span:first-child{color:#8A6100;background:#FFF6D6;border-color:#F2DE99}
+.hookcopy{align-self:stretch;justify-content:center}.rwl{display:block;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#8A857A;margin-bottom:2px}
 .an-n.bad{color:#B42318;background:#FDECEA}.an-n.go{color:#0F7B4B;background:#E6F6EE}
 .ancream{background:#FFFBEB;border:1px solid #F2DE99;border-radius:12px;padding:16px}.ansec.ancream+.ansec,.ansec+.ansec.ancream{border-top:1px solid #F2DE99}.anfoot{font-style:italic;font-size:12.5px}
 .c2st{font-size:12px;gap:12px}
