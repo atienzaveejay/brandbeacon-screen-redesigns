@@ -40,9 +40,12 @@ for i, (img, h, f, d, s, v, e) in enumerate([
         ("v3", "glowwithnia", "2.4K", "Sep 2", "1.6K", "1.1M", "8.7%"), ("v5", "skinbymaddie", "1.9K", "Aug 14", "1.4K", "960K", "11.2%"),
         ("v1", "thegoldenhourgirl", "3.7K", "Jul 30", "1.2K", "1.3M", "7.9%"), ("v4", "rae.reviews", "2.2K", "Jun 21", "1.1K", "870K", "9.8%")]):
     CARDS.append(dict(img=f"../img/{img}.jpg", h=h, f=f, d=d, dur="0:1" + str(i + 2), s=s, v=v, e=e, cap="SAMPLE card to fill the first 12", sample=True))
-CARDS[6]["sample_note"] = CARDS[7]["sample_note"] = CARDS[5]["sample_note"] = "engagement, date and caption"
+CARDS[6]["sample_note"] = CARDS[7]["sample_note"] = CARDS[5]["sample_note"] = "engagement, likes, comments, shares, date and caption"
 for c in CARDS[8:]:
     c["sample_note"] = "whole card"
+
+def kfmt(n):
+    return f"{n/1e6:.1f}M".replace(".0M", "M") if n >= 1e6 else f"{n/1e3:.1f}K".replace(".0K", "K") if n >= 1e3 else str(int(n))
 
 def num(x):
     x = str(x).replace("×", "").replace("%", "").replace(",", "")
@@ -60,8 +63,15 @@ FILT = {
     "all":  dict(lbl="All", n=214, vids="1,148", br="214", avg="655×", av="2.1M", af="3.1K", s=("vids", "br", "avg", "av", "af")),
 }
 
+def counts(c):
+    # Item 26 (Ivan, 21 Oct): likes, comments and shares stay on the card. Real for cards 1 to 5; SAMPLE split of the engagement for the rest.
+    if "l" not in c:
+        tot = num(c["v"]) * num(c["e"]) / 100
+        c["l"], c["c"], c["sh"] = kfmt(tot * .9), kfmt(tot * .01), kfmt(tot * .09)
+    return f'<div class="anst c2st"><span>{ico(I["heart"],14)} {c["l"]}</span><span>{ico(I["msg"],14)} {c["c"]}</span><span>{ico(I["send"],14)} {c["sh"]}</span></div>'
+
 def card2(c, rank):
-    """Item 26. Breakout Score first, then views against followers, then engagement %. Then who and the caption."""
+    """Item 26. Breakout Score first, then views against followers, then engagement % with likes, comments and shares. Then who and the caption."""
     smp = f'<span class="sample c2smp" title="SAMPLE: {c["sample_note"]}">SAMPLE</span>' if c["sample"] else ""
     return f'''<article class="card c2" data-score="{num(c['s'])}" data-views="{num(c['v'])}" data-date="{dnum(c['d'])}">
  <div class="c2t"><img src="{c['img']}" alt=""><span class="rank">{rank}</span><span class="dur">{c['dur']}</span><span class="c2new">New this run</span></div>
@@ -69,6 +79,7 @@ def card2(c, rank):
   <div class="c2top"><span class="c2sc"><b>{c['s']}×</b><span class="c2sl">Breakout Score<button class="kinfo2" type="button" data-act="def" aria-label="What is a Breakout Score?">i</button></span></span></div>
   <div class="c2vf"><span><b>{c['v']}</b> views</span><span class="c2from">from</span><span><b>{c['f']}</b> followers</span></div>
   <div class="c2e"><b>{float(c['e'][:-1]):.1f}%</b> engagement {smp}</div>
+  {counts(c)}
   <div class="c2who"><span class="av sm2">{c['h'].strip('_.')[0].upper()}</span><b>@{E(c['h'])}</b><span class="c2d">{c['d']}</span></div>
   <p class="capt clamp">{E(c['cap'])}</p>
   <div class="acts"><button class="btn y grow sm" data-act="analyze">{ico(I['spark'],15)} Analyze video</button><button class="ib round sm" data-act="save" aria-label="Save video">{ico(I['bookmark'],15)}</button></div>
@@ -133,24 +144,29 @@ results = f"""<section class="view" id="v-results">
 # ---------- item 26, close up: three cards at full width plus the old card for comparison
 OLD = ns["result_card"](V[0], 1)
 cardview = f"""<section class="view" id="v-card">
- <div><h1 class="h1">Video card</h1><p class="sub">Breakout Score first, then views against followers, then engagement. Same card on results, Saved videos and My Feed.</p></div>
+ <div><h1 class="h1">Video card</h1><p class="sub">Breakout Score first, then views against followers, then engagement with likes, comments and shares. Same card on results, Saved videos and My Feed.</p></div>
  <div class="cmpcards"><div><span class="cap">Now</span>{OLD}</div><div><span class="cap">New</span>{card2(CARDS[0], 1)}</div><div><span class="cap">New, small account</span>{card2(CARDS[2], 3)}</div></div>
 </section>"""
 
-# ---------- item 28: one page analysis (Ivan to confirm). Real data: Ivan's shared @getrealwithalix analysis.
+# ---------- item 28: the analysis as it was (live), on one page with Hook added, 3 points max per list (Ivan, Slack 21 Oct).
+# Real data, word for word from Ivan's shared @getrealwithalix analysis (brandbeacon.io/b/getrealwithalix/7jy3aokrb5).
 AX = dict(h="getrealwithalix", f="8.4K", d="Jan 31", dur="0:56", s="866", v="35M", l="451K", c="1.9K", sh="4.7K", e="1.3%",
           q="Okay every girl needs this in her closet 👌", tags="#shapewear #skims")
-DRIVERS = [("Clear essential item promise", "Opens with a direct line that tells you the item matters."),
-           ("Trend hashtags", "#shapewear and #skims put it in front of people already watching those topics."),
-           ("Creator authenticity", "Confident, relatable delivery builds trust."),
-           ("Strong engagement", "High likes, shares and saves tell TikTok to keep pushing it.")]
+DRIVERS = [("Clear Essential Item Promise", "The video opens with a direct statement that sets a clear expectation about the product’s importance, hooking viewers immediately."),
+           ("Trend-Relevant Hashtags", "Using #shapewear and #skims connects the content to trending topics and communities, increasing discoverability and shareability."),
+           ("Creator Authenticity", "The creator’s confident and relatable delivery builds trust, encouraging viewers to watch fully and engage with the content.")]
+DRAGS = [("Potential Payoff Delay", "If the video delays revealing the product or its benefits too long, some viewers might drop off before the payoff."),
+         ("Niche Appeal", "The focus on shapewear and a specific brand might limit appeal to viewers outside the target demographic, reducing repeat virality.")]
+NEXT = [("Make a Clear Essential Promise", "Start your video by stating a specific, relatable item or benefit that your target audience ‘needs’ or ‘can’t live without,’ to instantly hook viewers with a compelling reason to watch."),
+        ("Use Inclusive and Casual Language", "Address your audience directly with inclusive terms like ‘everyone,’ ‘every girl,’ or ‘every guy’ and keep the tone conversational and friendly to lower resistance and increase relatability."),
+        ("Leverage Trend-Relevant Hashtags", "Incorporate popular and relevant hashtags related to your product category or community to boost discoverability and tap into existing trends.")]
 WHY_HOOK = [("Countable promise", "One specific item every viewer can picture."), ("Inclusive language", "“Every girl” makes it feel personal."),
             ("Casual tone", "“Okay” and the emoji lower the guard.")]
 BEATS = [("0:00", "Setup", "“Okay” sets a casual, chatty tone."), ("0:01", "Named subject", "“every girl” calls out the viewer."),
          ("0:02", "Promise", "“needs this in her closet” creates curiosity.")]
 REWR = ["Here's the one closet item every girl can't live without", "You won't believe what every girl needs in her closet", "This is the must have piece every girl's talking about"]
-def li(items):
-    return "".join(f'<li><span class="an-n">{i+1:02d}</span><span><b>{E(t)}</b><span>{E(d)}</span></span></li>' for i, (t, d) in enumerate(items))
+def li(items, cls=""):
+    return "".join(f'<li><span class="an-n{cls}">{i+1:02d}</span><span><b>{E(t)}</b><span>{E(d)}</span></span></li>' for i, (t, d) in enumerate(items))
 analysis = f"""<div class="modal" id="m-analysis" hidden><div class="mscrim" data-x></div>
 <div class="anbox card" role="dialog" aria-modal="true" aria-label="Video analysis">
  <div class="anhead"><span class="rdy">Analysis ready</span><span class="sp"></span>
@@ -167,13 +183,16 @@ analysis = f"""<div class="modal" id="m-analysis" hidden><div class="mscrim" dat
   </aside>
   <div class="anbody">
    <h2 class="anq">“{E(AX['q'])}” <span class="tagc">{AX['tags']}</span></h2>
-   <section class="ansec"><h3 class="h2">Why it went viral</h3><ol class="anl">{li(DRIVERS)}</ol></section>
+   <section class="ansec"><h3 class="h2">Why it worked</h3><ol class="anl">{li(DRIVERS)}</ol></section>
    <section class="ansec"><h3 class="h2">Hook</h3>
     <div class="hookq"><span class="quiet">0:00</span><b>“{E(AX['q'])}”</b><button class="btn sm" type="button" data-act="toast" data-msg="Hook copied for a brief.">Copy hook</button></div>
     <h4 class="h4">Why it stops the scroll</h4><ol class="anl sm">{li(WHY_HOOK)}</ol>
     <h4 class="h4">The first three seconds</h4><div class="beats">{"".join(f'<div><span class="quiet">{t}</span><b>{E(a)}</b><span>{E(b)}</span></div>' for t,a,b in BEATS)}</div>
     <h4 class="h4">Swipe this hook <span class="sample ivan">IVAN TO CONFIRM</span></h4><div class="rewr">{"".join(f'<div><span>{E(r)}</span><button class="lnk sm" type="button" data-act="toast" data-msg="Copied.">Copy</button></div>' for r in REWR)}</div>
    </section>
+   <section class="ansec"><h3 class="h2">What could be improved</h3><ol class="anl">{li(DRAGS, " bad")}</ol></section>
+   <section class="ansec ancream"><h3 class="h2">What you should do next</h3><ol class="anl">{li(NEXT, " go")}</ol><p class="quiet anfoot">From this video’s transcript and metrics.</p></section>
+   <section class="ansec"><h3 class="h2">Transcript <span class="quiet">{AX['dur']}</span></h3><p class="quiet">No transcript was captured for this video.</p></section>
    <div class="ancta"><b>Share with your team and creators</b><span class="quiet">Does not use any of your credits.</span><button class="btn y sm" type="button" data-act="toast" data-msg="Opens the share view in this panel (live flow, unchanged).">{ico(I['share'],15)} Share</button></div>
   </div>
  </div>
@@ -200,7 +219,7 @@ analyses = f"""<section class="view" id="v-analyses">
 GROUPS = [("14 15 18 19 Results", [("results-v2", "This run"), ("results-v2-last", "Last run"), ("results-v2-all", "All"),
                                    ("results-v2-sort", "Sort open"), ("results-v2-first", "First run: Last run 0"), ("results-v2-low", "Lower sections")]),
           ("26 Card", [("card-v2", "Card")]),
-          ("28 Analysis", [("analysis-v2", "One page"), ("analysis-v2-hook", "Hook part")]),
+          ("28 Analysis", [("analysis-v2", "One page"), ("analysis-v2-hook", "Hook part"), ("analysis-v2-more", "Improved, next, transcript")]),
           ("31 Analyses list", [("analyses-list", "List"), ("analysis-v2-saved", "Saved from analysis")])]
 statebar = '<div class="statebar">' + "".join(f'<span class="sg"><i>{g}</i>' + "".join(f'<a href="#{k}">{t}</a>' for k, t in items) + '</span>' for g, items in GROUPS) + '<span class="sg"><a href="handoff-oct21.html" style="background:#FFC72C;color:#1A1300">Handoff page</a></span></div>'
 
@@ -261,6 +280,9 @@ CSS2 = '''
 .anl li>span:last-child{display:flex;flex-direction:column;gap:2px}.anl li>span:last-child>span{color:#5E5A52}
 .an-n{font-size:12px;font-weight:800;color:#6B4B00;background:#FFF6D6;border-radius:6px;padding:2px 6px;height:fit-content;font-variant-numeric:tabular-nums}
 .anl.sm li{font-size:13.5px}
+.an-n.bad{color:#B42318;background:#FDECEA}.an-n.go{color:#0F7B4B;background:#E6F6EE}
+.ancream{background:#FFFBEB;border:1px solid #F2DE99;border-radius:12px;padding:16px}.ansec.ancream+.ansec,.ansec+.ansec.ancream{border-top:1px solid #F2DE99}.anfoot{font-style:italic;font-size:12.5px}
+.c2st{font-size:12px;gap:12px}
 .hookq{display:flex;align-items:center;gap:12px;background:#FFFBEB;border:1px solid #F2DE99;border-radius:12px;padding:12px 14px;font-size:15px}.hookq b{flex:1}
 .beats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.beats>div{display:flex;flex-direction:column;gap:3px;border:1px solid #ECE9E1;border-radius:10px;padding:10px 12px;font-size:13px}.beats>div>span:last-child{color:#5E5A52}
 .rewr{display:flex;flex-direction:column}.rewr>div{display:flex;align-items:center;gap:12px;padding:9px 0;border-top:1px solid #F0EDE6;font-size:14px}.rewr>div span{flex:1}
@@ -313,7 +335,7 @@ function sortBy(k){var g=$('grid'),a=[].slice.call(g.children);a.sort(function(x
  a.forEach(function(c,i){g.appendChild(c);c.querySelector('.rank').textContent=i+1});show(shown)}
 function closePops(){document.querySelectorAll('.pop').forEach(function(p){p.hidden=true})}
 var CFG={'results-v2':{},'results-v2-last':{f:'last'},'results-v2-all':{f:'all'},'results-v2-sort':{pop:'sort2'},'results-v2-first':{first:1},'results-v2-low':{scroll:'sec-insights'},
- 'card-v2':{v:'card'},'analysis-v2':{modal:1},'analysis-v2-hook':{modal:1,hook:1},'analysis-v2-saved':{modal:1,saved:1},'analyses-list':{v:'analyses',s:'side-an'}};
+ 'card-v2':{v:'card'},'analysis-v2':{modal:1},'analysis-v2-hook':{modal:1,hook:1},'analysis-v2-more':{modal:1,more:1},'analysis-v2-saved':{modal:1,saved:1},'analyses-list':{v:'analyses',s:'side-an'}};
 function route(){var h=(location.hash||'#results-v2').slice(1),c=CFG[h]||{};var v=c.v||'results';
  ['results','card','analyses'].forEach(function(x){$('v-'+x).classList.toggle('on',x===v)});
  document.querySelectorAll('.s-side').forEach(function(n){n.hidden=n.id!==(c.s||'side-r')});
@@ -324,6 +346,7 @@ function route(){var h=(location.hash||'#results-v2').slice(1),c=CFG[h]||{};var 
  document.querySelectorAll('.statebar a').forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+h)});
  window.scrollTo(0,0);var ab=document.querySelector('.anbox');ab.scrollTop=0;
  if(c.hook){var hs=document.querySelectorAll('.ansec')[1];setTimeout(function(){ab.scrollTop=hs.offsetTop-70},30)}
+ if(c.more){var ms=document.querySelectorAll('.ansec')[2];setTimeout(function(){ab.scrollTop=ms.offsetTop-70},30)}
  if(c.scroll)setTimeout(function(){$(c.scroll).scrollIntoView()},30)}
 document.addEventListener('click',function(e){
  var fb=e.target.closest('[data-f]');if(fb){show(12);setF(fb.getAttribute('data-f'));return}
