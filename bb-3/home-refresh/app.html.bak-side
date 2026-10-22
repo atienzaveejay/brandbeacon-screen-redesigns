@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BB Home refresh</title>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* BB Home refresh, 22 Oct. Brand stays BrandBeacon: Figtree, yellow #FFC72C, warm ink on warm paper.
+   What changes is the system borrowed from UB 3.1: one spacing scale, one type scale, three text colors,
+   hairline rows instead of boxed rows, and yellow kept for the one main button. */
+:root{
+  --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;--s7:48px;--s8:64px;
+  --t12:12px;--t14:14px;--t16:16px;--t18:18px;--t20:20px;--t24:24px;--t30:30px;
+  --ink:#1A1814;--ink2:#57534A;--ink3:#736F66;--line:#E9E5DC;--line2:#D9D4C8;
+  --paper:#F7F6F2;--card:#FFFFFF;--y:#FFC72C;--y-ink:#1A1300;--ytint:#FFF6D6;--ytint-ink:#5C4100;
+  --r:8px;--r-l:12px;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:Figtree,"Segoe UI",system-ui,sans-serif;font-size:var(--t16);line-height:1.5;color:var(--ink);background:var(--card);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+.num{font-variant-numeric:tabular-nums}
+svg{flex:none}
+
+/* ---------- shell ---------- */
+.app{display:flex;min-height:100vh;background:linear-gradient(90deg,var(--paper) 240px,var(--card) 240px)}
+.side{width:240px;flex:none;position:sticky;top:0;height:100vh;background:var(--paper);display:flex;flex-direction:column;padding:var(--s5) var(--s4);gap:var(--s1)}
+.logo{display:flex;align-items:center;gap:var(--s2);font-weight:800;font-size:var(--t16);padding:0 var(--s2) var(--s5)}
+.logo i{width:28px;height:28px;border-radius:var(--r);background:var(--y);display:grid;place-items:center}
+.nv{display:flex;align-items:center;gap:var(--s3);height:40px;padding:0 var(--s2);border-radius:var(--r);font-size:var(--t14);font-weight:600;color:var(--ink2)}
+.nv.on{background:var(--card);color:var(--ink);font-weight:700;box-shadow:0 1px 2px rgba(26,24,20,.06)}
+.sl{font-size:var(--t12);font-weight:600;color:var(--ink3);padding:var(--s5) var(--s2) var(--s2)}
+.si{display:flex;align-items:center;gap:var(--s2);height:32px;padding:0 var(--s2);font-size:var(--t14);color:var(--ink2);border-radius:var(--r)}
+.si span{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.si b{font-size:var(--t12);font-weight:700;color:var(--ink)}
+.si .dt{width:6px;height:6px;border-radius:50%;background:var(--y);flex:none}
+.more{font-size:var(--t14);color:var(--ink3);padding:var(--s1) var(--s2)}
+.use{margin-top:auto;display:flex;flex-direction:column;gap:var(--s2);padding:0 var(--s2) var(--s4);font-size:var(--t12);color:var(--ink3)}
+.use b{color:var(--ink);font-weight:700}
+.me{display:flex;align-items:center;gap:var(--s2);padding:var(--s3) var(--s2) 0;border-top:1px solid var(--line);font-size:var(--t14)}
+.me i{width:28px;height:28px;border-radius:50%;background:var(--ytint);color:var(--ytint-ink);display:grid;place-items:center;font-style:normal;font-weight:700;font-size:var(--t12)}
+.me small{display:block;font-size:var(--t12);color:var(--ink3)}
+.main{flex:1;min-width:0}
+.wrap{padding:var(--s7) var(--s7) var(--s8);max-width:1040px}
+.wrap.narrow{max-width:808px;margin:0 auto}
+.mtop{display:none}
+
+/* ---------- shared parts ---------- */
+.hi{font-size:var(--t14);color:var(--ink3);margin:0 0 var(--s1)}
+.h1{font-size:var(--t30);line-height:1.15;letter-spacing:-.02em;font-weight:800;margin:0}
+.h2{font-size:var(--t18);line-height:1.3;font-weight:700;margin:0}
+.lnk{font-size:var(--t14);font-weight:600;color:var(--ink2)}
+.lnk:hover{color:var(--ink)}
+.sec{display:flex;flex-direction:column;gap:var(--s3)}
+.sech{display:flex;align-items:baseline;justify-content:space-between;gap:var(--s4)}
+.sf{display:flex;align-items:center;gap:var(--s3);height:56px;padding:0 var(--s2) 0 var(--s4);border:1.5px solid var(--line2);border-radius:var(--r-l);background:var(--card)}
+.sf:focus-within{border-color:var(--ink)}
+.sf input{flex:1;min-width:0;border:0;outline:0;font:inherit;font-size:var(--t16);color:var(--ink);background:none}
+.sf input::placeholder{color:var(--ink3)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--s2);height:40px;padding:0 var(--s4);border-radius:var(--r);font-size:var(--t14);font-weight:700;white-space:nowrap}
+.btn.y{background:var(--y);color:var(--y-ink)}
+.btn.k{background:var(--ink);color:#fff}
+.btn.g{color:var(--ink2)}
+.chips{display:flex;gap:var(--s2);flex-wrap:wrap;align-items:center}
+.chips .lb{font-size:var(--t14);color:var(--ink3);margin-right:var(--s1)}
+.chip{height:32px;padding:0 var(--s3);border-radius:var(--r);border:1px solid var(--line);font-size:var(--t14);font-weight:600;color:var(--ink2);display:inline-flex;align-items:center;background:var(--card)}
+.chip:hover{border-color:var(--line2);color:var(--ink)}
+.qs{display:flex;gap:var(--s6);padding-bottom:var(--s4);border-bottom:1px solid var(--line)}
+.qs div{display:flex;flex-direction:column}
+.qs b{font-size:var(--t20);font-weight:800;letter-spacing:-.01em}
+.qs span{font-size:var(--t12);color:var(--ink3)}
+.next{display:flex;align-items:center;gap:var(--s4);padding:var(--s4) var(--s5);border-radius:var(--r-l);background:var(--ytint)}
+.next .tx{flex:1;min-width:0}
+.next .tx b{display:block;font-size:var(--t16);font-weight:700;color:var(--ink)}
+.next .tx span{font-size:var(--t14);color:var(--ytint-ink)}
+.rows{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.row{display:flex;align-items:center;gap:var(--s4);padding:var(--s3) 0;border-bottom:1px solid var(--line);min-height:64px}
+.row:hover .nm{text-decoration:underline;text-underline-offset:3px}
+.row .tx{flex:1;min-width:0}
+.row .nm{font-size:var(--t16);font-weight:700}
+.row .mt{font-size:var(--t14);color:var(--ink3)}
+.row .mt i{font-style:normal}
+.row .nw{font-size:var(--t14);font-weight:700;color:var(--ink);white-space:nowrap}
+.row .nw.z{font-weight:500;color:var(--ink3)}
+.row svg{color:var(--ink3)}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s4)}
+.vc{display:flex;flex-direction:column;gap:var(--s2)}
+.vc .th{position:relative;aspect-ratio:3/4;border-radius:var(--r);overflow:hidden;background:#ddd}
+.vc .th img{width:100%;height:100%;object-fit:cover;display:block}
+.sc{position:absolute;left:var(--s2);bottom:var(--s2);display:inline-flex;align-items:baseline;gap:var(--s1);padding:var(--s1) var(--s2);border-radius:6px;background:rgba(255,255,255,.94);font-size:var(--t12);color:var(--ink2)}
+.sc b{font-size:var(--t14);font-weight:800;color:var(--ink)}
+.vc .hd{font-size:var(--t14);font-weight:700}
+.vc .hd small{display:block;font-weight:500;font-size:var(--t12);color:var(--ink3)}
+.sample{font-size:var(--t12);font-weight:700;color:#8A5A00;background:#FFF1C7;padding:2px 6px;border-radius:4px;margin-left:var(--s2);vertical-align:2px}
+
+/* ---------- A: one column, UB Home paid order ---------- */
+.va{display:flex;flex-direction:column;gap:var(--s6)}
+.va .top{display:flex;flex-direction:column;gap:var(--s4)}
+
+/* ---------- B: breakouts first, searches on the right ---------- */
+.vb{display:flex;flex-direction:column;gap:var(--s6)}
+.vb .bar{display:flex;flex-direction:column;gap:var(--s3)}
+.vb .cols{display:grid;grid-template-columns:minmax(0,1fr) 288px;gap:var(--s7);align-items:start}
+.vb .grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s5) var(--s4)}
+.vb .vc .why{font-size:var(--t14);color:var(--ink2);line-height:1.4}
+.vb .slist{position:sticky;top:var(--s5)}
+.vb .slist .row{min-height:52px;padding:var(--s2) 0}
+.vb .slist .nm{font-size:var(--t14)}
+.vb .slist .mt{font-size:var(--t12)}
+.vb .slist .mt i{display:none}
+
+/* ---------- C: searches as a table ---------- */
+.vc-top{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--s5);flex-wrap:wrap}
+.vcx{display:flex;flex-direction:column;gap:var(--s5)}
+.vcx .sf{height:48px;width:420px;max-width:100%}
+.tabs{display:flex;gap:var(--s5);border-bottom:1px solid var(--line)}
+.tabs button{height:40px;font-size:var(--t14);font-weight:600;color:var(--ink3);border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabs button.on{color:var(--ink);border-color:var(--ink)}
+.tbl{width:100%;border-collapse:collapse;font-size:var(--t14)}
+.tbl th{text-align:left;font-size:var(--t12);font-weight:600;color:var(--ink3);padding:0 var(--s3) var(--s2);white-space:nowrap}
+.tbl th.r,.tbl td.r{text-align:right}
+.tbl td{padding:0 var(--s3);height:52px;border-top:1px solid var(--line);color:var(--ink2);white-space:nowrap}
+.tbl td:first-child,.tbl th:first-child{padding-left:0}
+.tbl td.nm{color:var(--ink);font-weight:700;font-size:var(--t16)}
+.tbl td.nw b{color:var(--ink)}
+.tbl tr:hover td{background:#FBFAF7}
+.tbl .ty{color:var(--ink3)}
+.strip{display:flex;gap:var(--s3);overflow:auto;scrollbar-width:none}
+.strip .vc{width:132px;flex:none}
+.strip .sc{font-size:0;gap:0}.strip .sc b{font-size:var(--t14)}
+
+/* ---------- D: Ivan's reference (22 Oct): two sliding rows of top breakouts, then 8 searches ---------- */
+.vd{display:flex;flex-direction:column;gap:var(--s7)}
+.vd .top{display:flex;flex-direction:column;gap:var(--s4)}
+.vd .sub{font-size:var(--t16);color:var(--ink2);margin:var(--s2) 0 0}
+.vd .sub b{color:var(--ink)}
+.tb{display:flex;flex-direction:column;gap:var(--s6)}
+.lane{display:flex;flex-direction:column;gap:var(--s3)}
+.lane .lh{display:flex;align-items:center;justify-content:space-between;gap:var(--s4)}
+.lane .lh h3{margin:0;font-size:var(--t14);font-weight:600;color:var(--ink2)}
+.lane .ctl{display:flex;align-items:center;gap:var(--s2)}
+.arw{width:32px;height:32px;border-radius:50%;border:1px solid var(--line2);display:grid;place-items:center;color:var(--ink2);background:var(--card)}
+.arw:hover{border-color:var(--ink);color:var(--ink)}
+.arw[disabled]{opacity:.35;cursor:default}
+.slide{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 3*var(--s4))/4);gap:var(--s4);overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;scroll-behavior:smooth}
+.slide::-webkit-scrollbar{display:none}
+.slide .vc{scroll-snap-align:start}
+.slide .vc .th{aspect-ratio:4/5}
+.pill{display:inline-flex;align-items:center;height:24px;padding:0 var(--s2);border-radius:6px;background:var(--ytint);color:var(--ytint-ink);font-size:var(--t12);font-weight:700;white-space:nowrap}
+.pill.z{background:none;color:var(--ink3);font-weight:500}
+.showall{display:flex;justify-content:center;padding:var(--s3) 0;font-size:var(--t14);font-weight:700;color:var(--ink);border-bottom:1px solid var(--line)}
+.showall:hover{text-decoration:underline;text-underline-offset:3px}
+/* history page */
+.hist{display:flex;flex-direction:column;gap:var(--s5)}
+.hist .rows{border-top:0}
+.back{font-size:var(--t14);font-weight:600;color:var(--ink2)}
+.htop{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--s4);flex-wrap:wrap}
+.htop select{height:40px;border:1px solid var(--line2);border-radius:var(--r);padding:0 var(--s3);font:inherit;font-size:var(--t14);font-weight:600;color:var(--ink);background:var(--card)}
+.htop label{font-size:var(--t14);color:var(--ink3);display:flex;align-items:center;gap:var(--s2)}
+.note{font-size:var(--t12);color:var(--ink3)}
+
+.tbl .ph{display:none}
+/* ---------- phone ---------- */
+@media (max-width:700px){
+  .app{background:var(--card)}
+  .side{display:none}
+  .mtop{display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 var(--s4);border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--card);z-index:5}
+  .mtop .logo{padding:0}
+  .mtop .r{display:flex;align-items:center;gap:var(--s3);font-size:var(--t12);color:var(--ink3)}
+  .wrap{padding:var(--s5) var(--s4) var(--s7)}
+  .h1{font-size:var(--t24)}
+  .sf{height:52px}
+  .sf .btn span{display:none}
+  .sf .btn{width:40px;padding:0}
+  .chips{flex-wrap:nowrap;overflow:auto;scrollbar-width:none;margin:0 calc(-1*var(--s4));padding:0 var(--s4)}
+  .chips .lb{display:none}
+  .chip{flex:none}
+  .qs{gap:var(--s5)}
+  .qs b{font-size:var(--t18)}
+  .next{flex-direction:column;align-items:stretch;gap:var(--s3);padding:var(--s4)}
+  .next .btn{width:100%}
+  .grid4{grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s3)}
+  .vb .cols{grid-template-columns:1fr;gap:var(--s6)}
+  .vb .grid3{display:flex;overflow:auto;gap:var(--s3);scrollbar-width:none;margin:0 calc(-1*var(--s4));padding:0 var(--s4)}
+  .vb .grid3 .vc{width:200px;flex:none}
+  .vb .cols>*{min-width:0}
+  .vb .slist{position:static}
+  .vb .slist .row:nth-child(n+6){display:none}
+  .vd{gap:var(--s6)}
+  .slide{grid-auto-columns:160px;gap:var(--s3);margin:0 calc(-1*var(--s4));padding:0 var(--s4);scroll-padding:0 var(--s4)}
+  .lane .arw{display:none}
+  .tbl .ph{display:inline}
+  .vcx .sf{width:100%}
+  .tbl thead,.tbl .hide{display:none}
+  .tbl td{height:auto;padding:var(--s3) var(--s2) var(--s3) 0}
+  .tbl td.nm{white-space:normal}
+  .tbl td.nm small{display:block;font-weight:500;font-size:var(--t12);color:var(--ink3)}
+}
+@media (min-width:701px){.tbl td.nm small{display:none}}
+</style>
+</head>
+<body>
+<div class="app">
+ <aside class="side" id="side"></aside>
+ <main class="main"><header class="mtop" id="mtop"></header><div class="wrap" id="wrap"></div></main>
+</div>
+<script>
+/* Searches, counts and usage are read from Ivan's live Home screenshot (22 Oct); check against live before Lester builds.
+   Video thumbnails, handles and scores are the rhode skin run already used in the 3.0 mock. */
+var S=[
+ {n:"rhode",t:"Brand",b:463,top:"1.2K",nw:56,r:"Oct 27"},
+ {n:"tiktok made me buy it",t:"Product",b:241,top:"2.3K",nw:41,r:"Oct 28"},
+ {n:"Behringer",t:"Brand",b:24,top:"44",nw:39,r:"Oct 27"},
+ {n:"iphone",t:"Product",b:131,top:"1.1K",nw:31,r:"Oct 27"},
+ {n:"ipad",t:"Product",b:98,top:"350",nw:22,r:"Oct 27"},
+ {n:"alo yoga",t:"Brand",b:158,top:"431",nw:20,r:"Oct 27"},
+ {n:"glazed skin",t:"Product",b:17,top:"626",nw:18,r:"Oct 28"},
+ {n:"cerave",t:"Brand",b:198,top:"4.4K",nw:11,r:"Oct 28"},
+ {n:"gopure beauty",t:"Brand",b:189,top:"2K",nw:7,r:"Oct 28"},
+ {n:"test",t:"Brand",b:259,top:"1.1K",nw:0,r:"Oct 28"}];
+var V=[
+ {img:"../../img/v3.jpg",h:"em_ireland",s:"6.2K",q:"rhode",d:"2 days ago",why:"A pop-up hoodie shown once, no voiceover"},
+ {img:"../../img/v4.jpg",h:"justemma529",s:"5.9K",q:"rhode",d:"2 days ago",why:"A thank-you to the founder, 7 seconds long"},
+ {img:"../../img/v5.jpg",h:"jordannsagee",s:"4.2K",q:"rhode",d:"3 days ago",why:"A celebrity sighting filmed in-store"},
+ {img:"../../img/v2.jpg",h:"_ellapalmer_",s:"7.1K",q:"rhode",d:"5 days ago",why:"A Halloween costume built around the product"},
+ {img:"../../img/v6.jpg",h:"laurenestephanny_",s:"3.6K",q:"rhode",d:"5 days ago",why:"A lip combo filmed close up"}];
+/* D, In your searches: the real rhode skin run (same frames and handles as the 3.0 mock, v6 to v8 from the breakout creators list).
+   D, Across BrandBeacon: real nike breakouts from the sales page demo (sales-page/img/live). "x days ago" is SAMPLE for this week. */
+var DY=[
+ {img:"../../img/v2.jpg",h:"_ellapalmer_",s:"7.1K",q:"rhode",d:"5 days ago"},
+ {img:"../../img/v3.jpg",h:"em_ireland",s:"6.2K",q:"rhode",d:"2 days ago"},
+ {img:"../../img/v4.jpg",h:"justemma529",s:"5.9K",q:"rhode",d:"2 days ago"},
+ {img:"../../img/v5.jpg",h:"jordannsagee",s:"4.2K",q:"rhode",d:"3 days ago"},
+ {img:"../../img/v6.jpg",h:"laurenestephanny_",s:"3.6K",q:"rhode",d:"5 days ago"},
+ {img:"../../img/v7.jpg",h:"bricourtneyy",s:"1.9K",q:"rhode",d:"4 days ago"},
+ {img:"../../img/v8.jpg",h:"elizaveta_beauty_",s:"1.8K",q:"rhode",d:"6 days ago"}];
+var LV="../../sales-page/img/live/";
+var DA=[
+ {img:LV+"7573697125595303186-t.jpg",h:"natali.gogaladze",s:"5.1K",q:"nike",d:"1 day ago"},
+ {img:LV+"7673863358721920278-t.jpg",h:"arthurs_51",s:"5.1K",q:"nike",d:"2 days ago"},
+ {img:LV+"7658843442696523039-t.jpg",h:"smoothsailing3500",s:"2.3K",q:"nike",d:"3 days ago"},
+ {img:LV+"7686663477691305229-t.jpg",h:"rylanroskom",s:"2.2K",q:"nike",d:"3 days ago"},
+ {img:LV+"7631200726949170464-t.jpg",h:"f4nn1.2",s:"1.9K",q:"nike",d:"4 days ago"},
+ {img:LV+"7630200374590278925-t.jpg",h:"midowash",s:"1.9K",q:"nike",d:"5 days ago"},
+ {img:LV+"7693631783031590157-t.jpg",h:"brenda.19",s:"1.4K",q:"nike",d:"6 days ago"}];
+var NEWT=S.reduce(function(a,s){return a+s.nw},0);
+var CH=["sol de janeiro","tarte","peptide lip tint","heatless curlers","#skincareroutine"];
+var I={
+ search:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>',
+ chev:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg>',
+ home:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 11 12 4l8 7v9h-5v-6H9v6H4z"/></svg>',
+ feed:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M7 4v16l13-8z"/></svg>',
+ save:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M6 3h12v18l-6-4-6 4z"/></svg>',
+ spark:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></svg>',
+ beacon:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1A1300" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="2"/><path d="M8.5 8.5a5 5 0 0 0 0 7M15.5 8.5a5 5 0 0 1 0 7"/></svg>',
+ menu:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>'};
+var QP=new URLSearchParams(location.search);
+var v=(QP.get("v")||"a").toLowerCase();
+if(QP.get("view")==="history")v="history";
+function lane(id,title,cards){return '<div class="lane"><div class="lh"><h3>'+title+'</h3><span class="ctl"><button class="arw" data-dir="-1" data-for="'+id+'" aria-label="Back">'+I.chev.replace('m9 6 6 6-6 6','m15 6-6 6 6 6')+'</button><button class="arw" data-dir="1" data-for="'+id+'" aria-label="More">'+I.chev+'</button><a class="lnk" href="#">See all</a></span></div><div class="slide" id="'+id+'">'+cards.map(function(x){return vcard(x)}).join("")+'</div></div>';}
+function rowD(s){return '<a class="row" href="#"><span class="tx"><span class="nm">'+s.n+'</span><br><span class="mt num">'+s.t+' · '+s.b+' breakouts<i> · top '+s.top+'×</i></span></span><span class="pill num'+(s.nw?'':' z')+'">'+(s.nw?s.nw+' new':'Nothing new')+'</span>'+I.chev+'</a>';}
+function hrows(k,f){var a=S.filter(function(s){return f==="all"||s.t.toLowerCase()===f});
+ a.sort(function(x,y){return k==="az"?x.n.localeCompare(y.n):k==="b"?y.b-x.b:k==="r"?x.r.localeCompare(y.r):y.nw-x.nw});
+ return a.map(rowD).join("");}
+function logo(){return '<a class="logo" href="#">'+'<i>'+I.beacon+'</i>BrandBeacon</a>';}
+function side(){return logo()+
+ '<a class="nv on" href="#">'+I.home+'Home</a><a class="nv" href="#">'+I.feed+'My Feed</a>'+
+ '<div class="sl">Recent searches</div>'+S.slice(0,5).map(function(s){return '<a class="si" href="#"><span>'+s.n+'</span>'+(s.nw?'<b class="num">'+s.nw+' new</b>':'')+'</a>';}).join("")+
+ '<a class="more" href="#">See all 121</a>'+
+ '<div class="sl">Library</div><a class="nv" href="#">'+I.save+'Saved videos</a><a class="nv" href="#">'+I.spark+'Video analyses</a>'+
+ '<div class="use"><div><b class="num">92</b> of 100 searches left</div><div><b class="num">98</b> of 100 analyses left</div></div>'+
+ '<div class="me"><i>IB</i><div>Ivan Bagaybagayan<small>Growth plan</small></div></div>';}
+function sform(ph){return '<form class="sf" onsubmit="return false">'+I.search+'<input placeholder="'+(ph||"Brand, product or keyword")+'"><button class="btn y" type="submit">'+I.search.replace('width="18" height="18"','width="16" height="16"')+'<span>Find breakouts</span></button></form>';}
+function chips(lb){return '<div class="chips"><span class="lb">'+(lb||"Try")+'</span>'+CH.map(function(c){return '<a class="chip" href="#">'+c+'</a>';}).join("")+'</div>';}
+function rowS(s){return '<a class="row" href="#"><span class="tx"><span class="nm">'+s.n+'</span><br><span class="mt num">'+s.t+' · '+s.b+' breakouts<i> · top '+s.top+'×</i></span></span><span class="nw num'+(s.nw?'':' z')+'">'+(s.nw?s.nw+' new':'Nothing new')+'</span>'+I.chev+'</a>';}
+function vcard(x,why){return '<a class="vc" href="#"><span class="th"><img src="'+x.img+'" alt=""><span class="sc"><b class="num">'+x.s+'×</b>Breakout Score</span></span><span class="hd">@'+x.h+'<small>'+x.q+' · '+x.d+'</small></span>'+(why?'<span class="why">'+x.why+'</span>':'')+'</a>';}
+function qs(){return '<div class="qs"><div><b class="num">'+NEWT+'</b><span>new this week</span></div><div><b class="num">92</b><span>searches left</span></div><div><b class="num">2</b><span>videos analyzed</span></div></div>';}
+
+var VIEW={
+ a:function(){return '<div class="wrap narrow"><div class="va">'+
+  '<div class="top"><div><p class="hi">Hi Ivan</p><h1 class="h1">What do you want to find breakouts for?</h1></div>'+sform()+chips()+'</div>'+
+  qs()+
+  '<div class="next"><div class="tx"><b>rhode has 56 new breakouts since Monday</b><span>Your biggest jump this week. The top one is 6.2K× its creator’s usual.</span></div><a class="btn k" href="#">See what’s new</a><a class="btn g" href="#">Not now</a></div>'+
+  '<div class="sec"><div class="sech"><h2 class="h2">Your searches</h2><a class="lnk" href="#">See all 121</a></div><div class="rows">'+S.slice(0,5).map(rowS).join("")+'</div></div>'+
+  '<div class="sec"><div class="sech"><h2 class="h2">New in your searches</h2><a class="lnk" href="#">See all in My Feed</a></div><div class="grid4">'+V.slice(0,4).map(function(x){return vcard(x)}).join("")+'</div></div>'+
+  '</div></div>';},
+ b:function(){return '<div class="wrap"><div class="vb">'+
+  '<div class="bar">'+sform()+chips()+'</div>'+
+  '<div class="cols"><div class="sec"><div><p class="hi">Since Monday</p><h1 class="h1"><span class="num">'+NEWT+'</span> new breakouts in your searches</h1></div>'+
+  '<div class="grid3">'+V.slice(0,3).map(function(x){return vcard(x,1)}).join("")+'</div><a class="lnk" href="#">See all in My Feed</a></div>'+
+  '<aside class="sec slist"><div class="sech"><h2 class="h2">Your searches</h2><a class="lnk" href="#">See all 121</a></div><div class="rows">'+S.slice(0,7).map(rowS).join("")+'</div></aside></div>'+
+  '</div></div>';},
+ c:function(){return '<div class="wrap"><div class="vcx">'+
+  '<div class="vc-top"><div><p class="hi">121 searches · '+NEWT+' new breakouts this week</p><h1 class="h1">Your searches</h1></div>'+sform("Add a search")+'</div>'+
+  '<div class="tabs"><button class="on">All</button><button>Brands</button><button>Products</button><button>Has new</button></div>'+
+  '<table class="tbl num"><thead><tr><th>Search</th><th class="hide">Type</th><th class="r hide">Breakouts</th><th class="r hide">Top score</th><th class="r">New this week ↓</th><th class="r hide">Next refresh</th></tr></thead><tbody>'+
+  S.map(function(s){return '<tr><td class="nm">'+s.n+'<small>'+s.t+' · '+s.b+' breakouts · top '+s.top+'×</small></td><td class="ty hide">'+s.t+'</td><td class="r hide">'+s.b+'</td><td class="r hide">'+s.top+'×</td><td class="r nw">'+(s.nw?'<b>'+s.nw+'<span class="ph"> new</span></b>':'None')+'</td><td class="r hide">'+s.r+'</td></tr>';}).join("")+
+  '</tbody></table><a class="lnk" href="#">Show all 121</a>'+
+  '<div class="sec"><div class="sech"><h2 class="h2">Newest breakouts</h2><a class="lnk" href="#">See all in My Feed</a></div><div class="strip">'+V.map(function(x){return vcard(x)}).join("")+'</div></div>'+
+  '</div></div>';},
+ d:function(){return '<div class="wrap"><div class="vd">'+
+  '<div class="top"><div><p class="hi">Friday, October 23</p><h1 class="h1">Good morning, Ivan</h1><p class="sub">You have <b class="num">'+NEWT+'</b> new breakouts across your searches since Monday.</p></div>'+sform()+'</div>'+
+  '<div class="sec"><h2 class="h2">Top breakouts this week</h2><div class="tb">'+lane("ly","In your searches",DY)+lane("la","Across BrandBeacon",DA)+'</div></div>'+
+  '<div class="sec"><div class="sech"><h2 class="h2">Your searches</h2><span class="lnk num">121 total</span></div><div class="rows">'+S.slice(0,8).map(rowD).join("")+'</div><a class="showall num" href="app.html?v=d&view=history">Show all 121</a></div>'+
+  '</div></div>';},
+ history:function(){return '<div class="wrap"><div class="hist">'+
+  '<a class="back" href="app.html?v=d">← Home</a>'+
+  '<div class="htop"><div><p class="hi num">121 searches · '+NEWT+' new breakouts this week</p><h1 class="h1">Search history</h1></div>'+
+  '<label>Sort <select id="hs"><option value="nw">Most new</option><option value="b">Most breakouts</option><option value="r">Next refresh</option><option value="az">A to Z</option></select></label></div>'+
+  '<div class="tabs" id="ht"><button class="on" data-f="all">All</button><button data-f="brand">Brands</button><button data-f="product">Products</button></div>'+
+  '<div class="rows" id="hr">'+hrows("nw","all")+'</div>'+
+  '<p class="note">Showing the 10 searches read from your Home. The live page lists all 121, 20 at a time.</p>'+
+  '</div></div>';}};
+document.getElementById("side").innerHTML=side();
+document.getElementById("mtop").innerHTML=logo()+'<span class="r"><span class="num">92 left</span>'+I.menu+'</span>';
+var w=document.getElementById("wrap");w.outerHTML=(VIEW[v]||VIEW.a)();
+document.querySelectorAll(".arw").forEach(function(b){var s=document.getElementById(b.dataset.for);
+ function st(){var m=s.scrollWidth-s.clientWidth-2;document.querySelectorAll('.arw[data-for="'+s.id+'"]').forEach(function(x){x.disabled=x.dataset.dir<0?s.scrollLeft<=2:s.scrollLeft>=m;});}
+ b.addEventListener("click",function(){s.scrollBy({left:b.dataset.dir*s.clientWidth,behavior:"smooth"});});s.addEventListener("scroll",st);st();});
+var hs=document.getElementById("hs");
+if(hs){var hf="all";function hre(){document.getElementById("hr").innerHTML=hrows(hs.value,hf);}
+ hs.addEventListener("change",hre);
+ document.querySelectorAll("#ht button").forEach(function(b){b.addEventListener("click",function(){document.querySelectorAll("#ht button").forEach(function(x){x.classList.toggle("on",x===b)});hf=b.dataset.f;hre();});});}
+</script>
+</body>
+</html>
