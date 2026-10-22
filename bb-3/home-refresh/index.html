@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BB Home refresh</title>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1A1814;--ink2:#57534A;--ink3:#736F66;--line:#E9E5DC;--paper:#F7F6F2;--y:#FFC72C;--ytint:#FFF6D6}
+*{box-sizing:border-box}
+body{margin:0;font-family:Figtree,system-ui,sans-serif;color:var(--ink);background:var(--paper);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:48px 24px 96px;display:flex;flex-direction:column;gap:64px}
+h1{font-size:36px;line-height:1.1;letter-spacing:-.02em;margin:0 0 12px}
+h2{font-size:24px;line-height:1.2;margin:0 0 8px}
+h3{font-size:18px;margin:0}
+p{margin:0}
+.lede{font-size:18px;color:var(--ink2);max-width:46em}
+.quote{margin-top:16px;padding:16px 20px;background:#fff;border-left:3px solid var(--y);border-radius:0 8px 8px 0;color:var(--ink2);max-width:46em}
+.quote b{color:var(--ink)}
+.two{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:32px;align-items:start}
+.shot{background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.shot img{display:block;width:100%;height:auto}
+.cap{font-size:14px;color:var(--ink3);margin-top:8px}
+ol.n{margin:0;padding:0;list-style:none;counter-reset:n;display:flex;flex-direction:column;gap:16px}
+ol.n li{counter-increment:n;display:grid;grid-template-columns:28px 1fr;gap:12px;color:var(--ink2)}
+ol.n li::before{content:counter(n);width:24px;height:24px;border-radius:50%;background:#fff;border:1px solid var(--line);display:grid;place-items:center;font-size:12px;font-weight:700;color:var(--ink)}
+ol.n li b{color:var(--ink)}
+.rules{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 32px;margin-top:16px}
+.rules div{padding:12px 0;border-top:1px solid var(--line);color:var(--ink2)}
+.rules b{display:block;color:var(--ink)}
+.opt{display:flex;flex-direction:column;gap:20px;padding-top:32px;border-top:1px solid var(--line)}
+.oh{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.oh h2{margin:0}
+.bet{font-size:18px;color:var(--ink2);max-width:46em;margin-top:4px}
+.try{display:inline-flex;align-items:center;height:40px;padding:0 16px;border-radius:8px;background:var(--ink);color:#fff;font-weight:700;font-size:14px;text-decoration:none;white-space:nowrap}
+.pick{display:inline-block;font-size:12px;font-weight:700;background:var(--y);color:#1A1300;padding:2px 8px;border-radius:4px;margin-left:8px;vertical-align:4px}
+.shots{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:24px;align-items:start}
+.shots .ph{max-height:720px;overflow:hidden}
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.facts h3{font-size:14px;color:var(--ink3);font-weight:600;margin-bottom:4px}
+.facts p{color:var(--ink2)}
+.verdict{background:#fff;border:1px solid var(--line);border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:12px}
+.verdict p{color:var(--ink2);max-width:52em}
+ul.q{margin:0;padding-left:20px;color:var(--ink2);display:flex;flex-direction:column;gap:8px}
+@media (max-width:800px){
+ h1{font-size:28px}
+ .two,.shots,.facts,.rules{grid-template-columns:1fr}
+ .shots .ph{max-width:300px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+ <h1>BB Home refresh: first look</h1>
+ <p class="lede">Three ways to make the logged-in Home easier to look at, using the spacing and hierarchy from UGC Breakouts 3.1 while keeping BrandBeacon's own look. Everything is local and nothing has gone to Ivan or Lester yet.</p>
+ <p class="quote"><b>Ivan, 22 Oct (Slack):</b> “with the latest UGC B, and the spacing, making things look UX/UI, i'd like to give the home screen of BB a new refresh... it's not easy to look at, pretty to look at”</p>
+</header>
+
+<section>
+ <h2>Why the live Home is hard to look at</h2>
+ <p class="lede" style="margin-bottom:24px">From Ivan's screenshot of his own account. Every block on the page is useful. The trouble is that they all get the same weight, so the eye has nowhere to land.</p>
+ <div class="two">
+  <div><div class="shot"><img src="shots/before-live-oct22.png" alt="Live BB Home, Ivan's account"></div><p class="cap">Live, Ivan's account, 22 Oct.</p></div>
+  <ol class="n">
+   <li><span><b>No starting point.</b> The page opens on a box holding the search bar and 15 suggestion chips in three labeled rows. There is no heading, so nothing says what this page is for.</span></li>
+   <li><span><b>Yellow is on everything.</b> The main button, a dot on each of the 15 chips, 10 “new” pills, 5 “Ready” pills in the sidebar, the section markers, the active nav item and the usage bars. With that much yellow, none of it stands out.</span></li>
+   <li><span><b>Ten rows that look the same.</b> Each search gets an initials circle, a caps BRAND or PRODUCT tag, a gray line, a yellow pill and an arrow. At 121 searches this list can't scale, and at 10 it already reads as a wall.</span></li>
+   <li><span><b>Small type in one gray.</b> Most text is 12 to 14px, so tags and pills carry the hierarchy instead of size and weight.</span></li>
+   <li><span><b>Two lists of the same searches.</b> The sidebar repeats the searches with their own yellow pills, plus an Analysis list, so the eye compares two columns.</span></li>
+  </ol>
+ </div>
+</section>
+
+<section>
+ <h2>What UB 3.1 does that BB can borrow</h2>
+ <p class="lede" style="margin-bottom:24px">Ivan said UB 3.1 “looks great” (19 Oct) and liked the Home, paid layout: “minimal, you know where to look” (20 Oct). These are the parts that make it easy to read. The colors and fonts stay UB's.</p>
+ <div class="two">
+  <div><div class="shot"><img src="shots/ub31-homepaid.png" alt="UB 3.1 Home, paid"></div><p class="cap">UB 3.1, Home, paid (page 29).</p></div>
+  <ol class="n">
+   <li><span><b>One anchor.</b> A 28px bold question sits on top, with the search bar right under it. Everything else is smaller.</span></li>
+   <li><span><b>One row of suggestions.</b> Five chips with no category labels and no dots.</span></li>
+   <li><span><b>Quiet numbers.</b> Three at most, each a bold number with a small gray label, no boxes, one hairline under the row.</span></li>
+   <li><span><b>One thing to do next.</b> A single tinted card with one button and Not now.</span></li>
+   <li><span><b>Short lists.</b> Three to five rows split by hairlines, then See all.</span></li>
+   <li><span><b>One spacing scale.</b> 4, 8, 12, 16, 24, 32, 48. Gaps between sections are about three times the gaps inside them, so each group reads as one unit.</span></li>
+   <li><span><b>Each color has one job.</b> Coral is the action and teal is information. Text is ink, gray or light gray.</span></li>
+  </ol>
+ </div>
+</section>
+
+<section>
+ <h2>Rules all three options share</h2>
+ <div class="rules">
+  <div><b>BrandBeacon stays BrandBeacon</b>Figtree, the yellow, warm ink and warm paper. None of UB's coral or teal.</div>
+  <div><b>Yellow is for the main button only</b>Find breakouts (and the logo). “New” counts are bold ink text, and the next-step card uses a pale yellow tint with a black button.</div>
+  <div><b>One type scale, two weights</b>12, 14, 16, 18, 20, 24, 30. Body at 500, emphasis at 700 or 800.</div>
+  <div><b>Three text colors, all readable</b>Ink #1A1814 (17.7:1 on white), gray #57534A (7.7:1), light gray #736F66 (5.0:1).</div>
+  <div><b>Content comes forward</b>The sidebar sits on warm paper and the main area on white, so the page reads before the menu.</div>
+  <div><b>Searches are plain rows</b>No initials circles and no caps tags. Brand or Product moves into the gray line. Rows are split by hairlines.</div>
+  <div><b>Sidebar keeps the 3.0 order</b>Home, My Feed, recent searches (5), Library, usage, account. The Ready pills become “N new” text.</div>
+  <div><b>Same blocks as 3.0</b>Search, Your searches and New in your searches all stay. Only the order, the weight and one new card change.</div>
+ </div>
+</section>
+
+<section class="opt" id="a">
+ <div class="oh"><div><h2>A. Search first <span class="pick">Our pick</span></h2><p class="bet">Give BB the same reading order Ivan liked on UB: a question, the search bar, three numbers, one next step, then five searches and four new breakouts.</p></div><a class="try" href="app.html?v=a">Try it</a></div>
+ <div class="shots"><div class="shot"><img src="shots/a-1440.png" alt="Option A desktop"></div><div class="shot ph"><img src="shots/a-390.png" alt="Option A phone"></div></div>
+ <div class="facts">
+  <div><h3>What changes</h3><p>One centered column, 712px wide. The 15 chips become 5 in one row. The 10 search rows become 5, sorted by most new. A new card points at the search with the biggest jump this week, with one button and Not now, the same pattern as UB's Home, paid.</p></div>
+  <div><h3>Trade-off</h3><p>Only 5 of Ivan's 121 searches show on Home. People who track many brands go to See all every time. The next-step card needs rules for which message to show, as on UB.</p></div>
+ </div>
+</section>
+
+<section class="opt" id="b">
+ <div class="oh"><div><h2>B. New breakouts first</h2><p class="bet">The reason to come back is new videos, so lead with them. The headline is the count of new breakouts, the videos take the wide column, and the searches sit in a narrow column on the right.</p></div><a class="try" href="app.html?v=b">Try it</a></div>
+ <div class="shots"><div class="shot"><img src="shots/b-1440.png" alt="Option B desktop"></div><div class="shot ph"><img src="shots/b-390.png" alt="Option B phone"></div></div>
+ <div class="facts">
+  <div><h3>What changes</h3><p>Search bar on top at full width, then six bigger video cards, each with one line on why it broke out. Your searches becomes a compact list beside them. On phone, the videos scroll sideways and the list follows.</p></div>
+  <div><h3>Trade-off</h3><p>The “why it worked” line under each card doesn't exist in the app today (SAMPLE copy). It needs an analysis or a short generated line per video. Without it the cards are only thumbnails, which is My Feed again.</p></div>
+ </div>
+</section>
+
+<section class="opt" id="c">
+ <div class="oh"><div><h2>C. Searches as a table</h2><p class="bet">Ivan's account has 121 searches, and agencies track many brands at once. A sortable table handles that where rows can't.</p></div><a class="try" href="app.html?v=c">Try it</a></div>
+ <div class="shots"><div class="shot"><img src="shots/c-1440.png" alt="Option C desktop"></div><div class="shot ph"><img src="shots/c-390.png" alt="Option C phone"></div></div>
+ <div class="facts">
+  <div><h3>What changes</h3><p>The page is Your searches. Columns for type, breakouts, top score, new this week (sorted) and next refresh, with All, Brands, Products and Has new tabs. The search bar becomes “Add a search” in the header. A strip of the newest breakouts sits under the table.</p></div>
+  <div><h3>Trade-off</h3><p>It reads like a tool, and a new Free account with one or two searches gets a near-empty table. It would need its own state for new accounts (the 3.0 Get started steps).</p></div>
+ </div>
+</section>
+
+<section class="verdict">
+ <h2>Our pick: A, with C as the See all page</h2>
+ <p>A is the change Ivan asked for: the UB 3.1 spacing and reading order on BB's own look. It keeps every 3.0 decision Lester already has (search, Your searches, New in your searches), so the build is a restyle plus one new card rather than a new page. C's table solves a real problem for heavy accounts like Ivan's, so it fits best behind “See all 121” instead of on Home.</p>
+ <h3 style="margin-top:8px">Before this goes to Ivan</h3>
+ <ul class="q">
+  <li>The searches, counts and usage come from Ivan's 22 Oct screenshot, read off a small image. Check them against live, or swap in the rhode skin mock data.</li>
+  <li>The “why it worked” lines in B are SAMPLE.</li>
+  <li>The next-step card (A) needs message rules. Ours: the search with the most new breakouts this week, then an analysis that's ready, then Get started for new accounts.</li>
+  <li>“Hi Ivan” uses the account's first name. OK to keep, or drop it?</li>
+ </ul>
+</section>
+
+</div>
+</body>
+</html>
