@@ -191,7 +191,6 @@ var V=[
  {img:"../../img/v3.jpg",h:"em_ireland",s:"6.2K",q:"rhode",d:"2 days ago",why:"A pop-up hoodie shown once, no voiceover"},
  {img:"../../img/v4.jpg",h:"justemma529",s:"5.9K",q:"rhode",d:"2 days ago",why:"A thank-you to the founder, 7 seconds long"},
  {img:"../../img/v5.jpg",h:"jordannsagee",s:"4.2K",q:"rhode",d:"3 days ago",why:"A celebrity sighting filmed in-store"},
- {img:"../../img/v1.jpg",h:"cyr1n32",s:"8.6K",q:"rhode",d:"5 days ago",why:"One product shot with one line of text"},
  {img:"../../img/v2.jpg",h:"_ellapalmer_",s:"7.1K",q:"rhode",d:"5 days ago",why:"A Halloween costume built around the product"},
  {img:"../../img/v6.jpg",h:"glazedskincare",s:"20",q:"glazed skin",d:"41 min ago",why:"A routine shot on a kitchen counter"}];
 var NEWT=S.reduce(function(a,s){return a+s.nw},0);
@@ -231,7 +230,7 @@ var VIEW={
  b:function(){return '<div class="wrap"><div class="vb">'+
   '<div class="bar">'+sform()+chips()+'</div>'+
   '<div class="cols"><div class="sec"><div><p class="hi">Since Monday</p><h1 class="h1"><span class="num">'+NEWT+'</span> new breakouts in your searches</h1></div>'+
-  '<div class="grid3">'+V.map(function(x){return vcard(x,1)}).join("")+'</div><a class="lnk" href="#">See all in My Feed</a></div>'+
+  '<div class="grid3">'+V.slice(0,3).map(function(x){return vcard(x,1)}).join("")+'</div><a class="lnk" href="#">See all in My Feed</a></div>'+
   '<aside class="sec slist"><div class="sech"><h2 class="h2">Your searches</h2><a class="lnk" href="#">See all 121</a></div><div class="rows">'+S.slice(0,7).map(rowS).join("")+'</div></aside></div>'+
   '</div></div>';},
  c:function(){return '<div class="wrap"><div class="vcx">'+
