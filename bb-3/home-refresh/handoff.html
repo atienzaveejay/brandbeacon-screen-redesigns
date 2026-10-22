@@ -1,0 +1,100 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex, nofollow"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Home handoff for Lester</title>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700;800;900&display=swap" rel="stylesheet"><style>
+:root{--ink:#0B0B0B;--mid:#5E5A52;--q:#6B675F;--line:#ECE9E1;--bg:#F5F4F0;--y:#FFC72C;--card:#fff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--ink:#F3F1EC;--mid:#C9C4BA;--q:#A9A398;--line:#34312C;--bg:#141311;--card:#1D1B18}}
+:root[data-theme="dark"]{--ink:#F3F1EC;--mid:#C9C4BA;--q:#A9A398;--line:#34312C;--bg:#141311;--card:#1D1B18}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Figtree,system-ui,sans-serif;font-size:15px;line-height:1.5}
+a{color:inherit}.wrap{max-width:1180px;margin:0 auto;padding:28px 16px 80px}
+header.top h1{font-size:28px;margin:0 0 4px}header.top p{margin:0 0 6px;color:var(--mid)}
+nav.jump{display:flex;flex-wrap:wrap;gap:6px;margin:18px 0 8px;position:sticky;top:0;background:var(--bg);padding:8px 0;z-index:5}
+nav.jump a{text-decoration:none;font-size:13px;font-weight:700;border:1px solid var(--line);background:var(--card);border-radius:8px;padding:5px 10px}
+.item{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px 24px;margin-top:20px;scroll-margin-top:56px}
+.ih{display:flex;align-items:flex-start;gap:14px}.ih>div{flex:1;min-width:0}
+.no{font-size:22px;font-weight:900;background:var(--y);color:#1A1300;border-radius:8px;min-width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center}
+.area{font-size:12.5px;font-weight:700;color:var(--q)}h2{margin:0;font-size:20px;line-height:1.3}
+.open{font-size:13px;font-weight:700;border:1px solid var(--line);border-radius:8px;padding:6px 10px;text-decoration:none;white-space:nowrap}
+h3{font-size:13px;font-weight:800;margin:0 0 8px;color:var(--q)}
+figure{margin:18px 0 14px}figure img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:8px;background:#fff}
+figure.dk img{max-height:620px;object-fit:cover;object-position:top}
+figcaption{font-size:12.5px;color:var(--q);margin-top:5px}
+.notes{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:22px;border-top:1px solid var(--line);margin-top:8px;padding-top:16px}
+.notes ul,.item>ul{margin:0;padding-left:18px}.notes li,.item li{margin-bottom:6px;font-size:14px}
+.tag{font-size:11px;font-weight:800;background:#FFE9CF;color:#7A3E00;border-radius:5px;padding:2px 6px;margin-left:6px}
+@media (max-width:760px){.notes{grid-template-columns:minmax(0,1fr)}.ih{flex-wrap:wrap}.open{order:3}.item{padding:18px 16px}}
+</style></head><body><div class="wrap">
+<header class="top"><h1>Home (logged in): build notes</h1>
+<p>Final design, approved by Ivan on 23 Oct: option D of the Home refresh. Clickable mock: <a href="app.html?v=d">app.html?v=d</a>. Search history page: <a href="app.html?v=d&amp;view=history">app.html?v=d&amp;view=history</a>.</p>
+<p>Numbers, dates and the videos in the mock are <b>SAMPLE</b>. Everything else (layout, spacing, copy, order) is final.</p></header>
+<nav class="jump"><a href="#h1">1 Greeting</a><a href="#h2">2 Top breakouts</a><a href="#h3">3 Your searches</a><a href="#h4">4 Search history</a><a href="#h5">5 Left menu</a><a href="#h6">6 Phone</a><a href="#q">Questions</a></nav>
+
+<section class="item" id="h1">
+ <div class="ih"><span class="no">1</span><div><span class="area">Top of Home</span><h2>Greeting, this week's count, search bar</h2></div><a class="open" href="app.html?v=d" target="_blank">Open in mock</a></div>
+ <figure class="dk"><img src="shots/d-1440.png" alt="Home, option D, desktop"><figcaption>Option D at 1440px.</figcaption></figure>
+ <div class="notes"><div><h3>Build notes</h3><ul>
+  <li>Small date line (e.g. "Friday, October 23"), then "Good morning, {first name}" by the user's local time (morning before 12, afternoon before 6 PM, then evening).</li>
+  <li>Line under it: "You have <b>N</b> new breakouts across your searches since Monday". N = all new breakouts across the user's searches since the Monday rerun.</li>
+  <li>Search bar and Find breakouts button are the same component as today. No chips on this Home.</li>
+ </ul></div><div><h3>Edge cases</h3><ul>
+  <li>N = 0: "No new breakouts yet this week. Your searches rerun every Monday."</li>
+  <li>New account with no searches yet: drop the count line, keep the greeting and search bar.</li>
+ </ul></div></div>
+</section>
+
+<section class="item" id="h2">
+ <div class="ih"><span class="no">2</span><div><span class="area">Middle of Home</span><h2>Top breakouts this week: 2 rows you can slide</h2></div></div>
+ <div class="notes"><div><h3>Build notes</h3><ul>
+  <li>Heading "Top breakouts this week", then two labeled rows, each a horizontal row of the existing video cards (thumbnail, Breakout Score, @handle, search name, posted age).</li>
+  <li><b>In your searches:</b> this week's breakouts from the user's own searches, highest Breakout Score first, up to 12.</li>
+  <li><b>Across BrandBeacon:</b> this week's highest-scoring breakouts across all of BrandBeacon, up to 12, leaving out any video already in the first row.</li>
+  <li>Desktop: 4 cards visible. The arrow buttons next to See all move by 4; the left arrow is disabled at the start. Phone: swipe sideways, no arrows.</li>
+  <li>See all on "In your searches" opens My Feed.</li>
+ </ul></div><div><h3>Edge cases</h3><ul>
+  <li>Fewer than 4 cards: show what there is, hide the arrows.</li>
+  <li>No breakouts in the user's searches this week (or no searches yet): hide the first row and keep Across BrandBeacon.</li>
+ </ul></div></div>
+</section>
+
+<section class="item" id="h3">
+ <div class="ih"><span class="no">3</span><div><span class="area">Bottom of Home</span><h2>Your searches (8), then Show all</h2></div></div>
+ <div class="notes"><div><h3>Build notes</h3><ul>
+  <li>Heading "Your searches" with the total on the right ("121 total").</li>
+  <li>8 rows, same row as today: search name, type, breakouts, top score, the yellow "N new" tag and an arrow. Order: most new this week first, then most recent.</li>
+  <li>"Show all N" under the list opens the search history page (4).</li>
+ </ul></div><div><h3>Edge cases</h3><ul>
+  <li>Fewer than 8 searches: show them all, no Show all.</li>
+  <li>A search still running shows the Processing state it has today.</li>
+ </ul></div></div>
+</section>
+
+<section class="item" id="h4">
+ <div class="ih"><span class="no">4</span><div><span class="area">New page</span><h2>Search history</h2></div><a class="open" href="app.html?v=d&amp;view=history" target="_blank">Open in mock</a></div>
+ <figure class="dk"><img src="shots/history-1440.png" alt="Search history page"><figcaption>Search history at 1440px.</figcaption></figure>
+ <div class="notes"><div><h3>Build notes</h3><ul>
+  <li>Back to Home link, title "Search history", a short count line.</li>
+  <li>Sort: Most new (default), Most breakouts, Next refresh, A to Z. Tabs: All, Brands, Products.</li>
+  <li>Same rows as Home. 20 per page with Load more.</li>
+ </ul></div><div><h3>Edge cases</h3><ul>
+  <li>A tab with nothing in it: "No product searches yet."</li>
+ </ul></div></div>
+</section>
+
+<section class="item" id="h5">
+ <div class="ih"><span class="no">5</span><div><span class="area">Left menu</span><h2>Keep the menu from the live app</h2></div></div>
+ <ul style="margin-top:14px"><li>Ivan, 23 Oct: use the menu that's on the left of the current BB. So no change: Home, My Feed, Searches (Ready tags), Analysis, Saved videos, the usage bars and the account card, exactly as live. The mock copies it for the screenshots only.</li></ul>
+</section>
+
+<section class="item" id="h6">
+ <div class="ih"><span class="no">6</span><div><span class="area">Phone</span><h2>Phone width</h2></div></div>
+ <figure style="max-width:260px"><img src="shots/d-390.png" alt="Home, option D, phone"><figcaption>390px.</figcaption></figure>
+ <ul><li>Same order, one column. Both rows swipe sideways. The menu stays as it is on the live app at phone width.</li></ul>
+</section>
+
+<section class="item" id="q">
+ <div class="ih"><span class="no">?</span><div><span class="area">Before you build</span><h2>Questions</h2></div></div>
+ <ul style="margin-top:14px">
+  <li>Across BrandBeacon cards show the search name under the handle (e.g. "nike"). That would show what other accounts searched. Use the brand or product the video is about instead?</li>
+  <li>See all on "Across BrandBeacon": there is no page for it yet. Hide the link for now, or point it somewhere?</li>
+ </ul>
+</section>
+</div></body></html>
